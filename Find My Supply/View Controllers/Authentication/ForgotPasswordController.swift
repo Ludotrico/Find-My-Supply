@@ -172,9 +172,6 @@ class ForgotPasswordController: UIViewController {
                                                     UserDefaults.standard.set(10, forKey: "submissionsRemaining")
                                                     UserDefaults.standard.set(true, forKey: "firstLaunch")
                                                     
-                //                                        if UserDefaults.standard.string(forKey: "askedForNotification") == nil {
-                //                                            UserDefaults.standard.set("not asked", forKey: "askedForNotification")
-                //                                        }
                                                 }
                                             
                                         }

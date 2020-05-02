@@ -171,7 +171,8 @@ class LoginController: UIViewController {
                                 }
                                 else {
                                 
-                                    print("Hashed password: \((psw+user.salt).sha256())\n")
+                                    print("=====Server salt:\(user.salt)\n\(user.password)")
+                                    print("=====Local psw: \((psw+user.salt).sha256())\n")
                                     if user.password != (psw+user.salt).sha256() {
                                         if user.identifiedByEmail {
                                             self.showMessage(label: self.createLbl(text: "Incorrect password for given email."))
@@ -188,6 +189,7 @@ class LoginController: UIViewController {
                                             UserDefaults.standard.set("\(user.fName)", forKey: "fName")
                                             UserDefaults.standard.set("\(user.email)", forKey: "email")
                                             UserDefaults.standard.set("\(user.username)", forKey: "username")
+                                            UserDefaults.standard.set("\(user.ID)", forKey: "userID")
                                             UserDefaults.standard.set("\(user.salt)", forKey: "salt")
                                             UserDefaults.standard.set("\(user.password)", forKey: "password")
                                             (UserDefaults.standard.integer(forKey: "radius") == 0) ? UserDefaults.standard.set(10, forKey: "radius") : nil

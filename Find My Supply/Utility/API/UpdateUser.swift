@@ -60,11 +60,11 @@ class UpdateUser {
     }
     
     //POST
-    //changePassword/<str:login>/<str:newPsw>/<str:type>
+    //changePassword/<str:login>/<str:salt>/<str:newPsw>/<str:type>
     func changePassword(completion: @escaping(Result<String, Error>) -> ()) {
-        print("===https://find-my-supply-274702.uc.r.appspot.com/changePassword/\(UserDefaults.standard.string(forKey: "username") ?? UserDefaults.standard.string(forKey: "login")!)/\((newPassword+salt).sha256())/\(type)")
+        print("===https://find-my-supply-274702.uc.r.appspot.com/changePassword/\(UserDefaults.standard.string(forKey: "username") ?? UserDefaults.standard.string(forKey: "login")!)/\(salt)/\((newPassword+salt).sha256())/\(type)")
      
-        guard let url = URL(string: "https://find-my-supply-274702.uc.r.appspot.com/changePassword/\(UserDefaults.standard.string(forKey: "username") ?? UserDefaults.standard.string(forKey: "login")!)/\((newPassword+salt).sha256())/\(type)") else { return }
+        guard let url = URL(string: "https://find-my-supply-274702.uc.r.appspot.com/changePassword/\(UserDefaults.standard.string(forKey: "username") ?? UserDefaults.standard.string(forKey: "login")!)/\(salt)/\((newPassword+salt).sha256())/\(type)") else { return }
         
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
@@ -110,7 +110,13 @@ class UpdateUser {
                 return
             }
             
-            completion(.success("Success"))
+            do {
+                let message = try JSONDecoder().decode(Message.self, from: data!)
+                print("Finished RTS\n")
+                completion(.success(message.message))
+            } catch let error {
+                completion(.failure(error))
+            }
             
         }.resume()
     }

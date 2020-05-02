@@ -139,67 +139,76 @@ class ForgotPasswordController: UIViewController {
             self.resetPswButton.isEnabled = false
         
         DispatchQueue.global(qos: .userInitiated).async {
-            UpdateUser.shared.newPassword = psw1
-            UpdateUser.shared.type = "forgot"
-            UpdateUser.shared.changePassword { (result) in
-                    switch result {
-                    case .success( _):
-                        let userAuth = UserAuth.shared
-                        userAuth.initLoginUser(withLogin: UserDefaults.standard.string(forKey: "login")!, withPassword: psw1)
-                        userAuth.fetchUserInfo { (result) in
+            UserAuth.shared.fetchNewSalt { (result) in
+                switch result {
+                case .success(let s):
+                    UpdateUser.shared.salt = s
+                    UpdateUser.shared.newPassword = psw1
+                    UpdateUser.shared.type = "forgot"
+                    UpdateUser.shared.changePassword { (result) in
                             switch result {
-                                case .success(let user):
-                                    print("Completed User Fetch with user: \(user)\n")
-                                    DispatchQueue.main.async {
-                                        let firstChar = user.message.first
-                                        if firstChar == "#" {
-                                            self.showMessage(label: self.createLbl(text: "Username or email not found."))
-                                        }
-                                        else {
-                                            print("Hashed password: \((psw1+user.salt).sha256())\n")
+                            case .success( _):
+                                let userAuth = UserAuth.shared
+                                userAuth.initLoginUser(withLogin: UserDefaults.standard.string(forKey: "login")!, withPassword: psw1)
+                                userAuth.fetchUserInfo { (result) in
+                                    switch result {
+                                        case .success(let user):
+                                            print("Completed User Fetch with user: \(user)\n")
+                                            DispatchQueue.main.async {
+                                                let firstChar = user.message.first
+                                                if firstChar == "#" {
+                                                    self.showMessage(label: self.createLbl(text: "Username or email not found."))
+                                                }
+                                                else {
+                                                    print("Hashed password: \((psw1+user.salt).sha256())\n")
 
-                                                if firstChar == "F" {
-                                                    //User is unverified, (not a typo)
-                                                    self.showSentEmail(message: "VVerification email sent. Tap to resend.")
-                                                } else {
-                                                    UserDefaults.standard.set(true, forKey: "isRegistered")
-                                                    UserDefaults.standard.set("\(user.fName)", forKey: "fName")
-                                                    UserDefaults.standard.set("\(user.email)", forKey: "email")
-                                                    UserDefaults.standard.set("\(user.username)", forKey: "username")
-                                                    UserDefaults.standard.set("\(user.salt)", forKey: "salt")
-                                                    UserDefaults.standard.set("\(user.password)", forKey: "password")
-                                                    (UserDefaults.standard.integer(forKey: "radius") == 0) ? UserDefaults.standard.set(10, forKey: "radius") : nil
-                                                    UserDefaults.standard.set(10, forKey: "submissionsRemaining")
-                                                    UserDefaults.standard.set(true, forKey: "firstLaunch")
+                                                        if firstChar == "F" {
+                                                            //User is unverified, (not a typo)
+                                                            self.showSentEmail(message: "VVerification email sent. Tap to resend.")
+                                                        } else {
+                                                            UserDefaults.standard.set(true, forKey: "isRegistered")
+                                                            UserDefaults.standard.set("\(user.fName)", forKey: "fName")
+                                                            UserDefaults.standard.set("\(user.email)", forKey: "email")
+                                                            UserDefaults.standard.set("\(user.username)", forKey: "username")
+                                                            UserDefaults.standard.set("\(user.ID)", forKey: "userID")
+                                                            UserDefaults.standard.set("\(user.salt)", forKey: "salt")
+                                                            UserDefaults.standard.set("\(user.password)", forKey: "password")
+                                                            (UserDefaults.standard.integer(forKey: "radius") == 0) ? UserDefaults.standard.set(10, forKey: "radius") : nil
+                                                            UserDefaults.standard.set(10, forKey: "submissionsRemaining")
+                                                            UserDefaults.standard.set(true, forKey: "firstLaunch")
+                                                            
+                                                        }
                                                     
                                                 }
-                                            
-                                        }
+                                                
+                                         
+                         
+                                              UserDefaults.standard.set(false, forKey: "tappedForgotPassword")
+                                              UserDefaults.standard.set(false, forKey: "forgotPassword")
+                                              self.navigationController?.popToRootViewController(animated: true)
                                         
-                                 
-                 
-                                      UserDefaults.standard.set(false, forKey: "tappedForgotPassword")
-                                      UserDefaults.standard.set(false, forKey: "forgotPassword")
-                                      self.navigationController?.popToRootViewController(animated: true)
-                                
-                                          
-                                      self.resetPswButton.isEnabled = true
-                                        
-                                      print("Updated Register Obj salt\n")
-                                    }
-                                case .failure(let error):
-                                    print("DEBUG: Failed with error \(error)")
+                                                  
+                                              self.resetPswButton.isEnabled = true
+                                                
+                                              print("Updated Register Obj salt\n")
+                                            }
+                                        case .failure(let error):
+                                            print("DEBUG: Failed with error \(error)")
 
+                                    }
+                                }
+
+
+
+                                
+                            case.failure(let error):
+                                print("DEBUG: Failed with error \(error)")
                             }
                         }
-
-
-
-                        
-                    case.failure(let error):
-                        print("DEBUG: Failed with error \(error)")
-                    }
-                }
+                case .failure(let error):
+                    print("DEBUG: Failed with error \(error)")
+            }
+        }
                 
             }
         

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MapKit
 
 class RegisterController: UIViewController {
 
@@ -142,6 +143,8 @@ class RegisterController: UIViewController {
     var checkCount = 0
     var displayMessage = true
     var verified = false
+    var locationManager: CLLocationManager!
+    var locationEnabled = false
     
     @objc func handleRegister(){
         nameTextField?.resignFirstResponder()
@@ -281,6 +284,7 @@ class RegisterController: UIViewController {
                                     UserDefaults.standard.set("\(userAuth.fName)", forKey: "fName")
                                     UserDefaults.standard.set("\(userAuth.email)", forKey: "email")
                                     UserDefaults.standard.set("\(userAuth.username)", forKey: "username")
+                                    UserDefaults.standard.set(Int(m), forKey: "userID")
                                     UserDefaults.standard.set("\(userAuth.salt)", forKey: "salt")
                                     UserDefaults.standard.set("\(hashedPsw)", forKey: "password")
                                     UserDefaults.standard.set(10, forKey: "radius")
@@ -292,8 +296,9 @@ class RegisterController: UIViewController {
                                     if firstChar == "T" {
                                         UserDefaults.standard.set(true, forKey: "waitingForScrape")
                                     }
-                                    UserDefaults.standard.set(Int(m), forKey: "userID")
-                            
+                                    UserDefaults.standard.set(zip, forKey: "zipcode")
+                   
+                                    
                                                                        
                                     self.showSentEmail()
                                     registered = true
@@ -392,6 +397,71 @@ class RegisterController: UIViewController {
     
     @objc func findLocation() {
         print("++++FIND LOCATION")
+        
+        locationManager = CLLocationManager()
+        locationManager.delegate  = self
+        
+        enableLocationServices()
+    }
+    
+    func setZipcode() {
+        guard let exposedLocation = self.locationManager.location else {
+            print("*** Error in \(#function): exposedLocation is nil")
+            return
+        }
+        
+        getPlace(for: exposedLocation) { placemark in
+            guard let placemark = placemark else { return }
+            
+
+            if let country = placemark.country {
+                if country != "United States" {
+                    DispatchQueue.main.async {
+                        let alert = UIAlertController(title: "Domain Error", message: "Oops, it looks like \(country) is not currently supported. We apologize for the inconvenience.", preferredStyle: .alert)
+                        alert.addAction(UIAlertAction(title: "Understood", style: .default, handler: nil))
+                        self.present(alert, animated: true, completion: nil)
+                    }
+                }
+                print(country)
+            }
+            
+            if let zip = placemark.postalCode {
+                print(zip)
+                DispatchQueue.main.async {
+                    self.zipcodeTextField?.text = zip
+                }
+                
+                
+            }
+            print("+++\(Notifications.shared.city)")
+        }
+        
+        
+        
+        
+        
+    }
+    
+    func getPlace(for location: CLLocation,
+                  completion: @escaping (CLPlacemark?) -> Void) {
+        
+        let geocoder = CLGeocoder()
+        geocoder.reverseGeocodeLocation(location) { placemarks, error in
+            
+            guard error == nil else {
+                print("*** Error in \(#function): \(error!.localizedDescription)")
+                completion(nil)
+                return
+            }
+            
+            guard let placemark = placemarks?[0] else {
+                print("*** Error in \(#function): placemark is nil")
+                completion(nil)
+                return
+            }
+            
+            completion(placemark)
+        }
     }
         
         
@@ -560,3 +630,74 @@ extension RegisterController : UITextFieldDelegate {
         return updatedText.count <= 5
     }
 }
+
+
+
+
+extension RegisterController: CLLocationManagerDelegate {
+    func enableLocationServices() {
+        print("???Enable location services, status: \(CLLocationManager.authorizationStatus())")
+        switch CLLocationManager.authorizationStatus() {
+        case .notDetermined:
+            print("Location auth status is NOT DETERMINED")
+            locationManager.requestWhenInUseAuthorization()
+        case .restricted:
+            print("Location auth status is RESTRICTED")
+            locationEnabled = true
+        case .denied:
+            print("Location auth status is DENIED")
+            locationManager.requestWhenInUseAuthorization()
+            locationEnabled = false
+        case .authorizedAlways:
+            print("Location auth status is AUTHORIZED ALWAYS")
+            locationEnabled = true
+            setZipcode()
+        case .authorizedWhenInUse:
+            print("Location auth status is AUTHORIZED WHEN IN USE")
+            locationEnabled = true
+            setZipcode()
+        @unknown default:
+            print("Location auth status UNKOWN")
+            fatalError()
+            
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        print("???Entered did update location")
+        //centerMapOnUser()
+    }
+    
+
+    
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        print("???Entered did change Auth, status: \(status == .denied)")
+        //centerMapOnUser()
+        if status == .notDetermined {
+            
+        }
+        if status == .denied || status == .restricted  {
+            DispatchQueue.main.async {
+                let alert = UIAlertController(title: "Location Services Disabled", message: "To enable, go to Settings -> Privacy -> Location Services -> Find My Supply", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "Got it", style: .default, handler: nil))
+                self.present(alert, animated: true, completion: nil)
+            }
+
+            locationEnabled = false
+
+            
+        }
+        else {
+            locationEnabled = true
+            setZipcode()
+            
+        }
+    }
+    
+    
+    
+ 
+    
+    
+}
+    

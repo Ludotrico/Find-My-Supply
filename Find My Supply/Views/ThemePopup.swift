@@ -36,7 +36,7 @@ class ThemePopup: UIView {
     let titleLbl: UILabel = {
         let lbl = UILabel()
         lbl.text = "Color Theme"
-        lbl.font = UIFont(name: "HelveticaNeue", size: 25)
+        lbl.font = UIFont(name: "BrandonGrotesque-Black", size: 35)//UIFont(name: "HelveticaNeue", size: 25)
         lbl.textColor = .white //Dark mode
         lbl.numberOfLines = 1
         lbl.sizeToFit()
@@ -145,7 +145,7 @@ class ThemePopup: UIView {
     
     
     func configureViewComponents() {
-        backgroundColor = Color.shared.blue
+        backgroundColor = .systemTeal
         layer.cornerRadius = 20
         alpha = 0.9
         

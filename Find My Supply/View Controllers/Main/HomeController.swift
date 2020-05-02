@@ -68,12 +68,22 @@ class HomeController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         isSearching = false
-        getUserCity()
+        updateUserZip()
 
+        configureThemePopup()
+        for family: String in UIFont.familyNames
+        {
+            print(family)
+            for names: String in UIFont.fontNames(forFamilyName: family)
+            {
+                print("== \(names)")
+            }
+        }
         
         enableLocationServices()
-        if authorized {
-            //centerMapOnUser()
+        if UserDefaults.standard.bool(forKey: "firstLaunch") {
+            configureThemePopup()
+            UserDefaults.standard.set(false, forKey: "firstLaunch")
         }
    
         
@@ -441,6 +451,12 @@ class HomeController: UIViewController {
         return view
     }()
     
+    let newScrape: NewScrapePopup = {
+       let view = NewScrapePopup()
+        view.translatesAutoresizingMaskIntoConstraints =  false
+        return view
+    }()
+    
     let blur: UIVisualEffectView = {
         let effect = UIBlurEffect(style: .light)
         let blur = UIVisualEffectView(effect: effect)
@@ -465,6 +481,21 @@ class HomeController: UIViewController {
         return btn
         
     }()
+    
+    let go2: UIButton = {
+        let btn = UIButton()
+        btn.setTitle("Got it", for: .normal)
+        btn.setTitleColor(Color.shared.theme, for: .normal)
+        btn.backgroundColor = Color.shared.gold
+        btn.titleLabel?.font = UIFont(name: "HelveticaNeue", size: 25)
+        btn.layer.borderColor = Color.shared.gold.cgColor//UIColor.white.cgColor //Dark mode
+        btn.layer.borderWidth = 3
+        btn.layer.cornerRadius = 10
+        btn.addTarget(self, action: #selector(dismissNewScrape), for: .touchUpInside)
+        
+        return btn
+        
+    }()
 
     
     let menuView = UIView()
@@ -484,6 +515,14 @@ class HomeController: UIViewController {
     var isSearching = false
     
     var initialNeedsCentering = true
+    
+    var country = ""
+    
+    var countryNotSupported = false
+    
+    var zipNotSupported = false
+    
+
  
     
     
@@ -492,6 +531,7 @@ class HomeController: UIViewController {
     @objc func dismissThemePopup() {
         UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseIn, animations: {
             self.blur.alpha = 0
+
             self.themePopup.transform = CGAffineTransform(scaleX: 0, y: 0)
             self.go.transform = CGAffineTransform(scaleX: 0, y: 0)
             
@@ -499,15 +539,43 @@ class HomeController: UIViewController {
             self.blur.removeFromSuperview()
             self.themePopup.removeFromSuperview()
             self.go.removeFromSuperview()
+            
+            if true {//UserDefaults.standard.bool(forKey: "waitingForScrape") {
+                UserDefaults.standard.set(false, forKey: "waitingForScrape")
+                self.configureWaitingForScrape()
+            }
         })
         
         DispatchQueue.main.async {
             self.configureColorScheme()
             
+
+            
         }
         
         
     }
+    
+    @objc func dismissNewScrape() {
+        UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseIn, animations: {
+            self.blur.alpha = 0
+
+            self.newScrape.transform = CGAffineTransform(scaleX: 0, y: 0)
+  
+        
+            self.go2.transform = CGAffineTransform(scaleX: 0, y: 0)
+            
+        }, completion: { _ in
+            self.blur.removeFromSuperview()
+            self.newScrape.removeFromSuperview()
+            self.go2.removeFromSuperview()
+            
+
+        })
+
+        
+    }
+    
     
       func handleAddNotification() {
           let center = UNUserNotificationCenter.current()
@@ -1036,6 +1104,36 @@ class HomeController: UIViewController {
     
     // MARK: - Helper Functions
     
+    func configureWaitingForScrape() {
+        
+        view.addSubview(blur)
+        blur.anchor(top: view.topAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0)
+        
+        
+        view.addSubview(newScrape)
+        newScrape.anchor(top: nil, left: nil, bottom: nil, right: nil, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: view.frame.width-30, height: 300)
+        newScrape.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        newScrape.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        
+        
+        view.addSubview(go2)
+        go2.anchor(top: newScrape.bottomAnchor, left: nil, bottom: nil, right: nil, paddingTop: 25, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: view.frame.width-30, height: 45)
+        go2.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        
+        newScrape.transform = CGAffineTransform(scaleX: 0, y: 0)
+        go2.layer.transform = CATransform3DMakeAffineTransform(CGAffineTransform(scaleX: 0, y: 0))
+        
+        
+        UIView.animate(withDuration: 0.6, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0, options: .curveEaseOut, animations: {
+            self.newScrape.transform = CGAffineTransform(scaleX: 1, y: 1)
+            self.go2.layer.transform = CATransform3DMakeAffineTransform(CGAffineTransform(scaleX: 1, y: 1))
+            self.blur.alpha = 1
+        }, completion: nil)
+        
+        
+        
+    }
+    
     func configureThemePopup() {
         view.addSubview(blur)
         blur.anchor(top: view.topAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0)
@@ -1052,9 +1150,11 @@ class HomeController: UIViewController {
         go.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         
         themePopup.transform = CGAffineTransform(scaleX: 0, y: 0)
+        go.layer.transform = CATransform3DMakeAffineTransform(CGAffineTransform(scaleX: 0, y: 0))
         
         UIView.animate(withDuration: 0.6, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0, options: .curveEaseOut, animations: {
             self.themePopup.transform = CGAffineTransform(scaleX: 1, y: 1)
+            self.go.layer.transform = CATransform3DMakeAffineTransform(CGAffineTransform(scaleX: 1, y: 1))
             self.blur.alpha = 1
         }, completion: nil)
         
@@ -1250,8 +1350,15 @@ class HomeController: UIViewController {
         
     }
     
+    func showCountryNotSupported() {
+        DispatchQueue.main.async {
+            let alert = UIAlertController(title: "Domain Error", message: "Oops, it looks like \(self.country) is not currently supported. We apologize for the inconvenience.", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Understood", style: .default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+        }
+    }
     
-    func getUserCity() {
+    func updateUserZip() {
     
         guard let exposedLocation = self.locationManager.location else {
             print("*** Error in \(#function): exposedLocation is nil")
@@ -1262,8 +1369,15 @@ class HomeController: UIViewController {
             guard let placemark = placemark else { return }
             
 
-            if let town = placemark.locality {
-                Notifications.shared.city = "\(town)".replacingOccurrences(of: " ", with: "_")
+            if let country = placemark.country {
+                if country != "United States" {
+                    self.country = country
+                    self.countryNotSupported = true
+                    self.showCountryNotSupported()
+
+                    return
+                }
+                
             }
             
             if let zip = placemark.postalCode {
@@ -1272,13 +1386,14 @@ class HomeController: UIViewController {
                 DispatchQueue.global(qos: .background).async {
                     UpdateUser.shared.updateUserZip { (result) in
                         switch result {
-                        case .success(_):
+                        case .success(let m):
                             print("+++\(zip)")
+                            if m.first == "T" {
+                                self.zipNotSupported = true
+                            }
                         case .failure(let error):
                             print("DEBUG: Failed with error \(error)")
-                            
                         }
-                        
                     }
                 }
                 

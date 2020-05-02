@@ -21,6 +21,7 @@ class Color {
     //let tasteyBrown = UIColor.rgb(red: 173, green: 137, blue: 123)
     let lightRed = UIColor.rgb(red: 180, green: 0, blue: 0)
     let gold = UIColor.rgb(red:235, green: 219, blue:0)
+    let red = UIColor.rgb(red: 255, green: 70, blue: 56)
     
 }
 

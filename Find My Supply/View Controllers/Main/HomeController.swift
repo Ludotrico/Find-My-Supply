@@ -70,15 +70,7 @@ class HomeController: UIViewController {
         isSearching = false
         updateUserZip()
 
-        configureThemePopup()
-        for family: String in UIFont.familyNames
-        {
-            print(family)
-            for names: String in UIFont.fontNames(forFamilyName: family)
-            {
-                print("== \(names)")
-            }
-        }
+
         
         enableLocationServices()
         if UserDefaults.standard.bool(forKey: "firstLaunch") {
@@ -496,6 +488,36 @@ class HomeController: UIViewController {
         return btn
         
     }()
+    
+    let addZip: UIButton = {
+        let btn = UIButton()
+        btn.setTitle("Add ZIP code", for: .normal)
+        btn.setTitleColor(Color.shared.theme, for: .normal)
+        btn.backgroundColor = Color.shared.gold
+        btn.titleLabel?.font = UIFont(name: "HelveticaNeue", size: 25)
+        btn.layer.borderColor = Color.shared.gold.cgColor//UIColor.white.cgColor //Dark mode
+        btn.layer.borderWidth = 3
+        btn.layer.cornerRadius = 10
+        btn.addTarget(self, action: #selector(addNewZipcode), for: .touchUpInside)
+        
+        return btn
+        
+    }()
+    
+    let cancel: UIButton = {
+        let btn = UIButton()
+        btn.setTitle("Cancel", for: .normal)
+        btn.setTitleColor(Color.shared.theme, for: .normal)
+        btn.backgroundColor = Color.shared.red
+        btn.titleLabel?.font = UIFont(name: "HelveticaNeue", size: 25)
+        btn.layer.borderColor = Color.shared.red.cgColor //UIColor.white.cgColor //Dark mode
+        btn.layer.borderWidth = 3
+        btn.layer.cornerRadius = 10
+        btn.addTarget(self, action: #selector(dismissNewScrape2), for: .touchUpInside)
+        
+        return btn
+        
+    }()
 
     
     let menuView = UIView()
@@ -527,6 +549,36 @@ class HomeController: UIViewController {
     
     
     // MARK: - Selectors
+    @objc func addNewZipcode() {
+        DispatchQueue.main.async {
+            self.dismissNewScrape2()
+        }
+        
+        DispatchQueue.global(qos: .userInitiated).async {
+            UpdateUser.shared.addNewZipcode { (result) in
+                switch result {
+                case .success(_):
+                    DispatchQueue.main.async {
+                        let lbl = self.createLbl(text: "\(UpdateUser.shared.zip) successfully added to the server.")
+                        lbl.backgroundColor = .systemGreen
+                        
+                        self.showMessage(label: lbl)
+                        self.zipNotSupported = false
+                    }
+                    
+                case .failure(let error):
+                    print("DEBUG: Failed with error \(error)")
+                 
+                }
+            }
+        }
+        
+        
+        
+
+      
+        
+    }
     
     @objc func dismissThemePopup() {
         UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseIn, animations: {
@@ -555,6 +607,28 @@ class HomeController: UIViewController {
         
         
     }
+    
+      @objc func dismissNewScrape2() {
+          UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseIn, animations: {
+              self.blur.alpha = 0
+
+              self.newScrape.transform = CGAffineTransform(scaleX: 0, y: 0)
+    
+          
+              self.addZip.transform = CGAffineTransform(scaleX: 0, y: 0)
+            self.cancel.transform = CGAffineTransform(scaleX: 0, y: 0)
+              
+          }, completion: { _ in
+              self.blur.removeFromSuperview()
+              self.newScrape.removeFromSuperview()
+              self.addZip.removeFromSuperview()
+              self.cancel.removeFromSuperview()
+              
+
+          })
+
+          
+      }
     
     @objc func dismissNewScrape() {
         UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseIn, animations: {
@@ -1103,6 +1177,44 @@ class HomeController: UIViewController {
 
     
     // MARK: - Helper Functions
+    func configureWaitingForScrape2() {
+        
+        view.addSubview(blur)
+        blur.anchor(top: view.topAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0)
+        
+        
+        view.addSubview(newScrape)
+        newScrape.anchor(top: nil, left: nil, bottom: nil, right: nil, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: view.frame.width-30, height: 300)
+        newScrape.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        newScrape.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        
+
+        newScrape.text.text = "You're the first user in \(UpdateUser.shared.zip)! This ZIP code is not currently supported, would you like to add it to our servers? We'll email you when the data's available."
+        
+        
+        view.addSubview(addZip)
+        addZip.anchor(top: newScrape.bottomAnchor, left: nil, bottom: nil, right: nil, paddingTop: 25, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: view.frame.width-30, height: 45)
+        addZip.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        
+        view.addSubview(cancel)
+        cancel.anchor(top: addZip.bottomAnchor, left: nil, bottom: nil, right: nil, paddingTop: 25, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: view.frame.width-30, height: 45)
+        cancel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        
+        newScrape.transform = CGAffineTransform(scaleX: 0, y: 0)
+        addZip.layer.transform = CATransform3DMakeAffineTransform(CGAffineTransform(scaleX: 0, y: 0))
+        cancel.layer.transform = CATransform3DMakeAffineTransform(CGAffineTransform(scaleX: 0, y: 0))
+        
+        
+        UIView.animate(withDuration: 0.6, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0, options: .curveEaseOut, animations: {
+            self.newScrape.transform = CGAffineTransform(scaleX: 1, y: 1)
+            self.addZip.layer.transform = CATransform3DMakeAffineTransform(CGAffineTransform(scaleX: 1, y: 1))
+            self.cancel.layer.transform = CATransform3DMakeAffineTransform(CGAffineTransform(scaleX: 1, y: 1))
+            self.blur.alpha = 1
+        }, completion: nil)
+        
+        
+        
+    }
     
     func configureWaitingForScrape() {
         
@@ -1114,11 +1226,13 @@ class HomeController: UIViewController {
         newScrape.anchor(top: nil, left: nil, bottom: nil, right: nil, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: view.frame.width-30, height: 300)
         newScrape.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
         newScrape.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        newScrape.text.text = "You’re the first user in \(UpdateUser.shared.zip)! This ZIP code is not currently supported but we’re working hard to provide you reliable data quickly. We'll email you when the data's available."
         
         
         view.addSubview(go2)
         go2.anchor(top: newScrape.bottomAnchor, left: nil, bottom: nil, right: nil, paddingTop: 25, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: view.frame.width-30, height: 45)
         go2.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+
         
         newScrape.transform = CGAffineTransform(scaleX: 0, y: 0)
         go2.layer.transform = CATransform3DMakeAffineTransform(CGAffineTransform(scaleX: 0, y: 0))
@@ -1383,14 +1497,16 @@ class HomeController: UIViewController {
             if let zip = placemark.postalCode {
                 UpdateUser.shared.zip = Int(zip)!
                 
-                DispatchQueue.global(qos: .background).async {
+                DispatchQueue.global(qos: .userInitiated).async {
                     UpdateUser.shared.updateUserZip { (result) in
                         switch result {
                         case .success(let m):
                             print("+++\(zip)")
                             if m.first == "T" {
                                 self.zipNotSupported = true
+                        
                             }
+                            
                         case .failure(let error):
                             print("DEBUG: Failed with error \(error)")
                         }
@@ -1497,6 +1613,21 @@ class HomeController: UIViewController {
         
             
         
+    }
+    
+    
+    func createLbl(text: String) -> UILabel {
+        let lbl = UILabel()
+        lbl.backgroundColor = UIColor.rgb(red: 209, green: 21, blue: 0)
+        lbl.textColor = .white
+        lbl.text = text
+        lbl.font = UIFont.italicSystemFont(ofSize: 15.0)
+        //lbl.sizeToFit()
+        lbl.textAlignment = .center
+        lbl.numberOfLines = 0
+        //lbl.adjustsFontSizeToFitWidth  = true
+        lbl.layer.cornerRadius = 10
+        return lbl
     }
     
     func showMessage(label: UILabel) {
@@ -2124,6 +2255,10 @@ extension HomeController: CLLocationManagerDelegate {
                         self.initialCenterMapOnUser()
                     }
             }
+                
+                DispatchQueue.global(qos: .userInitiated).asyncAfter(deadline: .now() + 2) {
+                    self.updateUserZip()
+                }
             }
         
             
@@ -2221,6 +2356,16 @@ extension HomeController: UITableViewDelegate, UITableViewDataSource {
             self.triView.isHidden = true
             self.calloutIsShowing = false
             self.calloutShowing = -1
+            
+            if self.zipNotSupported {
+                self.configureWaitingForScrape2()
+                
+            }
+            
+            
+            
+            
+            
         }
         
         

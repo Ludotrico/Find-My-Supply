@@ -121,5 +121,32 @@ class UpdateUser {
         }.resume()
     }
     
+    //POST
+    //'updateUserZip/<str:username>/<int:zip>/<str:token>'
+    func addNewZipcode(completion: @escaping(Result<String, Error>) -> ()) {
+        print("===https://find-my-supply-274702.uc.r.appspot.com/addNewZipcode/\(UpdateUser.shared.zip)/\(UserDefaults.standard.string(forKey: "salt")!)")
+     
+        guard let url = URL(string: "https://find-my-supply-274702.uc.r.appspot.com/addNewZipcode/\(UpdateUser.shared.zip)/\(UserDefaults.standard.string(forKey: "salt")!)") else { return }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        
+        URLSession.shared.dataTask(with: request) { (data, response, error) in
+            
+            // handle error
+            if let error = error {
+                completion(.failure(error))
+                print("Finished RTS with Error\n")
+                return
+            }
+            
+
+            completion(.success("Success"))
+
+            
+        }.resume()
+    }
+    
+    
     
 }

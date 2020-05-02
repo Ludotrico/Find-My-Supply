@@ -297,6 +297,7 @@ class RegisterController: UIViewController {
                                         UserDefaults.standard.set(true, forKey: "waitingForScrape")
                                     }
                                     UserDefaults.standard.set(zip, forKey: "zipcode")
+                                    UpdateUser.shared.zip = Int(zip)!
                    
                                     
                                                                        

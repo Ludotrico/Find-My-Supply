@@ -317,6 +317,7 @@ class GoldController: UIViewController {
     var absoluteIndex = 0
     var viewIsDead = false
     let factor = CGFloat(5/8)
+    lazy var h = view.frame.height * (5/9)
     
     //MARK: HELPER FUNCTIONS
     
@@ -384,7 +385,7 @@ class GoldController: UIViewController {
         navigationItem.titleView = goldItem
         
         view.addSubview(invisibleRect)
-        invisibleRect.anchor(top: nil, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: view.frame.width, height: 350)
+        invisibleRect.anchor(top: nil, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: view.frame.width, height: self.h)
         
         invisibleRect.addSubview(titleLbl)
         titleLbl.anchor(top: invisibleRect.topAnchor, left: nil, bottom: nil, right: nil, paddingTop: 15, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 30)
@@ -392,7 +393,7 @@ class GoldController: UIViewController {
     
         
         invisibleRect.addSubview(Hscroll)
-        Hscroll.anchor(top: invisibleRect.topAnchor, left: invisibleRect.leftAnchor, bottom: nil, right: invisibleRect.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: view.frame.width, height: 350)
+        Hscroll.anchor(top: invisibleRect.topAnchor, left: invisibleRect.leftAnchor, bottom: nil, right: invisibleRect.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: view.frame.width, height: self.h)
         Hscroll.delegate = self
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(scrollWasTapped))
@@ -401,7 +402,7 @@ class GoldController: UIViewController {
 
         
         Hscroll.addSubview(info1Gradient)
-        info1Gradient.frame = CGRect(x: 0,y: 0, width: view.frame.width, height: 350)
+        info1Gradient.frame = CGRect(x: 0,y: 0, width: view.frame.width, height: self.h)
         
 
         
@@ -428,7 +429,7 @@ class GoldController: UIViewController {
         
         
         Hscroll.addSubview(info2Gradient)
-        info2Gradient.frame = CGRect(x: view.frame.width,y: 0, width: view.frame.width, height: 350)
+        info2Gradient.frame = CGRect(x: view.frame.width,y: 0, width: view.frame.width, height: self.h)
         
 
         
@@ -454,7 +455,7 @@ class GoldController: UIViewController {
         
         
         Hscroll.addSubview(info3Gradient)
-        info3Gradient.frame = CGRect(x: view.frame.width*2,y: 0, width: view.frame.width, height: 350)
+        info3Gradient.frame = CGRect(x: view.frame.width*2,y: 0, width: view.frame.width, height: self.h)
         
 
         
@@ -487,7 +488,7 @@ class GoldController: UIViewController {
 
         
         scrollView.contentSize = CGSize(width: view.frame.width, height: view.frame.height*2)
-        Hscroll.contentSize = CGSize(width: Double.greatestFiniteMagnitude, height: 350)
+        Hscroll.contentSize = CGSize(width: Double.greatestFiniteMagnitude, height: Double(self.h))
         Hscroll.contentOffset.x = 0
         
         view.addSubview(big)
@@ -744,7 +745,7 @@ class GoldController: UIViewController {
             (info1GradientCopy, info1StackCopy, info1TitleCopy, info1TextCopy, info1ImgCopy) = createTileSubviews(tile: 1)
             
             Hscroll.addSubview(info1GradientCopy)
-            info1GradientCopy.frame = CGRect(x: pastOffsetX + self.view.frame.width*3,y: 0, width: view.frame.width, height: 350)
+            info1GradientCopy.frame = CGRect(x: pastOffsetX + self.view.frame.width*3,y: 0, width: view.frame.width, height: self.h)
             
 
             
@@ -774,7 +775,7 @@ class GoldController: UIViewController {
             (info2GradientCopy, info2StackCopy, info2TitleCopy, info2TextCopy, info2ImgCopy) = createTileSubviews(tile: 2)
             
             Hscroll.addSubview(info2GradientCopy)
-            info2GradientCopy.frame = CGRect(x: pastOffsetX + self.view.frame.width*3,y: 0, width: view.frame.width, height: 350)
+            info2GradientCopy.frame = CGRect(x: pastOffsetX + self.view.frame.width*3,y: 0, width: view.frame.width, height: self.h)
             
 
             
@@ -803,7 +804,7 @@ class GoldController: UIViewController {
             (info3GradientCopy, info3StackCopy, info3TitleCopy, info3TextCopy, info3ImgCopy) = createTileSubviews(tile: 3)
             
             Hscroll.addSubview(info3GradientCopy)
-            info3GradientCopy.frame = CGRect(x: pastOffsetX + self.view.frame.width*3,y: 0, width: view.frame.width, height: 350)
+            info3GradientCopy.frame = CGRect(x: pastOffsetX + self.view.frame.width*3,y: 0, width: view.frame.width, height: self.h)
             
 
             

@@ -110,10 +110,6 @@ class NewScrapePopup: UIView {
         titleLbl.topAnchor.constraint(equalTo: topAnchor, constant: 12).isActive = true
         
         
-        let whiteRect = UIView()
-        whiteRect.backgroundColor = .white
-        whiteRect.backgroundColor?.withAlphaComponent(0.5)
-        whiteRect.layer.cornerRadius = 10
         
         addSubview(text)
         text.anchor(top: nil, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, paddingTop: 0, paddingLeft: 30, paddingBottom: 30, paddingRight: 30, width: frame.width-40, height: 0)

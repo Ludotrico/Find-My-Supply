@@ -65,6 +65,14 @@ class MenuController: UIViewController {
         return Hstack
     }()
     
+    let Hstack4: UIStackView = {
+        let Hstack = UIStackView()
+        Hstack.axis = .horizontal
+        Hstack.alignment = .leading
+        Hstack.spacing = 15
+        return Hstack
+    }()
+    
     let profileImg: UIImageView = {
         let view = UIImageView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -121,6 +129,24 @@ class MenuController: UIViewController {
         return lbl
     }()
     
+    let goldIcon: UIImageView = {
+        let view = UIImageView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.contentMode = .scaleAspectFit
+        view.clipsToBounds = true
+        view.image = #imageLiteral(resourceName: "contactGold").withRenderingMode(.alwaysOriginal)
+        return view
+    }()
+    
+    let goldLbl: UILabel = {
+        let lbl = UILabel()
+        lbl.text = "Gold"
+        lbl.font = UIFont(name: "Helvetica-Bold", size: 28)
+        lbl.textColor = Color.shared.gold  //Dark mode
+        lbl.textAlignment = .left
+        return lbl
+    }()
+    
     let contactIcon: UIImageView = {
         let view = UIImageView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -165,10 +191,18 @@ class MenuController: UIViewController {
         
     }
     
-    @objc func openContactUsController() {
+    @objc func openGoldController() {
         print("+++++OPEN PROFILE")
         //navigationController?.pushViewController(ProfileController(), animated: true)
         delegate?.handleMenuToggle(forMenuOption: 3)
+
+        
+    }
+    
+    @objc func openContactUsController() {
+        print("+++++OPEN PROFILE")
+        //navigationController?.pushViewController(ProfileController(), animated: true)
+        delegate?.handleMenuToggle(forMenuOption: 4)
 
         
     }
@@ -225,14 +259,29 @@ class MenuController: UIViewController {
         menuView.addSubview(Hstack3)
         Hstack3.anchor(top: nil, left: menuView.leftAnchor, bottom: nil, right: menuView.rightAnchor, paddingTop: 0, paddingLeft: 15, paddingBottom: 0, paddingRight: 15)
         Hstack3.topAnchor.constraint(equalTo: Hstack2.bottomAnchor, constant: 30).isActive = true
-        tap = UITapGestureRecognizer(target: self, action: #selector(openContactUsController))
+        tap = UITapGestureRecognizer(target: self, action: #selector(openGoldController))
         Hstack3.addGestureRecognizer(tap)
 
 
-        Hstack3.addArrangedSubview(contactIcon)
-        contactIcon.anchor(top: Hstack3.topAnchor, left: Hstack3.leftAnchor, bottom: nil, right: nil, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 30, height: 30)
-        Hstack3.addArrangedSubview(contactLbl)
-        contactLbl.anchor(top: Hstack3.topAnchor, left: contactIcon.rightAnchor, bottom: nil, right: Hstack3.rightAnchor, paddingTop: 0, paddingLeft: 15, paddingBottom: 0, paddingRight: 0)
+        Hstack3.addArrangedSubview(goldIcon)
+        goldIcon.anchor(top: Hstack3.topAnchor, left: Hstack3.leftAnchor, bottom: nil, right: nil, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 30, height: 30)
+        Hstack3.addArrangedSubview(goldLbl)
+        goldLbl.anchor(top: Hstack3.topAnchor, left: goldIcon.rightAnchor, bottom: nil, right: Hstack3.rightAnchor, paddingTop: 0, paddingLeft: 15, paddingBottom: 0, paddingRight: 0)
+        
+        
+        
+        
+        menuView.addSubview(Hstack4)
+        Hstack4.anchor(top: nil, left: menuView.leftAnchor, bottom: nil, right: menuView.rightAnchor, paddingTop: 0, paddingLeft: 15, paddingBottom: 0, paddingRight: 15)
+        Hstack4.topAnchor.constraint(equalTo: Hstack3.bottomAnchor, constant: 30).isActive = true
+        tap = UITapGestureRecognizer(target: self, action: #selector(openContactUsController))
+        Hstack4.addGestureRecognizer(tap)
+
+
+        Hstack4.addArrangedSubview(contactIcon)
+        contactIcon.anchor(top: Hstack4.topAnchor, left: Hstack4.leftAnchor, bottom: nil, right: nil, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 30, height: 30)
+        Hstack4.addArrangedSubview(contactLbl)
+        contactLbl.anchor(top: Hstack4.topAnchor, left: contactIcon.rightAnchor, bottom: nil, right: Hstack4.rightAnchor, paddingTop: 0, paddingLeft: 15, paddingBottom: 0, paddingRight: 0)
         
         configureColorScheme()
 
@@ -247,11 +296,11 @@ class MenuController: UIViewController {
             view.backgroundColor = .black
             menuView.backgroundColor = .black
             
-            for lbl in [profileLbl, notifLbl, settingsLbl, contactLbl] {
+            for lbl in [profileLbl, notifLbl, settingsLbl, goldLbl, contactLbl] {
                 lbl.textColor = Color.shared.gold
             }
             
-            for img in [profileImg, notifIcon, settingsIcon, contactIcon] {
+            for img in [profileImg, notifIcon, settingsIcon, goldIcon, contactIcon] {
                 if img == profileImg {
                     img.image = UIImage(systemName: "person.fill")?.withTintColor(.white, renderingMode: .alwaysTemplate)
                     img.tintColor = Color.shared.gold
@@ -262,6 +311,10 @@ class MenuController: UIViewController {
                 }
                 else if img == settingsIcon {
                     img.image = UIImage(systemName: "gear")?.withTintColor(.white, renderingMode: .alwaysTemplate)
+                    img.tintColor = Color.shared.gold
+                }
+                else if img == goldIcon {
+                    img.image = #imageLiteral(resourceName: "medallionTP").withRenderingMode(.alwaysTemplate)
                     img.tintColor = Color.shared.gold
                 }
                 else {
@@ -285,11 +338,11 @@ class MenuController: UIViewController {
             view.backgroundColor = .black
             menuView.backgroundColor = .black
             
-            for lbl in [profileLbl, notifLbl, settingsLbl, contactLbl] {
+            for lbl in [profileLbl, notifLbl, settingsLbl,goldLbl, contactLbl] {
                 lbl.textColor = Color.shared.gold//.white
             }
             
-            for img in [profileImg, notifIcon, settingsIcon, contactIcon] {
+            for img in [profileImg, notifIcon, settingsIcon, goldIcon, contactIcon] {
                 if img == profileImg {
                     img.image = UIImage(systemName: "person.fill")?.withTintColor(.white, renderingMode: .alwaysTemplate)
                     img.tintColor = Color.shared.gold//.white
@@ -300,6 +353,10 @@ class MenuController: UIViewController {
                 }
                 else if img == settingsIcon {
                     img.image = UIImage(systemName: "gear")?.withTintColor(.white, renderingMode: .alwaysTemplate)
+                    img.tintColor = Color.shared.gold//.white
+                }
+                else if img == goldIcon {
+                    img.image = #imageLiteral(resourceName: "medallionTP").withRenderingMode(.alwaysTemplate)
                     img.tintColor = Color.shared.gold//.white
                 }
                 else {
@@ -315,11 +372,11 @@ class MenuController: UIViewController {
             view.backgroundColor = .white
             menuView.backgroundColor = .white
             
-            for lbl in [profileLbl, notifLbl, settingsLbl, contactLbl] {
+            for lbl in [profileLbl, notifLbl, settingsLbl, goldLbl, contactLbl] {
                 lbl.textColor = .black
             }
             
-            for img in [profileImg, notifIcon, settingsIcon, contactIcon] {
+            for img in [profileImg, notifIcon, settingsIcon, goldIcon, contactIcon] {
                 if img == profileImg {
                     img.image = UIImage(systemName: "person.fill")?.withTintColor(.white, renderingMode: .alwaysTemplate)
                     img.tintColor = .black
@@ -330,6 +387,10 @@ class MenuController: UIViewController {
                 }
                 else if img == settingsIcon {
                     img.image = UIImage(systemName: "gear")?.withTintColor(.white, renderingMode: .alwaysTemplate)
+                    img.tintColor = .black
+                }
+                else if img == goldIcon {
+                    img.image = #imageLiteral(resourceName: "medallionTP").withRenderingMode(.alwaysTemplate)
                     img.tintColor = .black
                 }
                 else {

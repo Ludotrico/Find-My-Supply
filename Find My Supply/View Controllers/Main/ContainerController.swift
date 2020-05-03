@@ -137,6 +137,9 @@ class ContainerController: UIViewController {
             SC.homeController = homeController
             centerController.pushViewController(SC, animated: true)
         }
+        else if option == 3 {
+            centerController.pushViewController(GoldController(), animated: true)
+        }
         else {
             centerController.pushViewController(ContactUsController(), animated: true)
         }

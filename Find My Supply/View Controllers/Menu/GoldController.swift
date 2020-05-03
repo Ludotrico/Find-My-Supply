@@ -301,7 +301,7 @@ class GoldController: UIViewController {
     let big: UIView = {
         let view = UIView()
         view.backgroundColor = .black
-        view.alpha = 0.4
+
 
         return view
     }()
@@ -497,6 +497,7 @@ class GoldController: UIViewController {
         
         view.addScrollView(Dscroll, container: scrollViewContainer, elements: [invisibleRect, big ])
         Dscroll.alwaysBounceVertical = true
+        Dscroll.showsVerticalScrollIndicator = false
         
         
         configureColorScheme()
@@ -512,7 +513,7 @@ class GoldController: UIViewController {
         
         if scheme == 0 {
             //STANDARD
-            view.backgroundColor = .black
+            view.backgroundColor = Color.shared.gold.withAlphaComponent(0.2)
             
             goldItem.tintColor = .black
             
@@ -536,7 +537,7 @@ class GoldController: UIViewController {
         else if scheme == 1 {
             //DARK
             
-            view.backgroundColor = .black
+            view.backgroundColor = Color.shared.gold.withAlphaComponent(0.2)
             
             goldItem.tintColor = Color.shared.gold
             
@@ -556,7 +557,7 @@ class GoldController: UIViewController {
         }
         else {
             //LIGHT
-            view.backgroundColor = .black
+            view.backgroundColor = Color.shared.gold.withAlphaComponent(0.2)
             
             goldItem.tintColor = .black
             

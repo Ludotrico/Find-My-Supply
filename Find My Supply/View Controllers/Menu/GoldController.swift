@@ -41,7 +41,7 @@ class GoldController: UIViewController {
     }()
     
     let Dscroll = DScrollView()
-    let scrollViewContainer = DScrollViewContainer(axis: .vertical, spacing: 10)
+    let scrollViewContainer = DScrollViewContainer(axis: .vertical, spacing: 0)
     
     let goldItem: UIImageView = {
         let view = UIImageView()
@@ -306,6 +306,107 @@ class GoldController: UIViewController {
         return view
     }()
     
+    let Hstack: UIStackView = {
+        let stack = UIStackView()
+        stack.axis = .horizontal
+        stack.distribution = .fillEqually
+        //stack.alignment = .center
+        //stack.clipsToBounds = true
+        //stack.sizeToFit()
+        stack.spacing = 5
+        //stack.addBackground(color: Color.shared.gold.withAlphaComponent(0.2), cornerRadius: 0)
+        return stack
+    }()
+    
+    let twelveContainer: UIView = {
+        let view = UIView()
+        view.backgroundColor = .clear
+        return view
+    }()
+    
+
+    
+    let twelveInner: UIView = {
+        let view = UIView()
+        view.backgroundColor = .black
+        view.layer.borderColor = Color.shared.gold.cgColor
+        view.layer.borderWidth = 3
+        return view
+    }()
+    
+    let twelveLabel: PaddingLabel = {
+        let lbl = PaddingLabel()
+        lbl.text = "Best Value"
+        lbl.backgroundColor = Color.shared.gold
+        lbl.layer.cornerRadius = 15
+        lbl.layer.masksToBounds = true
+        lbl.adjustsFontSizeToFitWidth = true
+
+        return lbl
+    }()
+    
+    let twelveVstack1: UIStackView = {
+        let stack = UIStackView()
+        stack.axis = .vertical
+        stack.distribution = .fillEqually
+        stack.alignment = .center
+        //stack.clipsToBounds = true
+        //stack.sizeToFit()
+        stack.spacing = 0
+        stack.addBackground(color: UIColor.gray.withAlphaComponent(0.3), cornerRadius: 0)
+        return stack
+    }()
+    
+    let twelveVstack2: UIStackView = {
+        let stack = UIStackView()
+        stack.axis = .vertical
+        stack.distribution = .fillEqually
+        stack.alignment = .center
+        //stack.clipsToBounds = true
+        //stack.sizeToFit()
+        stack.spacing = 0
+        stack.addBackground(color: UIColor.green.withAlphaComponent(0.2), cornerRadius: 0)
+        return stack
+    }()
+    
+    
+    
+    
+    let sixContainer: UIView = {
+        let view = UIView()
+        view.backgroundColor = .clear
+        return view
+    }()
+    
+    
+    let sixInner: UIView = {
+        let view = UIView()
+        view.backgroundColor = .black
+        view.layer.borderColor = Color.shared.gold.cgColor
+        view.layer.borderWidth = 3
+        return view
+    }()
+    
+    let oneContainer: UIView = {
+        let view = UIView()
+        view.backgroundColor = .black
+        return view
+    }()
+    
+    let oneInner: UIView = {
+        let view = UIView()
+        view.backgroundColor = .clear
+        view.layer.borderColor = Color.shared.gold.cgColor
+        view.layer.borderWidth = 3
+        return view
+    }()
+    
+    let upgradeBackground: UIView = {
+        let view = UIView()
+        view.backgroundColor = .darkGray
+        return view
+    }()
+    
     
     //MARK: VARIABLES
     let scheme = UserDefaults.standard.integer(forKey: "colorScheme")
@@ -317,7 +418,9 @@ class GoldController: UIViewController {
     var absoluteIndex = 0
     var viewIsDead = false
     let factor = CGFloat(5/8)
-    lazy var h = view.frame.height * (5/9)
+    lazy var h = view.frame.height * (6/11)
+    lazy var pricingHeight = view.frame.height * (2.5/11)
+    lazy var upgradeHeight = view.frame.height * (2.5/11)
     
     //MARK: HELPER FUNCTIONS
     
@@ -344,15 +447,20 @@ class GoldController: UIViewController {
             if self.userHasSwiped {
                 return
             }
+
+            
             UIView.animate(withDuration: 0.8, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0.5, options: .curveEaseInOut, animations: {
 
                 self.Hscroll.isUserInteractionEnabled = false
                 self.Hscroll.contentOffset.x = self.Hscroll.contentOffset.x + self.view.frame.width
-                    
+                
+                
                 
 
               
             }, completion: { _ in
+                
+ 
                 print("+++ Completion!")
                 self.Hscroll.isUserInteractionEnabled = true
                 
@@ -487,16 +595,66 @@ class GoldController: UIViewController {
         
 
         
-        scrollView.contentSize = CGSize(width: view.frame.width, height: view.frame.height*2)
+        //scrollView.contentSize = CGSize(width: view.frame.width, height: view.frame.height*2)
         Hscroll.contentSize = CGSize(width: Double.greatestFiniteMagnitude, height: Double(self.h))
         Hscroll.contentOffset.x = 0
         
-        view.addSubview(big)
         
-        big.anchor(top: invisibleRect.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: view.frame.width, height: 1000)
+        view.addSubview(Hstack)
+        Hstack.anchor(top: nil, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: view.frame.width, height: pricingHeight)
+        Hstack.layoutMargins = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
+        Hstack.isLayoutMarginsRelativeArrangement = true
         
         
-        view.addScrollView(Dscroll, container: scrollViewContainer, elements: [invisibleRect, big ])
+        Hstack.addArrangedSubview(twelveContainer)
+        twelveContainer.anchor(top: nil, left: nil, bottom: nil, right: nil, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
+        Hstack.addArrangedSubview(sixContainer)
+        sixContainer.anchor(top: nil, left: nil, bottom: nil, right: nil, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
+        Hstack.addArrangedSubview(oneContainer)
+        oneContainer.anchor(top: nil, left: nil, bottom: nil, right: nil, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
+
+        
+
+        
+        twelveContainer.addSubview(twelveInner)
+        twelveInner.anchor(top: twelveContainer.topAnchor, left: twelveContainer.leftAnchor, bottom: twelveContainer.bottomAnchor, right: twelveContainer.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
+        
+        twelveContainer.addSubview(twelveLabel)
+        twelveLabel.anchor(top: nil, left: nil, bottom: nil, right: nil, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: twelveContainer.frame.width*(3/4), height: 30)
+        //twelveLabel.frame = CGRect(x: 0, y: h, width: twelveContainer.frame.width*(3/4), height: 30)
+        twelveLabel.centerXAnchor.constraint(equalTo: twelveContainer.centerXAnchor).isActive = true
+        twelveLabel.bottomAnchor.constraint(equalTo: twelveContainer.topAnchor, constant: 17.5).isActive = true
+        
+        twelveContainer.addSubview(twelveVstack1)
+        twelveVstack1.anchor(top: twelveContainer.topAnchor, left: twelveContainer.leftAnchor, bottom: twelveContainer.bottomAnchor, right: twelveContainer.rightAnchor, paddingTop: 5, paddingLeft: 5, paddingBottom: 5, paddingRight: 5)
+        
+        twelveContainer.bringSubviewToFront(twelveVstack1)
+        twelveContainer.bringSubviewToFront(twelveLabel)
+        
+        twelveVstack1.addArrangedSubview(twelveVstack2)
+        twelveVstack2.anchor(top: twelveVstack1.topAnchor, left: twelveVstack1.leftAnchor, bottom: twelveVstack1.bottomAnchor, right: twelveVstack1.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0)
+      
+        
+        
+        
+        
+        
+        
+        sixContainer.addSubview(sixInner)
+        sixInner.anchor(top: sixContainer.topAnchor, left: sixContainer.leftAnchor, bottom: sixContainer.bottomAnchor, right: sixContainer.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
+        
+        oneContainer.addSubview(oneInner)
+        oneInner.anchor(top: oneContainer.topAnchor, left: oneContainer.leftAnchor, bottom: oneContainer.bottomAnchor, right: oneContainer.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
+        
+        twelveInner.layer.borderWidth = 5
+        sixInner.layer.borderWidth = 0
+        oneInner.layer.borderWidth = 0
+        
+
+        view.addSubview(upgradeBackground)
+        upgradeBackground.anchor(top: nil, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: view.frame.width, height: upgradeHeight)
+        
+        view.addScrollView(Dscroll, container: scrollViewContainer, elements: [invisibleRect, Hstack, upgradeBackground ])
         Dscroll.alwaysBounceVertical = true
         Dscroll.showsVerticalScrollIndicator = false
         

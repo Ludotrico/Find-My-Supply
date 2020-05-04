@@ -603,7 +603,7 @@ class GoldController: UIViewController {
     
     let pricePerMonthLbl: UILabel = {
         let lbl = UILabel()
-        lbl.text = "$0.66/month"
+        lbl.text = "$0.84/mth"
         lbl.sizeToFit()
         lbl.font = UIFont(name: "BrandonGrotesque-Black", size: 500)
           lbl.lineBreakMode = .byClipping
@@ -682,6 +682,8 @@ class GoldController: UIViewController {
     var sixTapped = true
     var oneTapped = false
     
+    var isIpad = false
+    
     
     //MARK: Selectors
     
@@ -711,6 +713,9 @@ class GoldController: UIViewController {
         sixVstack1.subviews[0].backgroundColor = UIColor.black.withAlphaComponent(1)
         oneVstack1.subviews[0].backgroundColor = UIColor.black.withAlphaComponent(1)
         
+        pricePerMonthLbl.text =   isIpad ?   "$0.73/month" : "$0.73/mth"
+        
+        
         if twelveTapped {
             //Show purchase popup
              print("++++++ 12 tapped")
@@ -738,7 +743,8 @@ class GoldController: UIViewController {
         twelveVstack1.subviews[0].backgroundColor = UIColor.black.withAlphaComponent(1)
         sixVstack1.subviews[0].backgroundColor = UIColor.black.withAlphaComponent(0.5)
         oneVstack1.subviews[0].backgroundColor = UIColor.black.withAlphaComponent(1)
-        
+        pricePerMonthLbl.text =   isIpad ?   "$0.84/month" : "$0.84/mth"
+
         
         if sixTapped {
             //Show purchase popup
@@ -769,6 +775,8 @@ class GoldController: UIViewController {
         sixVstack1.subviews[0].backgroundColor = UIColor.black.withAlphaComponent(1)
         oneVstack1.subviews[0].backgroundColor = UIColor.black.withAlphaComponent(0.5)
         
+        pricePerMonthLbl.text =   isIpad ?   "$0.99/month" : "$0.99/mth"
+
         
         if oneTapped {
             //Show purchase popup
@@ -852,6 +860,8 @@ class GoldController: UIViewController {
         
         if UIDevice.current.userInterfaceIdiom == .pad {
             upgradeHeight = view.frame.height * (1.8/11)
+            pricePerMonthLbl.text = "$0.84/month"
+            isIpad = true
         }
         
    

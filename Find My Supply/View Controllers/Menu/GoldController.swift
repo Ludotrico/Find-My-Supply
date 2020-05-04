@@ -328,7 +328,7 @@ class GoldController: UIViewController {
     
     let twelveInner: UIView = {
         let view = UIView()
-        view.backgroundColor = .black
+        view.backgroundColor = .clear
         view.layer.borderColor = Color.shared.gold.cgColor
         view.layer.borderWidth = 3
         return view
@@ -341,6 +341,7 @@ class GoldController: UIViewController {
         lbl.layer.cornerRadius = 15
         lbl.layer.masksToBounds = true
         lbl.adjustsFontSizeToFitWidth = true
+        lbl.isHidden = true
 
         return lbl
     }()
@@ -353,7 +354,7 @@ class GoldController: UIViewController {
         //stack.clipsToBounds = true
         //stack.sizeToFit()
         stack.spacing = 0
-        stack.addBackground(color: UIColor.gray.withAlphaComponent(0.3), cornerRadius: 0)
+        stack.addBackground(color: UIColor.black, cornerRadius: 0)
         return stack
     }()
     
@@ -365,7 +366,7 @@ class GoldController: UIViewController {
         //stack.clipsToBounds = true
         //stack.sizeToFit()
         stack.spacing = 0
-        stack.addBackground(color: UIColor.green.withAlphaComponent(0.2), cornerRadius: 0)
+        //stack.addBackground(color: UIColor.green.withAlphaComponent(0.2), cornerRadius: 0)
         return stack
     }()
     
@@ -422,18 +423,98 @@ class GoldController: UIViewController {
         return view
     }()
     
-    
     let sixInner: UIView = {
         let view = UIView()
-        view.backgroundColor = .black
+        view.backgroundColor = .clear
         view.layer.borderColor = Color.shared.gold.cgColor
         view.layer.borderWidth = 3
         return view
     }()
     
+    let sixLabel: PaddingLabel = {
+        let lbl = PaddingLabel()
+        lbl.text = "Most Popular"
+        lbl.backgroundColor = Color.shared.gold
+        lbl.layer.cornerRadius = 15
+        lbl.layer.masksToBounds = true
+        lbl.adjustsFontSizeToFitWidth = true
+
+        return lbl
+    }()
+    
+    let sixVstack1: UIStackView = {
+        let stack = UIStackView()
+        stack.axis = .vertical
+        //stack.distribution = .fillEqually
+        stack.alignment = .center
+        //stack.clipsToBounds = true
+        //stack.sizeToFit()
+        stack.spacing = 0
+        stack.addBackground(color: UIColor.black.withAlphaComponent(0.5), cornerRadius: 0)
+        return stack
+    }()
+    
+    let sixVstack2: UIStackView = {
+        let stack = UIStackView()
+        stack.axis = .vertical
+        //stack.distribution = .fillEqually
+        stack.alignment = .bottom
+        //stack.clipsToBounds = true
+        //stack.sizeToFit()
+        stack.spacing = 0
+        //stack.addBackground(color: UIColor.green.withAlphaComponent(0.2), cornerRadius: 0)
+        return stack
+    }()
+    
+    let sixNumberLbl: UILabel = {
+        let lbl = UILabel()
+        lbl.text = "6"
+        lbl.sizeToFit()
+        lbl.font = UIFont(name: "BrandonGrotesque-Black", size: 500)
+        lbl.lineBreakMode = .byClipping
+        //lbl.minimumScaleFactor = 0.1
+        lbl.textColor = .white
+        lbl.adjustsFontSizeToFitWidth = true
+        lbl.sizeToFit()
+        lbl.textAlignment  = .center
+        lbl.numberOfLines = 0
+        return lbl
+    }()
+    
+    let sixMonthLbl: UILabel = {
+        let lbl = UILabel()
+        lbl.text = "6 months"
+        lbl.sizeToFit()
+        lbl.font = UIFont(name: "BrandonGrotesque-Light", size: 500)
+          lbl.lineBreakMode = .byClipping
+              //  lbl.minimumScaleFactor = 0.1
+        lbl.textColor = .white
+        lbl.adjustsFontSizeToFitWidth = true
+          lbl.textAlignment  = .center
+        lbl.numberOfLines = 0
+        return lbl
+    }()
+    
+    let sixPriceLbl: UILabel = {
+        let lbl = UILabel()
+        lbl.text = "$3.99"
+        lbl.sizeToFit()
+        lbl.font = UIFont(name: "BrandonGrotesque-Bold", size: 500)
+          lbl.lineBreakMode = .byClipping
+              //  lbl.minimumScaleFactor = 0.1
+        lbl.textColor = .white
+        lbl.adjustsFontSizeToFitWidth = true
+          lbl.textAlignment  = .center
+        lbl.numberOfLines = 0
+        return lbl
+    }()
+    
+    
+    
+    
     let oneContainer: UIView = {
         let view = UIView()
-        view.backgroundColor = .black
+        view.backgroundColor = .clear
         return view
     }()
     
@@ -443,6 +524,75 @@ class GoldController: UIViewController {
         view.layer.borderColor = Color.shared.gold.cgColor
         view.layer.borderWidth = 3
         return view
+    }()
+    
+
+    
+    let oneVstack1: UIStackView = {
+        let stack = UIStackView()
+        stack.axis = .vertical
+        //stack.distribution = .fillEqually
+        stack.alignment = .center
+        //stack.clipsToBounds = true
+        //stack.sizeToFit()
+        stack.spacing = 0
+        stack.addBackground(color: UIColor.black, cornerRadius: 0)
+        return stack
+    }()
+    
+    let oneVstack2: UIStackView = {
+        let stack = UIStackView()
+        stack.axis = .vertical
+        //stack.distribution = .fillEqually
+        stack.alignment = .bottom
+        //stack.clipsToBounds = true
+        //stack.sizeToFit()
+        stack.spacing = 0
+        //stack.addBackground(color: UIColor.green.withAlphaComponent(0.2), cornerRadius: 0)
+        return stack
+    }()
+    
+    let oneNumberLbl: UILabel = {
+        let lbl = UILabel()
+        lbl.text = "1"
+        lbl.sizeToFit()
+        lbl.font = UIFont(name: "BrandonGrotesque-Black", size: 500)
+        lbl.lineBreakMode = .byClipping
+        //lbl.minimumScaleFactor = 0.1
+        lbl.textColor = .white
+        lbl.adjustsFontSizeToFitWidth = true
+        lbl.sizeToFit()
+        lbl.textAlignment  = .center
+        lbl.numberOfLines = 0
+        return lbl
+    }()
+    
+    let oneMonthLbl: UILabel = {
+        let lbl = UILabel()
+        lbl.text = "1 month"
+        lbl.sizeToFit()
+        lbl.font = UIFont(name: "BrandonGrotesque-Light", size: 500)
+          lbl.lineBreakMode = .byClipping
+              //  lbl.minimumScaleFactor = 0.1
+        lbl.textColor = .white
+        lbl.adjustsFontSizeToFitWidth = true
+          lbl.textAlignment  = .center
+        lbl.numberOfLines = 0
+        return lbl
+    }()
+    
+    let onePriceLbl: UILabel = {
+        let lbl = UILabel()
+        lbl.text = "$0.99"
+        lbl.sizeToFit()
+        lbl.font = UIFont(name: "BrandonGrotesque-Bold", size: 500)
+          lbl.lineBreakMode = .byClipping
+              //  lbl.minimumScaleFactor = 0.1
+        lbl.textColor = .white
+        lbl.adjustsFontSizeToFitWidth = true
+          lbl.textAlignment  = .center
+        lbl.numberOfLines = 0
+        return lbl
     }()
     
     let upgradeBackground: UIView = {
@@ -461,11 +611,108 @@ class GoldController: UIViewController {
     var positiveSet = Set<CGFloat>()
     var absoluteIndex = 0
     var viewIsDead = false
+    
     let factor = CGFloat(5/8)
     lazy var h = view.frame.height * (6/11)
     lazy var pricingHeight = view.frame.height * (2.5/11)
     lazy var pricingInternalHeigh = pricingHeight*(3/5)
     lazy var upgradeHeight = view.frame.height * (2.5/11)
+    
+    var twelveTapped = false
+    var sixTapped = true
+    var oneTapped = false
+    
+    
+    //MARK: Selectors
+    @objc func twelveTap() {
+        
+   
+        sixTapped = false
+        oneTapped = false
+        
+        twelveInner.layer.borderWidth = 5
+        sixInner.layer.borderWidth = 0
+        oneInner.layer.borderWidth = 0
+        
+        
+        twelveLabel.isHidden = false
+        sixLabel.isHidden = true
+        
+        twelveVstack1.subviews[0].backgroundColor = UIColor.black.withAlphaComponent(0.5)
+        sixVstack1.subviews[0].backgroundColor = UIColor.black.withAlphaComponent(1)
+        oneVstack1.subviews[0].backgroundColor = UIColor.black.withAlphaComponent(1)
+        
+        if twelveTapped {
+            //Show purchase popup
+             print("++++++ 12 tapped")
+        }
+        twelveTapped = true
+        
+        
+        
+        
+    }
+    
+    @objc func sixTap() {
+
+        twelveTapped = false
+        oneTapped = false
+        
+        twelveInner.layer.borderWidth = 0
+        sixInner.layer.borderWidth = 5
+        oneInner.layer.borderWidth = 0
+        
+        twelveLabel.isHidden = true
+        sixLabel.isHidden = false
+        
+        twelveVstack1.subviews[0].backgroundColor = UIColor.black.withAlphaComponent(1)
+        sixVstack1.subviews[0].backgroundColor = UIColor.black.withAlphaComponent(0.5)
+        oneVstack1.subviews[0].backgroundColor = UIColor.black.withAlphaComponent(1)
+        
+        
+        if sixTapped {
+            //Show purchase popup
+             print("++++++ 6 tapped")
+        }
+        sixTapped = true
+        
+        
+        
+    }
+    
+    @objc func oneTap() {
+
+        
+        twelveTapped = false
+        sixTapped = false
+ 
+        
+        twelveInner.layer.borderWidth = 0
+        sixInner.layer.borderWidth = 0
+        oneInner.layer.borderWidth = 5
+        
+        twelveLabel.isHidden = true
+        sixLabel.isHidden = true
+        
+        twelveVstack1.subviews[0].backgroundColor = UIColor.black.withAlphaComponent(1)
+        sixVstack1.subviews[0].backgroundColor = UIColor.black.withAlphaComponent(1)
+        oneVstack1.subviews[0].backgroundColor = UIColor.black.withAlphaComponent(0.5)
+        
+        
+        if oneTapped {
+            //Show purchase popup
+             print("++++++ 1 tapped")
+        }
+        oneTapped = true
+    }
+    
+    
+    
+    
+    
+    
+    
+    
     
     //MARK: HELPER FUNCTIONS
     
@@ -549,7 +796,7 @@ class GoldController: UIViewController {
         Hscroll.anchor(top: invisibleRect.topAnchor, left: invisibleRect.leftAnchor, bottom: nil, right: invisibleRect.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: view.frame.width, height: self.h)
         Hscroll.delegate = self
         
-        let tap = UITapGestureRecognizer(target: self, action: #selector(scrollWasTapped))
+        var tap = UITapGestureRecognizer(target: self, action: #selector(scrollWasTapped))
 
         Hscroll.addGestureRecognizer(tap)
 
@@ -661,6 +908,8 @@ class GoldController: UIViewController {
         
 
         
+        
+        
         twelveContainer.addSubview(twelveInner)
         twelveInner.anchor(top: twelveContainer.topAnchor, left: twelveContainer.leftAnchor, bottom: twelveContainer.bottomAnchor, right: twelveContainer.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
         
@@ -674,6 +923,9 @@ class GoldController: UIViewController {
         twelveVstack1.anchor(top: twelveContainer.topAnchor, left: twelveContainer.leftAnchor, bottom: twelveContainer.bottomAnchor, right: twelveContainer.rightAnchor, paddingTop: 5, paddingLeft: 5, paddingBottom: 5, paddingRight: 5)
         //twelveVstack1.layoutMargins = UIEdgeInsets(top: pricingHeight*(1/5), left: 10, bottom: pricingHeight*(1/5), right: 10)
         twelveVstack1.isLayoutMarginsRelativeArrangement = true
+        tap = UITapGestureRecognizer(target: self, action: #selector(twelveTap))
+        twelveVstack1.addGestureRecognizer(tap)
+        
         
         
         twelveContainer.bringSubviewToFront(twelveVstack1)
@@ -692,7 +944,7 @@ class GoldController: UIViewController {
         twelveVstack2.addArrangedSubview(twelvePriceLbl)
         twelvePriceLbl.anchor(top: nil, left: twelveVstack2.leftAnchor, bottom: nil, right: twelveVstack2.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: twelveVstack2.frame.width, height: pricingHeight*(1/8))
         
-
+        
         
         
         
@@ -701,11 +953,95 @@ class GoldController: UIViewController {
         sixContainer.addSubview(sixInner)
         sixInner.anchor(top: sixContainer.topAnchor, left: sixContainer.leftAnchor, bottom: sixContainer.bottomAnchor, right: sixContainer.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
         
-        oneContainer.addSubview(oneInner)
+        sixContainer.addSubview(sixLabel)
+        sixLabel.anchor(top: nil, left: nil, bottom: nil, right: nil, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: sixContainer.frame.width*(3/4), height: 30)
+        //sixLabel.frame = CGRect(x: 0, y: h, width: sixContainer.frame.width*(3/4), height: 30)
+        sixLabel.centerXAnchor.constraint(equalTo: sixContainer.centerXAnchor).isActive = true
+        sixLabel.bottomAnchor.constraint(equalTo: sixContainer.topAnchor, constant: 17.5).isActive = true
+        
+        sixContainer.addSubview(sixVstack1)
+        sixVstack1.anchor(top: sixContainer.topAnchor, left: sixContainer.leftAnchor, bottom: sixContainer.bottomAnchor, right: sixContainer.rightAnchor, paddingTop: 5, paddingLeft: 5, paddingBottom: 5, paddingRight: 5)
+        //sixVstack1.layoutMargins = UIEdgeInsets(top: pricingHeight*(1/5), left: 10, bottom: pricingHeight*(1/5), right: 10)
+        sixVstack1.isLayoutMarginsRelativeArrangement = true
+        
+        tap = UITapGestureRecognizer(target: self, action: #selector(sixTap))
+        sixVstack1.addGestureRecognizer(tap)
+        
+        
+        sixContainer.bringSubviewToFront(sixVstack1)
+        sixContainer.bringSubviewToFront(sixLabel)
+        
+        sixVstack1.addArrangedSubview(sixVstack2)
+        sixVstack2.anchor(top: sixVstack1.topAnchor, left: sixVstack1.leftAnchor, bottom: sixVstack1.bottomAnchor, right: sixVstack1.rightAnchor, paddingTop: pricingHeight*(1/8), paddingLeft: pricingHeight*(1/8), paddingBottom: pricingHeight*(1/8), paddingRight: pricingHeight*(1/8), width: 0, height: 0)
+
+        
+        sixVstack2.addArrangedSubview(sixNumberLbl)
+        sixNumberLbl.anchor(top: nil, left: sixVstack2.leftAnchor, bottom: nil, right: sixVstack2.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: sixVstack2.frame.width, height: pricingHeight*(3/8))
+        
+        sixVstack2.addArrangedSubview(sixMonthLbl)
+        sixMonthLbl.anchor(top: nil, left: sixVstack2.leftAnchor, bottom: nil, right: sixVstack2.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: sixVstack2.frame.width, height: pricingHeight*(1.5/8))
+        
+        sixVstack2.addArrangedSubview(sixPriceLbl)
+        sixPriceLbl.anchor(top: nil, left: sixVstack2.leftAnchor, bottom: nil, right: sixVstack2.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: sixVstack2.frame.width, height: pricingHeight*(1/8))
+        
+
+        
+        
+        
+        sixContainer.addSubview(oneInner)
         oneInner.anchor(top: oneContainer.topAnchor, left: oneContainer.leftAnchor, bottom: oneContainer.bottomAnchor, right: oneContainer.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
         
-        twelveInner.layer.borderWidth = 5
-        sixInner.layer.borderWidth = 0
+//        oneContainer.addSubview(oneLabel)
+//        oneLabel.anchor(top: nil, left: nil, bottom: nil, right: nil, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: oneContainer.frame.width*(3/4), height: 30)
+//        //oneLabel.frame = CGRect(x: 0, y: h, width: oneContainer.frame.width*(3/4), height: 30)
+//        oneLabel.centerXAnchor.constraint(equalTo: oneContainer.centerXAnchor).isActive = true
+//        oneLabel.bottomAnchor.constraint(equalTo: oneContainer.topAnchor, constant: 17.5).isActive = true
+        
+        oneContainer.addSubview(oneVstack1)
+        oneVstack1.anchor(top: oneContainer.topAnchor, left: oneContainer.leftAnchor, bottom: oneContainer.bottomAnchor, right: oneContainer.rightAnchor, paddingTop: 5, paddingLeft: 5, paddingBottom: 5, paddingRight: 5)
+        //oneVstack1.layoutMargins = UIEdgeInsets(top: pricingHeight*(1/5), left: 10, bottom: pricingHeight*(1/5), right: 10)
+        oneVstack1.isLayoutMarginsRelativeArrangement = true
+        
+        tap = UITapGestureRecognizer(target: self, action: #selector(oneTap))
+        oneVstack1.addGestureRecognizer(tap)
+        
+        
+        
+        oneContainer.bringSubviewToFront(oneVstack1)
+        //oneContainer.bringSubviewToFront(oneLabel)
+        
+        oneVstack1.addArrangedSubview(oneVstack2)
+        oneVstack2.anchor(top: oneVstack1.topAnchor, left: oneVstack1.leftAnchor, bottom: oneVstack1.bottomAnchor, right: oneVstack1.rightAnchor, paddingTop: pricingHeight*(1/8), paddingLeft: pricingHeight*(1/8), paddingBottom: pricingHeight*(1/8), paddingRight: pricingHeight*(1/8), width: 0, height: 0)
+
+        
+        oneVstack2.addArrangedSubview(oneNumberLbl)
+        oneNumberLbl.anchor(top: nil, left: oneVstack2.leftAnchor, bottom: nil, right: oneVstack2.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: oneVstack2.frame.width, height: pricingHeight*(3/8))
+        
+        oneVstack2.addArrangedSubview(oneMonthLbl)
+        oneMonthLbl.anchor(top: nil, left: oneVstack2.leftAnchor, bottom: nil, right: oneVstack2.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: oneVstack2.frame.width, height: pricingHeight*(1.5/8))
+        
+        oneVstack2.addArrangedSubview(onePriceLbl)
+        onePriceLbl.anchor(top: nil, left: oneVstack2.leftAnchor, bottom: nil, right: oneVstack2.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: oneVstack2.frame.width, height: pricingHeight*(1/8))
+        
+        oneContainer.bringSubviewToFront(oneVstack1)
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+
+        
+        
+        
+        
+
+        twelveInner.layer.borderWidth = 0
+        sixInner.layer.borderWidth = 5
         oneInner.layer.borderWidth = 0
         
 
@@ -722,6 +1058,7 @@ class GoldController: UIViewController {
         view.bringSubviewToFront(pageControl)
         invisibleRect.bringSubviewToFront(titleLbl)
         view.bringSubviewToFront(titleLbl)
+        view.bringSubviewToFront(oneVstack1)
      
     }
     

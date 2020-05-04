@@ -401,9 +401,9 @@ class GoldController: UIViewController {
     
     let twelvePriceLbl: UILabel = {
         let lbl = UILabel()
-        lbl.text = "$9.99"
+        lbl.text = "$8.99"
         lbl.sizeToFit()
-        lbl.font = UIFont(name: "BrandonGrotesque-Bold", size: 500)
+        lbl.font = UIFont(name: "BrandonGrotesque-Black", size: 500)
           lbl.lineBreakMode = .byClipping
               //  lbl.minimumScaleFactor = 0.1
         lbl.textColor = .white
@@ -497,9 +497,9 @@ class GoldController: UIViewController {
     
     let sixPriceLbl: UILabel = {
         let lbl = UILabel()
-        lbl.text = "$3.99"
+        lbl.text = "$4.99"
         lbl.sizeToFit()
-        lbl.font = UIFont(name: "BrandonGrotesque-Bold", size: 500)
+        lbl.font = UIFont(name: "BrandonGrotesque-Black", size: 500)
           lbl.lineBreakMode = .byClipping
               //  lbl.minimumScaleFactor = 0.1
         lbl.textColor = .white
@@ -585,7 +585,7 @@ class GoldController: UIViewController {
         let lbl = UILabel()
         lbl.text = "$0.99"
         lbl.sizeToFit()
-        lbl.font = UIFont(name: "BrandonGrotesque-Bold", size: 500)
+        lbl.font = UIFont(name: "BrandonGrotesque-Black", size: 500)
           lbl.lineBreakMode = .byClipping
               //  lbl.minimumScaleFactor = 0.1
         lbl.textColor = .white
@@ -600,6 +600,66 @@ class GoldController: UIViewController {
         view.backgroundColor = UIColor.black.withAlphaComponent(0.5)
         return view
     }()
+    
+    let pricePerMonthLbl: UILabel = {
+        let lbl = UILabel()
+        lbl.text = "$0.66/month"
+        lbl.sizeToFit()
+        lbl.font = UIFont(name: "BrandonGrotesque-Black", size: 500)
+          lbl.lineBreakMode = .byClipping
+              //  lbl.minimumScaleFactor = 0.1
+        lbl.textColor = .white
+        lbl.adjustsFontSizeToFitWidth = true
+          lbl.textAlignment  = .center
+        lbl.numberOfLines = 0
+        return lbl
+    }()
+    
+    let btnStack: UIStackView = {
+        let stack = UIStackView()
+        stack.axis = .vertical
+        //stack.distribution = .fillEqually
+        stack.alignment = .center
+        //stack.clipsToBounds = true
+        //stack.sizeToFit()
+        stack.spacing = 0
+        //stack.addBackground(color: UIColor.white, cornerRadius: 0)
+        return stack
+    }()
+    
+    
+//    let upgradeBtn: UIButton = {
+//        let button = UIButton(type: .system)
+//        button.setTitle("Upgrade", for: .normal)
+//        button.titleLabel?.font = UIFont.systemFont(ofSize: 500)
+//        button.setTitleColor(UIColor.black, for: .normal)
+//        button.titleLabel?.adjustsFontSizeToFitWidth = true
+//        button.titleLabel?.numberOfLines = 1
+//        button.backgroundColor = Color.shared.gold
+//        button.addTarget(self, action: #selector(handleUpgrade), for: .touchUpInside)
+//        button.layer.cornerRadius = 20
+//        button.titleLabel?.lineBreakMode = .byClipping
+//        return button
+//    }()
+    
+    let upgradeBtn: PaddingLabel = {
+        let lbl = PaddingLabel()
+        lbl.text = "Upgrade"
+        lbl.sizeToFit()
+        lbl.font = UIFont(name: "BrandonGrotesque-Black", size: 500)
+          lbl.lineBreakMode = .byClipping
+              //  lbl.minimumScaleFactor = 0.1
+        lbl.textColor = .black
+        lbl.adjustsFontSizeToFitWidth = true
+          lbl.textAlignment  = .center
+        lbl.numberOfLines = 0
+        lbl.backgroundColor = Color.shared.gold
+        lbl.layer.cornerRadius = 20
+        lbl.layer.masksToBounds = true
+        
+        return lbl
+    }()
+    
     
     
     //MARK: VARIABLES
@@ -624,6 +684,15 @@ class GoldController: UIViewController {
     
     
     //MARK: Selectors
+    
+    @objc func handleUpgrade() {
+        print("++UPgrading $$$$")
+    }
+    
+    
+    
+    
+    
     @objc func twelveTap() {
         
    
@@ -645,6 +714,7 @@ class GoldController: UIViewController {
         if twelveTapped {
             //Show purchase popup
              print("++++++ 12 tapped")
+            handleUpgrade()
         }
         twelveTapped = true
         
@@ -673,6 +743,7 @@ class GoldController: UIViewController {
         if sixTapped {
             //Show purchase popup
              print("++++++ 6 tapped")
+            handleUpgrade()
         }
         sixTapped = true
         
@@ -702,6 +773,7 @@ class GoldController: UIViewController {
         if oneTapped {
             //Show purchase popup
              print("++++++ 1 tapped")
+            handleUpgrade()
         }
         oneTapped = true
     }
@@ -1029,16 +1101,6 @@ class GoldController: UIViewController {
         
         
         
-        
-        
-        
-        
-        
-
-        
-        
-        
-        
 
         twelveInner.layer.borderWidth = 0
         sixInner.layer.borderWidth = 5
@@ -1047,6 +1109,30 @@ class GoldController: UIViewController {
 
         view.addSubview(upgradeBackground)
         upgradeBackground.anchor(top: nil, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: view.frame.width, height: upgradeHeight)
+        
+        upgradeBackground.addSubview(pricePerMonthLbl)
+        pricePerMonthLbl.anchor(top: upgradeBackground.topAnchor, left: nil, bottom: nil, right: nil, paddingTop: 8, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: oneVstack2.frame.width, height: pricingHeight*(1/8) )
+        pricePerMonthLbl.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        
+       
+        btnStack.isLayoutMarginsRelativeArrangement = true
+
+        upgradeBackground.addSubview(btnStack)
+        btnStack.anchor(top: pricePerMonthLbl.bottomAnchor, left: view.leftAnchor, bottom: upgradeBackground.bottomAnchor, right: view.rightAnchor, paddingTop: 0, paddingLeft: view.frame.width/6, paddingBottom: upgradeHeight*(1/2), paddingRight: view.frame.width/6, width: 0, height: 0)
+        btnStack.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        
+        //btnStack.layoutMargins = UIEdgeInsets(top: 8, left: oneVstack2.frame.width/2, bottom: 0, right: oneVstack2.frame.width/2)
+        
+        btnStack.addArrangedSubview(upgradeBtn)
+        upgradeBtn.anchor(top: btnStack.topAnchor, left: btnStack.leftAnchor, bottom: btnStack.bottomAnchor, right: btnStack.rightAnchor, paddingTop: 2, paddingLeft: 0, paddingBottom: 5   , paddingRight: 0, width: btnStack.frame.width, height: btnStack.frame.height)
+        upgradeBtn.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        
+        
+        
+        
+        
+        
+        
         
         view.addScrollView(Dscroll, container: scrollViewContainer, elements: [invisibleRect, Hstack, upgradeBackground ])
         Dscroll.alwaysBounceVertical = true

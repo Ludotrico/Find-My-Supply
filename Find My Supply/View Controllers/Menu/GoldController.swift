@@ -676,7 +676,7 @@ class GoldController: UIViewController {
     lazy var h = view.frame.height * (6/11)
     lazy var pricingHeight = view.frame.height * (2.5/11)
     lazy var pricingInternalHeigh = pricingHeight*(3/5)
-    lazy var upgradeHeight = view.frame.height * (2.5/11)
+    lazy var upgradeHeight = (view.frame.height * (2.5/11)*(3/5))
     
     var twelveTapped = false
     var sixTapped = true
@@ -694,7 +694,7 @@ class GoldController: UIViewController {
     
     
     @objc func twelveTap() {
-        
+ 
    
         sixTapped = false
         oneTapped = false
@@ -850,6 +850,11 @@ class GoldController: UIViewController {
     
     func configureViewComponents() {
         
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            upgradeHeight = view.frame.height * (1.8/11)
+        }
+        
+   
         pastOffsetX = CGFloat(0)
         
         view.backgroundColor = .black
@@ -1118,7 +1123,7 @@ class GoldController: UIViewController {
         btnStack.isLayoutMarginsRelativeArrangement = true
 
         upgradeBackground.addSubview(btnStack)
-        btnStack.anchor(top: pricePerMonthLbl.bottomAnchor, left: view.leftAnchor, bottom: upgradeBackground.bottomAnchor, right: view.rightAnchor, paddingTop: 0, paddingLeft: view.frame.width/6, paddingBottom: upgradeHeight*(1/2), paddingRight: view.frame.width/6, width: 0, height: 0)
+        btnStack.anchor(top: pricePerMonthLbl.bottomAnchor, left: view.leftAnchor, bottom: upgradeBackground.bottomAnchor, right: view.rightAnchor, paddingTop: 0, paddingLeft: view.frame.width/6, paddingBottom: 24, paddingRight: view.frame.width/6, width: 0, height: 0)
         btnStack.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         
         //btnStack.layoutMargins = UIEdgeInsets(top: 8, left: oneVstack2.frame.width/2, bottom: 0, right: oneVstack2.frame.width/2)
@@ -1126,6 +1131,9 @@ class GoldController: UIViewController {
         btnStack.addArrangedSubview(upgradeBtn)
         upgradeBtn.anchor(top: btnStack.topAnchor, left: btnStack.leftAnchor, bottom: btnStack.bottomAnchor, right: btnStack.rightAnchor, paddingTop: 2, paddingLeft: 0, paddingBottom: 5   , paddingRight: 0, width: btnStack.frame.width, height: btnStack.frame.height)
         upgradeBtn.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        
+        tap = UITapGestureRecognizer(target: self, action: #selector(handleUpgrade))
+        btnStack.addGestureRecognizer(tap)
         
         
         
@@ -1155,12 +1163,13 @@ class GoldController: UIViewController {
             //STANDARD
             view.backgroundColor = Color.shared.gold.withAlphaComponent(0.2)
             
-            goldItem.tintColor = .black
+            goldItem.tintColor = Color.shared.gold
             
-            navigationController?.navigationBar.isTranslucent = true
-            navigationController?.navigationBar.tintColor = .black
-            navigationController?.navigationBar.barTintColor = .white
-            StatusBarColor.shared.isDark = true
+            
+            navigationController?.navigationBar.isTranslucent = false
+            navigationController?.navigationBar.tintColor = .white
+            navigationController?.navigationBar.barTintColor = .black
+            StatusBarColor.shared.isDark = false
             UIView.animate(withDuration: 0.5, animations: {
                  self.setNeedsStatusBarAppearanceUpdate()
             })
@@ -1199,16 +1208,16 @@ class GoldController: UIViewController {
             //LIGHT
             view.backgroundColor = Color.shared.gold.withAlphaComponent(0.2)
             
-            goldItem.tintColor = .black
+            goldItem.tintColor = Color.shared.gold
+            
             
             navigationController?.navigationBar.isTranslucent = false
-            navigationController?.navigationBar.tintColor = .black
-            navigationController?.navigationBar.barTintColor = .white
-            StatusBarColor.shared.isDark = true
+            navigationController?.navigationBar.tintColor = .white
+            navigationController?.navigationBar.barTintColor = .black
+            StatusBarColor.shared.isDark = false
             UIView.animate(withDuration: 0.5, animations: {
                  self.setNeedsStatusBarAppearanceUpdate()
             })
-            
    
 
             

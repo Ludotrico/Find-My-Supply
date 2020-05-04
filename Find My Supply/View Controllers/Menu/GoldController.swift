@@ -348,7 +348,7 @@ class GoldController: UIViewController {
     let twelveVstack1: UIStackView = {
         let stack = UIStackView()
         stack.axis = .vertical
-        stack.distribution = .fillEqually
+        //stack.distribution = .fillEqually
         stack.alignment = .center
         //stack.clipsToBounds = true
         //stack.sizeToFit()
@@ -360,14 +360,58 @@ class GoldController: UIViewController {
     let twelveVstack2: UIStackView = {
         let stack = UIStackView()
         stack.axis = .vertical
-        stack.distribution = .fillEqually
-        stack.alignment = .center
+        //stack.distribution = .fillEqually
+        stack.alignment = .bottom
         //stack.clipsToBounds = true
         //stack.sizeToFit()
         stack.spacing = 0
         stack.addBackground(color: UIColor.green.withAlphaComponent(0.2), cornerRadius: 0)
         return stack
     }()
+    
+    let twelveNUumberLbl: UILabel = {
+        let lbl = UILabel()
+        lbl.text = "12"
+        lbl.sizeToFit()
+        lbl.font = UIFont(name: "BrandonGrotesque-Black", size: 500)
+        lbl.lineBreakMode = .byClipping
+        //lbl.minimumScaleFactor = 0.1
+        lbl.textColor = .white
+        lbl.adjustsFontSizeToFitWidth = true
+        lbl.sizeToFit()
+        lbl.textAlignment  = .center
+        lbl.numberOfLines = 0
+        return lbl
+    }()
+    
+    let twelveMonthLbl: UILabel = {
+        let lbl = UILabel()
+        lbl.text = "12 months"
+        lbl.sizeToFit()
+        lbl.font = UIFont(name: "BrandonGrotesque-Light", size: 500)
+          lbl.lineBreakMode = .byClipping
+              //  lbl.minimumScaleFactor = 0.1
+        lbl.textColor = .white
+        lbl.adjustsFontSizeToFitWidth = true
+          lbl.textAlignment  = .center
+        lbl.numberOfLines = 0
+        return lbl
+    }()
+    
+    let twelvePriceLbl: UILabel = {
+        let lbl = UILabel()
+        lbl.text = "$9.99"
+        lbl.sizeToFit()
+        lbl.font = UIFont(name: "BrandonGrotesque-Bold", size: 500)
+          lbl.lineBreakMode = .byClipping
+              //  lbl.minimumScaleFactor = 0.1
+        lbl.textColor = .white
+        lbl.adjustsFontSizeToFitWidth = true
+          lbl.textAlignment  = .center
+        lbl.numberOfLines = 0
+        return lbl
+    }()
+    
     
     
     
@@ -403,7 +447,7 @@ class GoldController: UIViewController {
     
     let upgradeBackground: UIView = {
         let view = UIView()
-        view.backgroundColor = .darkGray
+        view.backgroundColor = UIColor.black.withAlphaComponent(0.5)
         return view
     }()
     
@@ -420,6 +464,7 @@ class GoldController: UIViewController {
     let factor = CGFloat(5/8)
     lazy var h = view.frame.height * (6/11)
     lazy var pricingHeight = view.frame.height * (2.5/11)
+    lazy var pricingInternalHeigh = pricingHeight*(3/5)
     lazy var upgradeHeight = view.frame.height * (2.5/11)
     
     //MARK: HELPER FUNCTIONS
@@ -627,14 +672,27 @@ class GoldController: UIViewController {
         
         twelveContainer.addSubview(twelveVstack1)
         twelveVstack1.anchor(top: twelveContainer.topAnchor, left: twelveContainer.leftAnchor, bottom: twelveContainer.bottomAnchor, right: twelveContainer.rightAnchor, paddingTop: 5, paddingLeft: 5, paddingBottom: 5, paddingRight: 5)
+        //twelveVstack1.layoutMargins = UIEdgeInsets(top: pricingHeight*(1/5), left: 10, bottom: pricingHeight*(1/5), right: 10)
+        twelveVstack1.isLayoutMarginsRelativeArrangement = true
+        
         
         twelveContainer.bringSubviewToFront(twelveVstack1)
         twelveContainer.bringSubviewToFront(twelveLabel)
         
         twelveVstack1.addArrangedSubview(twelveVstack2)
-        twelveVstack2.anchor(top: twelveVstack1.topAnchor, left: twelveVstack1.leftAnchor, bottom: twelveVstack1.bottomAnchor, right: twelveVstack1.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0)
-      
+        twelveVstack2.anchor(top: twelveVstack1.topAnchor, left: twelveVstack1.leftAnchor, bottom: twelveVstack1.bottomAnchor, right: twelveVstack1.rightAnchor, paddingTop: pricingHeight*(1/8), paddingLeft: pricingHeight*(1/8), paddingBottom: pricingHeight*(1/8), paddingRight: pricingHeight*(1/8), width: 0, height: 0)
+
         
+        twelveVstack2.addArrangedSubview(twelveNUumberLbl)
+        twelveNUumberLbl.anchor(top: nil, left: twelveVstack2.leftAnchor, bottom: nil, right: twelveVstack2.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: twelveVstack2.frame.width, height: pricingHeight*(3/8))
+        
+        twelveVstack2.addArrangedSubview(twelveMonthLbl)
+        twelveMonthLbl.anchor(top: nil, left: twelveVstack2.leftAnchor, bottom: nil, right: twelveVstack2.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: twelveVstack2.frame.width, height: pricingHeight*(1.5/8))
+        
+        twelveVstack2.addArrangedSubview(twelvePriceLbl)
+        twelvePriceLbl.anchor(top: nil, left: twelveVstack2.leftAnchor, bottom: nil, right: twelveVstack2.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: twelveVstack2.frame.width, height: pricingHeight*(1/8))
+        
+
         
         
         

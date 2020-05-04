@@ -313,7 +313,7 @@ class GoldController: UIViewController {
         //stack.alignment = .center
         //stack.clipsToBounds = true
         //stack.sizeToFit()
-        stack.spacing = 5
+        //stack.spacing = 5
         //stack.addBackground(color: Color.shared.gold.withAlphaComponent(0.2), cornerRadius: 0)
         return stack
     }()
@@ -966,7 +966,7 @@ class GoldController: UIViewController {
         
         view.addSubview(Hstack)
         Hstack.anchor(top: nil, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: view.frame.width, height: pricingHeight)
-        Hstack.layoutMargins = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
+        Hstack.layoutMargins = UIEdgeInsets(top: 2.5, left: 2.5, bottom: 2.5, right: 2.5)
         Hstack.isLayoutMarginsRelativeArrangement = true
         
         
@@ -992,7 +992,7 @@ class GoldController: UIViewController {
         twelveLabel.bottomAnchor.constraint(equalTo: twelveContainer.topAnchor, constant: 17.5).isActive = true
         
         twelveContainer.addSubview(twelveVstack1)
-        twelveVstack1.anchor(top: twelveContainer.topAnchor, left: twelveContainer.leftAnchor, bottom: twelveContainer.bottomAnchor, right: twelveContainer.rightAnchor, paddingTop: 5, paddingLeft: 5, paddingBottom: 5, paddingRight: 5)
+        twelveVstack1.anchor(top: twelveContainer.topAnchor, left: twelveContainer.leftAnchor, bottom: twelveContainer.bottomAnchor, right: twelveContainer.rightAnchor, paddingTop: 2.5, paddingLeft: 2.5, paddingBottom: 2.5, paddingRight: 2.5)
         //twelveVstack1.layoutMargins = UIEdgeInsets(top: pricingHeight*(1/5), left: 10, bottom: pricingHeight*(1/5), right: 10)
         twelveVstack1.isLayoutMarginsRelativeArrangement = true
         tap = UITapGestureRecognizer(target: self, action: #selector(twelveTap))
@@ -1032,7 +1032,7 @@ class GoldController: UIViewController {
         sixLabel.bottomAnchor.constraint(equalTo: sixContainer.topAnchor, constant: 17.5).isActive = true
         
         sixContainer.addSubview(sixVstack1)
-        sixVstack1.anchor(top: sixContainer.topAnchor, left: sixContainer.leftAnchor, bottom: sixContainer.bottomAnchor, right: sixContainer.rightAnchor, paddingTop: 5, paddingLeft: 5, paddingBottom: 5, paddingRight: 5)
+        sixVstack1.anchor(top: sixContainer.topAnchor, left: sixContainer.leftAnchor, bottom: sixContainer.bottomAnchor, right: sixContainer.rightAnchor, paddingTop: 2.5, paddingLeft: 2.5, paddingBottom: 2.5, paddingRight: 2.5)
         //sixVstack1.layoutMargins = UIEdgeInsets(top: pricingHeight*(1/5), left: 10, bottom: pricingHeight*(1/5), right: 10)
         sixVstack1.isLayoutMarginsRelativeArrangement = true
         
@@ -1070,7 +1070,7 @@ class GoldController: UIViewController {
 //        oneLabel.bottomAnchor.constraint(equalTo: oneContainer.topAnchor, constant: 17.5).isActive = true
         
         oneContainer.addSubview(oneVstack1)
-        oneVstack1.anchor(top: oneContainer.topAnchor, left: oneContainer.leftAnchor, bottom: oneContainer.bottomAnchor, right: oneContainer.rightAnchor, paddingTop: 5, paddingLeft: 5, paddingBottom: 5, paddingRight: 5)
+        oneVstack1.anchor(top: oneContainer.topAnchor, left: oneContainer.leftAnchor, bottom: oneContainer.bottomAnchor, right: oneContainer.rightAnchor, paddingTop: 2.5, paddingLeft: 2.5, paddingBottom: 2.5, paddingRight: 2.5)
         //oneVstack1.layoutMargins = UIEdgeInsets(top: pricingHeight*(1/5), left: 10, bottom: pricingHeight*(1/5), right: 10)
         oneVstack1.isLayoutMarginsRelativeArrangement = true
         

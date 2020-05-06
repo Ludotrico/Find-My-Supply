@@ -43,6 +43,14 @@ class Gold: NSObject {
         paymentQueue.restoreCompletedTransactions()
     }
     
+    func updatePrivileges() {
+        if UserDefaults.standard.bool(forKey: "isGold") {
+            Ads.shared.adsEnabled = false
+        } else {
+            Ads.shared.adsEnabled = true
+        }
+    }
+    
     
 }
 
@@ -97,6 +105,7 @@ extension Gold: SKPaymentTransactionObserver {
                             }
                             //Finish transaction
                             queue.finishTransaction(transaction)
+                            self.updatePrivileges()
                             
                         }
                     }

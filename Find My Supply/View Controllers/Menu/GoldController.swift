@@ -694,8 +694,7 @@ class GoldController: UIViewController {
     
     @objc func handleUpgrade() {
         print("++UPgrading $$$$")
-        
-        UserDefaults.standard.set(false, forKey: "isGold")
+
         
         if twelveTapped {
             Gold.shared.purchase(subscription: .twelveMonths)

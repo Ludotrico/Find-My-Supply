@@ -197,6 +197,7 @@ class LoginController: UIViewController {
                                             UserDefaults.standard.set(true, forKey: "firstLaunch")
                                             UserDefaults.standard.set(user.isGold, forKey: "isGold")
                                             
+                                            Gold.shared.updatePrivileges()
         //                                        if UserDefaults.standard.string(forKey: "askedForNotification") == nil {
         //                                            UserDefaults.standard.set("not asked", forKey: "askedForNotification")
         //                                        }

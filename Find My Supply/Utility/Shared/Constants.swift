@@ -65,7 +65,7 @@ class Ads {
     
     let tableViewBannerID = "ca-app-pub-7180024158512245/2015736475"
 
-    let adsEnabled = true
+    var adsEnabled = true
 }
 
 

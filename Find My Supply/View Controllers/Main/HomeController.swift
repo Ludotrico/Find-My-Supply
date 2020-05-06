@@ -1154,11 +1154,15 @@ class HomeController: UIViewController {
                             }
                             else if firstChar == "T" {
                                 UserDefaults.standard.set(true, forKey: "isGold")
+                                
                             } else if firstChar == "F" {
                                 UserDefaults.standard.set(false, forKey: "isGold")
                             }
+                           
+                            print("===== ADS Enabled?: \(Ads.shared.adsEnabled)")
                       
                             //Logged in user
+                            Gold.shared.updatePrivileges()
 
                             
                         

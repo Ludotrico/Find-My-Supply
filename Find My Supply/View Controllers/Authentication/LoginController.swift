@@ -195,6 +195,7 @@ class LoginController: UIViewController {
                                             (UserDefaults.standard.integer(forKey: "radius") == 0) ? UserDefaults.standard.set(10, forKey: "radius") : nil
                                             UserDefaults.standard.set(10, forKey: "submissionsRemaining")
                                             UserDefaults.standard.set(true, forKey: "firstLaunch")
+                                            UserDefaults.standard.set(user.isGold, forKey: "isGold")
                                             
         //                                        if UserDefaults.standard.string(forKey: "askedForNotification") == nil {
         //                                            UserDefaults.standard.set("not asked", forKey: "askedForNotification")

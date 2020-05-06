@@ -1143,20 +1143,24 @@ class HomeController: UIViewController {
 
                 UserAuth.shared.loginToServer{ (result) in
                     switch result{
-                        case .success(var message):
-                            if message.removeFirst() == "#" {
+                        case .success(let message):
+                            let firstChar = message.first
+                            if firstChar == "#" {
                                 //Failed to register user
                                 print("MESSAGE: \(message)")
                                 DispatchQueue.main.async {
                                 self.navigationController?.pushViewController(LoginController(), animated: true)
                                 }
                             }
-                            else {
-                                //Logged in user
-                                 DispatchQueue.main.async {
-                                    //self.configureViewComponents()
-                                }
+                            else if firstChar == "T" {
+                                UserDefaults.standard.set(true, forKey: "isGold")
+                            } else if firstChar == "F" {
+                                UserDefaults.standard.set(false, forKey: "isGold")
                             }
+                      
+                            //Logged in user
+
+                            
                         
                         case .failure(let error):
                             print("DEBUG: Failed with error \(error)")
@@ -1493,6 +1497,13 @@ class HomeController: UIViewController {
                 }
                 
             }
+            
+            if let city = placemark.locality {
+                print("+++\(city)")
+                Notifications.shared.city = city.replacingOccurrences(of: " ", with: "_")
+                
+            }
+            
             
             if let zip = placemark.postalCode {
                 UpdateUser.shared.zip = Int(zip)!

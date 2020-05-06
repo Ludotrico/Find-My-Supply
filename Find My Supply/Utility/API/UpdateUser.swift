@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Alamofire
 
 
 class UpdateUser {
@@ -19,6 +20,7 @@ class UpdateUser {
     var salt = "_"
     var zip = -1
     var type = "_"
+    var recipt = "_"
 
     
     func initialize(withFname n: String, withEmail e: String, withUsername u: String) {
@@ -147,6 +149,57 @@ class UpdateUser {
         }.resume()
     }
     
+    //POST
+    //verifyRecipt/<inst:userID>/<str:token>/<path:recipt>'
+    func verifyRecipt(completion: @escaping(Result<Bool, Error>) -> ()) {
+//        print("===https://find-my-supply-274702.uc.r.appspot.com/verifyRecipt/\(UserDefaults.standard.integer(forKey: "userID"))/\(UserDefaults.standard.string(forKey: "salt")!)/\(recipt)")
+//
+//        guard let url = URL(string: "https://find-my-supply-274702.uc.r.appspot.com/verifyRecipt/\(UserDefaults.standard.integer(forKey: "userID"))/\(UserDefaults.standard.string(forKey: "salt")!)/\(recipt)") else { return }
+//
+//        var request = URLRequest(url: url)
+//        request.httpMethod = "POST"
+//
+//        URLSession.shared.dataTask(with: request) { (data, response, error) in
+//
+//            // handle error
+//            if let error = error {
+//                completion(.failure(error))
+//                print("Finished RTS with Error\n")
+//                return
+//            }
+//
+//
+//            do {
+//                let message = try JSONDecoder().decode(Verified.self, from: data!)
+//                print("Finished RTS\n")
+//                completion(.success(message.isVerified))
+//            } catch let error {
+//                completion(.failure(error))
+//            }
+//
+//
+//        }.resume()
+        
+        
+        let paramaters: [String: Any] = ["receipt": recipt]
+        AF.request("https://find-my-supply-274702.uc.r.appspot.com/verifyRecipt/\(UserDefaults.standard.integer(forKey: "userID"))/\(UserDefaults.standard.string(forKey: "salt")!)", method: .post, parameters: paramaters, encoding: JSONEncoding.default)
+        .responseJSON { response in
+            print("RESPONSE: \(response)")
+                do {
+                    let message = try JSONDecoder().decode(Verified.self, from: response.data!)
+                    print("Finished RTS\n")
+                    print("======Verified: \(message.isVerified)")
+                    completion(.success(message.isVerified))
+                } catch let error {
+                    completion(.failure(error))
+                }
     
+        }
+
+        
+
+        
+
+    }
     
 }

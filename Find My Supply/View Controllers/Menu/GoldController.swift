@@ -13,6 +13,7 @@ class GoldController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureViewComponents()
+        Gold.shared.getProducts()
 
         // Do any additional setup after loading the view.
     }
@@ -62,7 +63,7 @@ class GoldController: UIViewController {
     
     let titleLbl: UILabel = {
         let lbl = UILabel()
-        lbl.text = "Get Gold"
+        lbl.text = "Go Gold"
         lbl.font = UIFont(name: "BrandonGrotesque-Black", size: 28)
         lbl.textColor = .white //Dark mode
         lbl.numberOfLines = 1
@@ -338,6 +339,7 @@ class GoldController: UIViewController {
         let lbl = PaddingLabel()
         lbl.text = "Best Value"
         lbl.backgroundColor = Color.shared.gold
+        lbl.textColor = .black
         lbl.layer.cornerRadius = 15
         lbl.layer.masksToBounds = true
         lbl.adjustsFontSizeToFitWidth = true
@@ -435,6 +437,7 @@ class GoldController: UIViewController {
         let lbl = PaddingLabel()
         lbl.text = "Most Popular"
         lbl.backgroundColor = Color.shared.gold
+        lbl.textColor = .black
         lbl.layer.cornerRadius = 15
         lbl.layer.masksToBounds = true
         lbl.adjustsFontSizeToFitWidth = true
@@ -684,11 +687,39 @@ class GoldController: UIViewController {
     
     var isIpad = false
     
+
+    
     
     //MARK: Selectors
     
     @objc func handleUpgrade() {
         print("++UPgrading $$$$")
+        
+        UserDefaults.standard.set(false, forKey: "isGold")
+        
+        if twelveTapped {
+            Gold.shared.purchase(subscription: .twelveMonths)
+        } else if sixTapped {
+            Gold.shared.purchase(subscription: .sixMonths)
+        } else {
+            Gold.shared.purchase(subscription: .oneMonth)
+        }
+   
+        DispatchQueue.global(qos: .userInitiated).async {
+            while !UserDefaults.standard.bool(forKey: "isGold") && !self.viewIsDead{
+                print("~~~~")
+                sleep(3)
+            }
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                let success = self.createLbl(text: "Congratulations! You are now a GOLD user.")
+                success.backgroundColor = .black
+                success.textColor = Color.shared.gold
+                self.showMessage(label: success)
+            }
+        }
+        
+        
     }
     
     
@@ -795,6 +826,8 @@ class GoldController: UIViewController {
     
     
     //MARK: HELPER FUNCTIONS
+    
+
     
     func updatePageControl() {
             UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseIn, animations: {
@@ -1484,6 +1517,47 @@ class GoldController: UIViewController {
             print("+++something went wrong")
             
         }
+    }
+    
+    
+    func createLbl(text: String) -> UILabel {
+        let lbl = UILabel()
+        lbl.backgroundColor = UIColor.rgb(red: 209, green: 21, blue: 0)
+        lbl.textColor = .white
+        lbl.text = text
+        lbl.font = UIFont.italicSystemFont(ofSize: 15.0)
+        //lbl.sizeToFit()
+        lbl.textAlignment = .center
+        lbl.numberOfLines = 0
+        //lbl.adjustsFontSizeToFitWidth  = true
+        lbl.layer.cornerRadius = 10
+        return lbl
+    }
+    
+    func showMessage(label: UILabel) {
+        
+
+        self.view.addSubview(label)
+        label.alpha = 1
+        
+      //     self.noNearbyStoresLbl.anchor(top: nil, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0)
+        label.frame = CGRect(x: 0 ,y: self.view.frame.height, width: (self.view.frame.width/4)*3, height: 50)
+        label.center.x = view.center.x
+     
+            UIView.animate(withDuration: 3 , delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+                
+                label.frame = CGRect(x: 0, y: self.view.frame.height - 100, width: (self.view.frame.width/4)*3, height: 50)
+                label.center.x = self.view.center.x
+            }, completion: { _ in
+                    UIView.animate(withDuration: 5, delay: 10, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+                        label.alpha = 0
+                    }, completion: { _ in
+                        
+                        label.removeFromSuperview()
+                        label.alpha = 1
+                    })
+            })
+        
     }
     
     

@@ -450,9 +450,9 @@ extension NotificationsController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if section == 0 {
-            return "Area Notifications"
+            return "Pending Area Notifications"
         }
-        return "Store Notifications"
+        return "Pending Store Notifications"
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

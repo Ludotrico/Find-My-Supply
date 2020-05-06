@@ -70,6 +70,7 @@
 		33B2E8FC245D52B0007A8F90 /* brandon-grotesque-light-58a8a4b38001d.otf in Resources */ = {isa = PBXBuildFile; fileRef = 33B2E8FB245D50E7007A8F90 /* brandon-grotesque-light-58a8a4b38001d.otf */; };
 		33B2E900245D5539007A8F90 /* brandon-grotesque-black-58a8a3e824392.otf in Resources */ = {isa = PBXBuildFile; fileRef = 33B2E8FE245D5528007A8F90 /* brandon-grotesque-black-58a8a3e824392.otf */; };
 		33B2E902245E141A007A8F90 /* GoldController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B2E901245E141A007A8F90 /* GoldController.swift */; };
+		33B2E904246104BE007A8F90 /* Gold.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B2E903246104BE007A8F90 /* Gold.swift */; };
 		574FEA2E39D6621FB0D23D0E /* Pods_Find_My_Supply.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18414091FFD4C5D4B68D3080 /* Pods_Find_My_Supply.framework */; };
 /* End PBXBuildFile section */
 
@@ -141,6 +142,8 @@
 		33B2E8FB245D50E7007A8F90 /* brandon-grotesque-light-58a8a4b38001d.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "brandon-grotesque-light-58a8a4b38001d.otf"; sourceTree = "<group>"; };
 		33B2E8FE245D5528007A8F90 /* brandon-grotesque-black-58a8a3e824392.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "brandon-grotesque-black-58a8a3e824392.otf"; sourceTree = "<group>"; };
 		33B2E901245E141A007A8F90 /* GoldController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoldController.swift; sourceTree = "<group>"; };
+		33B2E903246104BE007A8F90 /* Gold.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gold.swift; sourceTree = "<group>"; };
+		33B2E90524610D37007A8F90 /* Find My Supply.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Find My Supply.entitlements"; sourceTree = "<group>"; };
 		45524D81C0D7389CA467CBA0 /* Pods-Find My Supply.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Find My Supply.debug.xcconfig"; path = "Target Support Files/Pods-Find My Supply/Pods-Find My Supply.debug.xcconfig"; sourceTree = "<group>"; };
 		F3EA27433E1635C62CD66FDF /* Pods-Find My Supply.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Find My Supply.release.xcconfig"; path = "Target Support Files/Pods-Find My Supply/Pods-Find My Supply.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -178,6 +181,7 @@
 		33B2E57E245CD8B1007A8F90 /* Find My Supply */ = {
 			isa = PBXGroup;
 			children = (
+				33B2E90524610D37007A8F90 /* Find My Supply.entitlements */,
 				33B2E85F245CDB34007A8F90 /* Utility */,
 				33B2E8A7245CDCFD007A8F90 /* Models */,
 				33B2E8A9245CDD66007A8F90 /* View Controllers */,
@@ -292,6 +296,7 @@
 				33B2E86A245CDBEB007A8F90 /* Functions.swift */,
 				33B2E869245CDBEB007A8F90 /* Protocols.swift */,
 				33B2E882245CDBEB007A8F90 /* Constants.swift */,
+				33B2E903246104BE007A8F90 /* Gold.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -530,6 +535,7 @@
 				33B2E8C4245CDD66007A8F90 /* ColorSchemeController.swift in Sources */,
 				33B2E889245CDBEB007A8F90 /* Notifications.swift in Sources */,
 				33B2E891245CDBEC007A8F90 /* IQTitleBarButtonItem.swift in Sources */,
+				33B2E904246104BE007A8F90 /* Gold.swift in Sources */,
 				33B2E8CA245CDD66007A8F90 /* SearchSettingsController.swift in Sources */,
 				33B2E89D245CDBEC007A8F90 /* IQUIView+Hierarchy.swift in Sources */,
 				33B2E8C3245CDD66007A8F90 /* TESTViewController.swift in Sources */,
@@ -727,6 +733,7 @@
 			baseConfigurationReference = 45524D81C0D7389CA467CBA0 /* Pods-Find My Supply.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "Find My Supply/Find My Supply.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = ANZUB2C757;
 				INFOPLIST_FILE = "$(SRCROOT)/Find My Supply/Utility/Internal/Info.plist";
@@ -746,6 +753,7 @@
 			baseConfigurationReference = F3EA27433E1635C62CD66FDF /* Pods-Find My Supply.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "Find My Supply/Find My Supply.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = ANZUB2C757;
 				INFOPLIST_FILE = "$(SRCROOT)/Find My Supply/Utility/Internal/Info.plist";

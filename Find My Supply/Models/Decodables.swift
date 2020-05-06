@@ -30,6 +30,7 @@ struct UserInfo: Decodable {
     var password: String
     var identifiedByEmail: Bool
     var zip: Int
+    var isGold: Bool
 }
 
 struct supplyOption: Decodable {

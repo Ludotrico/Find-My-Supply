@@ -67,3 +67,11 @@ class Ads {
 
     let adsEnabled = true
 }
+
+
+enum GoldSubscription: String {
+    case twelveMonths = "TwelveMonths_auto"
+    case sixMonths = "SixMonths_auto"
+    case oneMonth = "OneMonth_auto"
+}
+

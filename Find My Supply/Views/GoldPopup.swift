@@ -137,6 +137,9 @@ class GoldPopup: UIViewController {
             lbl.textColor = .white //Dark mode
             lbl.numberOfLines = 1
             lbl.sizeToFit()
+            lbl.adjustsFontSizeToFitWidth = true
+            lbl.textAlignment = .center
+            lbl.sizeToFit()
             lbl.translatesAutoresizingMaskIntoConstraints = false
 
         
@@ -198,6 +201,7 @@ class GoldPopup: UIViewController {
             lbl.font = UIFont(name: "BrandonGrotesque-Black", size: 35)
             lbl.textColor = .white //Dark mode
             lbl.numberOfLines = 1
+            lbl.adjustsFontSizeToFitWidth = true
             lbl.sizeToFit()
             lbl.translatesAutoresizingMaskIntoConstraints = false
 
@@ -258,6 +262,8 @@ class GoldPopup: UIViewController {
               let lbl = UILabel()
               lbl.text = "Customer Support"
               lbl.font = UIFont(name: "BrandonGrotesque-Black", size: 35)
+            lbl.sizeToFit()
+            lbl.adjustsFontSizeToFitWidth = true
               lbl.textColor = .white //Dark mode
               lbl.numberOfLines = 1
               lbl.sizeToFit()
@@ -934,7 +940,7 @@ class GoldPopup: UIViewController {
         invisibleRect.anchor(top: nil, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: view.frame.width, height: self.h)
         
         invisibleRect.addSubview(titleLbl)
-        titleLbl.anchor(top: invisibleRect.topAnchor, left: nil, bottom: nil, right: nil, paddingTop: 15, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 30)
+        titleLbl.anchor(top: invisibleRect.topAnchor, left: nil, bottom: nil, right: nil, paddingTop: 5, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 30)
         titleLbl.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
     
         
@@ -945,6 +951,10 @@ class GoldPopup: UIViewController {
         var tap = UITapGestureRecognizer(target: self, action: #selector(scrollWasTapped))
 
         Hscroll.addGestureRecognizer(tap)
+        
+        
+        view.addSubview(pageControl)
+        pageControl.anchor(top: Hscroll.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: -pricingHeight*(3/10), paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 10, height: 10)
 
         
         Hscroll.addSubview(info1Gradient)
@@ -953,7 +963,7 @@ class GoldPopup: UIViewController {
 
         
         info1Gradient.addSubview(info1Stack)
-        info1Stack.anchor(top: nil, left: info1Gradient.leftAnchor, bottom: info1Gradient.bottomAnchor, right: info1Gradient.rightAnchor, paddingTop: 0, paddingLeft: 25, paddingBottom: 75, paddingRight: 25, width: 0, height: 115)
+        info1Stack.anchor(top: nil, left: info1Gradient.leftAnchor, bottom: pageControl.topAnchor, right: info1Gradient.rightAnchor, paddingTop: 0, paddingLeft: 20, paddingBottom: pricingHeight*(1/10), paddingRight: 20, width: 0, height: 100)
         info1Stack.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         info1Stack.layoutMargins = UIEdgeInsets(top: 0, left: 10, bottom: 10, right: 10)
         info1Stack.isLayoutMarginsRelativeArrangement = true
@@ -962,7 +972,7 @@ class GoldPopup: UIViewController {
         info1Stack.addArrangedSubview(info1Text)
         
         info1Gradient.addSubview(info1Img)
-        info1Img.anchor(top: titleLbl.bottomAnchor, left: nil, bottom: info1Stack.topAnchor, right: nil, paddingTop: 25, paddingLeft: 0, paddingBottom: 25, paddingRight: 0, width: 0, height: 0)
+        info1Img.anchor(top: titleLbl.bottomAnchor, left: nil, bottom: info1Stack.topAnchor, right: nil, paddingTop: 10, paddingLeft: 0, paddingBottom: 10, paddingRight: 0, width: 0, height: 0)
         info1Img.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         
         //IF you want it to page without it looking like a stack:
@@ -980,7 +990,7 @@ class GoldPopup: UIViewController {
 
         
         info2Gradient.addSubview(info2Stack)
-        info2Stack.anchor(top: nil, left: info2Gradient.leftAnchor, bottom: info2Gradient.bottomAnchor, right: info2Gradient.rightAnchor, paddingTop: 0, paddingLeft: 25, paddingBottom: 75, paddingRight: 25, width: 0, height: 115)
+        info2Stack.anchor(top: nil, left: info2Gradient.leftAnchor, bottom: pageControl.topAnchor, right: info2Gradient.rightAnchor, paddingTop: 0, paddingLeft: 20, paddingBottom: pricingHeight*(1/10), paddingRight: 25, width: 0, height: 100)
         info2Stack.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         info2Stack.layoutMargins = UIEdgeInsets(top: 0, left: 10, bottom: 10, right: 10)
         info2Stack.isLayoutMarginsRelativeArrangement = true
@@ -991,7 +1001,7 @@ class GoldPopup: UIViewController {
         info2Stack.addArrangedSubview(info2Text)
         
         info2Gradient.addSubview(info2Img)
-        info2Img.anchor(top: titleLbl.bottomAnchor, left: nil, bottom: info2Stack.topAnchor, right: nil, paddingTop: 20, paddingLeft: 0, paddingBottom: 20, paddingRight: 0, width: 0, height: 0)
+        info2Img.anchor(top: titleLbl.bottomAnchor, left: nil, bottom: info2Stack.topAnchor, right: nil, paddingTop: 10, paddingLeft: 0, paddingBottom: 10, paddingRight: 0, width: 0, height: 0)
         info2Img.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         
         
@@ -1006,7 +1016,7 @@ class GoldPopup: UIViewController {
 
         
         info3Gradient.addSubview(info3Stack)
-        info3Stack.anchor(top: nil, left: info3Gradient.leftAnchor, bottom: info3Gradient.bottomAnchor, right: info3Gradient.rightAnchor, paddingTop: 0, paddingLeft: 25, paddingBottom: 75, paddingRight: 25, width: 0, height: 115)
+        info3Stack.anchor(top: nil, left: info3Gradient.leftAnchor, bottom: pageControl.topAnchor, right: info3Gradient.rightAnchor, paddingTop: 0, paddingLeft: 20, paddingBottom: pricingHeight*(1/10), paddingRight: 20, width: 0, height: 100)
         info3Stack.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         info3Stack.layoutMargins = UIEdgeInsets(top: 0, left: 10, bottom: 10, right: 10)
         info3Stack.isLayoutMarginsRelativeArrangement = true
@@ -1017,7 +1027,7 @@ class GoldPopup: UIViewController {
         info3Stack.addArrangedSubview(info3Text)
         
         info3Gradient.addSubview(info3Img)
-        info3Img.anchor(top: titleLbl.bottomAnchor, left: nil, bottom: info3Stack.topAnchor, right: nil, paddingTop: 20, paddingLeft: 0, paddingBottom: 20, paddingRight: 0, width: 0, height: 0)
+        info3Img.anchor(top: titleLbl.bottomAnchor, left: nil, bottom: info3Stack.topAnchor, right: nil, paddingTop: 10, paddingLeft: 0, paddingBottom: 10, paddingRight: 0, width: 0, height: 0)
         info3Img.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         
 
@@ -1025,8 +1035,7 @@ class GoldPopup: UIViewController {
         
         
         
-        view.addSubview(pageControl)
-        pageControl.anchor(top: Hscroll.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: -45, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 10, height: 10)
+
         
         view.addSubview(line)
         line.anchor(top: Hscroll.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: view.frame.width, height: 2)
@@ -1331,6 +1340,8 @@ class GoldPopup: UIViewController {
                 let info1TitleCopy = UILabel()
                     info1TitleCopy.text = "Get There First"
                     info1TitleCopy.font = UIFont(name: "BrandonGrotesque-Black", size: 35)
+                    info1TitleCopy.adjustsFontSizeToFitWidth = true
+              
                     info1TitleCopy.textColor = .white //Dark mode
                     info1TitleCopy.numberOfLines = 1
                     info1TitleCopy.sizeToFit()
@@ -1377,6 +1388,7 @@ class GoldPopup: UIViewController {
                let info2TitleCopy = UILabel()
                    info2TitleCopy.text = "Terminate Ads"
                    info2TitleCopy.font = UIFont(name: "BrandonGrotesque-Black", size: 35)
+                   info2TitleCopy.adjustsFontSizeToFitWidth = true
                    info2TitleCopy.textColor = .white //Dark mode
                    info2TitleCopy.numberOfLines = 1
                    info2TitleCopy.sizeToFit()
@@ -1424,6 +1436,7 @@ class GoldPopup: UIViewController {
                    info3TitleCopy.font = UIFont(name: "BrandonGrotesque-Black", size: 35)
                    info3TitleCopy.textColor = .white //Dark mode
                    info3TitleCopy.numberOfLines = 1
+                    info3TitleCopy.adjustsFontSizeToFitWidth = true
                    info3TitleCopy.sizeToFit()
                    info3TitleCopy.translatesAutoresizingMaskIntoConstraints = false
 
@@ -1467,7 +1480,7 @@ class GoldPopup: UIViewController {
 
             
             info1GradientCopy.addSubview(info1StackCopy)
-            info1StackCopy.anchor(top: nil, left: info1GradientCopy.leftAnchor, bottom: info1GradientCopy.bottomAnchor, right: info1GradientCopy.rightAnchor, paddingTop: 0, paddingLeft: 25, paddingBottom: 75, paddingRight: 25, width: 0, height: 115)
+            info1StackCopy.anchor(top: nil, left: info1GradientCopy.leftAnchor, bottom: pageControl.topAnchor, right: info1GradientCopy.rightAnchor, paddingTop: 0, paddingLeft: 20, paddingBottom: pricingHeight*(1/10), paddingRight: 20, width: 0, height: 100)
             info1StackCopy.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
             info1StackCopy.layoutMargins = UIEdgeInsets(top: 0, left: 10, bottom: 10, right: 10)
             info1StackCopy.isLayoutMarginsRelativeArrangement = true
@@ -1476,7 +1489,7 @@ class GoldPopup: UIViewController {
             info1StackCopy.addArrangedSubview(info1TextCopy)
             
             info1GradientCopy.addSubview(info1ImgCopy)
-            info1ImgCopy.anchor(top: titleLbl.bottomAnchor, left: nil, bottom: info1StackCopy.topAnchor, right: nil, paddingTop: 25, paddingLeft: 0, paddingBottom: 25, paddingRight: 0, width: 0, height: 0)
+            info1ImgCopy.anchor(top: titleLbl.bottomAnchor, left: nil, bottom: info1StackCopy.topAnchor, right: nil, paddingTop: 10, paddingLeft: 0, paddingBottom: 10, paddingRight: 0, width: 0, height: 0)
             info1ImgCopy.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
             
        
@@ -1497,7 +1510,7 @@ class GoldPopup: UIViewController {
 
             
             info2GradientCopy.addSubview(info2StackCopy)
-            info2StackCopy.anchor(top: nil, left: info2GradientCopy.leftAnchor, bottom: info2GradientCopy.bottomAnchor, right: info2GradientCopy.rightAnchor, paddingTop: 0, paddingLeft: 25, paddingBottom: 75, paddingRight: 25, width: 0, height: 115)
+            info2StackCopy.anchor(top: nil, left: info2GradientCopy.leftAnchor, bottom: pageControl.topAnchor, right: info2GradientCopy.rightAnchor, paddingTop: 0, paddingLeft: 20, paddingBottom: pricingHeight*(1/10), paddingRight: 20, width: 0, height: 100)
             info2StackCopy.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
             info2StackCopy.layoutMargins = UIEdgeInsets(top: 0, left: 10, bottom: 10, right: 10)
             info2StackCopy.isLayoutMarginsRelativeArrangement = true
@@ -1508,7 +1521,7 @@ class GoldPopup: UIViewController {
             info2StackCopy.addArrangedSubview(info2TextCopy)
             
             info2GradientCopy.addSubview(info2ImgCopy)
-            info2ImgCopy.anchor(top: titleLbl.bottomAnchor, left: nil, bottom: info2StackCopy.topAnchor, right: nil, paddingTop: 20, paddingLeft: 0, paddingBottom: 20, paddingRight: 0, width: 0, height: 0)
+            info2ImgCopy.anchor(top: titleLbl.bottomAnchor, left: nil, bottom: info2StackCopy.topAnchor, right: nil, paddingTop: 10, paddingLeft: 0, paddingBottom: 10, paddingRight: 0, width: 0, height: 0)
             info2ImgCopy.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         case 3:
             let info3GradientCopy: UIImageView
@@ -1526,7 +1539,7 @@ class GoldPopup: UIViewController {
 
             
             info3GradientCopy.addSubview(info3StackCopy)
-            info3StackCopy.anchor(top: nil, left: info3GradientCopy.leftAnchor, bottom: info3GradientCopy.bottomAnchor, right: info3GradientCopy.rightAnchor, paddingTop: 0, paddingLeft: 25, paddingBottom: 75, paddingRight: 25, width: 0, height: 115)
+            info3StackCopy.anchor(top: nil, left: info3GradientCopy.leftAnchor, bottom: pageControl.topAnchor, right: info3GradientCopy.rightAnchor, paddingTop: 0, paddingLeft: 20, paddingBottom: pricingHeight*(1/10), paddingRight: 20, width: 0, height: 100)
             info3StackCopy.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
             info3StackCopy.layoutMargins = UIEdgeInsets(top: 0, left: 10, bottom: 10, right: 10)
             info3StackCopy.isLayoutMarginsRelativeArrangement = true
@@ -1537,7 +1550,7 @@ class GoldPopup: UIViewController {
             info3StackCopy.addArrangedSubview(info3TextCopy)
             
             info3GradientCopy.addSubview(info3ImgCopy)
-            info3ImgCopy.anchor(top: titleLbl.bottomAnchor, left: nil, bottom: info3StackCopy.topAnchor, right: nil, paddingTop: 20, paddingLeft: 0, paddingBottom: 20, paddingRight: 0, width: 0, height: 0)
+            info3ImgCopy.anchor(top: titleLbl.bottomAnchor, left: nil, bottom: info3StackCopy.topAnchor, right: nil, paddingTop: 10, paddingLeft: 0, paddingBottom: 10, paddingRight: 0, width: 0, height: 0)
             info3ImgCopy.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         default:
             print("+++something went wrong")

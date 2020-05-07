@@ -30,7 +30,7 @@ class AdCell: UITableViewCell {
     
     var bannerAd: GADBannerView = {
         let ad = GADBannerView()
-        ad.adUnitID = "ca-app-pub-3940256099942544/2934735716" //Ads.shared.tableViewBannerID
+        ad.adUnitID = Ads.shared.bannerTest
         
         return ad
     }()

@@ -2027,8 +2027,8 @@ class StoreController: UIViewController, UIScrollViewDelegate, UIGestureRecogniz
             var rowCount = products.count
             var adIndex = 0
             
-            while ((adIndex+6) <= rowCount) {
-                adIndex =  Int.random(in: (adIndex+6)...(adIndex+9))
+            while ((adIndex+Random.shared.tableRowStart) <= rowCount) {
+                adIndex =  Int.random(in: (adIndex+Random.shared.tableRowStart)...(adIndex+Random.shared.tableRowEnd))
                 if adIndex > rowCount {
                     break
                 }

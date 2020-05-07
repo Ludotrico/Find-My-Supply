@@ -344,12 +344,13 @@ class GoldController: UIViewController {
         let lbl = PaddingLabel()
         lbl.text = "Best Value"
         lbl.backgroundColor = Color.shared.gold
+        lbl.font = UIFont(name: "BrandonGrotesque-Light", size: 20)
         lbl.textColor = .black
         lbl.layer.cornerRadius = 15
         lbl.layer.masksToBounds = true
         lbl.adjustsFontSizeToFitWidth = true
         lbl.isHidden = true
-
+        lbl.numberOfLines = 1
         return lbl
     }()
     
@@ -442,11 +443,12 @@ class GoldController: UIViewController {
         let lbl = PaddingLabel()
         lbl.text = "Most Popular"
         lbl.backgroundColor = Color.shared.gold
+        lbl.font = UIFont(name: "BrandonGrotesque-Light", size: 20)
         lbl.textColor = .black
         lbl.layer.cornerRadius = 15
         lbl.layer.masksToBounds = true
         lbl.adjustsFontSizeToFitWidth = true
-
+        lbl.numberOfLines = 1
         return lbl
     }()
     
@@ -668,6 +670,54 @@ class GoldController: UIViewController {
         return lbl
     }()
     
+    let restoreStackV: UIStackView = {
+        let stack = UIStackView()
+        stack.axis = .vertical
+        //stack.distribution =
+        stack.alignment = .center
+        stack.clipsToBounds = true
+        //stack.sizeToFit()
+        //stack.addBackground(color: UIColor.black, cornerRadius: 0)
+        return stack
+    }()
+    
+    let restoreStackH: UIStackView = {
+        let stack = UIStackView()
+        stack.axis = .horizontal
+        //stack.distribution = .fillProportionally
+        stack.alignment = .center
+        stack.clipsToBounds = true
+        //stack.sizeToFit()
+        
+        return stack
+    }()
+    
+    let restoreImg: UIImageView = {
+        let view = UIImageView()
+        view.image = #imageLiteral(resourceName: "restore").withRenderingMode(.alwaysTemplate)
+        view.tintColor = .gray
+        view.contentMode = .scaleAspectFit
+        view.clipsToBounds = true
+        return view
+    }()
+    
+    let restoreLbl: UILabel = {
+        let lbl = UILabel()
+        lbl.text = "Restore Purchases"
+        lbl.sizeToFit()
+        lbl.font = UIFont(name: "BrandonGrotesque-Light", size: 500)
+          lbl.lineBreakMode = .byClipping
+              //  lbl.minimumScaleFactor = 0.1
+        lbl.textColor = .gray
+        lbl.adjustsFontSizeToFitWidth = true
+          lbl.textAlignment  = .center
+        lbl.numberOfLines = 0
+        lbl.clipsToBounds = true
+        return lbl
+    }()
+    
+    
+    
     
     
     //MARK: VARIABLES
@@ -834,6 +884,11 @@ class GoldController: UIViewController {
     }
     
     
+    @objc func restorePurchases() {
+        Gold.shared.restorePurchases()
+    }
+    
+    
     
     
     
@@ -842,6 +897,8 @@ class GoldController: UIViewController {
     
     
     //MARK: HELPER FUNCTIONS
+    
+    
     
 
     
@@ -1201,12 +1258,35 @@ class GoldController: UIViewController {
         
         
         
+        view.addSubview(restoreStackV)
+        restoreStackV.anchor(top: nil, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: view.frame.width, height: pricingHeight*(1/8)*2)
+        
+        restoreStackV.addArrangedSubview(restoreStackH)
+
+        
+        restoreStackH.addArrangedSubview(restoreImg)
+        restoreImg.anchor(top: nil, left: nil, bottom: nil, right: nil, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: pricingHeight*(1/8), height: pricingHeight*(1/8)/1.5)
+        
+        restoreStackH.addArrangedSubview(restoreLbl)
+        restoreLbl.anchor(top: nil, left: nil, bottom: nil, right: nil, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: pricingHeight*(1/8))
+        
+        restoreStackH.anchor(top: nil, left: nil, bottom: nil, right: nil, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: restoreLbl.frame.width+pricingHeight*(1/8) , height: pricingHeight*(1/8))
+        restoreStackH.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        
+        tap = UITapGestureRecognizer(target: self, action: #selector(restorePurchases))
+        restoreStackH.addGestureRecognizer(tap)
+        
+        
+        
+        
+        upgradeBtn.layer.cornerRadius = upgradeHeight/9
         
         
         
         
         
-        view.addScrollView(Dscroll, container: scrollViewContainer, elements: [invisibleRect, Hstack, upgradeBackground ])
+        
+        view.addScrollView(Dscroll, container: scrollViewContainer, elements: [invisibleRect, Hstack, upgradeBackground, restoreStackV ])
         Dscroll.alwaysBounceVertical = true
         Dscroll.showsVerticalScrollIndicator = false
         

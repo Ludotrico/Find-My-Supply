@@ -10,8 +10,8 @@ import UIKit
 import MapKit
 import SwiftUI
 import CoreLocation
-
 import EzPopup
+import GoogleMobileAds
 
 class HomeController: UIViewController {
 
@@ -21,6 +21,7 @@ class HomeController: UIViewController {
         //print(BCryptSwift.generateSalt())
         //showActivityIndicatory()
         
+        loadInterstitial()
         configureLocationManager()
         
         if let coordinates = self.locationManager.location?.coordinate {
@@ -37,6 +38,13 @@ class HomeController: UIViewController {
         configureMenu()
         configureMenuView()
         configureColorScheme()
+        
+    
+        
+        
+
+        
+        
         //if authorized {
             //centerMapOnUser()
 
@@ -552,11 +560,66 @@ class HomeController: UIViewController {
     
     var zipUpdated = false
     
+    var interstitial: GADInterstitial!
+    
 
  
     
     
     // MARK: - Selectors
+    func loadInterstitial() {
+        DispatchQueue.global(qos: .background).async {
+            self.interstitial = GADInterstitial(adUnitID: Ads.shared.interstitialTest)
+            self.interstitial.delegate = self
+            
+            let request = GADRequest()
+            self.interstitial.load(request)
+        }
+    }
+    
+    func showInterstitial() {
+
+        DispatchQueue.global(qos: .userInitiated).async {
+            while true {
+                if (self.interstitial.isReady) {
+                    if Int.random(in: 1...Random.shared.adPopup) == 1 {
+                        self.interstitial.present(fromRootViewController: self)
+                    }
+                    break
+                }
+            }
+        }
+     
+
+        
+    }
+    
+    @objc func showGoldPopup() -> Bool {
+        if (Int.random(in: 1...Random.shared.goldPopup) == 1){
+           let GC = GoldPopup()
+            GC.isPopup = true
+            GC.popupWidth = self.view.frame.width*(4/5)
+            GC.popupHeight = self.view.frame.height*(4/5)
+
+            // Init popup view controller with content is your content view controller
+            let popupVC = PopupViewController(contentController: GC, popupWidth: GC.popupWidth, popupHeight: GC.popupHeight)
+            
+            popupVC.backgroundAlpha = 0.4
+            popupVC.backgroundColor = Color.shared.darkGold
+            popupVC.canTapOutsideToDismiss = false
+            popupVC.cornerRadius = 10
+            popupVC.shadowEnabled = true
+            
+            // show it by call present(_ , animated:) method from a current UIViewController
+            self.present(popupVC, animated: true)
+            return true
+        }
+        return false
+        
+       }
+    
+    
+    
     @objc func addNewZipcode() {
         DispatchQueue.main.async {
             self.dismissNewScrape2()
@@ -1196,6 +1259,15 @@ class HomeController: UIViewController {
                       
                             //Logged in user
                             Gold.shared.updatePrivileges()
+                            
+                            if !UserDefaults.standard.bool(forKey: "isGold") {
+                                DispatchQueue.main.async {
+                                    if !self.showGoldPopup() {
+                                        self.showInterstitial()
+                                    }
+                                }
+                        }
+                     
 
                             
                         
@@ -2576,16 +2648,11 @@ extension HomeController: MKMapViewDelegate {
     }
 }
 
-//
-//extension HomeController: UIViewControllerTransitioningDelegate {
-//    
-//    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-//        transition.isPresenting = true
-//        return transition
-//    }
-//    
-//    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-//        transition.isPresenting = false
-//        return transition
-//    }
-//}
+
+
+extension HomeController: GADInterstitialDelegate {
+    func interstitialDidDismissScreen(_ ad: GADInterstitial) {
+        print("======AD dismissed")
+        showGoldPopup()
+    }
+}

@@ -1262,6 +1262,7 @@ class GoldPopup: UIViewController {
         
         twelveLabel.layer.cornerRadius = (pricingHeight*(2/10))/2
         sixLabel.layer.cornerRadius = (pricingHeight*(2/10))/2
+        
      
     }
     

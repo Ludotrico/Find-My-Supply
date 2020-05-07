@@ -23,7 +23,7 @@ class Color {
     let gold = UIColor.rgb(red:235, green: 219, blue:0)
     let red = UIColor.rgb(red: 255, green: 70, blue: 56)
     let lightGold = UIColor.rgb(red: 255, green: 236, blue: 117)
-    let darkGold = UIColor.rgb(red: 255, green: 0, blue: 0)
+    let darkGold = UIColor.rgb(red: 59, green: 55, blue: 0)
     let darkRed = UIColor.rgb(red: 135, green: 0, blue: 0)
     
     

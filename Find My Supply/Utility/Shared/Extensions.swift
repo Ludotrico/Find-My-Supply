@@ -319,8 +319,8 @@ extension UIStackView {
 
     @IBInspectable var topInset: CGFloat = 10.0
     @IBInspectable var bottomInset: CGFloat = 10.0
-    @IBInspectable var leftInset: CGFloat = 10.0
-    @IBInspectable var rightInset: CGFloat = 10.0
+    @IBInspectable var leftInset: CGFloat = 0.0
+    @IBInspectable var rightInset: CGFloat = 0.0
 
     override func drawText(in rect: CGRect) {
         let insets = UIEdgeInsets(top: topInset, left: leftInset, bottom: bottomInset, right: rightInset)
@@ -332,4 +332,15 @@ extension UIStackView {
         return CGSize(width: size.width + leftInset + rightInset,
                       height: size.height + topInset + bottomInset)
     }
+    
+    func insets(top: CGFloat, bottom: CGFloat, left: CGFloat, right: CGFloat) {
+        topInset = top
+        bottomInset = bottom
+        leftInset = left
+        rightInset = right
+    }
+    
+    
+    
+    
 }

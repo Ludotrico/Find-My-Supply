@@ -8,7 +8,7 @@
 
 import UIKit
 
-class GoldController: UIViewController {
+class GoldPopup: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -342,10 +342,17 @@ class GoldController: UIViewController {
     
     let twelveLabel: PaddingLabel = {
         let lbl = PaddingLabel()
+        lbl.insets(top: 0, bottom: 0, left: 3, right: 3)
         lbl.text = "Best Value"
         lbl.backgroundColor = Color.shared.gold
+        lbl.font = UIFont(name: "BrandonGrotesque-Light", size: 500)
+        lbl.lineBreakMode = .byClipping
+        lbl.adjustsFontSizeToFitWidth = true
+        lbl.sizeToFit()
+          lbl.textAlignment  = .center
+        lbl.numberOfLines = 0
         lbl.textColor = .black
-        lbl.layer.cornerRadius = 15
+        lbl.layer.cornerRadius = 10
         lbl.layer.masksToBounds = true
         lbl.adjustsFontSizeToFitWidth = true
         lbl.isHidden = true
@@ -440,10 +447,17 @@ class GoldController: UIViewController {
     
     let sixLabel: PaddingLabel = {
         let lbl = PaddingLabel()
+        lbl.insets(top: 0, bottom: 0, left: 3, right: 3)
         lbl.text = "Most Popular"
         lbl.backgroundColor = Color.shared.gold
+        lbl.font = UIFont(name: "BrandonGrotesque-Light", size: 500)
+        lbl.lineBreakMode = .byClipping
+        lbl.adjustsFontSizeToFitWidth = true
+        lbl.sizeToFit()
+          lbl.textAlignment  = .center
+        lbl.numberOfLines = 0
         lbl.textColor = .black
-        lbl.layer.cornerRadius = 15
+        lbl.layer.cornerRadius = 10
         lbl.layer.masksToBounds = true
         lbl.adjustsFontSizeToFitWidth = true
 
@@ -684,7 +698,7 @@ class GoldController: UIViewController {
     lazy var h = view.frame.height * (6/11)
     lazy var pricingHeight = view.frame.height * (2.5/11)
     lazy var pricingInternalHeigh = pricingHeight*(3/5)
-    lazy var upgradeHeight = (view.frame.height * (2.5/11)*(3/5))
+    lazy var upgradeHeight = view.frame.height * (2.5/11)
     
     var twelveTapped = false
     var sixTapped = true
@@ -904,12 +918,6 @@ class GoldController: UIViewController {
     
     func configureViewComponents() {
         
-        if UIDevice.current.userInterfaceIdiom == .pad {
-            upgradeHeight = view.frame.height * (1.8/11)
-            pricePerMonthLbl.text = "$0.84/month"
-            isIpad = true
-        }
-
         
         if isPopup {
             view.frame = CGRect(x: 0, y: 0, width: popupWidth, height: popupHeight)
@@ -1052,10 +1060,10 @@ class GoldController: UIViewController {
         twelveInner.anchor(top: twelveContainer.topAnchor, left: twelveContainer.leftAnchor, bottom: twelveContainer.bottomAnchor, right: twelveContainer.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
         
         twelveContainer.addSubview(twelveLabel)
-        twelveLabel.anchor(top: nil, left: nil, bottom: nil, right: nil, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: twelveContainer.frame.width*(3/4), height: 30)
+        twelveLabel.anchor(top: nil, left: nil, bottom: nil, right: nil, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: (view.frame.width/3)*(3/4), height: pricingHeight*(2/10))
         //twelveLabel.frame = CGRect(x: 0, y: h, width: twelveContainer.frame.width*(3/4), height: 30)
         twelveLabel.centerXAnchor.constraint(equalTo: twelveContainer.centerXAnchor).isActive = true
-        twelveLabel.bottomAnchor.constraint(equalTo: twelveContainer.topAnchor, constant: 17.5).isActive = true
+        twelveLabel.bottomAnchor.constraint(equalTo: twelveContainer.topAnchor, constant: (pricingHeight*(2/10)*0.5)+2.5).isActive = true
         
         twelveContainer.addSubview(twelveVstack1)
         twelveVstack1.anchor(top: twelveContainer.topAnchor, left: twelveContainer.leftAnchor, bottom: twelveContainer.bottomAnchor, right: twelveContainer.rightAnchor, paddingTop: 2.5, paddingLeft: 2.5, paddingBottom: 2.5, paddingRight: 2.5)
@@ -1092,10 +1100,10 @@ class GoldController: UIViewController {
         sixInner.anchor(top: sixContainer.topAnchor, left: sixContainer.leftAnchor, bottom: sixContainer.bottomAnchor, right: sixContainer.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
         
         sixContainer.addSubview(sixLabel)
-        sixLabel.anchor(top: nil, left: nil, bottom: nil, right: nil, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: sixContainer.frame.width*(3/4), height: 30)
+        sixLabel.anchor(top: nil, left: nil, bottom: nil, right: nil, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: (view.frame.width/3)*(3/4), height: pricingHeight*(2/10))
         //sixLabel.frame = CGRect(x: 0, y: h, width: sixContainer.frame.width*(3/4), height: 30)
         sixLabel.centerXAnchor.constraint(equalTo: sixContainer.centerXAnchor).isActive = true
-        sixLabel.bottomAnchor.constraint(equalTo: sixContainer.topAnchor, constant: 17.5).isActive = true
+        sixLabel.bottomAnchor.constraint(equalTo: sixContainer.topAnchor, constant: (pricingHeight*(2/10)*0.5)+2.5).isActive = true
         
         sixContainer.addSubview(sixVstack1)
         sixVstack1.anchor(top: sixContainer.topAnchor, left: sixContainer.leftAnchor, bottom: sixContainer.bottomAnchor, right: sixContainer.rightAnchor, paddingTop: 2.5, paddingLeft: 2.5, paddingBottom: 2.5, paddingRight: 2.5)
@@ -1198,7 +1206,7 @@ class GoldController: UIViewController {
         
         
         
-        
+       
         
         
         
@@ -1585,7 +1593,7 @@ class GoldController: UIViewController {
 }
 
 
-extension GoldController:UIScrollViewDelegate {
+extension GoldPopup:UIScrollViewDelegate {
     
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         //        if !self.userHasSwiped {

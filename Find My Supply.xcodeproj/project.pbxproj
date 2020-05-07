@@ -71,6 +71,7 @@
 		33B2E900245D5539007A8F90 /* brandon-grotesque-black-58a8a3e824392.otf in Resources */ = {isa = PBXBuildFile; fileRef = 33B2E8FE245D5528007A8F90 /* brandon-grotesque-black-58a8a3e824392.otf */; };
 		33B2E902245E141A007A8F90 /* GoldController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B2E901245E141A007A8F90 /* GoldController.swift */; };
 		33B2E904246104BE007A8F90 /* Gold.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B2E903246104BE007A8F90 /* Gold.swift */; };
+		33FC64522463929300058EB9 /* GoldPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33FC64512463929300058EB9 /* GoldPopup.swift */; };
 		574FEA2E39D6621FB0D23D0E /* Pods_Find_My_Supply.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18414091FFD4C5D4B68D3080 /* Pods_Find_My_Supply.framework */; };
 /* End PBXBuildFile section */
 
@@ -144,6 +145,7 @@
 		33B2E901245E141A007A8F90 /* GoldController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoldController.swift; sourceTree = "<group>"; };
 		33B2E903246104BE007A8F90 /* Gold.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gold.swift; sourceTree = "<group>"; };
 		33B2E90524610D37007A8F90 /* Find My Supply.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Find My Supply.entitlements"; sourceTree = "<group>"; };
+		33FC64512463929300058EB9 /* GoldPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoldPopup.swift; sourceTree = "<group>"; };
 		45524D81C0D7389CA467CBA0 /* Pods-Find My Supply.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Find My Supply.debug.xcconfig"; path = "Target Support Files/Pods-Find My Supply/Pods-Find My Supply.debug.xcconfig"; sourceTree = "<group>"; };
 		F3EA27433E1635C62CD66FDF /* Pods-Find My Supply.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Find My Supply.release.xcconfig"; path = "Target Support Files/Pods-Find My Supply/Pods-Find My Supply.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -383,6 +385,7 @@
 				33B2E8E0245CDEBE007A8F90 /* NotificationCell.swift */,
 				33B2E8E2245CDEBE007A8F90 /* ThemePopup.swift */,
 				33B2E8F8245D4A3B007A8F90 /* NewScrapePopup.swift */,
+				33FC64512463929300058EB9 /* GoldPopup.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -586,6 +589,7 @@
 				33B2E8C7245CDD66007A8F90 /* MapSettingsController.swift in Sources */,
 				33B2E88F245CDBEB007A8F90 /* IQTextView.swift in Sources */,
 				33B2E8D1245CDD66007A8F90 /* HomeController.swift in Sources */,
+				33FC64522463929300058EB9 /* GoldPopup.swift in Sources */,
 				33B2E8F2245CDEBE007A8F90 /* MenuCell.swift in Sources */,
 				33B2E893245CDBEC007A8F90 /* IQToolbar.swift in Sources */,
 				33B2E8C6245CDD66007A8F90 /* SettingsController.swift in Sources */,
@@ -737,6 +741,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = ANZUB2C757;
 				INFOPLIST_FILE = "$(SRCROOT)/Find My Supply/Utility/Internal/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -757,6 +762,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = ANZUB2C757;
 				INFOPLIST_FILE = "$(SRCROOT)/Find My Supply/Utility/Internal/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

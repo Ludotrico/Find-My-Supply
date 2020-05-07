@@ -44,6 +44,7 @@ class Gold: NSObject {
     }
     
     func updatePrivileges() {
+        print("===== Ads enabled: \(UserDefaults.standard.bool(forKey: "isGold"))")
         if UserDefaults.standard.bool(forKey: "isGold") {
             Ads.shared.adsEnabled = false
         } else {
@@ -97,15 +98,19 @@ extension Gold: SKPaymentTransactionObserver {
                                         UserDefaults.standard.set(true, forKey: "isGold")
                                     } else {
                                         print("=====Unverified recipt")
-                                        
+                                        UserDefaults.standard.set(false, forKey: "isGold")
                                     }
                                 case .failure(let error):
                                     print("DEBUG: Failed with error \(error)")
                                 }
+                                self.updatePrivileges()
                             }
                             //Finish transaction
                             queue.finishTransaction(transaction)
+                   
                             self.updatePrivileges()
+                            
+                            
                             
                         }
                     }

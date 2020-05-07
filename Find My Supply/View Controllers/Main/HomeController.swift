@@ -10,6 +10,9 @@ import UIKit
 import MapKit
 import SwiftUI
 import CoreLocation
+
+import EzPopup
+
 class HomeController: UIViewController {
 
     override func viewDidLoad() {
@@ -68,7 +71,10 @@ class HomeController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         isSearching = false
-        updateUserZip()
+        if !zipUpdated {
+            updateUserZip()
+            zipUpdated = true
+        }
 
 
         
@@ -544,6 +550,8 @@ class HomeController: UIViewController {
     
     var zipNotSupported = false
     
+    var zipUpdated = false
+    
 
  
     
@@ -851,8 +859,43 @@ class HomeController: UIViewController {
 
         let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         let addRegionNotification = UIAlertAction(title: "Add area notification ", style: .default) { action in
-        self.handleAddNotification()
+//            if UserDefaults.standard.bool(forKey: "isGold") {
+//                self.handleAddNotification()
+//            } else {
+//                let GC = GoldController()
+//                GC.modalPresentationStyle = .overCurrentContext
+//                GC.modalTransitionStyle = .crossDissolve
+//                self.present(GC, animated: true, completion: nil)
+//            }
+            
+//            let GC = GoldController()
+//            GC.isPopup = true
+//            GC.popupWidth = 300
+//            GC.popupHeight = 600
+//
+//            GC.modalPresentationStyle = .overCurrentContext
+//            GC.modalTransitionStyle = .crossDissolve
+//            self.present(GC, animated: true, completion: nil)
 
+            
+            
+            // init YourViewController
+            let GC = GoldPopup()
+            GC.isPopup = true
+            GC.popupWidth = 250
+            GC.popupHeight = 450
+
+            // Init popup view controller with content is your content view controller
+            let popupVC = PopupViewController(contentController: GC, popupWidth: 250, popupHeight: 450)
+            
+            popupVC.backgroundAlpha = 0.3
+            popupVC.backgroundColor = Color.shared.darkGold
+            popupVC.canTapOutsideToDismiss = true
+            popupVC.cornerRadius = 10
+            popupVC.shadowEnabled = true
+            
+            // show it by call present(_ , animated:) method from a current UIViewController
+            self.present(popupVC, animated: true)
         }
 
         actionSheet.addAction(addRegionNotification)

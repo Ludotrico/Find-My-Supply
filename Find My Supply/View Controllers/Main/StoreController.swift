@@ -754,7 +754,7 @@ class StoreController: UIViewController, UIScrollViewDelegate, UIGestureRecogniz
     @objc func addNotification(sender: AnyObject) {
         
         let btn = sender as! UIButton
-        self.navigationController?.pushViewController(TESTViewController(), animated: true)
+        //self.navigationController?.pushViewController(TESTViewController(), animated: true)
         print("===+ Sender: \(sender.tag)")
         currSKU = products[sender.tag].SKU
         

@@ -689,6 +689,17 @@ class GoldPopup: UIViewController {
     }()
     
     
+    let cancelBtn: UIButton = {
+        let button = UIButton(type: .system)
+        button.setImage(#imageLiteral(resourceName: "xbtn").withRenderingMode(.alwaysOriginal), for: .normal)
+        
+
+        button.addTarget(self, action: #selector(dismissPopup), for: .touchUpInside)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+        
+    }()
+    
     
     //MARK: VARIABLES
     let scheme = UserDefaults.standard.integer(forKey: "colorScheme")
@@ -720,6 +731,16 @@ class GoldPopup: UIViewController {
     
     
     //MARK: Selectors
+    
+    @objc func dismissPopup() {
+        
+        UIView.animate(withDuration: 5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0.2, options: .curveEaseIn, animations: {
+            
+
+            self.dismiss(animated: true, completion: nil)
+        }, completion: nil)
+        
+    }
     
     @objc func handleUpgrade() {
         print("=====UPgrading $$$$")
@@ -923,7 +944,10 @@ class GoldPopup: UIViewController {
     }
     
     func configureViewComponents() {
-        
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            pricePerMonthLbl.text = "$0.84/month"
+            isIpad = true
+        }
         
         if isPopup {
             view.frame = CGRect(x: 0, y: 0, width: popupWidth, height: popupHeight)
@@ -1215,6 +1239,9 @@ class GoldPopup: UIViewController {
         
         
         
+        
+        view.addSubview(cancelBtn)
+        cancelBtn.anchor(top: view.topAnchor, left: nil, bottom: nil, right: view.rightAnchor, paddingTop: 5, paddingLeft: 0, paddingBottom: 0, paddingRight: 5, width: 15, height: 15)
        
         
         
@@ -1231,6 +1258,10 @@ class GoldPopup: UIViewController {
         invisibleRect.bringSubviewToFront(titleLbl)
         view.bringSubviewToFront(titleLbl)
         view.bringSubviewToFront(oneVstack1)
+        view.bringSubviewToFront(cancelBtn)
+        
+        twelveLabel.layer.cornerRadius = (pricingHeight*(2/10))/2
+        sixLabel.layer.cornerRadius = (pricingHeight*(2/10))/2
      
     }
     

@@ -862,40 +862,30 @@ class HomeController: UIViewController {
 //            if UserDefaults.standard.bool(forKey: "isGold") {
 //                self.handleAddNotification()
 //            } else {
-//                let GC = GoldController()
-//                GC.modalPresentationStyle = .overCurrentContext
-//                GC.modalTransitionStyle = .crossDissolve
-//                self.present(GC, animated: true, completion: nil)
+                // init YourViewController
+                let GC = GoldPopup()
+                GC.isPopup = true
+                GC.popupWidth = self.view.frame.width*(4/5)
+                GC.popupHeight = self.view.frame.height*(4/5)
+
+                // Init popup view controller with content is your content view controller
+                let popupVC = PopupViewController(contentController: GC, popupWidth: GC.popupWidth, popupHeight: GC.popupHeight)
+                
+                popupVC.backgroundAlpha = 0.4
+                popupVC.backgroundColor = Color.shared.darkGold
+                popupVC.canTapOutsideToDismiss = false
+                popupVC.cornerRadius = 10
+                popupVC.shadowEnabled = true
+                
+                // show it by call present(_ , animated:) method from a current UIViewController
+                self.present(popupVC, animated: true)
 //            }
             
-//            let GC = GoldController()
-//            GC.isPopup = true
-//            GC.popupWidth = 300
-//            GC.popupHeight = 600
-//
-//            GC.modalPresentationStyle = .overCurrentContext
-//            GC.modalTransitionStyle = .crossDissolve
-//            self.present(GC, animated: true, completion: nil)
+
 
             
             
-            // init YourViewController
-            let GC = GoldPopup()
-            GC.isPopup = true
-            GC.popupWidth = 250
-            GC.popupHeight = 450
 
-            // Init popup view controller with content is your content view controller
-            let popupVC = PopupViewController(contentController: GC, popupWidth: 250, popupHeight: 450)
-            
-            popupVC.backgroundAlpha = 0.3
-            popupVC.backgroundColor = Color.shared.darkGold
-            popupVC.canTapOutsideToDismiss = true
-            popupVC.cornerRadius = 10
-            popupVC.shadowEnabled = true
-            
-            // show it by call present(_ , animated:) method from a current UIViewController
-            self.present(popupVC, animated: true)
         }
 
         actionSheet.addAction(addRegionNotification)

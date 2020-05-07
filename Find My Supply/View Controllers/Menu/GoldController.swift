@@ -705,6 +705,8 @@ class GoldController: UIViewController {
         print("=====UPgrading $$$$")
 
         
+        
+        UserDefaults.standard.set(false, forKey: "isGold")
         if twelveTapped {
             Gold.shared.purchase(subscription: .twelveMonths)
         } else if sixTapped {
@@ -725,6 +727,7 @@ class GoldController: UIViewController {
                     break
                 }
                 
+                print("======in loop=====")
                 sleep(3)
             }
             
@@ -1214,7 +1217,9 @@ class GoldController: UIViewController {
         invisibleRect.bringSubviewToFront(titleLbl)
         view.bringSubviewToFront(titleLbl)
         view.bringSubviewToFront(oneVstack1)
-     
+        view.bringSubviewToFront(twelveLabel)
+        view.bringSubviewToFront(sixLabel)
+
     }
     
     func configureColorScheme() {

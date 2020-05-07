@@ -8,6 +8,7 @@
 
 import UIKit
 import GoogleMobileAds
+import EzPopup
 //APP ID: ca-app-pub-7180024158512245~7111316337
 //AD UNIT ID: ca-app-pub-7180024158512245/2015736475
 
@@ -34,6 +35,19 @@ class AdCell: UITableViewCell {
         return ad
     }()
     
+    let cancelBtn: UIButton = {
+        let button = UIButton(type: .system)
+        button.setImage(#imageLiteral(resourceName: "whiteX").withRenderingMode(.alwaysOriginal), for: .normal)
+        
+
+        //button.addTarget(self, action: #selector(showPopup), for: .touchUpInside)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+        
+    }()
+    
+
+    
     
 
     
@@ -42,6 +56,9 @@ class AdCell: UITableViewCell {
         addSubview(bannerAd)
         bannerAd.anchor(top: topAnchor, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0)
   
+        
+        addSubview(cancelBtn)
+        cancelBtn.anchor(top: bannerAd.topAnchor, left: nil, bottom: nil, right: bannerAd.rightAnchor, paddingTop: 5, paddingLeft: 0, paddingBottom: 0, paddingRight: 5, width: 15, height: 15)
         
         
     }

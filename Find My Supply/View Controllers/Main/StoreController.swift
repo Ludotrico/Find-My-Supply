@@ -9,7 +9,7 @@ import UIKit
 import MapKit
 import Nuke
 import GoogleMobileAds
-
+import EzPopup
 
 class StoreController: UIViewController, UIScrollViewDelegate, UIGestureRecognizerDelegate{
 
@@ -549,6 +549,29 @@ class StoreController: UIViewController, UIScrollViewDelegate, UIGestureRecogniz
      
      
      // MARK: - Selectors
+       @objc func showPopup() {
+    
+           let GC = GoldPopup()
+            GC.isPopup = true
+            GC.popupWidth = self.view.frame.width*(4/5)
+            GC.popupHeight = self.view.frame.height*(4/5)
+
+            // Init popup view controller with content is your content view controller
+            let popupVC = PopupViewController(contentController: GC, popupWidth: GC.popupWidth, popupHeight: GC.popupHeight)
+            
+            popupVC.backgroundAlpha = 0.4
+            popupVC.backgroundColor = Color.shared.darkGold
+            popupVC.canTapOutsideToDismiss = false
+            popupVC.cornerRadius = 10
+            popupVC.shadowEnabled = true
+            
+            // show it by call present(_ , animated:) method from a current UIViewController
+            self.present(popupVC, animated: true)
+        
+       }
+    
+    
+    
     @objc func openImageController(_ sender: UITapGestureRecognizer) {
         let view = sender.view as! UIImageView
         print("+++ Open image #\(view.tag)")
@@ -771,14 +794,36 @@ class StoreController: UIViewController, UIScrollViewDelegate, UIGestureRecogniz
                     DispatchQueue.main.async {
                         var actionSheet = UIAlertController()
                         if stores.count > 0 {
-                            actionSheet = UIAlertController(title: "Add Item Notification", message: "Item is in stock in \(stores.count) nearby stores. Do you wish to view nearby stores or get a restock notification for this store?", preferredStyle: .actionSheet)
+                            let nonPlural = "store"
+                            actionSheet = UIAlertController(title: "Add Item Notification", message: "Item is in stock in \(stores.count) nearby \((stores.count == 1) ? nonPlural: nonPlural+"s"). Do you wish to view nearby stores or get a restock notification for this store?", preferredStyle: .actionSheet)
 
                             let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
                             let nearbyStores = UIAlertAction(title: "View nearby stores", style: .default) { action in
                                 self.showNearbyStores(sender: btn)
                             }
                             let addNotification = UIAlertAction(title: "Add notification", style: .default) { action in
-                                self.handleAddNotification(situation: 1, sender: btn)
+                                if UserDefaults.standard.bool(forKey: "isGold") {
+                                    self.handleAddNotification(situation: 1, sender: btn)
+                                } else {
+                                     
+                                    let GC = GoldPopup()
+                                    GC.isPopup = true
+                                    GC.popupWidth = self.view.frame.width*(4/5)
+                                    GC.popupHeight = self.view.frame.height*(4/5)
+
+                                    // Init popup view controller with content is your content view controller
+                                    let popupVC = PopupViewController(contentController: GC, popupWidth: GC.popupWidth, popupHeight: GC.popupHeight)
+                                    
+                                    popupVC.backgroundAlpha = 0.4
+                                    popupVC.backgroundColor = Color.shared.darkGold
+                                    popupVC.canTapOutsideToDismiss = false
+                                    popupVC.cornerRadius = 10
+                                    popupVC.shadowEnabled = true
+                                    
+                                    // show it by call present(_ , animated:) method from a current UIViewController
+                                    self.present(popupVC, animated: true)
+                                }
+                      
                             }
 
                             actionSheet.addAction(nearbyStores)
@@ -790,11 +835,52 @@ class StoreController: UIViewController, UIScrollViewDelegate, UIGestureRecogniz
                             
                             let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
                             let addRegionNotification = UIAlertAction(title: "Add area notification ", style: .default) { action in
-                                self.handleAddNotification(situation: 2, sender: btn)
+                                if UserDefaults.standard.bool(forKey: "isGold") {
+                                    self.handleAddNotification(situation: 2, sender: btn)
+                                } else {
+                                     
+                                    let GC = GoldPopup()
+                                    GC.isPopup = true
+                                    GC.popupWidth = self.view.frame.width*(4/5)
+                                    GC.popupHeight = self.view.frame.height*(4/5)
+
+                                    // Init popup view controller with content is your content view controller
+                                    let popupVC = PopupViewController(contentController: GC, popupWidth: GC.popupWidth, popupHeight: GC.popupHeight)
+                                    
+                                    popupVC.backgroundAlpha = 0.4
+                                    popupVC.backgroundColor = Color.shared.darkGold
+                                    popupVC.canTapOutsideToDismiss = false
+                                    popupVC.cornerRadius = 10
+                                    popupVC.shadowEnabled = true
+                                    
+                                    // show it by call present(_ , animated:) method from a current UIViewController
+                                    self.present(popupVC, animated: true)
+                                }
+                            
 
                             }
                             let addStoreNotification = UIAlertAction(title: "Add store notification", style: .default) { action in
-                                self.handleAddNotification(situation: 1, sender: btn)
+                                if UserDefaults.standard.bool(forKey: "isGold") {
+                                    self.handleAddNotification(situation: 1, sender: btn)
+                                } else {
+                                     
+                                    let GC = GoldPopup()
+                                    GC.isPopup = true
+                                    GC.popupWidth = self.view.frame.width*(4/5)
+                                    GC.popupHeight = self.view.frame.height*(4/5)
+
+                                    // Init popup view controller with content is your content view controller
+                                    let popupVC = PopupViewController(contentController: GC, popupWidth: GC.popupWidth, popupHeight: GC.popupHeight)
+                                    
+                                    popupVC.backgroundAlpha = 0.4
+                                    popupVC.backgroundColor = Color.shared.darkGold
+                                    popupVC.canTapOutsideToDismiss = false
+                                    popupVC.cornerRadius = 10
+                                    popupVC.shadowEnabled = true
+                                    
+                                    // show it by call present(_ , animated:) method from a current UIViewController
+                                    self.present(popupVC, animated: true)
+                                }
 
                             }
 
@@ -1998,7 +2084,7 @@ extension StoreController: UITableViewDelegate, UITableViewDataSource {
                         let cell = tableView.dequeueReusableCell(withIdentifier: "AdCell") as! AdCell
                         cell.bannerAd.rootViewController = self
                         cell.bannerAd.load(GADRequest())
-                        
+                        cell.cancelBtn.addTarget(self, action: #selector(showPopup), for: .touchUpInside)
                         adIndexes.remove(at: 0)
                         return cell
                     } }

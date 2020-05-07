@@ -859,10 +859,10 @@ class HomeController: UIViewController {
 
         let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         let addRegionNotification = UIAlertAction(title: "Add area notification ", style: .default) { action in
-//            if UserDefaults.standard.bool(forKey: "isGold") {
-//                self.handleAddNotification()
-//            } else {
-                // init YourViewController
+            if UserDefaults.standard.bool(forKey: "isGold") {
+                self.handleAddNotification()
+            } else {
+           
                 let GC = GoldPopup()
                 GC.isPopup = true
                 GC.popupWidth = self.view.frame.width*(4/5)
@@ -879,7 +879,7 @@ class HomeController: UIViewController {
                 
                 // show it by call present(_ , animated:) method from a current UIViewController
                 self.present(popupVC, animated: true)
-//            }
+            }
             
 
 

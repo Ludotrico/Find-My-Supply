@@ -21,6 +21,7 @@ class HomeController: UIViewController {
         //print(BCryptSwift.generateSalt())
         //showActivityIndicatory()
         
+            
         loadInterstitial()
         configureLocationManager()
         
@@ -40,13 +41,6 @@ class HomeController: UIViewController {
         configureColorScheme()
         
     
-        
-        
-
-        
-        
-        //if authorized {
-            //centerMapOnUser()
 
  
         let region = MKCoordinateRegion(center: Location.shared.coordinates, latitudinalMeters: 2000, longitudinalMeters: 2000)
@@ -63,10 +57,11 @@ class HomeController: UIViewController {
         
         
 
- 
                 
         
     }
+    
+
     
     
     override func viewWillAppear(_ animated: Bool) {

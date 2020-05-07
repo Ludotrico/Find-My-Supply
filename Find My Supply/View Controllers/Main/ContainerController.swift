@@ -30,8 +30,7 @@ class ContainerController: UIViewController {
     
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
-        return StatusBarColor.shared.isDark ? .default : .lightContent
-        //return .lightContent
+        return StatusBarColor.shared.isDark ? .darkContent : .lightContent
     }
     
     override var preferredStatusBarUpdateAnimation: UIStatusBarAnimation {

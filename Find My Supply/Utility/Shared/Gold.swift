@@ -52,6 +52,15 @@ class Gold: NSObject {
         }
     }
     
+    func sendRegistrationId() {
+        if UserDefaults.standard.bool(forKey: "hasRegisteredId") {
+            let settings = UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
+
+            UIApplication.shared.registerUserNotificationSettings(settings)
+            UIApplication.shared.registerForRemoteNotifications()
+        }
+    }
+    
     
 }
 

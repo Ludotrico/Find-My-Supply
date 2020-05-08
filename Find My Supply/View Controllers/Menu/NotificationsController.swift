@@ -506,7 +506,7 @@ extension NotificationsController: UITableViewDelegate, UITableViewDataSource {
                     cell.notifImage.image = #imageLiteral(resourceName: "soap")
                 case "Toilet Paper":
                     cell.notifImage.image = #imageLiteral(resourceName: "TP")
-                case "Disinfectant Wipes":
+                case "Disinfectant Wipes":  
                     cell.notifImage.image = #imageLiteral(resourceName: "wipe")
                 case "Disinfectant Spray":
                     cell.notifImage.image = #imageLiteral(resourceName: "spray")

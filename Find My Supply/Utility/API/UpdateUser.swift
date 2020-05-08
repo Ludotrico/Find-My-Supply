@@ -21,6 +21,7 @@ class UpdateUser {
     var zip = -1
     var type = "_"
     var recipt = "_"
+    var registrationID = "_"
 
     
     func initialize(withFname n: String, withEmail e: String, withUsername u: String) {
@@ -167,6 +168,32 @@ class UpdateUser {
     
         }
 
+        
+        //POST
+        //addRegistrationID/<int:userID>/<str:token>/<str:ID>'
+        func addRegistrationID(completion: @escaping(Result<String, Error>) -> ()) {
+            print("===https://find-my-supply-274702.uc.r.appspot.com/addRegistrationID/\(UserDefaults.standard.integer(forKey: "userID"))/\(UserDefaults.standard.string(forKey: "salt")!)/\(registrationID)")
+         
+            guard let url = URL(string: "https://find-my-supply-274702.uc.r.appspot.com/addRegistrationID/\(UserDefaults.standard.integer(forKey: "userID"))/\(UserDefaults.standard.string(forKey: "salt")!)/\(registrationID)") else { return }
+            
+            var request = URLRequest(url: url)
+            request.httpMethod = "POST"
+            
+            URLSession.shared.dataTask(with: request) { (data, response, error) in
+                
+                // handle error
+                if let error = error {
+                    completion(.failure(error))
+                    print("Finished RTS with Error\n")
+                    return
+                }
+                
+
+                completion(.success("Success"))
+
+                
+            }.resume()
+        }
         
 
         

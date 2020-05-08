@@ -749,6 +749,8 @@ class HomeController: UIViewController {
               else {
                   //Accepted
                       self.addSupplyRegionNotification()
+                        
+                        Gold.shared.sendRegistrationId()
                   
                   
                       

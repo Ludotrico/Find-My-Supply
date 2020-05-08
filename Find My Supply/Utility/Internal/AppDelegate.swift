@@ -30,11 +30,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //GADMobileAds.sharedInstance.requestConfiguration.testDeviceIdentifiers = @[kGADSimulatorID]
         
         
-        
-        let settings = UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
-
-        application.registerUserNotificationSettings(settings)
-        application.registerForRemoteNotifications()
+        UIApplication.shared.applicationIconBadgeNumber = 0
         
         
         return true
@@ -58,8 +54,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         print("@@@@@@@@@")
-        
         let deviceTokenString = deviceToken.map { String(format: "%02x", $0) }.joined()
+        
+        DispatchQueue.global(qos: .userInitiated).async {
+            UpdateUser.shared.registrationID = deviceTokenString
+            UpdateUser.shared.addRegistrationID { (result) in
+                switch result {
+                case .success(_):
+                    print("@@@@@@success")
+                case .failure(let error):
+                    print("DEBUG: Failed with error \(error)")
+                    
+                }
+            }
+        }
+        
+        
         
         print("@@@@@@@: \(deviceTokenString)")
         

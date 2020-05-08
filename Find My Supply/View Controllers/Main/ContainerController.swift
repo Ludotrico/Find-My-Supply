@@ -128,7 +128,11 @@ class ContainerController: UIViewController {
             centerController.pushViewController(ProfileController(), animated: true)
         }
         else if option == 1 {
+            if UserDefaults.standard.bool(forKey: "isGold") {
             centerController.pushViewController(NotificationsController(), animated: true)
+            } else {
+                centerController.pushViewController(GoldController(), animated: true)
+            }
         }
         else if option == 2 {
             let SC = SettingsController()

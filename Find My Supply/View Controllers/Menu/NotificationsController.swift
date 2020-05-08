@@ -486,14 +486,14 @@ extension NotificationsController: UITableViewDelegate, UITableViewDataSource {
                 } else {
                     cell.productName.text = notif.product__name!
                     Nuke.loadImage(with: URL(string: notif.product__imageLink!)!, options: options, into: cell.notifImage)
-                    cell.titleStackLbl.text = "\(notif.radius!) mile radius from \(notif.city!.replacingOccurrences(of: "_", with: " "))"
+                    cell.titleStackLbl.text = "\(notif.radius!) mile radius from \(notif.city!)"
                     cell.dateLbl.text = notif.date?.replacingOccurrences(of: "-", with: "/")
                 }
                 
             }
             else {
-                cell.productName.text = notif.supplyName!.replacingOccurrences(of: "_", with: " ")
-                let supply = notif.supplyName!.replacingOccurrences(of: "_", with: " ")
+                cell.productName.text = notif.supplyName!
+                let supply = notif.supplyName!
                 print("+++\(supply)")
                 switch supply{
                 case "Face Masks":
@@ -514,7 +514,7 @@ extension NotificationsController: UITableViewDelegate, UITableViewDataSource {
                     cell.notifImage.image = #imageLiteral(resourceName: "image-not-found")
                     
                     }
-                cell.titleStackLbl.text = "\(notif.radius!) mile radius from \(notif.city!.replacingOccurrences(of: "_", with: " "))"
+                cell.titleStackLbl.text = "\(notif.radius!) mile radius from \(notif.city!)"
                 cell.dateLbl.text = notif.date?.replacingOccurrences(of: "-", with: "/")
             }
             
@@ -557,14 +557,14 @@ extension NotificationsController: UITableViewDelegate, UITableViewDataSource {
                 } else {
                     cell.productName.text = notif.product__name!
                     Nuke.loadImage(with: URL(string: notif.product__imageLink!)!, options: options, into: cell.notifImage)
-                    cell.titleStackLbl.text = "\(notif.radius!) mile radius from \(notif.city!.replacingOccurrences(of: "_", with: " "))"
+                    cell.titleStackLbl.text = "\(notif.radius!) mile radius from \(notif.city!)"
                     cell.dateLbl.text = notif.date?.replacingOccurrences(of: "-", with: "/")
                 }
                 
             }
             else {
-                cell.productName.text = notif.supplyName!.replacingOccurrences(of: "_", with: " ")
-                let supply = notif.supplyName!.replacingOccurrences(of: "_", with: " ")
+                cell.productName.text = notif.supplyName!
+                let supply = notif.supplyName!
                 switch supply{
                 case "Face Masks":
                     cell.notifImage.image = #imageLiteral(resourceName: "mask")
@@ -585,7 +585,7 @@ extension NotificationsController: UITableViewDelegate, UITableViewDataSource {
                     
                     }
                 
-                cell.titleStackLbl.text = "\(notif.radius!) mile radius from \(notif.city!.replacingOccurrences(of: "_", with: " "))"
+                cell.titleStackLbl.text = "\(notif.radius!) mile radius from \(notif.city!)"
                 cell.dateLbl.text = notif.date?.replacingOccurrences(of: "-", with: "/")
             }
             

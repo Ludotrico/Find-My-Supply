@@ -29,6 +29,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         GADMobileAds.sharedInstance().start(completionHandler: nil)
         //GADMobileAds.sharedInstance.requestConfiguration.testDeviceIdentifiers = @[kGADSimulatorID]
         
+        
+        
+        let settings = UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
+
+        application.registerUserNotificationSettings(settings)
+        application.registerForRemoteNotifications()
+        
+        
         return true
     }
 
@@ -47,5 +55,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
 
+    
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        print("@@@@@@@@@")
+        
+        let deviceTokenString = deviceToken.map { String(format: "%02x", $0) }.joined()
+        
+        print("@@@@@@@: \(deviceTokenString)")
+        
+    }
+    
+    
 }
 

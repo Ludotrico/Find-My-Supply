@@ -236,21 +236,27 @@ class ContactUsController: UIViewController {
     
     @objc func twitterRedirect() {
         //let redirection = "https://www.waze.com/ul?ll=40.75889500,-73.98513100&navigate=yes"
-        let redirection = "waze://?ll="
+        let redirection = "https://twitter.com/FindMySupply"
         let url = URL(string: redirection)
         UIApplication.shared.open(url!, options: [:], completionHandler: nil)
     }
     
     @objc func facebookRedirect() {
-        //let redirection = "https://www.waze.com/ul?ll=40.75889500,-73.98513100&navigate=yes"
-        let redirection = "waze://?llte=yes"
+        var redirection = ""
+        if UIApplication.shared.canOpenURL(URL(string:"fb://")!) {
+            redirection = "fb://profile/111500357210465"
+        }
+        else {
+            redirection = "https://www.facebook.com/findmysupplyapp"
+        }
+      
         let url = URL(string: redirection)
         UIApplication.shared.open(url!, options: [:], completionHandler: nil)
     }
     
     @objc func instagramRedirect() {
         //let redirection = "https://www.waze.com/ul?ll=40.75889500,-73.98513100&navigate=yes"
-        let redirection = "waze://?ll=avigate=yes"
+        let redirection = "https://www.instagram.com/FindMySupply"
         let url = URL(string: redirection)
         UIApplication.shared.open(url!, options: [:], completionHandler: nil)
     }

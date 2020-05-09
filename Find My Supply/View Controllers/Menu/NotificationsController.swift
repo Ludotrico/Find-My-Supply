@@ -154,9 +154,10 @@ class NotificationsController: UIViewController {
     
     
     func deleteSKURegionNotification(notif: notification, indexPath: IndexPath) {
+        Notifications.shared.radius = notif.radius!
         Notifications.shared.productID = notif.product__id!
         Notifications.shared.date = notif.date!
-        Notifications.shared.city = notif.city!
+        Notifications.shared.city = notif.city!.replacingOccurrences(of: " ", with: "_")
         DispatchQueue.global(qos: .userInitiated).async {
             Notifications.shared.deleteSKURegionNotification { (result) in
                 switch result {
@@ -180,9 +181,11 @@ class NotificationsController: UIViewController {
     
     
     func deleteSupplyRegionNotification(notif: notification, indexPath: IndexPath) {
-        Notifications.shared.supply = notif.supplyName!
+        Notifications.shared.supply = notif.supplyName!.replacingOccurrences(of: " ", with: "_")
+        Notifications.shared.radius = notif.radius!
+        print("#######\(notif.radius!)")
         Notifications.shared.date = notif.date!
-        Notifications.shared.city = notif.city!
+        Notifications.shared.city = notif.city!.replacingOccurrences(of: " ", with: "_")
         DispatchQueue.global(qos: .userInitiated).async {
             Notifications.shared.deleteSupplyRegionNotification { (result) in
                 switch result {

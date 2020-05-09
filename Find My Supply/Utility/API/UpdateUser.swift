@@ -167,6 +167,7 @@ class UpdateUser {
                 }
     
         }
+    }
 
         
         //POST
@@ -200,4 +201,4 @@ class UpdateUser {
 
     }
     
-}
+

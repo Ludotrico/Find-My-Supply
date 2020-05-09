@@ -21,6 +21,7 @@ class HomeController: UIViewController {
         //print(BCryptSwift.generateSalt())
         //showActivityIndicatory()
         
+
             
         loadInterstitial()
         configureLocationManager()
@@ -74,12 +75,12 @@ class HomeController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         isSearching = false
-        if !zipUpdated {
+        if !zipUpdated && UserDefaults.standard.bool(forKey: "isRegistered"){
             updateUserZip()
             zipUpdated = true
         }
 
-
+        UIApplication.shared.applicationIconBadgeNumber = 0
         
         enableLocationServices()
         if UserDefaults.standard.bool(forKey: "firstLaunch") {
@@ -91,7 +92,7 @@ class HomeController: UIViewController {
         
 
         
-        
+            
         //Darkmode
         
     }
@@ -658,7 +659,7 @@ class HomeController: UIViewController {
             self.themePopup.removeFromSuperview()
             self.go.removeFromSuperview()
             
-            if true {//UserDefaults.standard.bool(forKey: "waitingForScrape") {
+            if UserDefaults.standard.bool(forKey: "waitingForScrape") {
                 UserDefaults.standard.set(false, forKey: "waitingForScrape")
                 self.configureWaitingForScrape()
             }
@@ -1615,17 +1616,19 @@ class HomeController: UIViewController {
                 UpdateUser.shared.zip = Int(zip)!
                 
                 DispatchQueue.global(qos: .userInitiated).async {
-                    UpdateUser.shared.updateUserZip { (result) in
-                        switch result {
-                        case .success(let m):
-                            print("+++\(zip)")
-                            if m.first == "T" {
-                                self.zipNotSupported = true
-                        
-                            }
+                    if UserDefaults.standard.bool(forKey: "isRegistered") {
+                        UpdateUser.shared.updateUserZip { (result) in
+                            switch result {
+                            case .success(let m):
+                                print("+++\(zip)")
+                                if m.first == "T" {
+                                    self.zipNotSupported = true
                             
-                        case .failure(let error):
-                            print("DEBUG: Failed with error \(error)")
+                                }
+                                
+                            case .failure(let error):
+                                print("DEBUG: Failed with error \(error)")
+                            }
                         }
                     }
                 }

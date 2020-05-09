@@ -329,7 +329,7 @@ class SettingsController: UIViewController {
             })
             
             for stack in [Hstack1, Hstack2, Hstack3] {
-                stack.addBackground(color: .lightGray, cornerRadius: 10)
+                stack.addBackground(color: .white, cornerRadius: 10)
             }
 
             

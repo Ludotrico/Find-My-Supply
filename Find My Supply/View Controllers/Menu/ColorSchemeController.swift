@@ -189,7 +189,7 @@ class ColorSchemeController: UIViewController {
              view.backgroundColor = .darkGray
                schemeItem.tintColor = .black
             mapIcon.tintColor = .black
-             
+
              navigationController?.navigationBar.isTranslucent = true
              navigationController?.navigationBar.tintColor = .black
              navigationController?.navigationBar.barTintColor = .white
@@ -197,12 +197,18 @@ class ColorSchemeController: UIViewController {
             UIView.animate(withDuration: 0.5, animations: {
                  self.setNeedsStatusBarAppearanceUpdate()
             })
-             
-          
-            
+
+
+
             view.backgroundColor = .darkGray
             Vstack.subviews[0].backgroundColor = .gray
             titleLbl.textColor = .white
+            
+            schemeSegment.layer.borderColor  = UIColor.darkGray.cgColor //Dark mode
+            schemeSegment.selectedSegmentTintColor = .white
+            schemeSegment.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.black], for: .selected)
+            schemeSegment.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.darkGray], for: .normal)
+
              
 
       
@@ -228,6 +234,11 @@ class ColorSchemeController: UIViewController {
             view.backgroundColor = .black
             Vstack.subviews[0].backgroundColor = .darkGray
             titleLbl.textColor = .white
+            
+            schemeSegment.layer.borderColor  = UIColor.gray.cgColor //Dark mode
+            schemeSegment.selectedSegmentTintColor = .black
+            schemeSegment.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.white], for: .selected)
+            schemeSegment.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.gray], for: .normal)
              
 
                
@@ -248,7 +259,12 @@ class ColorSchemeController: UIViewController {
             })
  
             Vstack.subviews[0].backgroundColor = .lightGray
-            titleLbl.textColor = .black
+            titleLbl.textColor = .white
+            
+            schemeSegment.layer.borderColor  = UIColor.white.cgColor //Dark mode
+            schemeSegment.selectedSegmentTintColor = .white
+            schemeSegment.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.black], for: .selected)
+            schemeSegment.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.white], for: .normal)
 
              
              

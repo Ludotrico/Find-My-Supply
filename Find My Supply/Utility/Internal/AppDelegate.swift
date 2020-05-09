@@ -62,6 +62,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 switch result {
                 case .success(_):
                     print("@@@@@@success")
+                    UserDefaults.standard.set(true, forKey: "hasRegisteredID")
                 case .failure(let error):
                     print("DEBUG: Failed with error \(error)")
                     

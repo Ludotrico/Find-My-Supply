@@ -434,9 +434,10 @@ class MapSettingsController: UIViewController {
             Vstack3.addBackground(color: .gray, cornerRadius: 10)
             
             for segment in [mapTypeSegment, mapStyleSegment, mapAppSegment] {
-                segment.layer.borderColor  = UIColor.white.cgColor //Dark mode
-                segment.tintColor = .white
+                segment.layer.borderColor  = UIColor.darkGray.cgColor //Dark mode
                 segment.selectedSegmentTintColor = .white
+                segment.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.black], for: .selected)
+                segment.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.darkGray], for: .normal)
             }
             
             
@@ -468,9 +469,10 @@ class MapSettingsController: UIViewController {
             Vstack3.addBackground(color: .darkGray, cornerRadius: 10)
             
             for segment in [mapTypeSegment, mapStyleSegment, mapAppSegment] {
-                segment.layer.borderColor  = UIColor.white.cgColor //Dark mode
-                segment.tintColor = .black
-                segment.selectedSegmentTintColor = .white
+                segment.layer.borderColor  = UIColor.gray.cgColor //Dark mode
+                segment.selectedSegmentTintColor = .black
+                segment.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.white], for: .selected)
+                segment.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.gray], for: .normal)
                 
               
             }
@@ -495,8 +497,9 @@ class MapSettingsController: UIViewController {
             
             for segment in [mapTypeSegment, mapStyleSegment, mapAppSegment] {
                 segment.layer.borderColor  = UIColor.white.cgColor //Dark mode
-                segment.tintColor = .white
                 segment.selectedSegmentTintColor = .white
+                segment.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.black], for: .selected)
+                segment.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.white], for: .normal)
             }
 
             

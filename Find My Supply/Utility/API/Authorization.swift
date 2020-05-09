@@ -125,7 +125,7 @@ class UserAuth{
         //print("Entered RTS with Salt: \(salt)\n")
         //print("UserAuth Password: \(password)\nUserAuth salt: \(salt)\n")
         //print("UserAuth Hashed password: \((password+salt).sha256())\n")
-        let base_url = "https://find-my-supply-274702.uc.r.appspot.com/loginUser/\(UserDefaults.standard.string(forKey: "username") ?? "nil")/\(UserDefaults.standard.string(forKey: "password") ?? "nil")/\(Location.shared.coordinates.latitude)/\(Location.shared.coordinates.longitude)/\(UserDefaults.standard.string(forKey: "salt") ?? "nil")"
+        let base_url = "https://find-my-supply-274702.uc.r.appspot.com/loginUser/\(UserDefaults.standard.string(forKey: "userID") ?? "nil")/\(UserDefaults.standard.string(forKey: "password") ?? "nil")/\(Location.shared.coordinates.latitude)/\(Location.shared.coordinates.longitude)/\(UserDefaults.standard.string(forKey: "salt") ?? "nil")"
         
         print(base_url)
         guard let url = URL(string: base_url) else { return }
@@ -154,37 +154,7 @@ class UserAuth{
     }
     
     
-    func loginToServerManually(completion: @escaping(Result<String, Error>) -> ()) {
-        //print("Entered RTS with Salt: \(salt)\n")
-        //print("UserAuth Password: \(password)\nUserAuth salt: \(salt)\n")
-        //print("UserAuth Hashed password: \((password+salt).sha256())\n")
-        let base_url = "https://find-my-supply-274702.uc.r.appspot.com/loginUser/\(UserDefaults.standard.string(forKey: "username") ?? "nil")/\(password)"
-        
-        print(base_url)
-        guard let url = URL(string: base_url) else { return }
-        var request = URLRequest(url: url)
-        request.httpMethod = "POST"
-        
-        URLSession.shared.dataTask(with: request) { (data, response, error) in
-            
-            // handle error
-            if let error = error {
-                completion(.failure(error))
-                //print("Finished RTS with Error\n")
-                return
-            }
-            
-            // decode data
-            do {
-                let login = try JSONDecoder().decode(Message.self, from: data!)
-                print("===+Finished LTS\n")
-                completion(.success(login.message))
-            } catch let error {
-                completion(.failure(error))
-            }
-            
-        }.resume()
-    }
+
     
     
     //'isUserVerified/<int:userID>/<str:token>'

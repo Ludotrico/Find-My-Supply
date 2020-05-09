@@ -32,11 +32,11 @@ class UpdateUser {
     
     
     //POST
-    //updateUserProfile/<str:oldUsername>/<str:fName>/<str:usrname>/<str:email>/<str:token>
+    //updateUserProfile/<int:userID>/<str:fName>/<str:usrname>/<str:email>/<str:token>
     func update(completion: @escaping(Result<String, Error>) -> ()) {
-        print("===https://find-my-supply-274702.uc.r.appspot.com/updateUserProfile/\(UserDefaults.standard.string(forKey: "username")!)/\(fName)/\(username)/\(email)/\(UserDefaults.standard.string(forKey: "salt") ?? "nil")")
+        print("===https://find-my-supply-274702.uc.r.appspot.com/updateUserProfile/\(UserDefaults.standard.string(forKey: "userID")!)/\(fName)/\(username)/\(email)/\(UserDefaults.standard.string(forKey: "salt") ?? "nil")")
      
-        guard let url = URL(string: "https://find-my-supply-274702.uc.r.appspot.com/updateUserProfile/\(UserDefaults.standard.string(forKey: "username")!)/\(fName)/\(username)/\(email)/\(UserDefaults.standard.string(forKey: "salt") ?? "nil")") else { return }
+        guard let url = URL(string: "https://find-my-supply-274702.uc.r.appspot.com/updateUserProfile/\(UserDefaults.standard.string(forKey: "userID")!)/\(fName)/\(username)/\(email)/\(UserDefaults.standard.string(forKey: "salt") ?? "nil")") else { return }
         
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
@@ -95,11 +95,11 @@ class UpdateUser {
     
     
     //POST
-    //'updateUserZip/<str:username>/<int:zip>/<str:token>'
+    //'updateUserZip/<int:userID>/<int:zip>/<str:token>'
     func updateUserZip(completion: @escaping(Result<String, Error>) -> ()) {
-        print("===https://find-my-supply-274702.uc.r.appspot.com/updateUserZip/\(UserDefaults.standard.string(forKey: "username")!)/\(zip)/\(UserDefaults.standard.string(forKey: "salt")!)")
+        print("===https://find-my-supply-274702.uc.r.appspot.com/updateUserZip/\(UserDefaults.standard.string(forKey: "userID")!)/\(zip)/\(UserDefaults.standard.string(forKey: "salt")!)")
      
-        guard let url = URL(string: "https://find-my-supply-274702.uc.r.appspot.com/updateUserZip/\(UserDefaults.standard.string(forKey: "username")!)/\(zip)/\(UserDefaults.standard.string(forKey: "salt")!)") else { return }
+        guard let url = URL(string: "https://find-my-supply-274702.uc.r.appspot.com/updateUserZip/\(UserDefaults.standard.string(forKey: "userID")!)/\(zip)/\(UserDefaults.standard.string(forKey: "salt")!)") else { return }
         
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
@@ -124,8 +124,7 @@ class UpdateUser {
         }.resume()
     }
     
-    //POST
-    //'updateUserZip/<str:username>/<int:zip>/<str:token>'
+   
     func addNewZipcode(completion: @escaping(Result<String, Error>) -> ()) {
         print("===https://find-my-supply-274702.uc.r.appspot.com/addNewZipcode/\(UpdateUser.shared.zip)/\(UserDefaults.standard.string(forKey: "salt")!)")
      

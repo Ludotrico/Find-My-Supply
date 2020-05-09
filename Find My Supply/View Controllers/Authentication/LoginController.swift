@@ -103,6 +103,15 @@ class LoginController: UIViewController {
         return button
     }()
     
+    let spinner: UIActivityIndicatorView = {
+        let spinner = UIActivityIndicatorView()
+        spinner.tintColor = .white
+        spinner.startAnimating()
+        spinner.alpha = 1
+        spinner.isHidden = true
+        return spinner
+    }()
+    
     
     //MARK VARIABLES
     var verified = false
@@ -157,6 +166,7 @@ class LoginController: UIViewController {
     
             let userAuth = UserAuth.shared
             self.loginButton.isEnabled = false
+            spinner.isHidden = false
             DispatchQueue.global(qos: .userInitiated).async {
                 print("\n\n\n======================START==================\n")
                 userAuth.initLoginUser(withLogin: login, withPassword: psw)
@@ -205,17 +215,25 @@ class LoginController: UIViewController {
                                         }
                                     }
                                 }
-                                
+                                self.spinner.isHidden = true
                                 self.loginButton.isEnabled = true
+                               
                                 print("Updated Register Obj salt\n")
                             }
                         case .failure(let error):
                             print("DEBUG: Failed with error \(error)")
+                            DispatchQueue.main.async {
+                                self.spinner.isHidden = true
+                                self.loginButton.isEnabled = true
+                                 self.showMessage(label: self.createLbl(text: "Oops! A network error occurred, please check your connection and try again."))
+                            }
+                           
 
                     }
                 }
 
-                       
+                    
+        
                         
                 }
             
@@ -250,19 +268,28 @@ class LoginController: UIViewController {
                 }
             }
         
-        
+        spinner.isHidden = false
+        forgotPasswordBtn.isEnabled = false
         DispatchQueue.global(qos: .userInitiated).async {
             UserAuth.shared.login = login
             UserAuth.shared.sendResetPasswordEmail { (result) in
                 switch result {
                     case .success(var m):
+                    
                         DispatchQueue.main.async {
                              let firstChar = m.first
                              if firstChar == "#" {
                                  m.removeFirst()
                                  self.showMessage(label: self.createLbl(text: m))
+                                     self.spinner.isHidden = true
+                                self.forgotPasswordBtn.isEnabled = true
                                  return
                              }
+                            
+                            DispatchQueue.main.async {
+                                self.spinner.isHidden = true
+                                self.forgotPasswordBtn.isEnabled = true
+                            }
 
                              self.showSentEmail(message: m)
                             print("++ SET IT TO TRUE")
@@ -277,6 +304,11 @@ class LoginController: UIViewController {
             
                     case .failure(let error):
                         print("DEBUG: Failed with error \(error)")
+                        DispatchQueue.main.async {
+                            self.spinner.isHidden = true
+                            self.forgotPasswordBtn.isEnabled = true
+                             self.showMessage(label: self.createLbl(text: "Oops! A network error occurred, please check your connection and try again."))
+                        }
                     
                 }
             }
@@ -310,6 +342,7 @@ class LoginController: UIViewController {
                           
                       case .failure(let error):
                           print("DEBUG: Failed with error \(error)")
+                         self.showMessage(label: self.createLbl(text: "Oops! A network error occurred, please check your connection and try again."))
                           
                       }
                   }
@@ -319,6 +352,7 @@ class LoginController: UIViewController {
     
     @objc func sendVerificationEmail() {
         print("=== RESENT")
+        spinner.isHidden = false
         DispatchQueue.global(qos: .userInitiated).async {
             UserAuth.shared.sendVerificationEmail { (result) in
                 switch result {
@@ -326,11 +360,16 @@ class LoginController: UIViewController {
                     DispatchQueue.main.async {
                         //VV is not a typo
                         self.showSentEmail(message: "VVerification email sent. Tap to resend.")
+                        self.spinner.isHidden = true
                     }
                     
                     
                 case .failure(let error):
                     print("DEBUG: Failed with error \(error)")
+                    DispatchQueue.main.async {
+                        self.spinner.isHidden = true
+                         self.showMessage(label: self.createLbl(text: "Oops! A network error occurred, please check your connection and try again."))
+                    }
                     
                 }
                 
@@ -362,11 +401,14 @@ class LoginController: UIViewController {
             passwordContainerView.anchor(top: loginContainerView.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 16, paddingLeft: 32, paddingBottom: 0, paddingRight: 32, width: 0, height: 50)
             
         scrollView.addSubview(forgotPasswordBtn)
-        forgotPasswordBtn.anchor(top: passwordContainerView.bottomAnchor, left: nil, bottom: nil, right: view.rightAnchor, paddingTop: 10, paddingLeft: 0, paddingBottom: 0, paddingRight: 32)
+        forgotPasswordBtn.anchor(top: passwordContainerView.bottomAnchor, left: nil, bottom: nil, right: view.rightAnchor, paddingTop: 7, paddingLeft: 0, paddingBottom: 0, paddingRight: 32)
         
             scrollView.addSubview(loginButton)
             loginButton.anchor(top: passwordContainerView.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 40, paddingLeft: 32, paddingBottom: 0, paddingRight: 32, width: 0, height: 50)
 
+        scrollView.addSubview(spinner)
+        spinner.anchor(top: passwordContainerView.bottomAnchor, left: nil, bottom: nil, right: nil, paddingTop: 9, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 20, height: 20)
+        spinner.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
     
 
             scrollView.addSubview(dontHaveAccountButton)

@@ -88,6 +88,15 @@ class ForgotPasswordController: UIViewController {
         return button
     }()
     
+    let spinner: UIActivityIndicatorView = {
+        let spinner = UIActivityIndicatorView()
+        spinner.tintColor = .white
+        spinner.startAnimating()
+        spinner.alpha = 1
+        spinner.isHidden = true
+        return spinner
+    }()
+    
     
     
     //MARK VARIABLES
@@ -138,6 +147,7 @@ class ForgotPasswordController: UIViewController {
     
             self.resetPswButton.isEnabled = false
         
+        spinner.isHidden = false
         DispatchQueue.global(qos: .userInitiated).async {
             UserAuth.shared.fetchNewSalt { (result) in
                 switch result {
@@ -189,11 +199,17 @@ class ForgotPasswordController: UIViewController {
                                         
                                                   
                                               self.resetPswButton.isEnabled = true
+                                                self.spinner.isHidden = true
                                                 
                                               print("Updated Register Obj salt\n")
                                             }
                                         case .failure(let error):
                                             print("DEBUG: Failed with error \(error)")
+                                            DispatchQueue.main.async {
+                                             self.spinner.isHidden = true
+                                                self.resetPswButton.isEnabled = true
+                                            self.showMessage(label: self.createLbl(text: "Oops! A network error occurred, please check your connection and try again."))
+                                        }
 
                                     }
                                 }
@@ -203,10 +219,20 @@ class ForgotPasswordController: UIViewController {
                                 
                             case.failure(let error):
                                 print("DEBUG: Failed with error \(error)")
+                                DispatchQueue.main.async {
+                                     self.spinner.isHidden = true
+                                    self.resetPswButton.isEnabled = true
+                                     self.showMessage(label: self.createLbl(text: "Oops! A network error occurred, please check your connection and try again."))
+                                }
                             }
                         }
                 case .failure(let error):
                     print("DEBUG: Failed with error \(error)")
+                    DispatchQueue.main.async {
+                         self.spinner.isHidden = true
+                        self.resetPswButton.isEnabled = true
+                         self.showMessage(label: self.createLbl(text: "Oops! A network error occurred, please check your connection and try again."))
+                    }
             }
         }
                 
@@ -227,7 +253,8 @@ class ForgotPasswordController: UIViewController {
         psw1TextField?.resignFirstResponder()
         psw2TextField?.resignFirstResponder()
             
-        
+        spinner.isHidden = false
+       
         DispatchQueue.global(qos: .userInitiated).async {
             UserAuth.shared.login = UserDefaults.standard.string(forKey: "login")!
             UserAuth.shared.sendResetPasswordEmail { (result) in
@@ -238,18 +265,28 @@ class ForgotPasswordController: UIViewController {
                              if firstChar == "#" {
                                  m.removeFirst()
                                  self.showMessage(label: self.createLbl(text: m))
+                                self.spinner.isHidden = true
                                  return
                              }
 
                              self.showSentEmail(message: m)
                    
                         }
+                        
+                        DispatchQueue.main.async {
+                             self.spinner.isHidden = true
+                        }
+                       
                         UserDefaults.standard.set(true, forKey: "tappedForgotPassword")
                         self.checkIfForgotPassword()
 
             
                     case .failure(let error):
                         print("DEBUG: Failed with error \(error)")
+                        DispatchQueue.main.async {
+                             self.spinner.isHidden = true
+                             self.showMessage(label: self.createLbl(text: "Oops! A network error occurred, please check your connection and try again."))
+                        }
                     
                 }
             }
@@ -283,6 +320,7 @@ class ForgotPasswordController: UIViewController {
                           
                       case .failure(let error):
                           print("DEBUG: Failed with error \(error)")
+                         self.showMessage(label: self.createLbl(text: "Oops! A network error occurred, please check your connection and try again."))
                           
                       }
                   }
@@ -326,6 +364,10 @@ class ForgotPasswordController: UIViewController {
         
             scrollView.addSubview(resetPswButton)
             resetPswButton.anchor(top: psw2ContainerView.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 24, paddingLeft: 32, paddingBottom: 0, paddingRight: 32, width: 0, height: 50)
+        
+            scrollView.addSubview(spinner)
+            spinner.anchor(top: psw2ContainerView.bottomAnchor, left: nil, bottom: nil, right: nil, paddingTop: 2, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 20, height: 20)
+            spinner.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
 
     
 

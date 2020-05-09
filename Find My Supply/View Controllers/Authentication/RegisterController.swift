@@ -138,6 +138,15 @@ class RegisterController: UIViewController {
         return button
     }()
     
+    let spinner: UIActivityIndicatorView = {
+        let spinner = UIActivityIndicatorView()
+        spinner.tintColor = .white
+        spinner.startAnimating()
+        spinner.alpha = 1
+        spinner.isHidden = true
+        return spinner
+    }()
+    
     //MARK: Variables
     
     var checkCount = 0
@@ -252,6 +261,7 @@ class RegisterController: UIViewController {
         
         let userAuth = UserAuth.shared
         self.loginButton.isEnabled = false
+        spinner.isHidden = false
         DispatchQueue.global(qos: .userInitiated).async {
             print("\n\n\n======================START==================\n")
             userAuth.initRegisterUser(withName: name, withEmail: email, withUsername: usrname, withPassword: psw, withZip: zip)
@@ -307,8 +317,10 @@ class RegisterController: UIViewController {
                                     ///self.navigationController?.popToRootViewController(animated: true)
                                     
                                 }
-    
+                                
+                                self.spinner.isHidden = true
                                 self.loginButton.isEnabled = true
+                               
                                 
                                 if registered {
                                     self.displayMessage = false
@@ -318,15 +330,27 @@ class RegisterController: UIViewController {
                             }
                         case .failure(let error):
                             print("DEBUG: Failed with error \(error)")
+                            DispatchQueue.main.async {
+                                self.spinner.isHidden = true
+                                self.loginButton.isEnabled = true
+                                self.showMessage(label: self.createLbl(text: "Oops! A network error occurred, please check your connection and try again."))
+                            }
                         }
                     }
                     }
 
                 case .failure(let error):
                     print("DEBUG: Failed with error \(error)")
+                    DispatchQueue.main.async {
+                        self.spinner.isHidden = true
+                        self.loginButton.isEnabled = true
+                         self.showMessage(label: self.createLbl(text: "Oops! A network error occurred, please check your connection and try again."))
+                    }
                 
                 }
             }
+            
+    
         }
             
             //if message.message.removeFirst() == "#" {
@@ -337,19 +361,27 @@ class RegisterController: UIViewController {
     
     @objc func sendVerificationEmail() {
         print("=== RESENT")
+        spinner.isHidden = false
         DispatchQueue.global(qos: .userInitiated).async {
             UserAuth.shared.sendVerificationEmail { (result) in
                 switch result {
                 case .success(_):
                     DispatchQueue.main.async {
                         self.showSentEmail()
+                        self.spinner.isHidden = true
                     }
+                    
                     
                     
                 case .failure(let error):
                     print("DEBUG: Failed with error \(error)")
+                     DispatchQueue.main.async {
+                         self.spinner.isHidden = true
+                         self.showMessage(label: self.createLbl(text: "Oops! A network error occurred, please check your connection and try again."))
+                     }
                     
                 }
+               
                 
             }
         }
@@ -367,6 +399,7 @@ class RegisterController: UIViewController {
     
     func checkVerification() {
         if UserDefaults.standard.bool(forKey: "firstLaunch") {
+
             DispatchQueue.global(qos: .userInitiated).async {
                 UserAuth.shared.checkIfVerified { (result) in
                     self.checkCount += 1
@@ -388,6 +421,7 @@ class RegisterController: UIViewController {
                             
                         case .failure(let error):
                             print("DEBUG: Failed with error \(error)")
+                             self.showMessage(label: self.createLbl(text: "Oops! A network error occurred, please check your connection and try again."))
                             
                         }
                     }
@@ -508,6 +542,11 @@ class RegisterController: UIViewController {
         
         scrollView.addSubview(haveAccountButton)
         haveAccountButton.anchor(top: loginButton.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 0, paddingLeft: 32, paddingBottom: 16, paddingRight: 32, width: 0, height: 50)
+        
+        
+        scrollView.addSubview(spinner)
+        spinner.anchor(top: zipcodeContainerView.bottomAnchor, left: nil, bottom: nil, right: nil, paddingTop: 2, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 20, height: 20)
+        spinner.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         
         let h = logoImageView.frame.height + 60 + 146 + 350
         scrollView.contentSize = CGSize(width: view.frame.width, height: h)

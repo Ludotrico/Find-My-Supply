@@ -1700,7 +1700,9 @@ class HomeController: UIViewController {
         let now = "\(calendar.component(.month, from: date))-\(calendar.component(.day, from: date))-\(calendar.component(.year, from: date)%1000)"
         
         
-        spinner.isHidden = false
+        DispatchQueue.main.async {
+            self.spinner.isHidden = false
+        }
         DispatchQueue.global(qos: .userInitiated).async {
             Notifications.shared.supply = self.supplySearchedFor.replacingOccurrences(of: " ", with: "_")
             Notifications.shared.date = now

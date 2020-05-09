@@ -376,6 +376,14 @@ class StoreController: UIViewController, UIScrollViewDelegate, UIGestureRecogniz
         return spinner
     }()
     
+    let spinner2: UIActivityIndicatorView = {
+        let spinner = UIActivityIndicatorView()
+        spinner.startAnimating()
+        spinner.isHidden = true
+        spinner.color = .black
+        return spinner
+    }()
+    
     let tableView: UITableView = {
         let view = UITableView()
         view.rowHeight = 100
@@ -613,6 +621,7 @@ class StoreController: UIViewController, UIScrollViewDelegate, UIGestureRecogniz
         let calendar = Calendar.current
         let now = "\(calendar.component(.month, from: date))-\(calendar.component(.day, from: date))-\(calendar.component(.year, from: date)%1000)"
         
+        spinner2.isHidden = false
         DispatchQueue.global(qos: .userInitiated).async {
             Notifications.shared.initialize(withSKU: self.currSKU, withStoreID: self.currStore.store__id)
             Notifications.shared.date = now
@@ -637,6 +646,7 @@ class StoreController: UIViewController, UIScrollViewDelegate, UIGestureRecogniz
  
                        
                             self.showMessage(label: lbl, sender: sender)
+                            self.spinner2.isHidden = true
                         }
                     }
                     else {
@@ -653,11 +663,15 @@ class StoreController: UIViewController, UIScrollViewDelegate, UIGestureRecogniz
                                //lbl.adjustsFontSizeToFitWidth  = true
                                lbl.layer.cornerRadius = 10
                             self.showMessage(label: lbl, sender: sender)
+                            self.spinner2.isHidden = true
                         }
                     }
                 case .failure(let error):
                     print("DEBUG: Failed with error \(error)")
-                    return
+                    DispatchQueue.main.async {
+                          self.spinner2.isHidden = true
+                        self.showMessage(label: self.createLbl(text: "Oops! A network error occurred, please check your connection and try again."))
+                    }
                 }
                 
             }
@@ -676,6 +690,7 @@ class StoreController: UIViewController, UIScrollViewDelegate, UIGestureRecogniz
         let calendar = Calendar.current
         let now = "\(calendar.component(.month, from: date))-\(calendar.component(.day, from: date))-\(calendar.component(.year, from: date)%1000)"
         
+        self.spinner2.isHidden = false
         DispatchQueue.global(qos: .userInitiated).async {
             Notifications.shared.initialize(withSKU: self.currSKU, withStoreID: self.currStore.store__id)
             Notifications.shared.date = now
@@ -698,6 +713,7 @@ class StoreController: UIViewController, UIScrollViewDelegate, UIGestureRecogniz
                             lbl.layer.cornerRadius = 10
                        
                             self.showMessage(label: lbl, sender: sender)
+                            self.spinner2.isHidden = true
                         }
                     }
                     else {
@@ -716,10 +732,15 @@ class StoreController: UIViewController, UIScrollViewDelegate, UIGestureRecogniz
                             lbl.layer.cornerRadius = 10
 
                             self.showMessage(label: lbl, sender: sender)
+                              self.spinner2.isHidden = true
                         }
                     }
                 case .failure(let error):
                     print("DEBUG: Failed with error \(error)")
+                    DispatchQueue.main.async {
+                          self.spinner2.isHidden = true
+                        self.showMessage(label: self.createLbl(text: "Oops! A network error occurred, please check your connection and try again."))
+                    }
                     
                 }
                 
@@ -743,6 +764,9 @@ class StoreController: UIViewController, UIScrollViewDelegate, UIGestureRecogniz
                     if let error = error {
                         // Handle the error here.
                         print("DEBUG: Failed with error \(error)")
+                        DispatchQueue.main.async {
+                            self.showMessage(label: self.createLbl(text: "Oops! An unexpected error occurred, please try again."))
+                        }
                     }
                     self.handleAddNotification(situation: situation, sender: sender)
                     return
@@ -881,6 +905,9 @@ class StoreController: UIViewController, UIScrollViewDelegate, UIGestureRecogniz
                     
                 case .failure(let error):
                     print("DEBUG: Failed with error \(error)")
+                    DispatchQueue.main.async {
+                        self.showMessage(label: self.createLbl(text: "Oops! A network error occurred, please check your connection and try again."))
+                    }
                 }
             }
             
@@ -1013,6 +1040,20 @@ class StoreController: UIViewController, UIScrollViewDelegate, UIGestureRecogniz
    
 
         
+    }
+    
+    func createLbl(text: String) -> UILabel {
+        let lbl = UILabel()
+        lbl.backgroundColor = UIColor.rgb(red: 209, green: 21, blue: 0)
+        lbl.textColor = .white
+        lbl.text = text
+        lbl.font = UIFont.italicSystemFont(ofSize: 15.0)
+        //lbl.sizeToFit()
+        lbl.textAlignment = .center
+        lbl.numberOfLines = 0
+        //lbl.adjustsFontSizeToFitWidth  = true
+        lbl.layer.cornerRadius = 10
+        return lbl
     }
     
     
@@ -1178,7 +1219,31 @@ class StoreController: UIViewController, UIScrollViewDelegate, UIGestureRecogniz
     
     
     
+    func showMessage(label: UILabel) {
+        
 
+        self.view.addSubview(label)
+        label.alpha = 1
+        
+      //     self.noNearbyStoresLbl.anchor(top: nil, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0)
+        label.frame = CGRect(x: 0 ,y: self.view.frame.height, width: (self.view.frame.width/4)*3, height: 50)
+        label.center.x = view.center.x
+     
+            UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+                
+                label.frame = CGRect(x: 0, y: self.view.frame.height - 100, width: (self.view.frame.width/4)*3, height: 50)
+                label.center.x = self.view.center.x
+            }, completion: { _ in
+                    UIView.animate(withDuration: 2, delay: 2, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+                        label.alpha = 0
+                    }, completion: { _ in
+                        
+                        label.removeFromSuperview()
+                        label.alpha = 1
+                    })
+            })
+        
+    }
     
     func showMessage(label: UILabel, sender: UIButton) {
         
@@ -1219,6 +1284,7 @@ class StoreController: UIViewController, UIScrollViewDelegate, UIGestureRecogniz
         Stores.shared.storeID = self.currStore.store__id
         Stores.shared.SKU = self.products[sender.tag].SKU
     
+        spinner2.isHidden = false
         DispatchQueue.global(qos: .userInitiated).async {
             
             Stores.shared.fetchNearbyStores { (result) in
@@ -1243,6 +1309,7 @@ class StoreController: UIViewController, UIScrollViewDelegate, UIGestureRecogniz
                                 lbl.layer.cornerRadius = 10
                           
                             self.showMessage(label: lbl, sender: sender)
+                            self.spinner2.isHidden = true
                             return
                         }
                         
@@ -1263,6 +1330,8 @@ class StoreController: UIViewController, UIScrollViewDelegate, UIGestureRecogniz
     
                         
                         self.topStack.isUserInteractionEnabled = false
+                        
+                        self.spinner2.isHidden = true
                         
                         if self.scheme == 0{
                            self.nearbyStoresView.backgroundColor = UIColor.white.withAlphaComponent(1)  //Dark mode
@@ -1291,6 +1360,11 @@ class StoreController: UIViewController, UIScrollViewDelegate, UIGestureRecogniz
                     
                 case .failure(let error):
                     print("DEBUG: Failed with error \(error)")
+                    DispatchQueue.main.async {
+                          self.spinner2.isHidden = true
+                        self.showMessage(label: self.createLbl(text: "Oops! A network error occurred, please check your connection and try again."))
+                        
+                    }
                 }
             }
             
@@ -1850,10 +1924,9 @@ class StoreController: UIViewController, UIScrollViewDelegate, UIGestureRecogniz
         pageControl.anchor(top: Hscroll.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: -20, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 10, height: 10)
         
 
-        view.addSubview(spinner)
-        spinner.anchor(top: view.topAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 50, height: 50)
-        spinner.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
-        spinner.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        view.addSubview(spinner2)
+        spinner2.anchor(top: nil, left: nil, bottom: view.bottomAnchor, right: nil, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 40, height: 40)
+        spinner2.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         
         
         
@@ -1885,7 +1958,7 @@ class StoreController: UIViewController, UIScrollViewDelegate, UIGestureRecogniz
         view.bringSubviewToFront(Hscroll)
         view.bringSubviewToFront(pageControl)
         view.bringSubviewToFront(tableView)
-        view.bringSubviewToFront(spinner)
+        view.bringSubviewToFront(spinner2)
         Dscroll.alwaysBounceVertical = true
         
 
@@ -1972,6 +2045,7 @@ class StoreController: UIViewController, UIScrollViewDelegate, UIGestureRecogniz
                     print("===DEBUG: Failed with error \(error)")
                     DispatchQueue.main.async {
                         self.spinner.isHidden = true
+                        self.showMessage(label: self.createLbl(text: "Oops! A network error occurred, please check your connection and try again."))
                     }
                 }
                 

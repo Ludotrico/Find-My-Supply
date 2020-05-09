@@ -83,6 +83,8 @@ class StoreController: UIViewController, UIScrollViewDelegate, UIGestureRecogniz
          
         }
         
+
+        
       
 
     }
@@ -555,13 +557,14 @@ class StoreController: UIViewController, UIScrollViewDelegate, UIGestureRecogniz
             GC.isPopup = true
             GC.popupWidth = self.view.frame.width*(4/5)
             GC.popupHeight = self.view.frame.height*(4/5)
+            GC.fromStoreController = true
 
             // Init popup view controller with content is your content view controller
             let popupVC = PopupViewController(contentController: GC, popupWidth: GC.popupWidth, popupHeight: GC.popupHeight)
             
             popupVC.backgroundAlpha = 0.4
             popupVC.backgroundColor = Color.shared.darkGold
-            popupVC.canTapOutsideToDismiss = false
+            popupVC.canTapOutsideToDismiss = true
             popupVC.cornerRadius = 10
             popupVC.shadowEnabled = true
             
@@ -806,22 +809,7 @@ class StoreController: UIViewController, UIScrollViewDelegate, UIGestureRecogniz
                                     self.handleAddNotification(situation: 1, sender: btn)
                                 } else {
                                      
-                                    let GC = GoldPopup()
-                                    GC.isPopup = true
-                                    GC.popupWidth = self.view.frame.width*(4/5)
-                                    GC.popupHeight = self.view.frame.height*(4/5)
-
-                                    // Init popup view controller with content is your content view controller
-                                    let popupVC = PopupViewController(contentController: GC, popupWidth: GC.popupWidth, popupHeight: GC.popupHeight)
-                                    
-                                    popupVC.backgroundAlpha = 0.4
-                                    popupVC.backgroundColor = Color.shared.darkGold
-                                    popupVC.canTapOutsideToDismiss = false
-                                    popupVC.cornerRadius = 10
-                                    popupVC.shadowEnabled = true
-                                    
-                                    // show it by call present(_ , animated:) method from a current UIViewController
-                                    self.present(popupVC, animated: true)
+                                    self.showPopup()
                                 }
                       
                             }
@@ -839,22 +827,7 @@ class StoreController: UIViewController, UIScrollViewDelegate, UIGestureRecogniz
                                     self.handleAddNotification(situation: 2, sender: btn)
                                 } else {
                                      
-                                    let GC = GoldPopup()
-                                    GC.isPopup = true
-                                    GC.popupWidth = self.view.frame.width*(4/5)
-                                    GC.popupHeight = self.view.frame.height*(4/5)
-
-                                    // Init popup view controller with content is your content view controller
-                                    let popupVC = PopupViewController(contentController: GC, popupWidth: GC.popupWidth, popupHeight: GC.popupHeight)
-                                    
-                                    popupVC.backgroundAlpha = 0.4
-                                    popupVC.backgroundColor = Color.shared.darkGold
-                                    popupVC.canTapOutsideToDismiss = false
-                                    popupVC.cornerRadius = 10
-                                    popupVC.shadowEnabled = true
-                                    
-                                    // show it by call present(_ , animated:) method from a current UIViewController
-                                    self.present(popupVC, animated: true)
+                                    self.showPopup()
                                 }
                             
 
@@ -864,22 +837,7 @@ class StoreController: UIViewController, UIScrollViewDelegate, UIGestureRecogniz
                                     self.handleAddNotification(situation: 1, sender: btn)
                                 } else {
                                      
-                                    let GC = GoldPopup()
-                                    GC.isPopup = true
-                                    GC.popupWidth = self.view.frame.width*(4/5)
-                                    GC.popupHeight = self.view.frame.height*(4/5)
-
-                                    // Init popup view controller with content is your content view controller
-                                    let popupVC = PopupViewController(contentController: GC, popupWidth: GC.popupWidth, popupHeight: GC.popupHeight)
-                                    
-                                    popupVC.backgroundAlpha = 0.4
-                                    popupVC.backgroundColor = Color.shared.darkGold
-                                    popupVC.canTapOutsideToDismiss = false
-                                    popupVC.cornerRadius = 10
-                                    popupVC.shadowEnabled = true
-                                    
-                                    // show it by call present(_ , animated:) method from a current UIViewController
-                                    self.present(popupVC, animated: true)
+                                    self.showPopup()
                                 }
 
                             }

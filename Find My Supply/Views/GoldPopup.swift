@@ -18,13 +18,148 @@ class GoldPopup: UIViewController {
         
         configureViewComponents()
         Gold.shared.getProducts()
+        
+        bringCancelToFront()
 
         // Do any additional setup after loading the view.
     }
        override func viewWillDisappear(_ animated: Bool) {
            self.navigationController?.navigationBar.isHidden = true
             viewIsDead = true
+        
+            configureNextColorScheme()
        }
+    func configureNextColorScheme() {
+        
+        let scheme = UserDefaults.standard.integer(forKey: "colorScheme")
+        
+        if fromStoreController {
+            
+            if scheme == 0 {
+                //STANDARD
+
+                StatusBarColor.shared.isDark = true
+                UIView.animate(withDuration: 0.5, animations: {
+                     self.setNeedsStatusBarAppearanceUpdate()
+                })
+
+            }
+            else if scheme == 1 {
+                //DARK
+
+                StatusBarColor.shared.isDark = false
+                UIView.animate(withDuration: 0.5, animations: {
+                     self.setNeedsStatusBarAppearanceUpdate()
+                })
+            }
+            else {
+                //LIGHT
+
+                StatusBarColor.shared.isDark = true
+                UIView.animate(withDuration: 0.5, animations: {
+                     self.setNeedsStatusBarAppearanceUpdate()
+                })
+
+            }
+        } else {
+                    var overriden = false
+                    
+                    
+                    let mapType = UserDefaults.standard.integer(forKey: "mapType")
+                        switch mapType {
+                        case 0:
+                              break
+                        case 1:
+                            StatusBarColor.shared.isDark = false
+                            overriden = true
+                        case 2:
+                            StatusBarColor.shared.isDark = false
+                            overriden = true
+                        default:
+                              break
+                        }
+                    
+                    UIView.animate(withDuration: 0.5, animations: {
+                         self.setNeedsStatusBarAppearanceUpdate()
+                    })
+                    
+                    let mapStyle = UserDefaults.standard.string(forKey: "mapStyle")
+                    if mapStyle != nil {
+                        //MapStle overrided in settings
+                        
+                        
+                        switch mapStyle {
+                        case "D":
+                            self.overrideUserInterfaceStyle = .dark
+                            if !overriden {
+                                StatusBarColor.shared.isDark = false
+                            }
+
+                        case "L":
+                            self.overrideUserInterfaceStyle = .light
+                            if !overriden {
+                                StatusBarColor.shared.isDark = true
+                            }
+                        default:
+                            self.overrideUserInterfaceStyle = .dark
+                            if !overriden {
+                                StatusBarColor.shared.isDark = false
+                            }
+                        }
+                        
+                        UIView.animate(withDuration: 0.5, animations: {
+                             self.setNeedsStatusBarAppearanceUpdate()
+                        })
+                    } else {
+                        //MapStyle matches color scheme (not overriden)
+                        let colorScheme = UserDefaults.standard.integer(forKey: "colorScheme")
+                        switch colorScheme{
+                        case 0:
+                            self.overrideUserInterfaceStyle = .dark
+                            if !overriden {
+                                StatusBarColor.shared.isDark = false
+                       
+                            }
+
+                        case 1:
+                            self.overrideUserInterfaceStyle = .dark
+                                 if !overriden {
+                                     StatusBarColor.shared.isDark = false
+                            
+                                 }
+                        case 2:
+                            self.overrideUserInterfaceStyle = .light
+                                 if !overriden {
+                                     StatusBarColor.shared.isDark = true
+                            
+                                 }
+
+                        default:
+                            self.overrideUserInterfaceStyle = .dark
+                                 if !overriden {
+                                     StatusBarColor.shared.isDark = false
+
+                            
+                                 }
+                        }
+                        UIView.animate(withDuration: 0.5, animations: {
+                             self.setNeedsStatusBarAppearanceUpdate()
+                        })
+                        
+                    }
+                    
+
+                    
+                    
+
+            
+            
+        }
+        
+        
+        
+        
+    }
            
     override func viewWillAppear(_ animated: Bool) {
           self.navigationController?.navigationBar.isHidden = false
@@ -727,14 +862,30 @@ class GoldPopup: UIViewController {
     var popupHeight = CGFloat()
     var popupWidth = CGFloat()
     
+    var fromStoreController = true
+    
 
     
     
     //MARK: Selectors
     
+    func bringCancelToFront() {
+        DispatchQueue.global(qos: .userInitiated).async {
+            while true {
+                DispatchQueue.main.async {
+                    self.view.bringSubviewToFront(self.cancelBtn)
+                }
+                sleep(2)
+                
+            }
+            
+        }
+
+    }
+    
     @objc func dismissPopup() {
-        
-        UIView.animate(withDuration: 5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0.2, options: .curveEaseIn, animations: {
+        print("&&&&&DISMISS")
+        UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0.2, options: .curveEaseIn, animations: {
             
 
             self.dismiss(animated: true, completion: nil)
@@ -895,6 +1046,7 @@ class GoldPopup: UIViewController {
     
     @objc func scrollWasTapped() {
         print("+++ TAPPED")
+        view.bringSubviewToFront(cancelBtn)
         userHasSwiped = true
         updatePageControl()
     }
@@ -924,6 +1076,7 @@ class GoldPopup: UIViewController {
                 self.Hscroll.isUserInteractionEnabled = true
                 
                 self.createNewTile()
+                self.view.bringSubviewToFront(self.cancelBtn)
 
                 self.currentPage += 1
                 if self.currentPage == 4 {
@@ -1678,6 +1831,7 @@ extension GoldPopup:UIScrollViewDelegate {
                 self.positiveSet.insert(currentOffset + self.view.frame.width*3)
                 
                 createNewTile()
+                view.bringSubviewToFront(cancelBtn)
                 
             }
             self.currentPage += 1
@@ -1692,6 +1846,7 @@ extension GoldPopup:UIScrollViewDelegate {
             
         }
         updatePageControl()
+        view.bringSubviewToFront(cancelBtn)
     }
 
         

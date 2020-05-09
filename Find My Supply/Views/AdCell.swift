@@ -58,7 +58,7 @@ class AdCell: UITableViewCell {
   
         
         addSubview(cancelBtn)
-        cancelBtn.anchor(top: bannerAd.topAnchor, left: nil, bottom: nil, right: bannerAd.rightAnchor, paddingTop: 5, paddingLeft: 0, paddingBottom: 0, paddingRight: 5, width: 15, height: 15)
+        cancelBtn.anchor(top: bannerAd.topAnchor, left: nil, bottom: nil, right: bannerAd.rightAnchor, paddingTop: 8, paddingLeft: 0, paddingBottom: 0, paddingRight: 8, width: 15, height: 15)
         
         
     }

@@ -556,7 +556,7 @@ class HomeController: UIViewController {
     
     var zipUpdated = false
     
-    var interstitial: GADInterstitial!
+    var interstitial: GADInterstitial?
     
 
  
@@ -566,10 +566,10 @@ class HomeController: UIViewController {
     func loadInterstitial() {
         DispatchQueue.global(qos: .background).async {
             self.interstitial = GADInterstitial(adUnitID: Ads.shared.interstitialTest)
-            self.interstitial.delegate = self
+            self.interstitial?.delegate = self
             
             let request = GADRequest()
-            self.interstitial.load(request)
+            self.interstitial?.load(request)
         }
     }
     
@@ -577,11 +577,13 @@ class HomeController: UIViewController {
 
         DispatchQueue.global(qos: .userInitiated).async {
             while true {
-                if (self.interstitial.isReady) {
-                    if Int.random(in: 1...Random.shared.adPopup) == 1 {
-                        self.interstitial.present(fromRootViewController: self)
+                if let ready = self.interstitial?.isReady {
+                    if ready {
+                        if Int.random(in: 1...Random.shared.adPopup) == 1 {
+                            self.interstitial?.present(fromRootViewController: self)
+                        }
+                        break
                     }
-                    break
                 }
             }
         }
@@ -596,13 +598,14 @@ class HomeController: UIViewController {
             GC.isPopup = true
             GC.popupWidth = self.view.frame.width*(4/5)
             GC.popupHeight = self.view.frame.height*(4/5)
+            GC.fromStoreController = false
 
             // Init popup view controller with content is your content view controller
             let popupVC = PopupViewController(contentController: GC, popupWidth: GC.popupWidth, popupHeight: GC.popupHeight)
             
             popupVC.backgroundAlpha = 0.4
             popupVC.backgroundColor = Color.shared.darkGold
-            popupVC.canTapOutsideToDismiss = false
+            popupVC.canTapOutsideToDismiss = true
             popupVC.cornerRadius = 10
             popupVC.shadowEnabled = true
             
@@ -923,18 +926,18 @@ class HomeController: UIViewController {
             if UserDefaults.standard.bool(forKey: "isGold") {
                 self.handleAddNotification()
             } else {
-           
+        
                 let GC = GoldPopup()
                 GC.isPopup = true
                 GC.popupWidth = self.view.frame.width*(4/5)
                 GC.popupHeight = self.view.frame.height*(4/5)
-
+                GC.fromStoreController = false
                 // Init popup view controller with content is your content view controller
                 let popupVC = PopupViewController(contentController: GC, popupWidth: GC.popupWidth, popupHeight: GC.popupHeight)
                 
                 popupVC.backgroundAlpha = 0.4
                 popupVC.backgroundColor = Color.shared.darkGold
-                popupVC.canTapOutsideToDismiss = false
+                popupVC.canTapOutsideToDismiss = true
                 popupVC.cornerRadius = 10
                 popupVC.shadowEnabled = true
                 

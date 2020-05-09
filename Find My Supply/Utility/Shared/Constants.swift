@@ -84,7 +84,7 @@ enum GoldSubscription: String {
 struct Random {
     static let shared = Random()
     
-    let goldPopup = 10
+    let goldPopup = 1
     let adPopup = 5
     let tableRowStart = 5
     let tableRowEnd = 9

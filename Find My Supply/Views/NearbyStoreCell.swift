@@ -58,6 +58,28 @@ class NearbyStoreCell: UICollectionViewCell {
         return stack
     }()
     
+    var HstackTitle: UIStackView = {
+        let stack = UIStackView()
+        stack.axis = .horizontal
+        stack.alignment = .center
+        stack.sizeToFit()
+    
+        //stack.distribution = .equalSpacing
+        return stack
+    }()
+    
+    var cityLbl: UILabel = {
+        let lbl = UILabel()
+        lbl.translatesAutoresizingMaskIntoConstraints = false
+        lbl.numberOfLines = 0
+       
+        lbl.textColor = .white
+        lbl.sizeToFit()
+        lbl.font = UIFont(name: "HelveticaNeue", size: 18)
+        lbl.textAlignment = .center
+        return lbl
+    }()
+    
     
 
     

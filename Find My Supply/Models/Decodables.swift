@@ -52,6 +52,7 @@ struct store: Decodable {
     var store__googlePlaceID: String
     
     
+    
     init() {
         store__id = -1
         store__address = ""
@@ -119,6 +120,7 @@ struct nearbyStore: Decodable {
     var store__weekdayText: [String]
     var store__openingHours: [String]
     var store__googlePlaceID: String
+    var store__city: String
     
     func convertToStore() -> store {
         var s = store()

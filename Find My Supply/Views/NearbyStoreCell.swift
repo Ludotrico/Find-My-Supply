@@ -74,6 +74,7 @@ class NearbyStoreCell: UICollectionViewCell {
         lbl.numberOfLines = 0
        
         lbl.textColor = .white
+        lbl.adjustsFontSizeToFitWidth = true
         lbl.sizeToFit()
         lbl.font = UIFont(name: "HelveticaNeue", size: 18)
         lbl.textAlignment = .center
@@ -158,8 +159,13 @@ class NearbyStoreCell: UICollectionViewCell {
         
         addSubview(Vstack)
         Vstack.anchor(top: topAnchor, left: storeImage.rightAnchor, bottom: bottomAnchor, right: rightAnchor, paddingTop: 10, paddingLeft: 10, paddingBottom: 10, paddingRight: 10, width: 1000, height: 1000)
-        Vstack.addArrangedSubview(chainLogo)
-        chainLogo.anchor(top: Vstack.topAnchor, left: nil, bottom: nil, right: nil, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 1000, height: 30)
+        
+        
+        Vstack.addArrangedSubview(HstackTitle)
+        HstackTitle.anchor(top: Vstack.topAnchor, left: Vstack.leftAnchor, bottom: nil, right: Vstack.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 30)
+        
+        HstackTitle.addArrangedSubview(chainLogo)
+        HstackTitle.addArrangedSubview(cityLbl)
         
         addSubview(line)
         line.anchor(top: nil, left: Vstack.leftAnchor, bottom: nil, right: Vstack.rightAnchor, paddingTop: 5, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: Vstack.frame.width, height: 2)

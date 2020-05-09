@@ -2200,6 +2200,7 @@ extension StoreController: UICollectionViewDelegate, UICollectionViewDataSource,
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "NearbyStoreCell", for: indexPath) as!  NearbyStoreCell
         let store = nearbyStores[indexPath.row]
+        cell.cityLbl.text = store.store__city
         if store.store__chainName == "CVS" {
             cell.chainLogo.image = #imageLiteral(resourceName: "cvs")
             cell.chainLogo.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)

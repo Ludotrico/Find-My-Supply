@@ -15,8 +15,21 @@ class StoreController: UIViewController, UIScrollViewDelegate, UIGestureRecogniz
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        if scheme == 0 {
+            view.backgroundColor = .darkGray
+        }
+        else if scheme == 1 {
+            view.backgroundColor =  .black
+        } else {
+            view.backgroundColor =  .white
+            spinner.color = .black
+            
+        }
         
-        view.backgroundColor =  Color.shared.theme
+        
+        view.addSubview(spinner)
+        spinner.anchor(top: view.topAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 100, height: 100)
+        spinner.isHidden = false
 
         
         view.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
@@ -357,9 +370,9 @@ class StoreController: UIViewController, UIScrollViewDelegate, UIGestureRecogniz
     
     let spinner: UIActivityIndicatorView = {
         let spinner = UIActivityIndicatorView()
-        spinner.tintColor = .black
         spinner.startAnimating()
-        spinner.isHidden = true
+        spinner.isHidden = false
+        spinner.color = Color.shared.gold
         return spinner
     }()
     
@@ -1479,6 +1492,7 @@ class StoreController: UIViewController, UIScrollViewDelegate, UIGestureRecogniz
             pageControl.pageIndicatorTintColor = .darkGray
             nearbyStoresCollectionView.backgroundColor = .darkGray
             Vscroll.backgroundColor = .darkGray
+            spinner.color = .white
             
         }
         else if scheme == 1 {
@@ -1510,6 +1524,8 @@ class StoreController: UIViewController, UIScrollViewDelegate, UIGestureRecogniz
             weekdayHoursLbl.textColor = .lightGray
             weekdayLbl.textColor = .lightGray
             tableView.backgroundColor = .black
+            
+            spinner.color = .white
         }
         else {
             //LIGHT
@@ -1529,6 +1545,8 @@ class StoreController: UIViewController, UIScrollViewDelegate, UIGestureRecogniz
             nearbyStoresCollectionView.backgroundColor = .white
             nearbyStoresView.backgroundColor = .white
             Vscroll.backgroundColor = .white
+            
+            spinner.color = .black
             
             
         }
@@ -1833,10 +1851,11 @@ class StoreController: UIViewController, UIScrollViewDelegate, UIGestureRecogniz
         
 
         view.addSubview(spinner)
-        spinner.anchor(top: nil, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 100, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 200, height: 200)
-        spinner.alpha = 1
-        spinner.color = .black
-        spinner.transform = CGAffineTransform(scaleX: 2, y: 2)
+        spinner.anchor(top: view.topAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 50, height: 50)
+        spinner.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        spinner.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        
+        
         
         
         
@@ -1856,7 +1875,7 @@ class StoreController: UIViewController, UIScrollViewDelegate, UIGestureRecogniz
 
 
         Dscroll.backgroundColor = .black //Dark mode
-        view.addScrollView(Dscroll, container: scrollContainer, elements: [spinner, storeImageView, whiteRect, tableView])
+        view.addScrollView(Dscroll, container: scrollContainer, elements: [storeImageView, whiteRect, tableView])
         
         
         //view.bringSubviewToFront(Vstack1)
@@ -1866,7 +1885,7 @@ class StoreController: UIViewController, UIScrollViewDelegate, UIGestureRecogniz
         view.bringSubviewToFront(Hscroll)
         view.bringSubviewToFront(pageControl)
         view.bringSubviewToFront(tableView)
-        
+        view.bringSubviewToFront(spinner)
         Dscroll.alwaysBounceVertical = true
         
 
@@ -1885,11 +1904,7 @@ class StoreController: UIViewController, UIScrollViewDelegate, UIGestureRecogniz
   
     @objc func configureImageView() {
 
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-              if self.stillLoading {
-                  self.spinner.isHidden = false
-            }
-        }
+            self.spinner.isHidden = false
 
             DispatchQueue.global(qos: .userInitiated).async { [weak self] in
                 if let data = try? Data(contentsOf: URL(string: (self?.currStore.store__storeImage)!)!) {
@@ -1941,6 +1956,7 @@ class StoreController: UIViewController, UIScrollViewDelegate, UIGestureRecogniz
     func getProductData() {
         Products.shared.initialize(withSupply: supply, withStoreID: currStore.store__id)
         
+        spinner.isHidden = false
         DispatchQueue.global(qos: .userInitiated).async {
             Products.shared.fetchProducts { (result) in
                 switch result {
@@ -1949,10 +1965,14 @@ class StoreController: UIViewController, UIScrollViewDelegate, UIGestureRecogniz
                         self.products = products
                         
                         self.configureViewComponents()
+                        self.spinner.isHidden = true
                         print("======\(products)")
                     }
                 case .failure(let error):
                     print("===DEBUG: Failed with error \(error)")
+                    DispatchQueue.main.async {
+                        self.spinner.isHidden = true
+                    }
                 }
                 
             }

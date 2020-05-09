@@ -18,6 +18,7 @@ class HomeController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .black
+
         //print(BCryptSwift.generateSalt())
         //showActivityIndicatory()
         

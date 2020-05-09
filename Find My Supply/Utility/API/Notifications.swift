@@ -29,9 +29,9 @@ struct Notifications {
     //POST
     //addSKUStoreNotification/<int:userID>/<int:sku>/<int:storeID>/<str:token>
     func addSKUStoreNotification(completion: @escaping(Result<String, Error>) -> ()) {
-        print("===https://find-my-supply-274702.uc.r.appspot.com/addSKUStoreNotification/\(UserDefaults.standard.string(forKey: "username")!)/\(SKU)/\(storeID)/\(date)/\(UserDefaults.standard.string(forKey: "salt") ?? "nil")")
+        print("===https://find-my-supply-274702.uc.r.appspot.com/addSKUStoreNotification/\(UserDefaults.standard.string(forKey: "userID")!)/\(SKU)/\(storeID)/\(date)/\(UserDefaults.standard.string(forKey: "salt") ?? "nil")")
      
-        guard let url = URL(string: "https://find-my-supply-274702.uc.r.appspot.com/addSKUStoreNotification/\(UserDefaults.standard.string(forKey: "username")!)/\(SKU)/\(storeID)/\(date)/\(UserDefaults.standard.string(forKey: "salt") ?? "nil")") else { return }
+        guard let url = URL(string: "https://find-my-supply-274702.uc.r.appspot.com/addSKUStoreNotification/\(UserDefaults.standard.string(forKey: "userID")!)/\(SKU)/\(storeID)/\(date)/\(UserDefaults.standard.string(forKey: "salt") ?? "nil")") else { return }
         
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
@@ -59,11 +59,11 @@ struct Notifications {
     
     
     //POST
-    //addSKURegionNotification/<str:usernm>/<int:sku>/<int:radius><str:metric>/<latitude>/<longitude>/<str:token>
+    //addSKURegionNotification/<int:userID>/<int:sku>/<int:radius><str:metric>/<latitude>/<longitude>/<str:token>
     func addSKURegionNotification(completion: @escaping(Result<String, Error>) -> ()) {
-        print("===https://find-my-supply-274702.uc.r.appspot.com/addSKURegionNotification/\(UserDefaults.standard.string(forKey: "username")!)/\(SKU)/\(UserDefaults.standard.integer(forKey: "radius"))mi/\(city)/\(Location.shared.coordinates.latitude)/\(Location.shared.coordinates.longitude)/\(date)/\(UserDefaults.standard.string(forKey: "salt") ?? "nil")")
+        print("===https://find-my-supply-274702.uc.r.appspot.com/addSKURegionNotification/\(UserDefaults.standard.string(forKey: "userID")!)/\(SKU)/\(UserDefaults.standard.integer(forKey: "radius"))mi/\(city)/\(Location.shared.coordinates.latitude)/\(Location.shared.coordinates.longitude)/\(date)/\(UserDefaults.standard.string(forKey: "salt") ?? "nil")")
      
-        guard let url = URL(string: "https://find-my-supply-274702.uc.r.appspot.com/addSKURegionNotification/\(UserDefaults.standard.string(forKey: "username")!)/\(SKU)/\(UserDefaults.standard.integer(forKey: "radius"))mi/\(city)/\(Location.shared.coordinates.latitude)/\(Location.shared.coordinates.longitude)/\(date)/\(UserDefaults.standard.string(forKey: "salt") ?? "nil")") else { return }
+        guard let url = URL(string: "https://find-my-supply-274702.uc.r.appspot.com/addSKURegionNotification/\(UserDefaults.standard.string(forKey: "userID")!)/\(SKU)/\(UserDefaults.standard.integer(forKey: "radius"))mi/\(city)/\(Location.shared.coordinates.latitude)/\(Location.shared.coordinates.longitude)/\(date)/\(UserDefaults.standard.string(forKey: "salt") ?? "nil")") else { return }
         
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
@@ -91,11 +91,11 @@ struct Notifications {
     
     
     //POST
-    //addSKURegionNotification/<str:usernm>/<int:sku>/<int:radius><str:metric>/<latitude>/<longitude>/<str:token>
+    //addSKURegionNotification/<int:userID>/<int:sku>/<int:radius><str:metric>/<latitude>/<longitude>/<str:token>
     func addSupplyRegionNotification(completion: @escaping(Result<String, Error>) -> ()) {
-        print("===https://find-my-supply-274702.uc.r.appspot.com/addSupplyRegionNotification/\(UserDefaults.standard.string(forKey: "username")!)/\(supply)/\(UserDefaults.standard.integer(forKey: "radius"))mi/\(city)/\(Location.shared.coordinates.latitude)/\(Location.shared.coordinates.longitude)/\(date)/\(UserDefaults.standard.string(forKey: "salt") ?? "nil")")
+        print("===https://find-my-supply-274702.uc.r.appspot.com/addSupplyRegionNotification/\(UserDefaults.standard.string(forKey: "userID")!)/\(supply)/\(UserDefaults.standard.integer(forKey: "radius"))mi/\(city)/\(Location.shared.coordinates.latitude)/\(Location.shared.coordinates.longitude)/\(date)/\(UserDefaults.standard.string(forKey: "salt") ?? "nil")")
      
-        guard let url = URL(string: "https://find-my-supply-274702.uc.r.appspot.com/addSupplyRegionNotification/\(UserDefaults.standard.string(forKey: "username")!)/\(supply)/\(UserDefaults.standard.integer(forKey: "radius"))mi/\(city)/\(Location.shared.coordinates.latitude)/\(Location.shared.coordinates.longitude)/\(date)/\(UserDefaults.standard.string(forKey: "salt") ?? "nil")") else { return }
+        guard let url = URL(string: "https://find-my-supply-274702.uc.r.appspot.com/addSupplyRegionNotification/\(UserDefaults.standard.string(forKey: "userID")!)/\(supply)/\(UserDefaults.standard.integer(forKey: "radius"))mi/\(city)/\(Location.shared.coordinates.latitude)/\(Location.shared.coordinates.longitude)/\(date)/\(UserDefaults.standard.string(forKey: "salt") ?? "nil")") else { return }
         
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
@@ -122,12 +122,12 @@ struct Notifications {
     }
     
     
-    //https://find-my-supply-274702.uc.r.appspot.com/getNotifications/<str:username>/<str:token>
+    //https://find-my-supply-274702.uc.r.appspot.com/getNotifications/<int:userID>/<str:token>
     func getAreaNotifications(completion: @escaping(Result<[notification], Error>) -> ()) {
         
-        print("===https://find-my-supply-274702.uc.r.appspot.com/getAreaNotifications/\(UserDefaults.standard.string(forKey: "username")!)/\(UserDefaults.standard.string(forKey: "salt") ?? "nil")")
+        print("===https://find-my-supply-274702.uc.r.appspot.com/getAreaNotifications/\(UserDefaults.standard.string(forKey: "userID")!)/\(UserDefaults.standard.string(forKey: "salt") ?? "nil")")
         print("===Entering get Notifs")
-        guard let url = URL(string: "https://find-my-supply-274702.uc.r.appspot.com/getAreaNotifications/\(UserDefaults.standard.string(forKey: "username")!)/\(UserDefaults.standard.string(forKey: "salt") ?? "nil")") else { return }
+        guard let url = URL(string: "https://find-my-supply-274702.uc.r.appspot.com/getAreaNotifications/\(UserDefaults.standard.string(forKey: "userID")!)/\(UserDefaults.standard.string(forKey: "salt") ?? "nil")") else { return }
         
         URLSession.shared.dataTask(with: url) { (data, response, error) in
             
@@ -150,12 +150,12 @@ struct Notifications {
         }.resume()
     }
     
-    //https://find-my-supply-274702.uc.r.appspot.com/getNotifications/<str:username>/<str:token>
+    //https://find-my-supply-274702.uc.r.appspot.com/getNotifications/<int:userID>/<str:token>
     func getStoreNotifications(completion: @escaping(Result<[notification], Error>) -> ()) {
         
-        print("===https://find-my-supply-274702.uc.r.appspot.com/getStoreNotifications/\(UserDefaults.standard.string(forKey: "username")!)/\(UserDefaults.standard.string(forKey: "salt") ?? "nil")")
+        print("===https://find-my-supply-274702.uc.r.appspot.com/getStoreNotifications/\(UserDefaults.standard.string(forKey: "userID")!)/\(UserDefaults.standard.string(forKey: "salt") ?? "nil")")
         print("===Entering get Notifs")
-        guard let url = URL(string: "https://find-my-supply-274702.uc.r.appspot.com/getStoreNotifications/\(UserDefaults.standard.string(forKey: "username")!)/\(UserDefaults.standard.string(forKey: "salt") ?? "nil")") else { return }
+        guard let url = URL(string: "https://find-my-supply-274702.uc.r.appspot.com/getStoreNotifications/\(UserDefaults.standard.string(forKey: "userID")!)/\(UserDefaults.standard.string(forKey: "salt") ?? "nil")") else { return }
         
         URLSession.shared.dataTask(with: url) { (data, response, error) in
             
@@ -179,11 +179,11 @@ struct Notifications {
     }
     
     //POST
-    //deleteSupplyRegionNotification/<str:username>/<str:supply>/<int:radius>/<str:city>/<str:date>/<str:token>
+    //deleteSupplyRegionNotification/<int:userID>/<str:supply>/<int:radius>/<str:city>/<str:date>/<str:token>
     func deleteSupplyRegionNotification(completion: @escaping(Result<String, Error>) -> ()) {
-        print("===https://find-my-supply-274702.uc.r.appspot.com/deleteSupplyRegionNotification/\(UserDefaults.standard.string(forKey: "username")!)/\(supply)/\(radius)/\(city)/\(date)/\(UserDefaults.standard.string(forKey: "salt") ?? "nil")")
+        print("===https://find-my-supply-274702.uc.r.appspot.com/deleteSupplyRegionNotification/\(UserDefaults.standard.string(forKey: "userID")!)/\(supply)/\(radius)/\(city)/\(date)/\(UserDefaults.standard.string(forKey: "salt") ?? "nil")")
      
-        guard let url = URL(string: "https://find-my-supply-274702.uc.r.appspot.com/deleteSupplyRegionNotification/\(UserDefaults.standard.string(forKey: "username")!)/\(supply)/\(radius)/\(city)/\(date)/\(UserDefaults.standard.string(forKey: "salt") ?? "nil")") else { return }
+        guard let url = URL(string: "https://find-my-supply-274702.uc.r.appspot.com/deleteSupplyRegionNotification/\(UserDefaults.standard.string(forKey: "userID")!)/\(supply)/\(radius)/\(city)/\(date)/\(UserDefaults.standard.string(forKey: "salt") ?? "nil")") else { return }
         
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
@@ -203,11 +203,11 @@ struct Notifications {
     }
     
     //POST
-    //deleteSKUStoreNotification/<str:username>/<int:productID>/<int:storeID>/<str:date>/<str:token>
+    //deleteSKUStoreNotification/<int:userID>/<int:productID>/<int:storeID>/<str:date>/<str:token>
     func deleteSKUStoreNotification(completion: @escaping(Result<String, Error>) -> ()) {
-        print("===https://find-my-supply-274702.uc.r.appspot.com/deleteSKUStoreNotification/\(UserDefaults.standard.string(forKey: "username")!)/\(productID)/\(storeID)/\(date)/\(UserDefaults.standard.string(forKey: "salt") ?? "nil")")
+        print("===https://find-my-supply-274702.uc.r.appspot.com/deleteSKUStoreNotification/\(UserDefaults.standard.string(forKey: "userID")!)/\(productID)/\(storeID)/\(date)/\(UserDefaults.standard.string(forKey: "salt") ?? "nil")")
      
-        guard let url = URL(string: "https://find-my-supply-274702.uc.r.appspot.com/deleteSKUStoreNotification/\(UserDefaults.standard.string(forKey: "username")!)/\(productID)/\(storeID)/\(date)/\(UserDefaults.standard.string(forKey: "salt") ?? "nil")") else { return }
+        guard let url = URL(string: "https://find-my-supply-274702.uc.r.appspot.com/deleteSKUStoreNotification/\(UserDefaults.standard.string(forKey: "userID")!)/\(productID)/\(storeID)/\(date)/\(UserDefaults.standard.string(forKey: "salt") ?? "nil")") else { return }
         
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
@@ -227,11 +227,11 @@ struct Notifications {
     }
     
     //POST
-    //deleteSKURegionNotification/<str:username>/<int:productID>/<int:radius>/<str:city>/<str:date>/<str:token>
+    //deleteSKURegionNotification/<int:userID>/<int:productID>/<int:radius>/<str:city>/<str:date>/<str:token>
     func deleteSKURegionNotification(completion: @escaping(Result<String, Error>) -> ()) {
-        print("===https://find-my-supply-274702.uc.r.appspot.com/deleteSKURegionNotification/\(UserDefaults.standard.string(forKey: "username")!)/\(productID)/\(radius)/\(city)/\(date)/\(UserDefaults.standard.string(forKey: "salt") ?? "nil")")
+        print("===https://find-my-supply-274702.uc.r.appspot.com/deleteSKURegionNotification/\(UserDefaults.standard.string(forKey: "userID")!)/\(productID)/\(radius)/\(city)/\(date)/\(UserDefaults.standard.string(forKey: "salt") ?? "nil")")
      
-        guard let url = URL(string: "https://find-my-supply-274702.uc.r.appspot.com/deleteSKURegionNotification/\(UserDefaults.standard.string(forKey: "username")!)/\(productID)/\(radius)/\(city)/\(date)/\(UserDefaults.standard.string(forKey: "salt") ?? "nil")") else { return }
+        guard let url = URL(string: "https://find-my-supply-274702.uc.r.appspot.com/deleteSKURegionNotification/\(UserDefaults.standard.string(forKey: "userID")!)/\(productID)/\(radius)/\(city)/\(date)/\(UserDefaults.standard.string(forKey: "salt") ?? "nil")") else { return }
         
         var request = URLRequest(url: url)
         request.httpMethod = "POST"

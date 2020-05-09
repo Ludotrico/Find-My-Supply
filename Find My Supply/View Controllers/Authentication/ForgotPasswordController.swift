@@ -90,7 +90,7 @@ class ForgotPasswordController: UIViewController {
     
     let spinner: UIActivityIndicatorView = {
         let spinner = UIActivityIndicatorView()
-        spinner.tintColor = .white
+        spinner.color = Color.shared.gold
         spinner.startAnimating()
         spinner.alpha = 1
         spinner.isHidden = true
@@ -320,8 +320,9 @@ class ForgotPasswordController: UIViewController {
                           
                       case .failure(let error):
                           print("DEBUG: Failed with error \(error)")
-                         self.showMessage(label: self.createLbl(text: "Oops! A network error occurred, please check your connection and try again."))
-                          
+                          DispatchQueue.main.async {
+                            self.showMessage(label: self.createLbl(text: "Oops! A network error occurred, please check your connection and try again."))
+                          }
                       }
                   }
               }

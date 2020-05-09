@@ -326,7 +326,8 @@ class HomeController: UIViewController {
     
     let spinner: UIActivityIndicatorView = {
         let spinner = UIActivityIndicatorView()
-        spinner.tintColor = .black
+        spinner.color = Color.shared.gold
+        
         spinner.startAnimating()
         spinner.alpha = 1
         spinner.transform = CGAffineTransform(scaleX: 1.25, y: 1.25)
@@ -344,6 +345,8 @@ class HomeController: UIViewController {
         return button
 
     }()
+    
+    
     
     
     let menuBtn: UIButton = {
@@ -622,6 +625,7 @@ class HomeController: UIViewController {
     @objc func addNewZipcode() {
         DispatchQueue.main.async {
             self.dismissNewScrape2()
+            self.spinner.isHidden = false
         }
         
         DispatchQueue.global(qos: .userInitiated).async {
@@ -634,10 +638,15 @@ class HomeController: UIViewController {
                         
                         self.showMessage(label: lbl)
                         self.zipNotSupported = false
+                        self.spinner.isHidden = true
                     }
                     
                 case .failure(let error):
                     print("DEBUG: Failed with error \(error)")
+                    DispatchQueue.main.async {
+                        self.spinner.isHidden = true
+                        self.showMessage(label: self.createLbl(text: "Oops! A network error occurred, please check your connection and try again."))
+                    }
                  
                 }
             }
@@ -733,6 +742,7 @@ class HomeController: UIViewController {
                       if let error = error {
                           // Handle the error here.
                           print("DEBUG: Failed with error \(error)")
+                        self.showMessage(label: self.createLbl(text: "Oops! An unexpected error occurred, please try again."))
                       }
                       self.handleAddNotification()
                       return
@@ -1274,6 +1284,9 @@ class HomeController: UIViewController {
                         
                         case .failure(let error):
                             print("DEBUG: Failed with error \(error)")
+                            DispatchQueue.main.async {
+                                self.showMessage(label: self.createLbl(text: "Oops! A network error occurred, please check your connection and try again."))
+                        }
                     }
                 }
             }
@@ -1631,6 +1644,9 @@ class HomeController: UIViewController {
                                 
                             case .failure(let error):
                                 print("DEBUG: Failed with error \(error)")
+                                DispatchQueue.main.async {
+                                    self.showMessage(label: self.createLbl(text: "Oops! A network error occurred, please check your connection and try again."))
+                                }
                             }
                         }
                     }
@@ -1683,7 +1699,7 @@ class HomeController: UIViewController {
         let now = "\(calendar.component(.month, from: date))-\(calendar.component(.day, from: date))-\(calendar.component(.year, from: date)%1000)"
         
         
-        
+        spinner.isHidden = false
         DispatchQueue.global(qos: .userInitiated).async {
             Notifications.shared.supply = self.supplySearchedFor.replacingOccurrences(of: " ", with: "_")
             Notifications.shared.date = now
@@ -1706,6 +1722,7 @@ class HomeController: UIViewController {
                             lbl.layer.cornerRadius = 10
                        
                             self.showMessage(label: lbl)
+                            self.spinner.isHidden = true
                         }
                     }
                     else {
@@ -1724,10 +1741,15 @@ class HomeController: UIViewController {
                             lbl.layer.cornerRadius = 10
 
                             self.showMessage(label: lbl)
+                            self.spinner.isHidden = true
                         }
                     }
                 case .failure(let error):
                     print("DEBUG: Failed with error \(error)")
+                    DispatchQueue.main.async {
+                        self.spinner.isHidden = true
+                        self.showMessage(label: self.createLbl(text: "Oops! A network error occurred, please check your connection and try again."))
+                    }
                     
                 }
                 
@@ -1814,6 +1836,9 @@ class HomeController: UIViewController {
                     }
                 case .failure(let error):
                     print("DEBUG: Failed with error \(error)")
+                    DispatchQueue.main.async {
+                        self.showMessage(label: self.createLbl(text: "Oops! A network error occurred, please check your connection and try again."))
+                    }
                 }
             }
         }
@@ -2296,9 +2321,11 @@ class HomeController: UIViewController {
         view.bringSubviewToFront(tableView)
         
         view.addSubview(spinner)
-        spinner.anchor(top: tableView.topAnchor, left: nil, bottom: nil, right: nil, paddingTop: 00, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 50, height: 50)
-        spinner.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: -(view.frame.width/4)).isActive = true
+
+        self.spinner.anchor(top: tableView.topAnchor, left: nil, bottom: nil, right: nil, paddingTop: 9.7, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 35, height: 35)
+        self.spinner.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
         
+
         
         
         
@@ -2502,12 +2529,8 @@ extension HomeController: UITableViewDelegate, UITableViewDataSource {
         
         Stores.shared.initialize(withSupply: supplyList[indexPath.row].replacingOccurrences(of: " ", with: "_"), withCoor: Location.shared.coordinates)
         print("===================================START========================================")
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-            if self.stillLoading {
-                self.spinner.isHidden = false
-            }
-        }
-        
+
+        self.spinner.isHidden = false
         DispatchQueue.global(qos: .userInitiated).async {
             Stores.shared.fetchStoresWithSupply { (result) in
                 switch result {
@@ -2527,6 +2550,7 @@ extension HomeController: UITableViewDelegate, UITableViewDataSource {
                                     lbl.layer.cornerRadius = 10
 
                                 self.showMessage(label: lbl)
+                                self.spinner.isHidden = true
                                 
                                 self.notifBtn.transform = CGAffineTransform(scaleX: 0, y: 0)
                                 UIView.animate(withDuration: 0.5, delay: 1, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
@@ -2558,6 +2582,11 @@ extension HomeController: UITableViewDelegate, UITableViewDataSource {
                         
                     case .failure(let error):
                         print("DEBUG: Failed with error \(error)")
+                        DispatchQueue.main.async {
+                            self.spinner.isHidden = true
+                            self.showMessage(label: self.createLbl(text: "Oops! A network error occurred, please check your connection and try again."))
+                        }
+                
             
                 }
             }

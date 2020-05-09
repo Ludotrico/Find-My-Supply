@@ -154,8 +154,106 @@ class ContactUsController: UIViewController {
         
     }()
     
+    let spinner: UIActivityIndicatorView = {
+        let spinner = UIActivityIndicatorView()
+        spinner.startAnimating()
+        spinner.isHidden = true
+        spinner.color = Color.shared.gold
+        return spinner
+    }()
+    
+    let Hstack1: UIStackView = {
+        let stack = UIStackView()
+        stack.axis = .horizontal
+        stack.spacing = 5
+        stack.alignment = .center
+        stack.distribution = .equalSpacing
+        
+
+       stack.sizeToFit()
+    
+        return stack
+    }()
+    
+    let twitterBtn: UIButton = {
+        let button = UIButton(type: .system)
+
+        button.setImage(#imageLiteral(resourceName: "Twitter").withRenderingMode(.alwaysOriginal), for: .normal)
+        button.contentMode = .scaleAspectFit
+        button.imageView?.contentMode = .scaleAspectFit
+        button.sizeToFit()
+        button.clipsToBounds = true
+
+        button.imageView?.sizeToFit()
+        button.imageView?.clipsToBounds = true
+
+        button.addTarget(self, action: #selector(twitterRedirect), for: .touchUpInside)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+        
+    }()
+    
+    let facebookBtn: UIButton = {
+        let button = UIButton(type: .system)
+
+        button.setImage(#imageLiteral(resourceName: "Facebook").withRenderingMode(.alwaysOriginal), for: .normal)
+        button.contentMode = .scaleAspectFit
+        button.imageView?.contentMode = .scaleAspectFit
+        button.sizeToFit()
+        button.clipsToBounds = true
+        button.imageView?.sizeToFit()
+        button.imageView?.clipsToBounds = true
+
+
+        button.addTarget(self, action: #selector(facebookRedirect), for: .touchUpInside)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+        
+    }()
+    
+    let instaBtn: UIButton = {
+        let button = UIButton(type: .system)
+
+        button.setImage(#imageLiteral(resourceName: "Insta").withRenderingMode(.alwaysOriginal), for: .normal)
+        button.contentMode = .scaleAspectFit
+        button.imageView?.contentMode = .scaleAspectFit
+        button.sizeToFit()
+        button.clipsToBounds = true
+        
+        button.imageView?.sizeToFit()
+        button.imageView?.clipsToBounds = true
+
+        button.addTarget(self, action: #selector(instagramRedirect), for: .touchUpInside)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+        
+    }()
+    
+    
+    
     
     //MARK: Helper Functions
+    
+    @objc func twitterRedirect() {
+        //let redirection = "https://www.waze.com/ul?ll=40.75889500,-73.98513100&navigate=yes"
+        let redirection = "waze://?ll="
+        let url = URL(string: redirection)
+        UIApplication.shared.open(url!, options: [:], completionHandler: nil)
+    }
+    
+    @objc func facebookRedirect() {
+        //let redirection = "https://www.waze.com/ul?ll=40.75889500,-73.98513100&navigate=yes"
+        let redirection = "waze://?llte=yes"
+        let url = URL(string: redirection)
+        UIApplication.shared.open(url!, options: [:], completionHandler: nil)
+    }
+    
+    @objc func instagramRedirect() {
+        //let redirection = "https://www.waze.com/ul?ll=40.75889500,-73.98513100&navigate=yes"
+        let redirection = "waze://?ll=avigate=yes"
+        let url = URL(string: redirection)
+        UIApplication.shared.open(url!, options: [:], completionHandler: nil)
+    }
     
     @objc func submitSuggestion() {
         submission.resignFirstResponder()
@@ -169,6 +267,11 @@ class ContactUsController: UIViewController {
                     return
                 }
   
+                DispatchQueue.main.async {
+                    self.spinner.isHidden = false
+                    self.submit.isEnabled = false
+                }
+           
                 Submissions.shared.initialize(withSupply: text.replacingOccurrences(of: " ", with: "_"))
                 DispatchQueue.global(qos: .userInitiated).async {
                     Submissions.shared.addSubmission { (result) in
@@ -183,10 +286,18 @@ class ContactUsController: UIViewController {
                                 UserDefaults.standard.set(prev-1, forKey: "submissionsRemaining")
                                 self.submission.text = ""
                                 self.configureSubmissionField()
+                                
+                                self.submit.isEnabled = true
+                                self.spinner.isHidden = true
                             }
 
                         case .failure(let error):
                             print("DEBUG: Failed with error \(error)")
+                            DispatchQueue.main.async {
+                                self.submit.isEnabled = true
+                                self.spinner.isHidden = true
+                                self.showMessage(label: self.createLbl(text: "Oops! A network error occurred, please check your connection and try again."))
+                            }
                         }
                     }
                 }
@@ -232,13 +343,23 @@ class ContactUsController: UIViewController {
         submit.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         
         scrollView.addSubview(Vstack2)
-        Vstack2.anchor(top: submit.bottomAnchor, left: nil, bottom: nil, right: nil, paddingTop: 25, paddingLeft: 15, paddingBottom: 0, paddingRight: 15, width: view.frame.width-30, height: 100)
+        Vstack2.anchor(top: submit.bottomAnchor, left: nil, bottom: nil, right: nil, paddingTop: 25, paddingLeft: 15, paddingBottom: 0, paddingRight: 15, width: view.frame.width-30, height: 150)
         Vstack2.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         Vstack2.layoutMargins = UIEdgeInsets(top: 5, left: 10, bottom: 10, right: 10)
         Vstack2.isLayoutMarginsRelativeArrangement = true
         
         Vstack2.addArrangedSubview(titleLbl2)
         titleLbl2.anchor(top: nil, left: nil, bottom: nil, right: nil, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 130, height: 30)
+        
+        Vstack2.addArrangedSubview(Hstack1)
+        Hstack1.anchor(top: nil, left: nil, bottom: nil, right: nil, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 160, height: 40)
+        Hstack1.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        Hstack1.addArrangedSubview(twitterBtn)
+        twitterBtn.anchor(top: nil, left: nil, bottom: nil, right: nil, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 40, height: 40)
+        Hstack1.addArrangedSubview(facebookBtn)
+        facebookBtn.anchor(top: nil, left: nil, bottom: nil, right: nil, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 40, height: 40)
+        Hstack1.addArrangedSubview(instaBtn)
+        instaBtn.anchor(top: nil, left: nil, bottom: nil, right: nil, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 40, height: 40)
         
         
         Vstack2.addArrangedSubview(Hstack)
@@ -247,6 +368,17 @@ class ContactUsController: UIViewController {
         Hstack.addArrangedSubview(emailLbl)
         //titleLbl2.anchor(top: nil, left: nil, bottom: nil, right: nil, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 400, height: 30)
         
+        
+
+        
+        
+        
+        
+        
+        
+        scrollView.addSubview(spinner)
+        spinner.anchor(top: submit.bottomAnchor, left: nil, bottom: Vstack2.topAnchor, right: nil, paddingTop: 2, paddingLeft: 0, paddingBottom: 2, paddingRight: 0, width: 20, height: 20)
+        spinner.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         
         configureColorScheme()
     }
@@ -271,6 +403,9 @@ class ContactUsController: UIViewController {
             Vstack.addBackground(color: .gray, cornerRadius: 10)
             Vstack2.addBackground(color: .gray, cornerRadius: 10)
 
+            spinner.color = Color.shared.gold
+            
+            Hstack1.addBackground(color: Color.shared.gold.withAlphaComponent(0.5), cornerRadius: 30)
             
             
      
@@ -295,6 +430,9 @@ class ContactUsController: UIViewController {
                  self.setNeedsStatusBarAppearanceUpdate()
             })
             
+            spinner.color = Color.shared.gold
+            
+            Hstack1.addBackground(color: Color.shared.gold.withAlphaComponent(1), cornerRadius: 30)
 
         }
         else {
@@ -311,10 +449,14 @@ class ContactUsController: UIViewController {
                  self.setNeedsStatusBarAppearanceUpdate()
             })
             
+            spinner.color = .black
+            
             
 
             Vstack.addBackground(color: .lightGray, cornerRadius: 10)
             Vstack2.addBackground(color: .lightGray, cornerRadius: 10)
+            
+            Hstack1.addBackground(color: Color.shared.gold.withAlphaComponent(0.5), cornerRadius: 30)
 
             
             

@@ -92,6 +92,8 @@ class ProfileController: UIViewController {
         txt.adjustsFontSizeToFitWidth = true
         txt.font = UIFont(name: "HelveticaNeue", size: 20)
         txt.isUserInteractionEnabled = false
+        txt.autocorrectionType = .no
+
         txt.alpha = 1
         txt.tag = 1
         return txt
@@ -145,6 +147,8 @@ class ProfileController: UIViewController {
         txt.adjustsFontSizeToFitWidth = true
         txt.font = UIFont(name: "HelveticaNeue", size: 20)
         txt.isUserInteractionEnabled = false
+        txt.autocapitalizationType = .none
+        txt.autocorrectionType = .no
         txt.alpha = 1
         txt.tag = 3
         return txt
@@ -193,6 +197,8 @@ class ProfileController: UIViewController {
         txt.adjustsFontSizeToFitWidth = true
         txt.font = UIFont(name: "HelveticaNeue", size: 20)
         txt.isUserInteractionEnabled = false
+        txt.autocapitalizationType = .none
+        txt.autocorrectionType = .no
         txt.alpha = 1
         txt.tag = 2
         return txt
@@ -238,6 +244,14 @@ class ProfileController: UIViewController {
         
         return btn
         
+    }()
+    
+    let spinner: UIActivityIndicatorView = {
+        let spinner = UIActivityIndicatorView()
+        spinner.startAnimating()
+        spinner.isHidden = true
+        spinner.color = Color.shared.gold
+        return spinner
     }()
     
     
@@ -335,6 +349,10 @@ class ProfileController: UIViewController {
         
         print("+++ENTerinG update with: \(fName) \(email) \(usrname)")
 
+            
+        DispatchQueue.main.async {
+            self.spinner.isHidden = false
+        }
         UpdateUser.shared.initialize(withFname: fName, withEmail: email, withUsername: usrname)
         
         DispatchQueue.global(qos: .userInitiated).async {
@@ -344,6 +362,7 @@ class ProfileController: UIViewController {
                     DispatchQueue.main.async {
                         if m.removeFirst() == "#" {
                             self.showMessage(label: self.createLbl(text: m))
+                            self.spinner.isHidden = true
                             return
                         }
                         let success = self.createLbl(text: "Changes saved.")
@@ -360,11 +379,16 @@ class ProfileController: UIViewController {
                         for elem in [self.fNameField, self.emailField, self.usernameField] {
                             elem.text = ""
                         }
+                        self.spinner.isHidden = true
                     }
 
                     self.updateUserDefaults(fName: fName, email: email, username: usrname)
                 case .failure(let error):
                     print("DEBUG: Failed with error \(error)")
+                    DispatchQueue.main.async {
+                        self.spinner.isHidden = true
+                        self.showMessage(label: self.createLbl(text: "Oops! A network error occurred, please check your connection and try again."))
+                    }
                 }
             }
         }
@@ -551,6 +575,11 @@ class ProfileController: UIViewController {
         save.topAnchor.constraint(equalTo: changePswBtn.bottomAnchor, constant: 60).isActive = true
 
         
+        scrollView.addSubview(spinner)
+        spinner.anchor(top: nil, left: nil, bottom: save.topAnchor, right: nil, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 40, height: 40)
+        spinner.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        
+        
         scrollView.contentSize = CGSize(width: view.frame.width, height: 850)
         print("===\(view.frame.height)")
         
@@ -594,6 +623,8 @@ class ProfileController: UIViewController {
             changePswBtn.backgroundColor = .black
             changePswBtn.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
             
+            spinner.color = Color.shared.gold
+            
 
             
             
@@ -633,6 +664,8 @@ class ProfileController: UIViewController {
             
             changePswBtn.backgroundColor = .darkGray
             changePswBtn.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
+            
+            spinner.color = Color.shared.gold
 
         }
         else {
@@ -666,6 +699,8 @@ class ProfileController: UIViewController {
             
             changePswBtn.backgroundColor = .gray
             changePswBtn.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
+            
+            spinner.color = .black
   
 
             

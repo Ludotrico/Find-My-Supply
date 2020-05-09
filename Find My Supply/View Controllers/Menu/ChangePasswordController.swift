@@ -201,6 +201,15 @@ class ChangePasswordController: UIViewController {
         
     }()
     
+    
+    let spinner: UIActivityIndicatorView = {
+        let spinner = UIActivityIndicatorView()
+        spinner.startAnimating()
+        spinner.isHidden = true
+        spinner.color = Color.shared.gold
+        return spinner
+    }()
+    
      let scheme = UserDefaults.standard.integer(forKey: "colorScheme")
     
     
@@ -237,6 +246,10 @@ class ChangePasswordController: UIViewController {
                 UpdateUser.shared.salt = salt
                 UpdateUser.shared.type = "change"
                 
+                DispatchQueue.main.async {
+                    self.spinner.isHidden = false
+                }
+                
                 DispatchQueue.global(qos: .userInitiated).async {
                     UpdateUser.shared.changePassword { (result) in
                         switch result {
@@ -248,12 +261,17 @@ class ChangePasswordController: UIViewController {
                                 self.newPswField1.resignFirstResponder()
                                 self.newPswField2.resignFirstResponder()
                                 self.showMessage(label: success)
+                                self.spinner.isHidden = true
                                 return
                             }
 
                             
                         case.failure(let error):
                             print("DEBUG: Failed with error \(error)")
+                            DispatchQueue.main.async {
+                                self.spinner.isHidden = true
+                                self.showMessage(label: self.createLbl(text: "Oops! A network error occurred, please check your connection and try again."))
+                            }
                         }
                     }
                 }
@@ -296,6 +314,11 @@ class ChangePasswordController: UIViewController {
         saveBtn.anchor(top: nil, left: nil, bottom: nil, right: nil, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 260, height: 40)
         
         newPswField1.becomeFirstResponder()
+        
+        
+        scrollView.addSubview(spinner)
+        spinner.anchor(top: saveBtn.bottomAnchor, left: nil, bottom: nil, right: nil, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 40, height: 40)
+        spinner.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
     }
     
     
@@ -430,6 +453,8 @@ class ChangePasswordController: UIViewController {
             saveBtn.backgroundColor = .white
             saveBtn.setTitleColor(Color.shared.blue, for: .normal)
             
+            spinner.color = Color.shared.gold
+            
             
             
             
@@ -457,6 +482,7 @@ class ChangePasswordController: UIViewController {
             
             saveBtn.backgroundColor = .white
             saveBtn.setTitleColor(Color.shared.blue, for: .normal)
+            spinner.color = Color.shared.gold
             
             
 
@@ -480,6 +506,7 @@ class ChangePasswordController: UIViewController {
 
             saveBtn.backgroundColor = .white
             saveBtn.setTitleColor(Color.shared.blue, for: .normal)
+            spinner.color = .black
 
             
             

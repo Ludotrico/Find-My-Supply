@@ -621,7 +621,9 @@ class StoreController: UIViewController, UIScrollViewDelegate, UIGestureRecogniz
         let calendar = Calendar.current
         let now = "\(calendar.component(.month, from: date))-\(calendar.component(.day, from: date))-\(calendar.component(.year, from: date)%1000)"
         
-        spinner2.isHidden = false
+        DispatchQueue.main.async {
+            self.spinner2.isHidden = false
+        }
         DispatchQueue.global(qos: .userInitiated).async {
             Notifications.shared.initialize(withSKU: self.currSKU, withStoreID: self.currStore.store__id)
             Notifications.shared.date = now
@@ -690,7 +692,10 @@ class StoreController: UIViewController, UIScrollViewDelegate, UIGestureRecogniz
         let calendar = Calendar.current
         let now = "\(calendar.component(.month, from: date))-\(calendar.component(.day, from: date))-\(calendar.component(.year, from: date)%1000)"
         
-        self.spinner2.isHidden = false
+        DispatchQueue.main.async {
+            self.spinner2.isHidden = false
+        }
+        
         DispatchQueue.global(qos: .userInitiated).async {
             Notifications.shared.initialize(withSKU: self.currSKU, withStoreID: self.currStore.store__id)
             Notifications.shared.date = now
@@ -1566,7 +1571,7 @@ class StoreController: UIViewController, UIScrollViewDelegate, UIGestureRecogniz
             pageControl.pageIndicatorTintColor = .darkGray
             nearbyStoresCollectionView.backgroundColor = .darkGray
             Vscroll.backgroundColor = .darkGray
-            spinner.color = .white
+            spinner2.color = Color.shared.blue
             
         }
         else if scheme == 1 {
@@ -1599,7 +1604,7 @@ class StoreController: UIViewController, UIScrollViewDelegate, UIGestureRecogniz
             weekdayLbl.textColor = .lightGray
             tableView.backgroundColor = .black
             
-            spinner.color = .white
+            spinner2.color = Color.shared.gold
         }
         else {
             //LIGHT
@@ -1620,7 +1625,7 @@ class StoreController: UIViewController, UIScrollViewDelegate, UIGestureRecogniz
             nearbyStoresView.backgroundColor = .white
             Vscroll.backgroundColor = .white
             
-            spinner.color = .black
+            spinner2.color = Color.shared.blue
             
             
         }

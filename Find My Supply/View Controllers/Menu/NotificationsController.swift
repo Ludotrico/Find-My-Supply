@@ -13,6 +13,26 @@ class NotificationsController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let scheme = UserDefaults.standard.integer(forKey: "colorScheme")
+        if scheme == 0 {
+            view.backgroundColor = .darkGray
+        }
+        else if scheme == 1 {
+            view.backgroundColor =  .black
+        } else {
+            view.backgroundColor =  .white
+            spinner.color = .black
+            
+        }
+        
+        
+        view.addSubview(spinner)
+        spinner.anchor(top: view.topAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 100, height: 100)
+        spinner.isHidden = false
+        
+        
+        
         configureViewComponents()
 
         // Do any additional setup after loading the view.
@@ -66,6 +86,22 @@ class NotificationsController: UIViewController {
         lbl.textAlignment = .center
         lbl.sizeToFit()
         return lbl
+    }()
+    
+    let spinner: UIActivityIndicatorView = {
+        let spinner = UIActivityIndicatorView()
+        spinner.startAnimating()
+        spinner.isHidden = true
+        spinner.color = Color.shared.gold
+        return spinner
+    }()
+    
+    let spinner2: UIActivityIndicatorView = {
+        let spinner = UIActivityIndicatorView()
+        spinner.startAnimating()
+        spinner.isHidden = true
+        spinner.color = .black
+        return spinner
     }()
     
     //MARK: Variables
@@ -131,6 +167,10 @@ class NotificationsController: UIViewController {
         Notifications.shared.productID = notif.product__id!
         Notifications.shared.storeID = notif.store__id!
         Notifications.shared.date = notif.date!
+        
+        DispatchQueue.main.async {
+            self.spinner2.isHidden = false
+        }
         DispatchQueue.global(qos: .userInitiated).async {
             Notifications.shared.deleteSKUStoreNotification { (result) in
                 switch result {
@@ -140,9 +180,15 @@ class NotificationsController: UIViewController {
                         self.tableView.deleteRows(at: [indexPath], with: .automatic)
                         self.tableView.reloadData()
                         self.tableView.endUpdates()
+                        
+                        self.spinner2.isHidden = true
                     }
                 case .failure(let error):
                     print("DEBUG: Failed with error \(error)")
+                    DispatchQueue.main.async {
+                        self.spinner2.isHidden = true
+                        self.showMessage(label: self.createLbl(text: "Oops! A network error occurred, please check your connection and try again."))
+                    }
                 }
                 
             }
@@ -158,6 +204,10 @@ class NotificationsController: UIViewController {
         Notifications.shared.productID = notif.product__id!
         Notifications.shared.date = notif.date!
         Notifications.shared.city = notif.city!.replacingOccurrences(of: " ", with: "_")
+        
+        DispatchQueue.main.async {
+            self.spinner2.isHidden = false
+        }
         DispatchQueue.global(qos: .userInitiated).async {
             Notifications.shared.deleteSKURegionNotification { (result) in
                 switch result {
@@ -167,9 +217,14 @@ class NotificationsController: UIViewController {
                         self.tableView.deleteRows(at: [indexPath], with: .automatic)
                         self.tableView.reloadData()
                         self.tableView.endUpdates()
+                        self.spinner2.isHidden = true
                     }
                 case .failure(let error):
                     print("DEBUG: Failed with error \(error)")
+                    DispatchQueue.main.async {
+                        self.spinner2.isHidden = true
+                        self.showMessage(label: self.createLbl(text: "Oops! A network error occurred, please check your connection and try again."))
+                    }
                 }
                 
             }
@@ -186,6 +241,10 @@ class NotificationsController: UIViewController {
         print("#######\(notif.radius!)")
         Notifications.shared.date = notif.date!
         Notifications.shared.city = notif.city!.replacingOccurrences(of: " ", with: "_")
+        
+        DispatchQueue.main.async {
+            self.spinner2.isHidden = false
+        }
         DispatchQueue.global(qos: .userInitiated).async {
             Notifications.shared.deleteSupplyRegionNotification { (result) in
                 switch result {
@@ -195,9 +254,14 @@ class NotificationsController: UIViewController {
                         self.tableView.deleteRows(at: [indexPath], with: .automatic)
                         self.tableView.reloadData()
                         self.tableView.endUpdates()
+                        self.spinner2.isHidden = true
                     }
                 case .failure(let error):
                     print("DEBUG: Failed with error \(error)")
+                    DispatchQueue.main.async {
+                        self.spinner2.isHidden = true
+                        self.showMessage(label: self.createLbl(text: "Oops! A network error occurred, please check your connection and try again."))
+                    }
                 }
                 
             }
@@ -235,6 +299,47 @@ class NotificationsController: UIViewController {
         }
 
         
+        
+    }
+    
+    func createLbl(text: String) -> UILabel {
+        let lbl = UILabel()
+        lbl.backgroundColor = UIColor.rgb(red: 209, green: 21, blue: 0)
+        lbl.textColor = .white
+        lbl.text = text
+        lbl.font = UIFont.italicSystemFont(ofSize: 15.0)
+        //lbl.sizeToFit()
+        lbl.textAlignment = .center
+        lbl.numberOfLines = 0
+        //lbl.adjustsFontSizeToFitWidth  = true
+        lbl.layer.cornerRadius = 10
+        return lbl
+    }
+    
+    
+    func showMessage(label: UILabel) {
+        
+
+        self.view.addSubview(label)
+        label.alpha = 1
+        
+      //     self.noNearbyStoresLbl.anchor(top: nil, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0)
+        label.frame = CGRect(x: 0 ,y: self.view.frame.height, width: (self.view.frame.width/4)*3, height: 50)
+        label.center.x = view.center.x
+     
+            UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+                
+                label.frame = CGRect(x: 0, y: self.view.frame.height - 100, width: (self.view.frame.width/4)*3, height: 50)
+                label.center.x = self.view.center.x
+            }, completion: { _ in
+                    UIView.animate(withDuration: 2, delay: 2, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+                        label.alpha = 0
+                    }, completion: { _ in
+                        
+                        label.removeFromSuperview()
+                        label.alpha = 1
+                    })
+            })
         
     }
     
@@ -296,6 +401,10 @@ class NotificationsController: UIViewController {
         
         navigationItem.titleView = notifItem
         
+        view.addSubview(spinner2)
+        spinner2.anchor(top: nil, left: nil, bottom: view.bottomAnchor, right: nil, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 40, height: 40)
+        spinner2.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        
         configureColorScheme()
         
       
@@ -320,6 +429,8 @@ class NotificationsController: UIViewController {
             
              noNotifsLbl.textColor = .black
             
+            spinner2.color = .systemRed
+            
     
             
         }
@@ -338,6 +449,7 @@ class NotificationsController: UIViewController {
             })
             
              noNotifsLbl.textColor = .white
+            spinner2.color = .systemRed
             
 
         }
@@ -356,6 +468,8 @@ class NotificationsController: UIViewController {
             })
             
             noNotifsLbl.textColor = .black
+            
+            spinner2.color = .systemRed
             
 
             
@@ -388,16 +502,24 @@ class NotificationsController: UIViewController {
                                     } else {
                                     self.configureTableView()
                                     }
+                                    self.spinner.removeFromSuperview()
                                 }
                                 
                             case .failure(let error):
                                 print("DEBUG: Failed with error \(error)")
+                                DispatchQueue.main.async {
+                                    self.showMessage(label: self.createLbl(text: "Oops! A network error occurred, please check your connection and try again."))
+                                }
                             }
                         }
                     }
                     
                 case .failure(let error):
                     print("DEBUG: Failed with error \(error)")
+                    DispatchQueue.main.async {
+                        self.showMessage(label: self.createLbl(text: "Oops! A network error occurred, please check your connection and try again."))
+                    }
+                    
                 }
             }
         }

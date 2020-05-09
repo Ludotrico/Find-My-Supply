@@ -12,6 +12,25 @@ class ImageController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        let scheme = UserDefaults.standard.integer(forKey: "colorScheme")
+        if scheme == 0 {
+            view.backgroundColor = .darkGray
+        }
+        else if scheme == 1 {
+            view.backgroundColor =  .black
+        } else {
+            view.backgroundColor =  .white
+            spinner.color = .black
+            
+        }
+        
+        
+        view.addSubview(spinner)
+        spinner.anchor(top: view.topAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 100, height: 100)
+        spinner.isHidden = false
+        
+        
+        
         configureViewComponents()
         
         
@@ -62,6 +81,17 @@ class ImageController: UIViewController {
 
 
     var img = UIImageView()
+    
+    let spinner: UIActivityIndicatorView = {
+        let spinner = UIActivityIndicatorView()
+        spinner.color = Color.shared.gold
+        
+        spinner.startAnimating()
+        spinner.alpha = 1
+        spinner.transform = CGAffineTransform(scaleX: 1.25, y: 1.25)
+        spinner.isHidden = true
+        return spinner
+    }()
    
     
 
@@ -99,6 +129,8 @@ class ImageController: UIViewController {
             UIView.animate(withDuration: 0.5, animations: {
                  self.setNeedsStatusBarAppearanceUpdate()
             })
+            
+            spinner.color = Color.shared.gold
             
         } else if scheme == 1 {
             view.backgroundColor = .black

@@ -146,7 +146,7 @@ class GoldController: UIViewController {
     
     let info1Text: UILabel = {
         let lbl = UILabel()
-        lbl.text = "Push-notifications to notify you when supplies you’re interested in get restocked"
+        lbl.text = "Push-notifications to notify you when supplies you need get re-stocked"
         lbl.font = UIFont(name: "BrandonGrotesque-Light", size: 20)
         lbl.textColor = .white //Dark mode
         lbl.numberOfLines = 0
@@ -1416,7 +1416,7 @@ class GoldController: UIViewController {
 
 
                 let info1TextCopy = UILabel()
-                    info1TextCopy.text = "Push-notifications to notify you when supplies you’re interested in get re-stocked"
+                    info1TextCopy.text = "Push-notifications to notify you when supplies you need get re-stocked"
                     info1TextCopy.font = UIFont(name: "BrandonGrotesque-Light", size: 20)
                     info1TextCopy.textColor = .white //Dark mode
                     info1TextCopy.numberOfLines = 0

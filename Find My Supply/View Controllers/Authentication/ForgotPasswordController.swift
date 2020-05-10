@@ -33,7 +33,7 @@ class ForgotPasswordController: UIViewController {
         let view = UIScrollView()
         view.alwaysBounceVertical = true
         view.showsVerticalScrollIndicator = false
-        
+        view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
@@ -42,27 +42,32 @@ class ForgotPasswordController: UIViewController {
         iv.contentMode = .scaleAspectFit
         iv.clipsToBounds = true
         iv.image = #imageLiteral(resourceName: "tpTransp")
+        iv.translatesAutoresizingMaskIntoConstraints = false
         return iv
     }()
     
 
     lazy var psw1ContainerView: UIView = {
         let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
         return view.textContainerView(view: view, UIImage(systemName: "lock")!.withTintColor(.white, renderingMode: .alwaysOriginal), psw1TextField!)
     }()
     
     lazy var psw2ContainerView: UIView = {
         let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
         return view.textContainerView(view: view, UIImage(systemName: "lock.fill")!.withTintColor(.white, renderingMode: .alwaysOriginal), psw2TextField!)
     }()
     
     lazy var psw1TextField: UITextField? = {
         let tf = UITextField()
+        tf.translatesAutoresizingMaskIntoConstraints = false
         return tf.textField(withPlaceolder: "New password", isSecureTextEntry: true, isTextEntry: true)
     }()
     
     lazy var psw2TextField: UITextField? = {
         let tf = UITextField()
+        tf.translatesAutoresizingMaskIntoConstraints = false
         return tf.textField(withPlaceolder: "New password, again", isSecureTextEntry: true, isTextEntry: true)
     }()
     
@@ -76,6 +81,7 @@ class ForgotPasswordController: UIViewController {
         button.backgroundColor = .white
         button.addTarget(self, action: #selector(resetPassword), for: .touchUpInside)
         button.layer.cornerRadius = 5
+        button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
@@ -85,6 +91,7 @@ class ForgotPasswordController: UIViewController {
         attributedTitle.append(NSAttributedString(string: "Cancel", attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 16), NSAttributedString.Key.foregroundColor: Color.shared.gold]))
         button.setAttributedTitle(attributedTitle, for: .normal)
         button.addTarget(self, action: #selector(cancel), for: .touchUpInside)
+        button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
@@ -94,6 +101,7 @@ class ForgotPasswordController: UIViewController {
         spinner.startAnimating()
         spinner.alpha = 1
         spinner.isHidden = true
+        spinner.translatesAutoresizingMaskIntoConstraints = false
         return spinner
     }()
     

@@ -20,6 +20,7 @@ class ProductCell: UITableViewCell {
         view.clipsToBounds = true
         view.isUserInteractionEnabled = true
         view.layer.cornerRadius = 5
+        view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
@@ -33,6 +34,7 @@ class ProductCell: UITableViewCell {
         lbl.textColor = .black
         lbl.font = UIFont(name: "HelveticaNeue", size: 15)
         lbl.textAlignment = .center
+        lbl.translatesAutoresizingMaskIntoConstraints = false
         return lbl
     }()
     
@@ -45,6 +47,7 @@ class ProductCell: UITableViewCell {
         let stack = UIStackView()
         stack.axis = .vertical
         stack.alignment = .top
+        stack.translatesAutoresizingMaskIntoConstraints = false
         //stack.sizeToFit()
 
         return stack
@@ -58,6 +61,7 @@ class ProductCell: UITableViewCell {
         stack.sizeToFit()
         stack.spacing = 10
         stack.distribution = .equalSpacing
+        stack.translatesAutoresizingMaskIntoConstraints = false
         return stack
     }()
     
@@ -67,6 +71,7 @@ class ProductCell: UITableViewCell {
         stack.axis = .vertical
         stack.alignment = .center
         stack.sizeToFit()
+        stack.translatesAutoresizingMaskIntoConstraints = false
 
         return stack
     }()
@@ -79,6 +84,7 @@ class ProductCell: UITableViewCell {
         lbl.sizeToFit()
         lbl.font = UIFont(name: "HelveticaNeue", size: 15)
         lbl.textAlignment = .center
+        lbl.translatesAutoresizingMaskIntoConstraints = false
         return lbl
     }()
     
@@ -91,6 +97,7 @@ class ProductCell: UITableViewCell {
         lbl.sizeToFit()
         lbl.font = UIFont(name: "HelveticaNeue", size: 15)
         lbl.textAlignment = .center
+        lbl.translatesAutoresizingMaskIntoConstraints = false
         return lbl
     }()
     
@@ -103,6 +110,7 @@ class ProductCell: UITableViewCell {
         lbl.sizeToFit()
         lbl.font = UIFont(name: "HelveticaNeue", size: 15)
         lbl.textAlignment = .center
+        lbl.translatesAutoresizingMaskIntoConstraints = false
         return lbl
     }()
     
@@ -119,6 +127,7 @@ class ProductCell: UITableViewCell {
         button.titleLabel?.textAlignment = .center
         button.clipsToBounds = true
         button.tag = -1
+        button.translatesAutoresizingMaskIntoConstraints = false
     
         return button
     }()
@@ -129,6 +138,7 @@ class ProductCell: UITableViewCell {
         view.contentMode = .scaleAspectFit
         view.clipsToBounds = true
         view.layer.cornerRadius = 0
+        view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
@@ -139,6 +149,7 @@ class ProductCell: UITableViewCell {
         button.setImage( img, for: .normal)
         button.sizeToFit()
        // button.addTarget(self, action: #selector(handleCenterOnUser), for: .touchUpInside)
+        button.translatesAutoresizingMaskIntoConstraints = false
         button.translatesAutoresizingMaskIntoConstraints = false
 
         return button
@@ -153,6 +164,7 @@ class ProductCell: UITableViewCell {
         button.sizeToFit()
        // button.addTarget(self, action: #selector(handleCenterOnUser), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.translatesAutoresizingMaskIntoConstraints = false
         return button
         
     }()
@@ -163,6 +175,7 @@ class ProductCell: UITableViewCell {
         let view = UIView()
         view.backgroundColor = .lightGray
         view.layer.cornerRadius = 2
+        view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
@@ -170,6 +183,7 @@ class ProductCell: UITableViewCell {
         let view = UIView()
         view.backgroundColor = .gray
         view.layer.cornerRadius = 2
+        view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     

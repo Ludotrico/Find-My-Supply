@@ -65,6 +65,7 @@ class ChangePasswordController: UIViewController {
         view.sizeToFit()
         view.widthAnchor.constraint(equalToConstant: 30).isActive = true
         view.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        view.translatesAutoresizingMaskIntoConstraints = false
         return view
 
     }()
@@ -73,6 +74,7 @@ class ChangePasswordController: UIViewController {
         let view = UIScrollView()
         view.alwaysBounceVertical = true
         view.showsVerticalScrollIndicator = false
+        view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
@@ -82,6 +84,7 @@ class ChangePasswordController: UIViewController {
             stack.spacing = 15
             stack.alignment = .center
         stack.sizeToFit()
+        stack.translatesAutoresizingMaskIntoConstraints = false
         
             return stack
     }()
@@ -93,6 +96,7 @@ class ChangePasswordController: UIViewController {
         lbl.textColor = .white //Dark mode
         lbl.numberOfLines = 1
         lbl.sizeToFit()
+        lbl.translatesAutoresizingMaskIntoConstraints = false
         return lbl
         
     }()
@@ -108,6 +112,7 @@ class ChangePasswordController: UIViewController {
         txt.isUserInteractionEnabled = true
         txt.alpha = 1
         txt.tag = 1
+        txt.translatesAutoresizingMaskIntoConstraints = false
         return txt
         
     }()
@@ -120,6 +125,7 @@ class ChangePasswordController: UIViewController {
         btn.layer.borderWidth = 3
         btn.layer.cornerRadius = 10
         btn.addTarget(self, action: #selector(verifyPassword), for: .touchUpInside)
+        btn.translatesAutoresizingMaskIntoConstraints = false
         
         return btn
         
@@ -131,6 +137,7 @@ class ChangePasswordController: UIViewController {
             stack.spacing = 15
             stack.alignment = .center
         stack.sizeToFit()
+        stack.translatesAutoresizingMaskIntoConstraints = false
         
             return stack
     }()
@@ -142,6 +149,7 @@ class ChangePasswordController: UIViewController {
         lbl.textColor = .white //Dark mode
         lbl.numberOfLines = 1
         lbl.sizeToFit()
+        lbl.translatesAutoresizingMaskIntoConstraints = false
         return lbl
         
     }()
@@ -157,6 +165,7 @@ class ChangePasswordController: UIViewController {
         txt.isUserInteractionEnabled = true
         txt.alpha = 1
         txt.tag = 1
+        txt.translatesAutoresizingMaskIntoConstraints = false
         return txt
         
     }()
@@ -168,6 +177,7 @@ class ChangePasswordController: UIViewController {
         lbl.textColor = .white //Dark mode
         lbl.numberOfLines = 1
         lbl.sizeToFit()
+        lbl.translatesAutoresizingMaskIntoConstraints = false
         return lbl
         
     }()
@@ -183,6 +193,7 @@ class ChangePasswordController: UIViewController {
         txt.isUserInteractionEnabled = true
         txt.alpha = 1
         txt.tag = 1
+        txt.translatesAutoresizingMaskIntoConstraints = false
         return txt
         
     }()
@@ -196,6 +207,7 @@ class ChangePasswordController: UIViewController {
         btn.layer.borderWidth = 3
         btn.layer.cornerRadius = 10
         btn.addTarget(self, action: #selector(savePassword), for: .touchUpInside)
+        btn.translatesAutoresizingMaskIntoConstraints = false
         
         return btn
         
@@ -207,6 +219,7 @@ class ChangePasswordController: UIViewController {
         spinner.startAnimating()
         spinner.isHidden = true
         spinner.color = Color.shared.gold
+        spinner.translatesAutoresizingMaskIntoConstraints = false
         return spinner
     }()
     

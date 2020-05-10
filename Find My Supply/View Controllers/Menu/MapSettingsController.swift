@@ -57,6 +57,7 @@ class MapSettingsController: UIViewController {
         view.sizeToFit()
         view.widthAnchor.constraint(equalToConstant: 30).isActive = true
         view.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        view.translatesAutoresizingMaskIntoConstraints = false
         return view
 
     }()
@@ -65,6 +66,7 @@ class MapSettingsController: UIViewController {
         let view = UIScrollView()
         view.alwaysBounceVertical = true
         view.showsVerticalScrollIndicator = false
+        view.translatesAutoresizingMaskIntoConstraints = false
         
         return view
     }()
@@ -77,6 +79,7 @@ class MapSettingsController: UIViewController {
          //stack.addBackground(color: .darkGray, cornerRadius: 15)
         stack.distribution = .equalSpacing
         stack.sizeToFit()
+        stack.translatesAutoresizingMaskIntoConstraints = false
      
          return stack
      }()
@@ -88,6 +91,7 @@ class MapSettingsController: UIViewController {
         lbl.textColor = .white //Dark mode
         lbl.numberOfLines = 1
         lbl.sizeToFit()
+        lbl.translatesAutoresizingMaskIntoConstraints = false
         return lbl
         
     }()
@@ -103,6 +107,7 @@ class MapSettingsController: UIViewController {
         control.addTarget(self, action: #selector(handleMapTypeToggle(_:)), for: .valueChanged)
         control.tintColor = .white
         control.selectedSegmentTintColor = .white
+        control.translatesAutoresizingMaskIntoConstraints = false
         return control
     }()
     
@@ -119,7 +124,7 @@ class MapSettingsController: UIViewController {
          //stack.addBackground(color: .darkGray, cornerRadius: 15)
         stack.distribution = .equalSpacing
         stack.sizeToFit()
-     
+        stack.translatesAutoresizingMaskIntoConstraints = false
          return stack
      }()
     
@@ -130,6 +135,7 @@ class MapSettingsController: UIViewController {
         lbl.textColor = .white //Dark mode
         lbl.numberOfLines = 1
         lbl.sizeToFit()
+        lbl.translatesAutoresizingMaskIntoConstraints = false
         return lbl
         
     }()
@@ -155,6 +161,7 @@ class MapSettingsController: UIViewController {
         control.addTarget(self, action: #selector(handleMapStyleToggle(_:)), for: .valueChanged)
         control.tintColor = .white
         control.selectedSegmentTintColor = .white
+        control.translatesAutoresizingMaskIntoConstraints = false
         return control
     }()
     
@@ -167,6 +174,7 @@ class MapSettingsController: UIViewController {
          stack.alignment = .center
          //stack.addBackground(color: .darkGray, cornerRadius: 15)
         stack.distribution = .equalSpacing
+        stack.translatesAutoresizingMaskIntoConstraints = false
     
      
          return stack
@@ -182,6 +190,7 @@ class MapSettingsController: UIViewController {
         lbl.textColor = .white //Dark mode
         lbl.numberOfLines = 1
         lbl.sizeToFit()
+        lbl.translatesAutoresizingMaskIntoConstraints = false
         return lbl
         
     }()
@@ -200,6 +209,7 @@ class MapSettingsController: UIViewController {
         control.addTarget(self, action: #selector(handleMapAppToggle(_:)), for: .valueChanged)
         control.tintColor = .white
         control.selectedSegmentTintColor = .white
+        control.translatesAutoresizingMaskIntoConstraints = false
         return control
     }()
     
@@ -217,7 +227,7 @@ class MapSettingsController: UIViewController {
         btn.layer.borderWidth = 3
         btn.layer.cornerRadius = 10
         btn.addTarget(self, action: #selector(saveChanges), for: .touchUpInside)
-        
+        btn.translatesAutoresizingMaskIntoConstraints = false
         return btn
         
     }()

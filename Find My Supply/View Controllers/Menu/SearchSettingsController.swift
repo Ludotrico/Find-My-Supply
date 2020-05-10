@@ -62,6 +62,7 @@ class SearchSettingsController: UIViewController {
         view.sizeToFit()
         view.widthAnchor.constraint(equalToConstant: 30).isActive = true
         view.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        view.translatesAutoresizingMaskIntoConstraints = false
         return view
 
     }()
@@ -70,6 +71,7 @@ class SearchSettingsController: UIViewController {
         let view = UIScrollView()
         view.alwaysBounceVertical = true
               view.showsVerticalScrollIndicator = false
+        view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
@@ -80,6 +82,7 @@ class SearchSettingsController: UIViewController {
          stack.alignment = .center
          //stack.addBackground(color: .darkGray, cornerRadius: 15)
         stack.distribution = .equalSpacing
+        stack.translatesAutoresizingMaskIntoConstraints = false
     
      
          return stack
@@ -93,6 +96,7 @@ class SearchSettingsController: UIViewController {
         lbl.textColor = .white //Dark mode
         lbl.numberOfLines = 1
         lbl.sizeToFit()
+        lbl.translatesAutoresizingMaskIntoConstraints = false
         return lbl
         
     }()
@@ -105,6 +109,7 @@ class SearchSettingsController: UIViewController {
          stack.alignment = .center
          //stack.addBackground(color: .lightGray, cornerRadius: 10)
         stack.distribution = .equalSpacing
+        stack.translatesAutoresizingMaskIntoConstraints = false
     
      
          return stack
@@ -121,6 +126,7 @@ class SearchSettingsController: UIViewController {
         button.sizeToFit()
         button.addTarget(self, action: #selector(subtract), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.translatesAutoresizingMaskIntoConstraints = false
         return button
 
     }()
@@ -135,6 +141,7 @@ class SearchSettingsController: UIViewController {
         lbl.layer.cornerRadius = 3
         lbl.layer.masksToBounds = true
         lbl.textAlignment = .center
+        lbl.translatesAutoresizingMaskIntoConstraints = false
         return lbl
         
     }()
@@ -148,6 +155,7 @@ class SearchSettingsController: UIViewController {
         button.sizeToFit()
         button.addTarget(self, action: #selector(add), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
+    
         return button
 
     }()

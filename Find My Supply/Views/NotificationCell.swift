@@ -102,6 +102,7 @@ class NotificationCell: UITableViewCell {
         //view.clipsToBounds = true
         view.layer.cornerRadius = 5
         view.isUserInteractionEnabled = true
+        view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
@@ -114,6 +115,7 @@ class NotificationCell: UITableViewCell {
             button.sizeToFit()
             //button.addTarget(self, action: #selector(test), for: .touchUpInside)
             button.translatesAutoresizingMaskIntoConstraints = false
+            
             return button
     
         }()
@@ -158,6 +160,7 @@ class NotificationCell: UITableViewCell {
         stack.alignment = .top
         stack.spacing = 10
         //stack.sizeToFit()
+        stack.translatesAutoresizingMaskIntoConstraints = false
 
         return stack
     }()
@@ -168,6 +171,7 @@ class NotificationCell: UITableViewCell {
         stack.axis = .horizontal
         stack.alignment = .center
         stack.sizeToFit()
+        stack.translatesAutoresizingMaskIntoConstraints = false
     
         //stack.distribution = .equalSpacing
         return stack
@@ -180,6 +184,7 @@ class NotificationCell: UITableViewCell {
         stack.sizeToFit()
         stack.spacing = 2
         stack.distribution = .equalSpacing
+        stack.translatesAutoresizingMaskIntoConstraints = false
         return stack
     }()
     
@@ -234,6 +239,7 @@ class NotificationCell: UITableViewCell {
         let view = UIView()
         view.backgroundColor = .lightGray
         view.layer.cornerRadius = 2
+        view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
@@ -241,6 +247,7 @@ class NotificationCell: UITableViewCell {
         let view = UIView()
         view.backgroundColor = .black
         view.layer.cornerRadius = 2
+        view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     

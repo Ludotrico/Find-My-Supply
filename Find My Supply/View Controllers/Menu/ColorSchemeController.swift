@@ -57,6 +57,7 @@ class ColorSchemeController: UIViewController {
         
         mapBtn.widthAnchor.constraint(equalToConstant: 30).isActive = true
         mapBtn.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        mapBtn.translatesAutoresizingMaskIntoConstraints = false
         return mapBtn
     }()
     
@@ -70,6 +71,7 @@ class ColorSchemeController: UIViewController {
         view.sizeToFit()
         view.widthAnchor.constraint(equalToConstant: 30).isActive = true
         view.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        view.translatesAutoresizingMaskIntoConstraints = false
         return view
 
     }()
@@ -78,6 +80,7 @@ class ColorSchemeController: UIViewController {
         let view = UIScrollView()
         view.alwaysBounceVertical = true
         view.showsVerticalScrollIndicator = false
+        view.translatesAutoresizingMaskIntoConstraints = false
         
         return view
     }()
@@ -90,6 +93,7 @@ class ColorSchemeController: UIViewController {
          stack.addBackground(color: .darkGray, cornerRadius: 15)
         stack.distribution = .equalSpacing
         stack.sizeToFit()
+        stack.translatesAutoresizingMaskIntoConstraints = false
      
          return stack
      }()
@@ -101,6 +105,8 @@ class ColorSchemeController: UIViewController {
         lbl.textColor = .white //Dark mode
         lbl.numberOfLines = 1
         lbl.sizeToFit()
+        lbl.translatesAutoresizingMaskIntoConstraints = false
+        lbl.translatesAutoresizingMaskIntoConstraints = false
         return lbl
         
     }()
@@ -116,6 +122,7 @@ class ColorSchemeController: UIViewController {
         control.addTarget(self, action: #selector(handleSchemeToggle(_:)), for: .valueChanged)
         control.tintColor = .white
         control.selectedSegmentTintColor = .white
+        control.translatesAutoresizingMaskIntoConstraints = false
         return control
     }()
     

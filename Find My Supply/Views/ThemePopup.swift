@@ -64,6 +64,7 @@ class ThemePopup: UIView {
         view.contentMode = .scaleAspectFit
         view.clipsToBounds = true
         view.sizeToFit()
+        view.translatesAutoresizingMaskIntoConstraints = false
         
         
         return view
@@ -75,6 +76,7 @@ class ThemePopup: UIView {
         view.contentMode = .scaleAspectFit
         view.clipsToBounds = true
         view.sizeToFit()
+        view.translatesAutoresizingMaskIntoConstraints = false
         
         
         return view
@@ -86,7 +88,7 @@ class ThemePopup: UIView {
         view.contentMode = .scaleAspectFit
         view.clipsToBounds = true
         view.sizeToFit()
-        
+        view.translatesAutoresizingMaskIntoConstraints = false
         
         return view
     }()
@@ -106,6 +108,7 @@ class ThemePopup: UIView {
             control.addTarget(self, action: #selector(handleThemeToggle(_:)), for: .valueChanged)
             control.tintColor = .white
             control.selectedSegmentTintColor = .white
+            control.translatesAutoresizingMaskIntoConstraints = false
             control.translatesAutoresizingMaskIntoConstraints = false
             return control
         }()

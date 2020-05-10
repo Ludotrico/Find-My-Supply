@@ -35,6 +35,7 @@ class RegisterController: UIViewController {
         let view = UIScrollView()
         view.alwaysBounceVertical = true
         view.showsVerticalScrollIndicator = false
+        view.translatesAutoresizingMaskIntoConstraints = false
         
         return view
     }()
@@ -44,31 +45,37 @@ class RegisterController: UIViewController {
         iv.contentMode = .scaleAspectFit
         iv.clipsToBounds = true
         iv.image = #imageLiteral(resourceName: "tpTransp")
+        iv.translatesAutoresizingMaskIntoConstraints = false
         return iv
     }()
     
     lazy var nameContainerView: UIView = {
         let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
         return view.textContainerView(view: view, UIImage(systemName: "person")!.withTintColor(.white, renderingMode: .alwaysOriginal), nameTextField!)
     }()
     
     lazy var emailContainerView: UIView = {
         let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
         return view.textContainerView(view: view, UIImage(systemName: "envelope")!.withTintColor(.white, renderingMode: .alwaysOriginal), emailTextField!)
     }()
     
     lazy var usernameContainerView: UIView = {
         let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
         return view.textContainerView(view: view, UIImage(systemName: "person.fill")!.withTintColor(.white, renderingMode: .alwaysOriginal), usernameTextField!)
     }()
     
     lazy var passwordContainerView: UIView = {
         let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
         return view.textContainerView(view: view, UIImage(systemName: "lock")!.withTintColor(.white, renderingMode: .alwaysOriginal), passwordTextField!)
     }()
     
     lazy var zipcodeContainerView: UIView = {
         let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
         return view.textContainerView(view: view, #imageLiteral(resourceName: "map-1").withTintColor(.white, renderingMode: .alwaysOriginal), zipcodeTextField!)
     }()
     
@@ -76,12 +83,14 @@ class RegisterController: UIViewController {
     lazy var nameTextField: UITextField? = {
         let tf = UITextField()
         //tf.textContentType = .name
+        tf.translatesAutoresizingMaskIntoConstraints = false
         return tf.textField(withPlaceolder: "First name", isSecureTextEntry: false, isTextEntry: true)
     }()
     
     lazy var emailTextField: UITextField? = {
         var tf = UITextField()
         //tf.textContentType = .emailAddress
+        tf.translatesAutoresizingMaskIntoConstraints = false
         tf = tf.textField(withPlaceolder: "Email", isSecureTextEntry: false, isTextEntry: true)
         tf.autocapitalizationType = .none
         return tf
@@ -90,6 +99,7 @@ class RegisterController: UIViewController {
     lazy var usernameTextField: UITextField? = {
         var tf = UITextField()
 //        tf.textContentType = .username
+        tf.translatesAutoresizingMaskIntoConstraints = false
         tf = tf.textField(withPlaceolder: "Username", isSecureTextEntry: false, isTextEntry: true)
         tf.autocapitalizationType = .none
         return tf
@@ -98,11 +108,13 @@ class RegisterController: UIViewController {
     lazy var passwordTextField: UITextField? = {
         let tf = UITextField()
 //        tf.textContentType = .password
+        tf.translatesAutoresizingMaskIntoConstraints = false
         return tf.textField(withPlaceolder: "Password", isSecureTextEntry: true, isTextEntry: true)
     }()
     
     lazy var zipcodeTextField: UITextField? = {
         var tf = UITextField()
+        tf.translatesAutoresizingMaskIntoConstraints = false
         tf = tf.textField(withPlaceolder: "ZIP code", isSecureTextEntry: false, isTextEntry: false)
         tf.delegate = self
         return tf
@@ -112,6 +124,7 @@ class RegisterController: UIViewController {
     
     let locationBtn: UIButton = {
         let button = UIButton(type: .system)
+        button.translatesAutoresizingMaskIntoConstraints = false
         button.setImage(UIImage(systemName: "location.fill")?.withTintColor(Color.shared.blue, renderingMode: .alwaysTemplate), for: .normal)
         button.addTarget(self, action: #selector(findLocation), for: .touchUpInside)
         button.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
@@ -120,6 +133,7 @@ class RegisterController: UIViewController {
     
     let loginButton: UIButton = {
         let button = UIButton(type: .system)
+        button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("Sign up", for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 18)
         button.setTitleColor(Color.shared.blue, for: .normal)
@@ -131,6 +145,7 @@ class RegisterController: UIViewController {
     
     let haveAccountButton: UIButton = {
         let button = UIButton(type: .system)
+        button.translatesAutoresizingMaskIntoConstraints = false
         let attributedTitle = NSMutableAttributedString(string: "Already have an account?  ", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 16), NSAttributedString.Key.foregroundColor: UIColor.white])
         attributedTitle.append(NSAttributedString(string: "Sign in", attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 16), NSAttributedString.Key.foregroundColor: Color.shared.gold]))
         button.setAttributedTitle(attributedTitle, for: .normal)
@@ -140,6 +155,7 @@ class RegisterController: UIViewController {
     
     let spinner: UIActivityIndicatorView = {
         let spinner = UIActivityIndicatorView()
+        spinner.translatesAutoresizingMaskIntoConstraints = false
         spinner.color = Color.shared.gold
         spinner.startAnimating()
         spinner.alpha = 1

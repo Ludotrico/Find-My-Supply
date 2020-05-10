@@ -21,6 +21,7 @@ class supplyCell: UITableViewCell {
         label.clipsToBounds = true
         label.sizeToFit()
         label.backgroundColor = .clear
+        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     

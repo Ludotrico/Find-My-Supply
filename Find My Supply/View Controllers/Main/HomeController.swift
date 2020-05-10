@@ -19,6 +19,7 @@ class HomeController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .black
 
+        
         //print(BCryptSwift.generateSalt())
         //showActivityIndicatory()
         
@@ -103,6 +104,7 @@ class HomeController: UIViewController {
         let view = UIView()
         view.backgroundColor = Color.shared.gold//.white
         view.layer.cornerRadius = 20
+        view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
@@ -146,6 +148,7 @@ class HomeController: UIViewController {
 
         button.addTarget(self, action: #selector(handleCenterOnUser), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.translatesAutoresizingMaskIntoConstraints = false
         return button
         
     }()
@@ -161,6 +164,7 @@ class HomeController: UIViewController {
         view.layer.borderWidth = 10
         view.layer.borderColor = Color.shared.theme.cgColor
         view.isUserInteractionEnabled = true
+        view.translatesAutoresizingMaskIntoConstraints = false
         
         return view
     }()
@@ -302,6 +306,7 @@ class HomeController: UIViewController {
         lbl.font = UIFont(name: "HelveticaNeue", size: 30)
         lbl.textAlignment = .center
         lbl.transform = CGAffineTransform(scaleX: 4, y: 4)
+        lbl.translatesAutoresizingMaskIntoConstraints = false
         return lbl
     }()
     
@@ -312,6 +317,7 @@ class HomeController: UIViewController {
         lbl.font = UIFont(name: "HelveticaNeue", size: 30)
         lbl.textAlignment = .center
         lbl.transform = CGAffineTransform(scaleX: 4, y: 4)
+        lbl.translatesAutoresizingMaskIntoConstraints = false
         return lbl
     }()
     
@@ -322,6 +328,7 @@ class HomeController: UIViewController {
         lbl.font = UIFont(name: "HelveticaNeue", size: 30)
         lbl.textAlignment = .center
         lbl.transform = CGAffineTransform(scaleX: 4, y: 4)
+        lbl.translatesAutoresizingMaskIntoConstraints = false
         return lbl
     }()
     
@@ -333,6 +340,7 @@ class HomeController: UIViewController {
         spinner.alpha = 1
         spinner.transform = CGAffineTransform(scaleX: 1.25, y: 1.25)
         spinner.isHidden = true
+        spinner.translatesAutoresizingMaskIntoConstraints = false
         return spinner
     }()
     
@@ -367,6 +375,7 @@ class HomeController: UIViewController {
         //Vstack.alignment = .leading
         Vstack.axis = .vertical
         //Vstack.spacing = 30
+        Vstack.translatesAutoresizingMaskIntoConstraints = false
         return Vstack
     }()
     
@@ -376,6 +385,7 @@ class HomeController: UIViewController {
         //Hstack.alignment = .leading
         Hstack.spacing = 15
         Hstack.isUserInteractionEnabled = true
+        Hstack.translatesAutoresizingMaskIntoConstraints = false
         return Hstack
     }()
     
@@ -384,6 +394,7 @@ class HomeController: UIViewController {
         Hstack.axis = .horizontal
         Hstack.alignment = .leading
         Hstack.spacing = 15
+        Hstack.translatesAutoresizingMaskIntoConstraints = false
         return Hstack
     }()
     
@@ -392,6 +403,7 @@ class HomeController: UIViewController {
         Hstack.axis = .horizontal
         Hstack.alignment = .leading
         Hstack.spacing = 15
+        Hstack.translatesAutoresizingMaskIntoConstraints = false
         return Hstack
     }()
     
@@ -401,6 +413,7 @@ class HomeController: UIViewController {
         view.contentMode = .scaleAspectFit
         view.clipsToBounds = true
         view.image = #imageLiteral(resourceName: "goldProf").withRenderingMode(.alwaysOriginal)
+        view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
@@ -410,6 +423,7 @@ class HomeController: UIViewController {
         lbl.font = UIFont(name: "Helvetica-Bold", size: 28)
         lbl.textColor = Color.shared.gold  //Dark mode
         lbl.textAlignment = .left
+        lbl.translatesAutoresizingMaskIntoConstraints = false
         return lbl
     }()
     
@@ -420,6 +434,7 @@ class HomeController: UIViewController {
         view.clipsToBounds = true
         view.image =  #imageLiteral(resourceName: "goldBell").withRenderingMode(.alwaysOriginal)
         view.image?.withTintColor(.white)
+        view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
@@ -429,6 +444,7 @@ class HomeController: UIViewController {
         lbl.font = UIFont(name: "Helvetica-Bold", size: 28)
         lbl.textColor = Color.shared.gold  //Dark mode
         lbl.textAlignment = .left
+        lbl.translatesAutoresizingMaskIntoConstraints = false
         return lbl
     }()
     
@@ -439,6 +455,7 @@ class HomeController: UIViewController {
         view.contentMode = .scaleAspectFit
         view.clipsToBounds = true
         view.image =  #imageLiteral(resourceName: "goldGear").withRenderingMode(.alwaysOriginal)
+        view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
@@ -448,6 +465,7 @@ class HomeController: UIViewController {
         lbl.font = UIFont(name: "Helvetica-Bold", size: 28)
         lbl.textColor = Color.shared.gold  //Dark mode
         lbl.textAlignment = .left
+        lbl.translatesAutoresizingMaskIntoConstraints = false
         return lbl
     }()
     
@@ -483,7 +501,7 @@ class HomeController: UIViewController {
         btn.layer.borderWidth = 3
         btn.layer.cornerRadius = 10
         btn.addTarget(self, action: #selector(dismissThemePopup), for: .touchUpInside)
-        
+        btn.translatesAutoresizingMaskIntoConstraints = false
         return btn
         
     }()
@@ -498,7 +516,7 @@ class HomeController: UIViewController {
         btn.layer.borderWidth = 3
         btn.layer.cornerRadius = 10
         btn.addTarget(self, action: #selector(dismissNewScrape), for: .touchUpInside)
-        
+        btn.translatesAutoresizingMaskIntoConstraints = false
         return btn
         
     }()
@@ -513,7 +531,7 @@ class HomeController: UIViewController {
         btn.layer.borderWidth = 3
         btn.layer.cornerRadius = 10
         btn.addTarget(self, action: #selector(addNewZipcode), for: .touchUpInside)
-        
+        btn.translatesAutoresizingMaskIntoConstraints = false
         return btn
         
     }()
@@ -528,7 +546,7 @@ class HomeController: UIViewController {
         btn.layer.borderWidth = 3
         btn.layer.cornerRadius = 10
         btn.addTarget(self, action: #selector(dismissNewScrape2), for: .touchUpInside)
-        
+        btn.translatesAutoresizingMaskIntoConstraints = false
         return btn
         
     }()

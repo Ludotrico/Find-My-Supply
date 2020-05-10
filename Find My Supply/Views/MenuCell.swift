@@ -16,6 +16,7 @@ class MenuCell: UITableViewCell {
           view.contentMode = .scaleAspectFit
           view.clipsToBounds = true
           view.layer.cornerRadius = 5
+        view.translatesAutoresizingMaskIntoConstraints = false
           return view
       }()
       
@@ -29,6 +30,7 @@ class MenuCell: UITableViewCell {
           lbl.textColor = .black
           lbl.font = UIFont(name: "HelveticaNeue", size: 15)
           lbl.textAlignment = .center
+        lbl.translatesAutoresizingMaskIntoConstraints = false
           return lbl
       }()
       
@@ -44,6 +46,7 @@ class MenuCell: UITableViewCell {
           stack.sizeToFit()
           stack.spacing = 20
           //stack.distribution = .equalSpacing
+        stack.translatesAutoresizingMaskIntoConstraints = false
           return stack
       }()
       

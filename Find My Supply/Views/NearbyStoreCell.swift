@@ -16,6 +16,7 @@ class NearbyStoreCell: UICollectionViewCell {
         view.contentMode = .scaleAspectFit
         view.clipsToBounds = true
         view.layer.cornerRadius = 5
+        view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
@@ -26,6 +27,7 @@ class NearbyStoreCell: UICollectionViewCell {
         view.contentMode = .scaleAspectFit
         view.clipsToBounds = true
         view.layer.cornerRadius = 5
+        view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
@@ -42,6 +44,7 @@ class NearbyStoreCell: UICollectionViewCell {
         stack.axis = .vertical
         stack.alignment = .top
         stack.spacing = 10
+        stack.translatesAutoresizingMaskIntoConstraints = false
         //stack.sizeToFit()
 
         return stack
@@ -55,6 +58,7 @@ class NearbyStoreCell: UICollectionViewCell {
         stack.sizeToFit()
     
         stack.distribution = .equalSpacing
+        stack.translatesAutoresizingMaskIntoConstraints = false
         return stack
     }()
     
@@ -63,6 +67,7 @@ class NearbyStoreCell: UICollectionViewCell {
         stack.axis = .horizontal
         stack.alignment = .center
         stack.sizeToFit()
+        stack.translatesAutoresizingMaskIntoConstraints = false
     
         //stack.distribution = .equalSpacing
         return stack
@@ -78,6 +83,7 @@ class NearbyStoreCell: UICollectionViewCell {
         lbl.sizeToFit()
         lbl.font = UIFont(name: "HelveticaNeue", size: 18)
         lbl.textAlignment = .center
+        lbl.translatesAutoresizingMaskIntoConstraints = false
         return lbl
     }()
     
@@ -93,6 +99,7 @@ class NearbyStoreCell: UICollectionViewCell {
         lbl.sizeToFit()
         lbl.font = UIFont(name: "HelveticaNeue", size: 15)
         lbl.textAlignment = .center
+        lbl.translatesAutoresizingMaskIntoConstraints = false
         return lbl
     }()
     
@@ -104,6 +111,7 @@ class NearbyStoreCell: UICollectionViewCell {
         lbl.sizeToFit()
         lbl.font = UIFont(name: "HelveticaNeue", size: 15)
         lbl.textAlignment = .center
+        lbl.translatesAutoresizingMaskIntoConstraints = false
         return lbl
     }()
     
@@ -116,6 +124,7 @@ class NearbyStoreCell: UICollectionViewCell {
         lbl.sizeToFit()
         lbl.font = UIFont(name: "HelveticaNeue", size: 15)
         lbl.textAlignment = .center
+        lbl.translatesAutoresizingMaskIntoConstraints = false
         return lbl
     }()
     
@@ -129,6 +138,7 @@ class NearbyStoreCell: UICollectionViewCell {
         let view = UIView()
         view.backgroundColor = .white
         view.layer.cornerRadius = 2
+        view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
@@ -136,6 +146,7 @@ class NearbyStoreCell: UICollectionViewCell {
         let view = UIView()
         view.backgroundColor = .black
         view.layer.cornerRadius = 2
+        view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     

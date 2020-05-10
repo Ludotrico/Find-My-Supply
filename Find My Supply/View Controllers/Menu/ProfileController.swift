@@ -38,6 +38,7 @@ class ProfileController: UIViewController {
         view.sizeToFit()
         view.widthAnchor.constraint(equalToConstant: 30).isActive = true
         view.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        view.translatesAutoresizingMaskIntoConstraints = false
         return view
 
     }()
@@ -46,6 +47,8 @@ class ProfileController: UIViewController {
         let view = UIScrollView()
         view.alwaysBounceVertical = true
         view.showsVerticalScrollIndicator = false
+        view.showsHorizontalScrollIndicator = false
+        view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
@@ -55,7 +58,7 @@ class ProfileController: UIViewController {
         view.tintColor = .white  //Dark mode
         view.contentMode = .scaleAspectFit
         view.sizeToFit()
-
+        view.translatesAutoresizingMaskIntoConstraints = false
         return view
 
     }()
@@ -67,6 +70,8 @@ class ProfileController: UIViewController {
         stack.axis = .horizontal
         stack.spacing = 15
         stack.alignment = .center
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        stack.translatesAutoresizingMaskIntoConstraints = false
         //stack.addBackground(color: .darkGray, cornerRadius: 10)
     
         return stack
@@ -79,6 +84,7 @@ class ProfileController: UIViewController {
         lbl.textColor = .white //Dark mode
         lbl.numberOfLines = 1
         lbl.sizeToFit()
+        lbl.translatesAutoresizingMaskIntoConstraints = false
         return lbl
         
     }()
@@ -93,7 +99,7 @@ class ProfileController: UIViewController {
         txt.font = UIFont(name: "HelveticaNeue", size: 20)
         txt.isUserInteractionEnabled = false
         txt.autocorrectionType = .no
-
+        txt.translatesAutoresizingMaskIntoConstraints = false
         txt.alpha = 1
         txt.tag = 1
         return txt
@@ -114,6 +120,7 @@ class ProfileController: UIViewController {
         view.contentMode = .scaleAspectFit
         view.sizeToFit()
         view.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
+        view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
@@ -122,6 +129,7 @@ class ProfileController: UIViewController {
         stack.axis = .horizontal
         stack.spacing = 15
         stack.alignment = .center
+        stack.translatesAutoresizingMaskIntoConstraints = false
         //stack.addBackground(color: .darkGray, cornerRadius: 10)
     
         return stack
@@ -134,6 +142,7 @@ class ProfileController: UIViewController {
         lbl.textColor = .white //Dark mode
         lbl.numberOfLines = 1
         lbl.sizeToFit()
+        lbl.translatesAutoresizingMaskIntoConstraints = false
         return lbl
         
     }()
@@ -151,6 +160,7 @@ class ProfileController: UIViewController {
         txt.autocorrectionType = .no
         txt.alpha = 1
         txt.tag = 3
+        txt.translatesAutoresizingMaskIntoConstraints = false
         return txt
 
         
@@ -164,6 +174,7 @@ class ProfileController: UIViewController {
         view.contentMode = .scaleAspectFit
         view.sizeToFit()
         view.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
+        view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
@@ -172,6 +183,7 @@ class ProfileController: UIViewController {
             stack.axis = .horizontal
             stack.spacing = 15
             stack.alignment = .center
+        stack.translatesAutoresizingMaskIntoConstraints = false
         //stack.addBackground(color: .darkGray, cornerRadius: 10)
         
             return stack
@@ -184,6 +196,7 @@ class ProfileController: UIViewController {
         lbl.textColor = .white //Dark mode
         lbl.numberOfLines = 1
         lbl.sizeToFit()
+        lbl.translatesAutoresizingMaskIntoConstraints = false
         return lbl
         
     }()
@@ -201,6 +214,7 @@ class ProfileController: UIViewController {
         txt.autocorrectionType = .no
         txt.alpha = 1
         txt.tag = 2
+        txt.translatesAutoresizingMaskIntoConstraints = false
         return txt
         
     }()
@@ -213,6 +227,7 @@ class ProfileController: UIViewController {
         view.contentMode = .scaleAspectFit
         view.sizeToFit()
         view.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
+        view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
@@ -226,6 +241,7 @@ class ProfileController: UIViewController {
         btn.layer.borderWidth = 3
         btn.layer.cornerRadius = 10
         btn.addTarget(self, action: #selector(goToChangePassword), for: .touchUpInside)
+        btn.translatesAutoresizingMaskIntoConstraints = false
         
         return btn
         
@@ -241,6 +257,7 @@ class ProfileController: UIViewController {
         btn.layer.borderWidth = 3
         btn.layer.cornerRadius = 10
         btn.addTarget(self, action: #selector(saveChanges), for: .touchUpInside)
+        btn.translatesAutoresizingMaskIntoConstraints = false
         
         return btn
         
@@ -251,6 +268,7 @@ class ProfileController: UIViewController {
         spinner.startAnimating()
         spinner.isHidden = true
         spinner.color = Color.shared.gold
+        spinner.translatesAutoresizingMaskIntoConstraints = false
         return spinner
     }()
     

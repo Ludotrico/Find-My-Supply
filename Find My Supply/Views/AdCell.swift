@@ -31,6 +31,7 @@ class AdCell: UITableViewCell {
     var bannerAd: GADBannerView = {
         let ad = GADBannerView()
         ad.adUnitID = Ads.shared.bannerTest
+        ad.translatesAutoresizingMaskIntoConstraints = false
         
         return ad
     }()
@@ -41,6 +42,7 @@ class AdCell: UITableViewCell {
         
 
         //button.addTarget(self, action: #selector(showPopup), for: .touchUpInside)
+        button.translatesAutoresizingMaskIntoConstraints = false
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
         

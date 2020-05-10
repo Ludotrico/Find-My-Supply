@@ -276,6 +276,7 @@ func height(withConstrainedWidth width: CGFloat, font: UIFont) -> CGFloat {
 
 
 extension UILabel {
+    
         var actualNumberOfLines: Int {
             let textStorage = NSTextStorage(attributedString: self.attributedText!)
             let layoutManager = NSLayoutManager()

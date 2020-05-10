@@ -57,6 +57,7 @@ class NotificationsController: UIViewController {
         view.sizeToFit()
         view.widthAnchor.constraint(equalToConstant: 30).isActive = true
         view.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        view.translatesAutoresizingMaskIntoConstraints = false
         return view
 
     }()
@@ -65,6 +66,7 @@ class NotificationsController: UIViewController {
         let view = UIScrollView()
         view.alwaysBounceVertical = true
         view.showsVerticalScrollIndicator = false
+        view.translatesAutoresizingMaskIntoConstraints = false
         
         return view
     }()
@@ -74,6 +76,7 @@ class NotificationsController: UIViewController {
         let view = UITableView()
         view.isScrollEnabled = false
         view.rowHeight = 100
+        view.translatesAutoresizingMaskIntoConstraints = false
         return view
         
         
@@ -85,6 +88,7 @@ class NotificationsController: UIViewController {
         lbl.textColor = .black //Dark mode
         lbl.textAlignment = .center
         lbl.sizeToFit()
+        lbl.translatesAutoresizingMaskIntoConstraints = false
         return lbl
     }()
     
@@ -93,6 +97,7 @@ class NotificationsController: UIViewController {
         spinner.startAnimating()
         spinner.isHidden = true
         spinner.color = Color.shared.gold
+        spinner.translatesAutoresizingMaskIntoConstraints = false
         return spinner
     }()
     
@@ -101,6 +106,7 @@ class NotificationsController: UIViewController {
         spinner.startAnimating()
         spinner.isHidden = true
         spinner.color = .black
+        spinner.translatesAutoresizingMaskIntoConstraints = false
         return spinner
     }()
     
@@ -378,6 +384,8 @@ class NotificationsController: UIViewController {
     
     func configureTableView() {
         scrollView.addSubview(tableView)
+        
+    
         let tableHeight = (125*(areaNotifications.count + storeNotifications.count)) + 57
         tableView.anchor(top: scrollView.topAnchor, left: scrollView.leftAnchor, bottom: scrollView.bottomAnchor, right: scrollView.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: view.frame.width, height: CGFloat(tableHeight))
         
@@ -416,6 +424,7 @@ class NotificationsController: UIViewController {
         if scheme == 0 {
             //STANDARD
             view.backgroundColor = .darkGray
+            tableView.backgroundColor = .darkGray
             
             notifItem.tintColor = .black
             
@@ -437,6 +446,7 @@ class NotificationsController: UIViewController {
         else if scheme == 1 {
             //DARK
             view.backgroundColor = .black
+            tableView.backgroundColor = .black
             
             notifItem.tintColor = .white
             
@@ -456,6 +466,7 @@ class NotificationsController: UIViewController {
         else {
             //LIGHT
             view.backgroundColor = .white
+            tableView.backgroundColor = .white
             
             notifItem.tintColor = .black
             

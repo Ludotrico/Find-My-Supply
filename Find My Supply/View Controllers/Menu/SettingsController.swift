@@ -35,6 +35,7 @@ class SettingsController: UIViewController {
         view.sizeToFit()
         view.widthAnchor.constraint(equalToConstant: 30).isActive = true
         view.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        view.translatesAutoresizingMaskIntoConstraints = false
         return view
 
     }()
@@ -43,6 +44,7 @@ class SettingsController: UIViewController {
         let view = UIScrollView()
         view.alwaysBounceVertical = true
         view.showsVerticalScrollIndicator = false
+        view.translatesAutoresizingMaskIntoConstraints = false
         
         return view
     }()
@@ -52,6 +54,7 @@ class SettingsController: UIViewController {
         stack.axis = .horizontal
         stack.spacing = 15
         stack.alignment = .center
+        stack.translatesAutoresizingMaskIntoConstraints = false
         //stack.addBackground(color: .white, cornerRadius: 10)
    
     
@@ -68,6 +71,7 @@ class SettingsController: UIViewController {
         view.sizeToFit()
         view.widthAnchor.constraint(equalToConstant: 30).isActive = true
         view.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        view.translatesAutoresizingMaskIntoConstraints = false
         return view
 
     }()
@@ -79,6 +83,7 @@ class SettingsController: UIViewController {
         lbl.textColor = .black //Dark mode
         lbl.numberOfLines = 1
         lbl.sizeToFit()
+        lbl.translatesAutoresizingMaskIntoConstraints = false
         return lbl
         
     }()
@@ -91,6 +96,7 @@ class SettingsController: UIViewController {
         view.sizeToFit()
         view.widthAnchor.constraint(equalToConstant: 30).isActive = true
         view.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        view.translatesAutoresizingMaskIntoConstraints = false
         return view
 
     }()
@@ -100,6 +106,7 @@ class SettingsController: UIViewController {
         stack.axis = .horizontal
         stack.spacing = 15
         stack.alignment = .center
+        stack.translatesAutoresizingMaskIntoConstraints = false
         //stack.addBackground(color: .white, cornerRadius: 10)
   
     
@@ -113,6 +120,7 @@ class SettingsController: UIViewController {
         view.sizeToFit()
         view.widthAnchor.constraint(equalToConstant: 30).isActive = true
         view.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        view.translatesAutoresizingMaskIntoConstraints = false
         return view
 
     }()
@@ -124,6 +132,7 @@ class SettingsController: UIViewController {
         lbl.textColor = .black //Dark mode
         lbl.numberOfLines = 1
         lbl.sizeToFit()
+        lbl.translatesAutoresizingMaskIntoConstraints = false
         return lbl
         
     }()
@@ -136,6 +145,7 @@ class SettingsController: UIViewController {
         view.sizeToFit()
         view.widthAnchor.constraint(equalToConstant: 30).isActive = true
         view.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        view.translatesAutoresizingMaskIntoConstraints = false
         return view
 
     }()
@@ -147,6 +157,7 @@ class SettingsController: UIViewController {
         stack.alignment = .center
         stack.backgroundColor = .white
         stack.layer.cornerRadius = 10
+        stack.translatesAutoresizingMaskIntoConstraints = false
         //stack.addBackground(color: .white, cornerRadius: 10)
     
         return stack
@@ -160,6 +171,7 @@ class SettingsController: UIViewController {
         view.widthAnchor.constraint(equalToConstant: 30).isActive = true
         view.heightAnchor.constraint(equalToConstant: 30).isActive = true
         view.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
+        view.translatesAutoresizingMaskIntoConstraints = false
         return view
 
     }()
@@ -171,6 +183,7 @@ class SettingsController: UIViewController {
         lbl.textColor = .black //Dark mode
         lbl.numberOfLines = 1
         lbl.sizeToFit()
+        lbl.translatesAutoresizingMaskIntoConstraints = false
         return lbl
         
     }()
@@ -183,6 +196,7 @@ class SettingsController: UIViewController {
         view.sizeToFit()
         view.widthAnchor.constraint(equalToConstant: 30).isActive = true
         view.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        view.translatesAutoresizingMaskIntoConstraints = false
         return view
 
     }()

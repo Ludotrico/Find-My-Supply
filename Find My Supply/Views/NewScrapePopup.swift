@@ -29,6 +29,7 @@ class NewScrapePopup: UIView {
         lbl.numberOfLines = 1
         lbl.sizeToFit()
         lbl.translatesAutoresizingMaskIntoConstraints = false
+        lbl.translatesAutoresizingMaskIntoConstraints = false
         return lbl
         
     }()
@@ -44,6 +45,7 @@ class NewScrapePopup: UIView {
         view.contentMode = .scaleToFill
         view.clipsToBounds = true
         view.sizeToFit()
+        view.translatesAutoresizingMaskIntoConstraints = false
         
         
         
@@ -64,6 +66,7 @@ class NewScrapePopup: UIView {
         lbl.layer.masksToBounds = true
         lbl.textAlignment = .center
         lbl.backgroundColor = UIColor(white: 1, alpha: 0.7)
+        lbl.translatesAutoresizingMaskIntoConstraints = false
         
         return lbl
         
@@ -97,6 +100,7 @@ class NewScrapePopup: UIView {
         view.clipsToBounds = true
         view.sizeToFit()
         view.layer.cornerRadius = 20
+        view.translatesAutoresizingMaskIntoConstraints = false
         
     
         

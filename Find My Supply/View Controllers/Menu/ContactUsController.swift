@@ -38,6 +38,7 @@ class ContactUsController: UIViewController {
         view.sizeToFit()
         view.widthAnchor.constraint(equalToConstant: 30).isActive = true
         view.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        view.translatesAutoresizingMaskIntoConstraints = false
         return view
 
     }()
@@ -46,6 +47,7 @@ class ContactUsController: UIViewController {
         let view = UIScrollView()
         view.alwaysBounceVertical = true
         view.showsVerticalScrollIndicator = false
+        view.translatesAutoresizingMaskIntoConstraints = false
         
         return view
     }()
@@ -58,6 +60,7 @@ class ContactUsController: UIViewController {
          //stack.addBackground(color: .darkGray, cornerRadius: 15)
         stack.distribution = .equalSpacing
         stack.sizeToFit()
+        stack.translatesAutoresizingMaskIntoConstraints = false
      
          return stack
      }()
@@ -69,6 +72,7 @@ class ContactUsController: UIViewController {
         lbl.textColor = .white //Dark mode
         lbl.numberOfLines = 0
         lbl.sizeToFit()
+        lbl.translatesAutoresizingMaskIntoConstraints = false
         return lbl
         
     }()
@@ -84,6 +88,7 @@ class ContactUsController: UIViewController {
         txt.isUserInteractionEnabled = true
         txt.alpha = 1
         txt.tag = 3
+        txt.translatesAutoresizingMaskIntoConstraints = false
         return txt
 
         
@@ -99,7 +104,7 @@ class ContactUsController: UIViewController {
         btn.layer.borderWidth = 3
         btn.layer.cornerRadius = 10
         btn.addTarget(self, action: #selector(submitSuggestion), for: .touchUpInside)
-        
+        btn.translatesAutoresizingMaskIntoConstraints = false
         return btn
         
     }()
@@ -112,7 +117,7 @@ class ContactUsController: UIViewController {
          //stack.addBackground(color: .darkGray, cornerRadius: 15)
         stack.distribution = .equalSpacing
         stack.sizeToFit()
-     
+     stack.translatesAutoresizingMaskIntoConstraints = false
          return stack
      }()
     
@@ -123,6 +128,7 @@ class ContactUsController: UIViewController {
         lbl.textColor = .white //Dark mode
         lbl.numberOfLines = 0
         lbl.sizeToFit()
+        lbl.translatesAutoresizingMaskIntoConstraints = false
         return lbl
         
     }()
@@ -133,7 +139,7 @@ class ContactUsController: UIViewController {
         stack.spacing = 15
         stack.alignment = .center
         stack.addBackground(color: .white, cornerRadius: 15)
-
+        stack.translatesAutoresizingMaskIntoConstraints = false
        stack.sizeToFit()
     
         return stack
@@ -150,6 +156,7 @@ class ContactUsController: UIViewController {
         //lbl.layer.cornerRadius = 5
         //lbl.clipsToBounds = true
         lbl.textAlignment = .center
+        lbl.translatesAutoresizingMaskIntoConstraints = false
         return lbl
         
     }()
@@ -159,6 +166,7 @@ class ContactUsController: UIViewController {
         spinner.startAnimating()
         spinner.isHidden = true
         spinner.color = Color.shared.gold
+        spinner.translatesAutoresizingMaskIntoConstraints = false
         return spinner
     }()
     
@@ -171,6 +179,7 @@ class ContactUsController: UIViewController {
         
 
        stack.sizeToFit()
+        stack.translatesAutoresizingMaskIntoConstraints = false
     
         return stack
     }()
@@ -188,6 +197,7 @@ class ContactUsController: UIViewController {
         button.imageView?.clipsToBounds = true
 
         button.addTarget(self, action: #selector(twitterRedirect), for: .touchUpInside)
+        button.translatesAutoresizingMaskIntoConstraints = false
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
         

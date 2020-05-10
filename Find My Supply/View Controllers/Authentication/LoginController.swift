@@ -27,6 +27,7 @@ class LoginController: UIViewController {
     
     let scrollView: UIScrollView = {
         let view = UIScrollView()
+        view.translatesAutoresizingMaskIntoConstraints = false
         view.alwaysBounceVertical = true
         view.showsVerticalScrollIndicator = false
         
@@ -35,6 +36,7 @@ class LoginController: UIViewController {
     
     let logoImageView: UIImageView = {
         let iv = UIImageView()
+        iv.translatesAutoresizingMaskIntoConstraints = false
         iv.contentMode = .scaleAspectFit
         iv.clipsToBounds = true
         iv.image = #imageLiteral(resourceName: "tpTransp")
@@ -44,16 +46,19 @@ class LoginController: UIViewController {
 
     lazy var loginContainerView: UIView = {
         let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
         return view.textContainerView(view: view, UIImage(systemName: "person")!.withTintColor(.white, renderingMode: .alwaysOriginal), loginTextField!)
     }()
     
     lazy var passwordContainerView: UIView = {
         let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
         return view.textContainerView(view: view, UIImage(systemName: "lock")!.withTintColor(.white, renderingMode: .alwaysOriginal),passwordTextField!)
     }()
     
     lazy var loginTextField: UITextField? = {
         var tf = UITextField()
+        tf.translatesAutoresizingMaskIntoConstraints = false
         tf = tf.textField(withPlaceolder: "Username or email", isSecureTextEntry: false, isTextEntry: true)
         tf.autocapitalizationType = .none
         return tf
@@ -61,6 +66,7 @@ class LoginController: UIViewController {
     
     lazy var passwordTextField: UITextField? = {
         let tf = UITextField()
+        tf.translatesAutoresizingMaskIntoConstraints = false
         return tf.textField(withPlaceolder: "Password", isSecureTextEntry: true, isTextEntry: true)
     }()
     
@@ -70,6 +76,7 @@ class LoginController: UIViewController {
         label.textColor = .white
         label.numberOfLines = 10
         label.text=""
+        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
@@ -81,6 +88,7 @@ class LoginController: UIViewController {
         button.backgroundColor = .white
         button.addTarget(self, action: #selector(handleLogin), for: .touchUpInside)
         button.layer.cornerRadius = 5
+        button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
@@ -90,6 +98,7 @@ class LoginController: UIViewController {
         attributedTitle.append(NSAttributedString(string: "Sign up", attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 16), NSAttributedString.Key.foregroundColor: Color.shared.gold]))
         button.setAttributedTitle(attributedTitle, for: .normal)
         button.addTarget(self, action: #selector(handleShowRegister), for: .touchUpInside)
+        button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
@@ -100,6 +109,7 @@ class LoginController: UIViewController {
         button.addTarget(self, action: #selector(sendResetPswEmail), for: .touchUpInside)
         button.clipsToBounds = true
         button.titleLabel?.sizeToFit()
+        button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
@@ -109,6 +119,7 @@ class LoginController: UIViewController {
         spinner.startAnimating()
         spinner.alpha = 1
         spinner.isHidden = true
+        spinner.translatesAutoresizingMaskIntoConstraints = false
         return spinner
     }()
     

@@ -87,7 +87,7 @@ class MapSettingsController: UIViewController {
     let titleLbl: UILabel = {
         let lbl = UILabel()
         lbl.text = "Map Type"
-        lbl.font = UIFont(name: "HelveticaNeue", size: 25)
+        lbl.font = Fonts.shared.largeBold//UIFont(name: "HelveticaNeue", size: 25)
         lbl.textColor = .white //Dark mode
         lbl.numberOfLines = 1
         lbl.sizeToFit()
@@ -131,7 +131,7 @@ class MapSettingsController: UIViewController {
     let titleLbl2: UILabel = {
         let lbl = UILabel()
         lbl.text = "Map Style"
-        lbl.font = UIFont(name: "HelveticaNeue", size: 25)
+        lbl.font = Fonts.shared.largeBold//UIFont(name: "HelveticaNeue", size: 25)
         lbl.textColor = .white //Dark mode
         lbl.numberOfLines = 1
         lbl.sizeToFit()
@@ -186,7 +186,7 @@ class MapSettingsController: UIViewController {
     let titlelbl3: UILabel = {
         let lbl = UILabel()
         lbl.text = "Get Directions From"
-        lbl.font = UIFont(name: "HelveticaNeue", size: 25)
+        lbl.font = Fonts.shared.largeBold//UIFont(name: "HelveticaNeue", size: 25)
         lbl.textColor = .white //Dark mode
         lbl.numberOfLines = 1
         lbl.sizeToFit()
@@ -205,6 +205,7 @@ class MapSettingsController: UIViewController {
         control.layer.cornerRadius = 10
         control.layer.borderWidth = 1
         control.layer.masksToBounds = true
+
         control.layer.borderColor  = UIColor.white.cgColor //Dark mode
         control.addTarget(self, action: #selector(handleMapAppToggle(_:)), for: .valueChanged)
         control.tintColor = .white

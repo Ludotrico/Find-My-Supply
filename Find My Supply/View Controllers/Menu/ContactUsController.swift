@@ -68,7 +68,7 @@ class ContactUsController: UIViewController {
     let titleLbl: UILabel = {
         let lbl = UILabel()
         lbl.text = "Submit Supply Suggestions"
-        lbl.font = UIFont(name: "HelveticaNeue", size: 25)
+        lbl.font = Fonts.shared.largeBold//UIFont(name: "HelveticaNeue", size: 25)
         lbl.textColor = .white //Dark mode
         lbl.numberOfLines = 0
         lbl.sizeToFit()
@@ -84,7 +84,7 @@ class ContactUsController: UIViewController {
         attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray]) //Dark mode
         txt.borderStyle = .roundedRect
         txt.adjustsFontSizeToFitWidth = true
-        txt.font = UIFont(name: "HelveticaNeue", size: 20)
+        txt.font = Fonts.shared.largeLight//UIFont(name: "HelveticaNeue", size: 20)
         txt.isUserInteractionEnabled = true
         txt.alpha = 1
         txt.tag = 3
@@ -99,7 +99,7 @@ class ContactUsController: UIViewController {
         btn.setTitle("Submit", for: .normal)
         btn.setTitleColor(Color.shared.blue, for: .normal)
         btn.backgroundColor = .white
-        btn.titleLabel?.font = UIFont(name: "HelveticaNeue", size: 25)
+        btn.titleLabel?.font = Fonts.shared.largeBold//UIFont(name: "HelveticaNeue", size: 25)
         btn.layer.borderColor = UIColor.white.cgColor //Dark mode
         btn.layer.borderWidth = 3
         btn.layer.cornerRadius = 10
@@ -124,7 +124,7 @@ class ContactUsController: UIViewController {
     let titleLbl2: UILabel = {
         let lbl = UILabel()
         lbl.text = "Contact Us"
-        lbl.font = UIFont(name: "HelveticaNeue", size: 25)
+        lbl.font = Fonts.shared.largeBold//UIFont(name: "HelveticaNeue", size: 25)
         lbl.textColor = .white //Dark mode
         lbl.numberOfLines = 0
         lbl.sizeToFit()
@@ -148,7 +148,7 @@ class ContactUsController: UIViewController {
     let emailLbl: CopyableLabel = {
         let lbl = CopyableLabel()
         lbl.text = "FindMySupplyApp@gmail.com"
-        lbl.font = UIFont(name: "HelveticaNeue", size: 15)
+        lbl.font = Fonts.shared.largeLight//UIFont(name: "HelveticaNeue", size: 15)
         lbl.textColor = .black //Dark mode
         lbl.numberOfLines = 0
         //lbl.sizeToFit()
@@ -365,7 +365,7 @@ class ContactUsController: UIViewController {
         Vstack2.isLayoutMarginsRelativeArrangement = true
         
         Vstack2.addArrangedSubview(titleLbl2)
-        titleLbl2.anchor(top: nil, left: nil, bottom: nil, right: nil, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 130, height: 30)
+        titleLbl2.anchor(top: nil, left: nil, bottom: nil, right: nil, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 115, height: 30)
         
         Vstack2.addArrangedSubview(Hstack1)
         Hstack1.anchor(top: nil, left: nil, bottom: nil, right: nil, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 160, height: 40)

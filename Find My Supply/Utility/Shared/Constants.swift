@@ -33,33 +33,39 @@ class Fonts {
     
     static let shared = Fonts()
     
-    let productNameFont = UIFont(name: "HelveticaNeue", size: 15)
-    let productNameFontHeight = 18
+
+    let menu = UIFont(name: "BrandonGrotesque-Black", size: 25)!
+    let homeButton = UIFont(name: "BrandonGrotesque-Black", size: 20)!
+    let homeSupplies = UIFont(name: "BrandonGrotesque-Light", size: 18)!
     
-    let menu = UIFont(name: "BrandonGrotesque-Black", size: 25)
-    let homeButton = UIFont(name: "BrandonGrotesque-Black", size: 20)
-    let homeSupplies = UIFont(name: "BrandonGrotesque-Light", size: 18)
-    
-    let popupBtn = UIFont(name: "BrandonGrotesque-Black", size: 20)
+    let popupBtn = UIFont(name: "BrandonGrotesque-Black", size: 20)!
     let slideInMessage = UIFont(name: "BrandonGrotesque-Lightitalic", size: 18)
-    let calloutBtn = UIFont(name: "BrandonGrotesque-Black", size: 120)
-    let callout = UIFont(name: "BrandonGrotesque-Light", size: 32)
-    let calloutBold = UIFont(name: "BrandonGrotesque-Black", size: 32)
+    let calloutBtn = UIFont(name: "BrandonGrotesque-Black", size: 120)!
+    let callout = UIFont(name: "BrandonGrotesque-Light", size: 32)!
+    let calloutBold = UIFont(name: "BrandonGrotesque-Black", size: 32)!
     
-    let navigationTitle = UIFont(name: "BrandonGrotesque-Black", size: 35)
-    let storeChainName = UIFont(name: "BrandonGrotesque-Black", size: 25)
-    let storeInfo = UIFont(name: "BrandonGrotesque-Light", size: 18)
-    let storeHours = UIFont(name: "BrandonGrotesque-Light", size: 12)
-    let storeButton = UIFont(name: "BrandonGrotesque-Black", size: 20)
+    let navigationTitle = UIFont(name: "BrandonGrotesque-Black", size: 35)!
+    let storeChainName = UIFont(name: "BrandonGrotesque-Black", size: 25)!
+    let storeInfo = UIFont(name: "BrandonGrotesque-Light", size: 18)!
+    let storeHours = UIFont(name: "BrandonGrotesque-Light", size: 12)!
+    let storeButton = UIFont(name: "BrandonGrotesque-Black", size: 20)!
     
     let tableRowTitle = UIFont(name: "BrandonGrotesque-Black", size: 15)
-     let tableRowTitleLarge = UIFont(name: "BrandonGrotesque-Black", size: 25)
-    let tableRowContent = UIFont(name: "BrandonGrotesque-Light", size: 15)
-    let tableRowBtn = UIFont(name: "BrandonGrotesque-Black", size: 15)
+     let tableRowTitleLarge = UIFont(name: "BrandonGrotesque-Black", size: 25)!
+    let tableRowContent = UIFont(name: "BrandonGrotesque-Light", size: 15)!
+    let tableRowBtn = UIFont(name: "BrandonGrotesque-Black", size: 15)!
     
-    let largeBold = UIFont(name: "BrandonGrotesque-Black", size: 25)
-    let largeLight = UIFont(name: "BrandonGrotesque-Light", size: 20)
+    let XLBold = UIFont(name: "BrandonGrotesque-Black", size: 30)!
+    let XLLight = UIFont(name: "BrandonGrotesque-Light", size: 30)!
     
+    let largeBold = UIFont(name: "BrandonGrotesque-Black", size: 25)!
+    let largeLight = UIFont(name: "BrandonGrotesque-Light", size: 20)!
+    
+    let mediumBold = UIFont(name: "BrandonGrotesque-Black", size: 18)!
+    let mediumLight = UIFont(name: "BrandonGrotesque-Light", size: 18)!
+    
+    let smallBold = UIFont(name: "BrandonGrotesque-Black", size: 14)!
+    let smallLight = UIFont(name: "BrandonGrotesque-Light", size: 14)!
 }
 
 class System {

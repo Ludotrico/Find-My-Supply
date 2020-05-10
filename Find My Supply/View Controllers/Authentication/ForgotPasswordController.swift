@@ -76,7 +76,7 @@ class ForgotPasswordController: UIViewController {
     let resetPswButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Reset password", for: .normal)
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 18)
+        button.titleLabel?.font = Fonts.shared.XLBold//UIFont.systemFont(ofSize: 18)
         button.setTitleColor(Color.shared.blue, for: .normal)
         button.backgroundColor = .white
         button.addTarget(self, action: #selector(resetPassword), for: .touchUpInside)
@@ -87,8 +87,8 @@ class ForgotPasswordController: UIViewController {
     
     let cancelButton: UIButton = {
         let button = UIButton(type: .system)
-        let attributedTitle = NSMutableAttributedString(string: "Remembered your password?  ", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 16), NSAttributedString.Key.foregroundColor: UIColor.white])
-        attributedTitle.append(NSAttributedString(string: "Cancel", attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 16), NSAttributedString.Key.foregroundColor: Color.shared.gold]))
+        let attributedTitle = NSMutableAttributedString(string: "Remembered your password?  ", attributes: [NSAttributedString.Key.font: Fonts.shared.mediumLight, NSAttributedString.Key.foregroundColor: UIColor.white])
+        attributedTitle.append(NSAttributedString(string: "Cancel", attributes: [NSAttributedString.Key.font: Fonts.shared.mediumBold, NSAttributedString.Key.foregroundColor: Color.shared.gold]))
         button.setAttributedTitle(attributedTitle, for: .normal)
         button.addTarget(self, action: #selector(cancel), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false

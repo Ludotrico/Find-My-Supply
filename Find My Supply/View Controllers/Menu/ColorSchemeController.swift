@@ -101,7 +101,7 @@ class ColorSchemeController: UIViewController {
     let titleLbl: UILabel = {
         let lbl = UILabel()
         lbl.text = "Color Scheme"
-        lbl.font = UIFont(name: "HelveticaNeue", size: 25)
+        lbl.font = Fonts.shared.largeBold//UIFont(name: "HelveticaNeue", size: 25)
         lbl.textColor = .white //Dark mode
         lbl.numberOfLines = 1
         lbl.sizeToFit()

@@ -92,7 +92,7 @@ class SearchSettingsController: UIViewController {
     let titleLbl: UILabel = {
         let lbl = UILabel()
         lbl.text = "Search Radius (mi)"
-        lbl.font = UIFont(name: "HelveticaNeue", size: 25)
+        lbl.font = Fonts.shared.largeBold//UIFont(name: "HelveticaNeue", size: 25)
         lbl.textColor = .white //Dark mode
         lbl.numberOfLines = 1
         lbl.sizeToFit()
@@ -134,7 +134,7 @@ class SearchSettingsController: UIViewController {
     let radius: UILabel = {
         let lbl = UILabel()
         lbl.text = "\(UserDefaults.standard.integer(forKey: "radius"))"
-        lbl.font = UIFont(name: "HelveticaNeue", size: 20)
+        lbl.font = Fonts.shared.largeLight//UIFont(name: "HelveticaNeue", size: 20)
         lbl.textColor = .black //Dark mode
         lbl.numberOfLines = 1
         lbl.backgroundColor = .white  //Dark mode

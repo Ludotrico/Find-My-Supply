@@ -79,7 +79,7 @@ class SettingsController: UIViewController {
     let searchSettingsLbl: UILabel = {
         let lbl = UILabel()
         lbl.text = "Search"
-        lbl.font = UIFont(name: "HelveticaNeue", size: 25)
+        lbl.font = Fonts.shared.largeBold//UIFont(name: "HelveticaNeue", size: 25)
         lbl.textColor = .black //Dark mode
         lbl.numberOfLines = 1
         lbl.sizeToFit()
@@ -128,7 +128,7 @@ class SettingsController: UIViewController {
     let mapSettingsLbl: UILabel = {
         let lbl = UILabel()
         lbl.text = "Map"
-        lbl.font = UIFont(name: "HelveticaNeue", size: 25)
+        lbl.font = Fonts.shared.largeBold//UIFont(name: "HelveticaNeue", size: 25)
         lbl.textColor = .black //Dark mode
         lbl.numberOfLines = 1
         lbl.sizeToFit()
@@ -179,7 +179,7 @@ class SettingsController: UIViewController {
     let colorSchemeLbl: UILabel = {
         let lbl = UILabel()
         lbl.text = "Color Scheme"
-        lbl.font = UIFont(name: "HelveticaNeue", size: 25)
+        lbl.font = Fonts.shared.largeBold//UIFont(name: "HelveticaNeue", size: 25)
         lbl.textColor = .black //Dark mode
         lbl.numberOfLines = 1
         lbl.sizeToFit()

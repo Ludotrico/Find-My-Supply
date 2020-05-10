@@ -52,6 +52,7 @@ class ContainerController: UIViewController {
         centerController.navigationBar.isHidden = true
         
         navigationController?.interactivePopGestureRecognizer?.isEnabled = true
+
         
         view.addSubview(centerController.view)
         addChild(centerController)

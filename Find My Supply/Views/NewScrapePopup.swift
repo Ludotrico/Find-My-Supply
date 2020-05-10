@@ -56,7 +56,7 @@ class NewScrapePopup: UIView {
     let text: PaddingLabel = {
         let lbl = PaddingLabel()
         lbl.text = "You’re the first user in 92660! This ZIP code is not currently supported but we’re working hard to provide you reliable data quickly. We'll email you when the data's available."
-        lbl.font = UIFont(name: "BrandonGrotesque-Black", size: 20)
+        lbl.font = UIFont(name: "BrandonGrotesque-Light", size: 18)
         lbl.textColor = .black //Dark mode
         lbl.numberOfLines = 0
         lbl.sizeToFit()
@@ -65,7 +65,7 @@ class NewScrapePopup: UIView {
         lbl.layer.cornerRadius = 10
         lbl.layer.masksToBounds = true
         lbl.textAlignment = .center
-        lbl.backgroundColor = UIColor(white: 1, alpha: 0.7)
+        lbl.backgroundColor = UIColor(white: 1, alpha: 0.8)
         lbl.translatesAutoresizingMaskIntoConstraints = false
         
         return lbl

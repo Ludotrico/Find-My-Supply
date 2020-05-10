@@ -34,12 +34,17 @@ class StoreController: UIViewController, UIScrollViewDelegate, UIGestureRecogniz
         
         view.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
         
+        
+        configureColorSchemeNavigationBar()
+        
         initializeConstants()
         getProductData()
         
         
-        title = currStore.store__chainName
         
+        
+        //self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "CaviarDreams", size: 20)!]
+
       
     
         
@@ -62,6 +67,10 @@ class StoreController: UIViewController, UIScrollViewDelegate, UIGestureRecogniz
     
     override func viewWillDisappear(_ animated: Bool) {
         self.navigationController?.navigationBar.isHidden = true
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -141,12 +150,6 @@ class StoreController: UIViewController, UIScrollViewDelegate, UIGestureRecogniz
         return view
     }()
     
-    let storeImageView2: UIImageView = {
-       let view = UIImageView()
-        view.image = #imageLiteral(resourceName: "tst")
-        view.backgroundColor = .clear
-        return view
-    }()
     
     let shadow: UIView = {
         let view = UIView()
@@ -162,7 +165,7 @@ class StoreController: UIViewController, UIScrollViewDelegate, UIGestureRecogniz
         let lbl = UILabel(frame: CGRect(x: 0, y: 0, width: 300, height: 200))
         lbl.text = ""
         lbl.textColor = .black //Dark mode
-        lbl.font = UIFont(name: "HelveticaNeue", size: 25)
+        lbl.font = Fonts.shared.storeChainName//UIFont(name: "HelveticaNeue", size: 25)
         lbl.textAlignment = .center
         lbl.sizeToFit()
         return lbl
@@ -174,7 +177,7 @@ class StoreController: UIViewController, UIScrollViewDelegate, UIGestureRecogniz
         lbl.numberOfLines = 2 //0
         lbl.adjustsFontSizeToFitWidth = true
         lbl.textColor = Color.shared.blue
-        lbl.font = UIFont(name: "HelveticaNeue", size: 20)
+        lbl.font = Fonts.shared.storeInfo//UIFont(name: "HelveticaNeue", size: 20)
         lbl.textAlignment = .center
         lbl.isUserInteractionEnabled = true
         lbl.sizeToFit()
@@ -186,7 +189,7 @@ class StoreController: UIViewController, UIScrollViewDelegate, UIGestureRecogniz
         lbl.text = ""
         lbl.numberOfLines = 0
         lbl.textColor = .gray
-        lbl.font = UIFont(name: "HelveticaNeue", size: 20)
+        lbl.font = Fonts.shared.storeInfo//UIFont(name: "HelveticaNeue", size: 20)
         lbl.textAlignment = .center
         lbl.sizeToFit()
         
@@ -210,7 +213,7 @@ class StoreController: UIViewController, UIScrollViewDelegate, UIGestureRecogniz
         lbl.text = ""
         lbl.numberOfLines = 0
         lbl.textColor = .gray
-        lbl.font = UIFont(name: "HelveticaNeue", size: 20)
+        lbl.font = Fonts.shared.storeInfo//UIFont(name: "HelveticaNeue", size: 20)
         lbl.textAlignment = .left
         lbl.sizeToFit()
         return lbl
@@ -269,7 +272,7 @@ class StoreController: UIViewController, UIScrollViewDelegate, UIGestureRecogniz
         let lbl = UILabel()
         lbl.text = ""
         lbl.numberOfLines = 0
-        lbl.font = UIFont(name: "HelveticaNeue", size: 20)
+        lbl.font = Fonts.shared.storeInfo//UIFont(name: "HelveticaNeue", size: 20)
         lbl.textAlignment = .center
         lbl.sizeToFit()
     
@@ -281,7 +284,7 @@ class StoreController: UIViewController, UIScrollViewDelegate, UIGestureRecogniz
         lbl.text = ""
         lbl.numberOfLines = 0
         lbl.textColor = .black //Dark mode
-        lbl.font = UIFont(name: "HelveticaNeue", size: 20)
+        lbl.font = Fonts.shared.storeInfo//UIFont(name: "HelveticaNeue", size: 20)
         lbl.textAlignment = .left
         lbl.sizeToFit()
         return lbl
@@ -304,7 +307,7 @@ class StoreController: UIViewController, UIScrollViewDelegate, UIGestureRecogniz
         lbl.text = "Weekly hours"
         lbl.numberOfLines = 0
         lbl.textColor = Color.shared.blue
-        lbl.font = UIFont(name: "HelveticaNeue", size: 20)
+        lbl.font = Fonts.shared.storeButton//UIFont(name: "HelveticaNeue", size: 20)
         lbl.textAlignment = .center
         lbl.sizeToFit()
         return lbl
@@ -351,7 +354,7 @@ class StoreController: UIViewController, UIScrollViewDelegate, UIGestureRecogniz
         lbl.text = "Monday:\nTuesday:\nWednesday:\nThursday:\nFriday:\nSaturday:\nSunday\n"
         lbl.numberOfLines = 0
         lbl.textColor = .gray
-        lbl.font = UIFont(name: "HelveticaNeue", size: 15)
+        lbl.font = Fonts.shared.storeHours//UIFont(name: "HelveticaNeue", size: 15)
         lbl.textAlignment = .left
         //lbl.sizeToFit()
         return lbl
@@ -362,7 +365,7 @@ class StoreController: UIViewController, UIScrollViewDelegate, UIGestureRecogniz
         lbl.text = ""
         lbl.numberOfLines = 0
         lbl.textColor = .gray
-        lbl.font = UIFont(name: "HelveticaNeue", size: 15)
+        lbl.font = Fonts.shared.storeHours//UIFont(name: "HelveticaNeue", size: 15)
         lbl.textAlignment = .right
         //lbl.sizeToFit()
         return lbl
@@ -448,15 +451,7 @@ class StoreController: UIViewController, UIScrollViewDelegate, UIGestureRecogniz
         return view
     }()
     
-    let nearbyStoresLbl: UILabel = {
-        let lbl = UILabel()
-        lbl.sizeToFit()
-        lbl.text = "Nearby Stores in Stock"
-        lbl.font = UIFont(name: "HelveticaNeue", size: 25)
-        lbl.numberOfLines = 1
-        lbl.textColor = .black
-        return lbl
-    }()
+
     
     let Vscroll: UIScrollView = {
         let view = UIScrollView()
@@ -487,47 +482,8 @@ class StoreController: UIViewController, UIScrollViewDelegate, UIGestureRecogniz
           
       }()
     
-    let noNearbyStoresLbl: UILabel = {
-        let lbl = UILabel()
-        lbl.backgroundColor = UIColor.rgb(red: 209, green: 21, blue: 0)
-        lbl.textColor = .white
-        lbl.text = "No stores nearby currently have this product in stock."
-        lbl.font = UIFont.italicSystemFont(ofSize: 15.0)
-        //lbl.sizeToFit()
-        lbl.textAlignment = .center
-        lbl.numberOfLines = 0
-        //lbl.adjustsFontSizeToFitWidth  = true
-        lbl.layer.cornerRadius = 10
-        return lbl
-    }()
     
-    let notificationAdded: UILabel = {
-        let lbl = UILabel()
-        lbl.backgroundColor = .systemGreen
-        lbl.textColor = .white
-        lbl.text = "Notification added."
-        lbl.font = UIFont.italicSystemFont(ofSize: 15.0)
-        //lbl.sizeToFit()
-        lbl.textAlignment = .center
-        lbl.numberOfLines = 0
-        //lbl.adjustsFontSizeToFitWidth  = true
-        lbl.layer.cornerRadius = 10
-        return lbl
-    }()
-    
-    let notificationAlreadyAdded: UILabel = {
-        let lbl = UILabel()
-        lbl.backgroundColor = UIColor.rgb(red: 255, green: 153, blue: 0)
-        lbl.textColor = .white
-        lbl.text = "Notification has already been added."
-        lbl.font = UIFont.italicSystemFont(ofSize: 15.0)
-        //lbl.sizeToFit()
-        lbl.textAlignment = .center
-        lbl.numberOfLines = 0
-        //lbl.adjustsFontSizeToFitWidth  = true
-        lbl.layer.cornerRadius = 10
-        return lbl
-    }()
+
      
      
      // MARK: - Variables
@@ -639,11 +595,11 @@ class StoreController: UIViewController, UIScrollViewDelegate, UIGestureRecogniz
                                 lbl.backgroundColor = UIColor.rgb(red: 255, green: 153, blue: 0)
                                 lbl.textColor = .white
                                 lbl.text = "Notification has already been added."
-                                lbl.font = UIFont.italicSystemFont(ofSize: 15.0)
+                                lbl.font = Fonts.shared.slideInMessage//UIFont.italicSystemFont(ofSize: 15.0)
                                 //lbl.sizeToFit()
                                 lbl.textAlignment = .center
                                 lbl.numberOfLines = 0
-                                //lbl.adjustsFontSizeToFitWidth  = true
+                                lbl.adjustsFontSizeToFitWidth  = true
                                 lbl.layer.cornerRadius = 10
  
                        
@@ -658,11 +614,11 @@ class StoreController: UIViewController, UIScrollViewDelegate, UIGestureRecogniz
                                lbl.backgroundColor = .systemGreen
                                lbl.textColor = .white
                                lbl.text = "Notification added."
-                               lbl.font = UIFont.italicSystemFont(ofSize: 15.0)
+                            lbl.font = Fonts.shared.slideInMessage//UIFont.italicSystemFont(ofSize: 15.0)
                                //lbl.sizeToFit()
                                lbl.textAlignment = .center
                                lbl.numberOfLines = 0
-                               //lbl.adjustsFontSizeToFitWidth  = true
+                               lbl.adjustsFontSizeToFitWidth  = true
                                lbl.layer.cornerRadius = 10
                             self.showMessage(label: lbl, sender: sender)
                             self.spinner2.isHidden = true
@@ -710,11 +666,11 @@ class StoreController: UIViewController, UIScrollViewDelegate, UIGestureRecogniz
                             lbl.backgroundColor = UIColor.rgb(red: 255, green: 153, blue: 0)
                             lbl.textColor = .white
                             lbl.text = "Notification has already been added."
-                            lbl.font = UIFont.italicSystemFont(ofSize: 15.0)
+                            lbl.font = Fonts.shared.slideInMessage//UIFont.italicSystemFont(ofSize: 15.0)
                             //lbl.sizeToFit()
                             lbl.textAlignment = .center
                             lbl.numberOfLines = 0
-                            //lbl.adjustsFontSizeToFitWidth  = true
+                            lbl.adjustsFontSizeToFitWidth  = true
                             lbl.layer.cornerRadius = 10
                        
                             self.showMessage(label: lbl, sender: sender)
@@ -729,11 +685,11 @@ class StoreController: UIViewController, UIScrollViewDelegate, UIGestureRecogniz
                             lbl.backgroundColor = .systemGreen
                             lbl.textColor = .white
                             lbl.text = "Notification added."
-                            lbl.font = UIFont.italicSystemFont(ofSize: 15.0)
+                            lbl.font = Fonts.shared.slideInMessage//  UIFont.italicSystemFont(ofSize: 15.0)
                             //lbl.sizeToFit()
                             lbl.textAlignment = .center
                             lbl.numberOfLines = 0
-                            //lbl.adjustsFontSizeToFitWidth  = true
+                            lbl.adjustsFontSizeToFitWidth  = true
                             lbl.layer.cornerRadius = 10
 
                             self.showMessage(label: lbl, sender: sender)
@@ -1052,11 +1008,11 @@ class StoreController: UIViewController, UIScrollViewDelegate, UIGestureRecogniz
         lbl.backgroundColor = UIColor.rgb(red: 209, green: 21, blue: 0)
         lbl.textColor = .white
         lbl.text = text
-        lbl.font = UIFont.italicSystemFont(ofSize: 15.0)
+        lbl.font = Fonts.shared.slideInMessage//UIFont.italicSystemFont(ofSize: 15.0)
         //lbl.sizeToFit()
         lbl.textAlignment = .center
         lbl.numberOfLines = 0
-        //lbl.adjustsFontSizeToFitWidth  = true
+        lbl.adjustsFontSizeToFitWidth  = true
         lbl.layer.cornerRadius = 10
         return lbl
     }
@@ -1551,8 +1507,7 @@ class StoreController: UIViewController, UIScrollViewDelegate, UIGestureRecogniz
         
     }
     
-    func configureColorScheme() {
-        
+    func configureColorSchemeNavigationBar() {
         let scheme = UserDefaults.standard.integer(forKey: "colorScheme")
         
         if scheme == 0 {
@@ -1560,18 +1515,17 @@ class StoreController: UIViewController, UIScrollViewDelegate, UIGestureRecogniz
             navigationController?.navigationBar.isTranslucent = true
             navigationController?.navigationBar.tintColor = .black
             navigationController?.navigationBar.barTintColor = .white
-            navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor:UIColor.black]
+            title = currStore.store__chainName
+            navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor:UIColor.black, NSAttributedString.Key.font: Fonts.shared.navigationTitle]
+            
+            //self.navigationController?.navigationBar.titleTextAttributes = [ NSAttributedString.Key.font: Fonts.shared.navigationTitle]
+            
             StatusBarColor.shared.isDark = true
             UIView.animate(withDuration: 0.5, animations: {
                  self.setNeedsStatusBarAppearanceUpdate()
             })
            
-            
-            Dscroll.backgroundColor = .darkGray
-            pageControl.pageIndicatorTintColor = .darkGray
-            nearbyStoresCollectionView.backgroundColor = .darkGray
-            Vscroll.backgroundColor = .darkGray
-            spinner2.color = Color.shared.blue
+
             
         }
         else if scheme == 1 {
@@ -1581,13 +1535,52 @@ class StoreController: UIViewController, UIScrollViewDelegate, UIGestureRecogniz
             navigationController?.navigationBar.isTranslucent = false
             navigationController?.navigationBar.tintColor = .white
             navigationController?.navigationBar.barTintColor = .black
-            navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor:UIColor.white]
+            title = currStore.store__chainName
+            navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor:UIColor.white, NSAttributedString.Key.font: Fonts.shared.navigationTitle]
+            //self.navigationController?.navigationBar.titleTextAttributes = [ ]
+            
             StatusBarColor.shared.isDark = false
             UIView.animate(withDuration: 0.5, animations: {
                  self.setNeedsStatusBarAppearanceUpdate()
             })
 
+
+        }
+        else {
+            //LIGHT
+            navigationController?.navigationBar.isTranslucent = false
+            navigationController?.navigationBar.tintColor = .black
+            navigationController?.navigationBar.barTintColor = .white
+            title = currStore.store__chainName
+            navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor:UIColor.black, NSAttributedString.Key.font: Fonts.shared.navigationTitle]
             
+            StatusBarColor.shared.isDark = true
+            UIView.animate(withDuration: 0.5, animations: {
+                 self.setNeedsStatusBarAppearanceUpdate()
+            })
+
+            
+        }
+        
+    }
+    
+    func configureColorScheme() {
+        
+        let scheme = UserDefaults.standard.integer(forKey: "colorScheme")
+        
+        if scheme == 0 {
+            //STANDARD
+
+            Dscroll.backgroundColor = .darkGray
+            pageControl.pageIndicatorTintColor = .darkGray
+            nearbyStoresCollectionView.backgroundColor = .darkGray
+            Vscroll.backgroundColor = .darkGray
+            spinner2.color = Color.shared.blue
+            
+        }
+        else if scheme == 1 {
+            //DARK
+
             
             Dscroll.backgroundColor = .darkGray
             pageControl.pageIndicatorTintColor = .darkGray
@@ -1608,16 +1601,7 @@ class StoreController: UIViewController, UIScrollViewDelegate, UIGestureRecogniz
         }
         else {
             //LIGHT
-            navigationController?.navigationBar.isTranslucent = false
-            navigationController?.navigationBar.tintColor = .black
-            navigationController?.navigationBar.barTintColor = .white
-            navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor:UIColor.black]
-            StatusBarColor.shared.isDark = true
-            UIView.animate(withDuration: 0.5, animations: {
-                 self.setNeedsStatusBarAppearanceUpdate()
-            })
 
-            
             
             Dscroll.backgroundColor = .lightGray
             pageControl.pageIndicatorTintColor = .lightGray

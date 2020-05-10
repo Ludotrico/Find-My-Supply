@@ -175,7 +175,7 @@ class HomeController: UIViewController {
          button.setTitle("View items", for: .normal)
          button.setTitleColor(Color.shared.blue, for: .normal)
           // button.addTarget(self, action: #selector(redirect), for: .touchUpInside)
-         button.titleLabel?.font = UIFont(name: "HelveticaNeue", size: 120)
+        button.titleLabel?.font = Fonts.shared.calloutBtn//UIFont(name: "HelveticaNeue", size: 120)
          button.layer.borderColor = Color.shared.blue.cgColor
          button.backgroundColor = .clear
          button.isEnabled = true
@@ -194,7 +194,7 @@ class HomeController: UIViewController {
         button.setTitle("Get directions", for: .normal)
         button.setTitleColor(Color.shared.blue, for: .normal)
          // button.addTarget(self, action: #selector(redirect), for: .touchUpInside)
-        button.titleLabel?.font = UIFont(name: "HelveticaNeue", size: 120)
+        button.titleLabel?.font = Fonts.shared.calloutBtn//UIFont(name: "HelveticaNeue", size: 120)
         button.layer.borderColor = Color.shared.blue.cgColor
         button.backgroundColor = .clear
         button.isEnabled = true
@@ -303,7 +303,7 @@ class HomeController: UIViewController {
         let lbl = UILabel(frame: CGRect(x: 0, y: 0, width: 300, height: 200))
         lbl.text = ""
         lbl.textColor = .black
-        lbl.font = UIFont(name: "HelveticaNeue", size: 30)
+        lbl.font = Fonts.shared.callout//UIFont(name: "HelveticaNeue", size: 30)
         lbl.textAlignment = .center
         lbl.transform = CGAffineTransform(scaleX: 4, y: 4)
         lbl.translatesAutoresizingMaskIntoConstraints = false
@@ -314,7 +314,7 @@ class HomeController: UIViewController {
         let lbl = UILabel(frame: CGRect(x: 0, y: 0, width: 300, height: 200))
         lbl.text = ""
         lbl.textColor = .black
-        lbl.font = UIFont(name: "HelveticaNeue", size: 30)
+        lbl.font = Fonts.shared.calloutBold//UIFont(name: "HelveticaNeue", size: 30)
         lbl.textAlignment = .center
         lbl.transform = CGAffineTransform(scaleX: 4, y: 4)
         lbl.translatesAutoresizingMaskIntoConstraints = false
@@ -325,7 +325,7 @@ class HomeController: UIViewController {
         let lbl = UILabel(frame: CGRect(x: 0, y: 0, width: 300, height: 200))
         lbl.text = ""
         lbl.textColor = .black
-        lbl.font = UIFont(name: "HelveticaNeue", size: 30)
+        lbl.font = Fonts.shared.callout//UIFont(name: "HelveticaNeue", size: 30)
         lbl.textAlignment = .center
         lbl.transform = CGAffineTransform(scaleX: 4, y: 4)
         lbl.translatesAutoresizingMaskIntoConstraints = false
@@ -496,7 +496,7 @@ class HomeController: UIViewController {
         btn.setTitle("Let's go", for: .normal)
         btn.setTitleColor(Color.shared.blue, for: .normal)
         btn.backgroundColor = .white
-        btn.titleLabel?.font = UIFont(name: "HelveticaNeue", size: 25)
+        btn.titleLabel?.font = Fonts.shared.popupBtn//UIFont(name: "HelveticaNeue", size: 25)
         btn.layer.borderColor = UIColor.white.cgColor //Dark mode
         btn.layer.borderWidth = 3
         btn.layer.cornerRadius = 10
@@ -511,7 +511,7 @@ class HomeController: UIViewController {
         btn.setTitle("Got it", for: .normal)
         btn.setTitleColor(Color.shared.theme, for: .normal)
         btn.backgroundColor = Color.shared.gold
-        btn.titleLabel?.font = UIFont(name: "HelveticaNeue", size: 25)
+        btn.titleLabel?.font = Fonts.shared.popupBtn//UIFont(name: "HelveticaNeue", size: 25)
         btn.layer.borderColor = Color.shared.gold.cgColor//UIColor.white.cgColor //Dark mode
         btn.layer.borderWidth = 3
         btn.layer.cornerRadius = 10
@@ -526,7 +526,7 @@ class HomeController: UIViewController {
         btn.setTitle("Add ZIP code", for: .normal)
         btn.setTitleColor(Color.shared.theme, for: .normal)
         btn.backgroundColor = Color.shared.gold
-        btn.titleLabel?.font = UIFont(name: "HelveticaNeue", size: 25)
+        btn.titleLabel?.font = Fonts.shared.popupBtn//UIFont(name: "HelveticaNeue", size: 25)
         btn.layer.borderColor = Color.shared.gold.cgColor//UIColor.white.cgColor //Dark mode
         btn.layer.borderWidth = 3
         btn.layer.cornerRadius = 10
@@ -541,7 +541,7 @@ class HomeController: UIViewController {
         btn.setTitle("Cancel", for: .normal)
         btn.setTitleColor(Color.shared.theme, for: .normal)
         btn.backgroundColor = Color.shared.red
-        btn.titleLabel?.font = UIFont(name: "HelveticaNeue", size: 25)
+        btn.titleLabel?.font = Fonts.shared.popupBtn//UIFont(name: "HelveticaNeue", size: 25)
         btn.layer.borderColor = Color.shared.red.cgColor //UIColor.white.cgColor //Dark mode
         btn.layer.borderWidth = 3
         btn.layer.cornerRadius = 10
@@ -1735,11 +1735,11 @@ class HomeController: UIViewController {
                             lbl.backgroundColor = UIColor.rgb(red: 255, green: 153, blue: 0)
                             lbl.textColor = .white
                             lbl.text = "Notification has already been added."
-                            lbl.font = UIFont.italicSystemFont(ofSize: 15.0)
+                            lbl.font = Fonts.shared.slideInMessage//UIFont.italicSystemFont(ofSize: 15.0)
                             //lbl.sizeToFit()
                             lbl.textAlignment = .center
                             lbl.numberOfLines = 0
-                            //lbl.adjustsFontSizeToFitWidth  = true
+                            lbl.adjustsFontSizeToFitWidth  = true
                             lbl.layer.cornerRadius = 10
                        
                             self.showMessage(label: lbl)
@@ -1754,11 +1754,11 @@ class HomeController: UIViewController {
                             lbl.backgroundColor = .systemGreen
                             lbl.textColor = .white
                             lbl.text = "Notification added."
-                            lbl.font = UIFont.italicSystemFont(ofSize: 15.0)
+                            lbl.font = Fonts.shared.slideInMessage//UIFont.italicSystemFont(ofSize: 15.0)
                             //lbl.sizeToFit()
                             lbl.textAlignment = .center
                             lbl.numberOfLines = 0
-                            //lbl.adjustsFontSizeToFitWidth  = true
+                            lbl.adjustsFontSizeToFitWidth  = true
                             lbl.layer.cornerRadius = 10
 
                             self.showMessage(label: lbl)
@@ -1787,11 +1787,11 @@ class HomeController: UIViewController {
         lbl.backgroundColor = UIColor.rgb(red: 209, green: 21, blue: 0)
         lbl.textColor = .white
         lbl.text = text
-        lbl.font = UIFont.italicSystemFont(ofSize: 15.0)
+        lbl.font = Fonts.shared.slideInMessage//UIFont.italicSystemFont(ofSize: 15.0)
         //lbl.sizeToFit()
         lbl.textAlignment = .center
         lbl.numberOfLines = 0
-        //lbl.adjustsFontSizeToFitWidth  = true
+        lbl.adjustsFontSizeToFitWidth  = true
         lbl.layer.cornerRadius = 10
         return lbl
     }
@@ -2460,9 +2460,9 @@ extension HomeController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let button = UIButton(type: .system)
-        button.setTitle("Find your supply", for: .normal)
+        button.setTitle("Find my supply", for: .normal)
         button.setTitleColor(Color.shared.gold, for: .normal)
-        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
+        button.titleLabel?.font = Fonts.shared.homeButton//UIFont(name: "BrandonGrotesque-Black", size: 20)//UIFont.boldSystemFont(ofSize: 14)
         button.addTarget(self, action: #selector(handleDropDown), for: .touchUpInside)
         button.backgroundColor = Color.shared.theme
         button.alpha = 1
@@ -2563,11 +2563,11 @@ extension HomeController: UITableViewDelegate, UITableViewDataSource {
                                     lbl.backgroundColor = UIColor.rgb(red: 209, green: 21, blue: 0)
                                     lbl.textColor = .white
                                     lbl.text = "No stores nearby currently have \(self.supplyList[indexPath.row]) in stock."
-                                    lbl.font = UIFont.italicSystemFont(ofSize: 15.0)
+                                    lbl.font = Fonts.shared.slideInMessage//UIFont.italicSystemFont(ofSize: 15.0)
                                     //lbl.sizeToFit()
                                     lbl.textAlignment = .center
                                     lbl.numberOfLines = 0
-                                    //lbl.adjustsFontSizeToFitWidth  = true
+                                    lbl.adjustsFontSizeToFitWidth  = true
                                     lbl.layer.cornerRadius = 10
 
                                 self.showMessage(label: lbl)

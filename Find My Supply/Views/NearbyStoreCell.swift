@@ -81,7 +81,7 @@ class NearbyStoreCell: UICollectionViewCell {
         lbl.textColor = .white
         lbl.adjustsFontSizeToFitWidth = true
         lbl.sizeToFit()
-        lbl.font = UIFont(name: "HelveticaNeue", size: 18)
+        lbl.font = Fonts.shared.tableRowTitle//UIFont(name: "HelveticaNeue", size: 18)
         lbl.textAlignment = .center
         lbl.translatesAutoresizingMaskIntoConstraints = false
         return lbl
@@ -97,7 +97,7 @@ class NearbyStoreCell: UICollectionViewCell {
         lbl.textColor = .white
 
         lbl.sizeToFit()
-        lbl.font = UIFont(name: "HelveticaNeue", size: 15)
+        lbl.font = Fonts.shared.tableRowContent//UIFont(name: "HelveticaNeue", size: 15)
         lbl.textAlignment = .center
         lbl.translatesAutoresizingMaskIntoConstraints = false
         return lbl
@@ -109,7 +109,7 @@ class NearbyStoreCell: UICollectionViewCell {
         lbl.numberOfLines = 0
 
         lbl.sizeToFit()
-        lbl.font = UIFont(name: "HelveticaNeue", size: 15)
+        lbl.font = Fonts.shared.tableRowContent//UIFont(name: "HelveticaNeue", size: 15)
         lbl.textAlignment = .center
         lbl.translatesAutoresizingMaskIntoConstraints = false
         return lbl
@@ -122,7 +122,7 @@ class NearbyStoreCell: UICollectionViewCell {
        
         lbl.textColor = .white
         lbl.sizeToFit()
-        lbl.font = UIFont(name: "HelveticaNeue", size: 15)
+        lbl.font = Fonts.shared.tableRowContent//UIFont(name: "HelveticaNeue", size: 15)
         lbl.textAlignment = .center
         lbl.translatesAutoresizingMaskIntoConstraints = false
         return lbl

@@ -44,7 +44,7 @@ class MenuController: UIViewController {
     let Hstack1: UIStackView = {
         let Hstack = UIStackView()
         Hstack.axis = .horizontal
-        Hstack.alignment = .leading
+        //Hstack.alignment = .leading
         Hstack.spacing = 15
         return Hstack
     }()
@@ -52,7 +52,7 @@ class MenuController: UIViewController {
     let Hstack2: UIStackView = {
         let Hstack = UIStackView()
         Hstack.axis = .horizontal
-        Hstack.alignment = .leading
+        //Hstack.alignment = .leading
         Hstack.spacing = 15
         return Hstack
     }()
@@ -60,7 +60,7 @@ class MenuController: UIViewController {
     let Hstack3: UIStackView = {
         let Hstack = UIStackView()
         Hstack.axis = .horizontal
-        Hstack.alignment = .leading
+        //Hstack.alignment = .leading
         Hstack.spacing = 15
         return Hstack
     }()
@@ -68,7 +68,7 @@ class MenuController: UIViewController {
     let Hstack4: UIStackView = {
         let Hstack = UIStackView()
         Hstack.axis = .horizontal
-        Hstack.alignment = .leading
+        //Hstack.alignment = .leading
         Hstack.spacing = 15
         return Hstack
     }()
@@ -85,7 +85,7 @@ class MenuController: UIViewController {
     let profileLbl: UILabel = {
         let lbl = UILabel()
         lbl.text = "Profile"
-        lbl.font = UIFont(name: "Helvetica-Bold", size: 28)
+        lbl.font = Fonts.shared.menu//UIFont(name: "Helvetica-Bold", size: 28)
         lbl.textColor = Color.shared.gold  //Dark mode
         lbl.textAlignment = .left
         return lbl
@@ -104,7 +104,7 @@ class MenuController: UIViewController {
     let notifLbl: UILabel = {
         let lbl = UILabel()
         lbl.text = "Notifications"
-        lbl.font = UIFont(name: "Helvetica-Bold", size: 28)
+        lbl.font = Fonts.shared.menu//UIFont(name: "Helvetica-Bold", size: 28)
         lbl.textColor = Color.shared.gold  //Dark mode
         lbl.textAlignment = .left
         return lbl
@@ -123,7 +123,7 @@ class MenuController: UIViewController {
     let settingsLbl: UILabel = {
         let lbl = UILabel()
         lbl.text = "Settings"
-        lbl.font = UIFont(name: "Helvetica-Bold", size: 28)
+        lbl.font = Fonts.shared.menu//UIFont(name: "Helvetica-Bold", size: 28)
         lbl.textColor = Color.shared.gold  //Dark mode
         lbl.textAlignment = .left
         return lbl
@@ -141,7 +141,7 @@ class MenuController: UIViewController {
     let goldLbl: UILabel = {
         let lbl = UILabel()
         lbl.text = "Gold"
-        lbl.font = UIFont(name: "Helvetica-Bold", size: 28)
+        lbl.font = Fonts.shared.menu//UIFont(name: "Helvetica-Bold", size: 28)
         lbl.textColor = Color.shared.gold  //Dark mode
         lbl.textAlignment = .left
         return lbl
@@ -159,7 +159,7 @@ class MenuController: UIViewController {
     let contactLbl: UILabel = {
         let lbl = UILabel()
         lbl.text = "Contact Us"
-        lbl.font = UIFont(name: "Helvetica-Bold", size: 28)
+        lbl.font = Fonts.shared.menu//UIFont(name: "Helvetica-Bold", size: 28)
         lbl.textColor = Color.shared.gold  //Dark mode
         lbl.textAlignment = .left
         return lbl

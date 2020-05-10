@@ -71,6 +71,7 @@
 		33B2E900245D5539007A8F90 /* brandon-grotesque-black-58a8a3e824392.otf in Resources */ = {isa = PBXBuildFile; fileRef = 33B2E8FE245D5528007A8F90 /* brandon-grotesque-black-58a8a3e824392.otf */; };
 		33B2E902245E141A007A8F90 /* GoldController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B2E901245E141A007A8F90 /* GoldController.swift */; };
 		33B2E904246104BE007A8F90 /* Gold.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B2E903246104BE007A8F90 /* Gold.swift */; };
+		33C1251E246792A800EB8A09 /* brandon-grotesque-light-italic-58a8a4ccb88be.otf in Resources */ = {isa = PBXBuildFile; fileRef = 33C1251D2467929E00EB8A09 /* brandon-grotesque-light-italic-58a8a4ccb88be.otf */; };
 		33FC64522463929300058EB9 /* GoldPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33FC64512463929300058EB9 /* GoldPopup.swift */; };
 		574FEA2E39D6621FB0D23D0E /* Pods_Find_My_Supply.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18414091FFD4C5D4B68D3080 /* Pods_Find_My_Supply.framework */; };
 /* End PBXBuildFile section */
@@ -145,6 +146,7 @@
 		33B2E901245E141A007A8F90 /* GoldController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoldController.swift; sourceTree = "<group>"; };
 		33B2E903246104BE007A8F90 /* Gold.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gold.swift; sourceTree = "<group>"; };
 		33B2E90524610D37007A8F90 /* Find My Supply.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Find My Supply.entitlements"; sourceTree = "<group>"; };
+		33C1251D2467929E00EB8A09 /* brandon-grotesque-light-italic-58a8a4ccb88be.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "brandon-grotesque-light-italic-58a8a4ccb88be.otf"; sourceTree = "<group>"; };
 		33FC64512463929300058EB9 /* GoldPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoldPopup.swift; sourceTree = "<group>"; };
 		45524D81C0D7389CA467CBA0 /* Pods-Find My Supply.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Find My Supply.debug.xcconfig"; path = "Target Support Files/Pods-Find My Supply/Pods-Find My Supply.debug.xcconfig"; sourceTree = "<group>"; };
 		F3EA27433E1635C62CD66FDF /* Pods-Find My Supply.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Find My Supply.release.xcconfig"; path = "Target Support Files/Pods-Find My Supply/Pods-Find My Supply.release.xcconfig"; sourceTree = "<group>"; };
@@ -395,6 +397,7 @@
 			children = (
 				33B2E8FE245D5528007A8F90 /* brandon-grotesque-black-58a8a3e824392.otf */,
 				33B2E8FB245D50E7007A8F90 /* brandon-grotesque-light-58a8a4b38001d.otf */,
+				33C1251D2467929E00EB8A09 /* brandon-grotesque-light-italic-58a8a4ccb88be.otf */,
 			);
 			path = Fonts;
 			sourceTree = "<group>";
@@ -480,6 +483,7 @@
 				33B2E900245D5539007A8F90 /* brandon-grotesque-black-58a8a3e824392.otf in Resources */,
 				33B2E589245CD8B3007A8F90 /* Assets.xcassets in Resources */,
 				33B2E587245CD8B1007A8F90 /* Main.storyboard in Resources */,
+				33C1251E246792A800EB8A09 /* brandon-grotesque-light-italic-58a8a4ccb88be.otf in Resources */,
 				33B2E8FC245D52B0007A8F90 /* brandon-grotesque-light-58a8a4b38001d.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

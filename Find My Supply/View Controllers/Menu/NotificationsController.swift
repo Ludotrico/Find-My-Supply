@@ -317,7 +317,7 @@ class NotificationsController: UIViewController {
         //lbl.sizeToFit()
         lbl.textAlignment = .center
         lbl.numberOfLines = 0
-        //lbl.adjustsFontSizeToFitWidth  = true
+        lbl.adjustsFontSizeToFitWidth  = true
         lbl.layer.cornerRadius = 10
         return lbl
     }

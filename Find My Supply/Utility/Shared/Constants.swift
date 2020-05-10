@@ -36,6 +36,26 @@ class Fonts {
     let productNameFont = UIFont(name: "HelveticaNeue", size: 15)
     let productNameFontHeight = 18
     
+    let menu = UIFont(name: "BrandonGrotesque-Black", size: 25)
+    let homeButton = UIFont(name: "BrandonGrotesque-Black", size: 20)
+    let homeSupplies = UIFont(name: "BrandonGrotesque-Light", size: 18)
+    
+    let popupBtn = UIFont(name: "BrandonGrotesque-Black", size: 20)
+    let slideInMessage = UIFont(name: "BrandonGrotesque-Lightitalic", size: 18)
+    let calloutBtn = UIFont(name: "BrandonGrotesque-Black", size: 120)
+    let callout = UIFont(name: "BrandonGrotesque-Light", size: 32)
+    let calloutBold = UIFont(name: "BrandonGrotesque-Black", size: 32)
+    
+    let navigationTitle = UIFont(name: "BrandonGrotesque-Black", size: 35)
+    let storeChainName = UIFont(name: "BrandonGrotesque-Black", size: 25)
+    let storeInfo = UIFont(name: "BrandonGrotesque-Light", size: 18)
+    let storeHours = UIFont(name: "BrandonGrotesque-Light", size: 12)
+    let storeButton = UIFont(name: "BrandonGrotesque-Black", size: 20)
+    
+    let tableRowTitle = UIFont(name: "BrandonGrotesque-Black", size: 15)
+    let tableRowContent = UIFont(name: "BrandonGrotesque-Light", size: 15)
+    let tableRowBtn = UIFont(name: "BrandonGrotesque-Black", size: 15)
+    
 }
 
 class System {

@@ -14,7 +14,7 @@ class supplyCell: UITableViewCell {
     
     let supply: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 14)
+        label.font = Fonts.shared.homeSupplies//UIFont(name: "BrandonGrotesque-Light", size: 18)//UIFont.systemFont(ofSize: 14)
         label.textColor = .white
         label.layer.cornerRadius = 10
         label.adjustsFontSizeToFitWidth = true

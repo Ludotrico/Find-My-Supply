@@ -32,7 +32,7 @@ class ProductCell: UITableViewCell {
         //productName.adjustsFontSizeToFitWidth = true
         lbl.sizeToFit()
         lbl.textColor = .black
-        lbl.font = UIFont(name: "HelveticaNeue", size: 15)
+        lbl.font = Fonts.shared.tableRowTitle//UIFont(name: "HelveticaNeue", size: 15)
         lbl.textAlignment = .center
         lbl.translatesAutoresizingMaskIntoConstraints = false
         return lbl
@@ -82,7 +82,7 @@ class ProductCell: UITableViewCell {
         lbl.numberOfLines = 0
         //productName.adjustsFontSizeToFitWidth = true
         lbl.sizeToFit()
-        lbl.font = UIFont(name: "HelveticaNeue", size: 15)
+        lbl.font = Fonts.shared.tableRowContent//UIFont(name: "HelveticaNeue", size: 15)
         lbl.textAlignment = .center
         lbl.translatesAutoresizingMaskIntoConstraints = false
         return lbl
@@ -95,7 +95,7 @@ class ProductCell: UITableViewCell {
         //productName.adjustsFontSizeToFitWidth = true
         lbl.textColor = .gray
         lbl.sizeToFit()
-        lbl.font = UIFont(name: "HelveticaNeue", size: 15)
+        lbl.font = Fonts.shared.tableRowContent//UIFont(name: "HelveticaNeue", size: 15)
         lbl.textAlignment = .center
         lbl.translatesAutoresizingMaskIntoConstraints = false
         return lbl
@@ -108,7 +108,7 @@ class ProductCell: UITableViewCell {
         //productName.adjustsFontSizeToFitWidth = true
         lbl.textColor = .black
         lbl.sizeToFit()
-        lbl.font = UIFont(name: "HelveticaNeue", size: 15)
+        lbl.font = Fonts.shared.tableRowContent//UIFont(name: "HelveticaNeue", size: 15)
         lbl.textAlignment = .center
         lbl.translatesAutoresizingMaskIntoConstraints = false
         return lbl
@@ -117,7 +117,7 @@ class ProductCell: UITableViewCell {
     var nearbyStoresBtn: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Nearby stores", for: .normal)
-        button.titleLabel?.font = UIFont(name: "HelveticaNeue", size: 15)
+        button.titleLabel?.font = Fonts.shared.tableRowBtn//UIFont(name: "HelveticaNeue", size: 15)
         button.setTitleColor(Color.shared.blue, for: .normal)
         button.layer.borderColor = Color.shared.blue.cgColor
         button.layer.borderWidth = 1.25
@@ -127,6 +127,7 @@ class ProductCell: UITableViewCell {
         button.titleLabel?.textAlignment = .center
         button.clipsToBounds = true
         button.tag = -1
+        button.titleLabel?.adjustsFontSizeToFitWidth = true
         button.translatesAutoresizingMaskIntoConstraints = false
     
         return button

@@ -386,7 +386,7 @@ class NotificationsController: UIViewController {
         scrollView.addSubview(tableView)
         
     
-        let tableHeight = (125*(areaNotifications.count + storeNotifications.count)) + 57
+        let tableHeight = (125*(areaNotifications.count + storeNotifications.count)) + 57 + 80
         tableView.anchor(top: scrollView.topAnchor, left: scrollView.leftAnchor, bottom: scrollView.bottomAnchor, right: scrollView.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: view.frame.width, height: CGFloat(tableHeight))
         
         tableView.delegate = self
@@ -579,17 +579,41 @@ extension NotificationsController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        125
+        return 125
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 40
+    }
+
+    
+//    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+//        if section == 0 {
+//            return "Pending Area Notifications"
+//        }
+//        return "Pending Store Notifications"
+//    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+                if section == 0 {
+                    let lbl = PaddingLabel()
+                    lbl.insets(top: 10, bottom: 10, left: 10, right: 10)
+                    lbl.text = "Pending Area Notifications"
+                    lbl.font = Fonts.shared.tableRowTitleLarge
+                    lbl.textColor = Color.shared.gold
+                    lbl.backgroundColor = .black
+                    return lbl
+                }
+                let lbl = PaddingLabel()
+                lbl.insets(top: 10, bottom: 10, left: 10, right: 10)
+                lbl.text = "Pending Store Notifications"
+                lbl.font = Fonts.shared.tableRowTitleLarge
+                lbl.textColor = Color.shared.gold
+                lbl.backgroundColor = .black
+                return lbl
     }
     
 
-    
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if section == 0 {
-            return "Pending Area Notifications"
-        }
-        return "Pending Store Notifications"
-    }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         print("++++++Item\(indexPath.row)")
@@ -617,7 +641,7 @@ extension NotificationsController: UITableViewDelegate, UITableViewDataSource {
                     cell.productName.text = notif.product__name!
                     Nuke.loadImage(with: URL(string: notif.product__imageLink!)!, options: options, into: cell.notifImage)
                     cell.titleStackLbl.text = notif.store__chainName!
-                    cell.addressLbl.text = notif.store__address!
+                    cell.addressLbl.text = notif.store__city!
                     cell.dateLbl.text = notif.date?.replacingOccurrences(of: "-", with: "/")
                 } else {
                     cell.productName.text = notif.product__name!
@@ -688,7 +712,7 @@ extension NotificationsController: UITableViewDelegate, UITableViewDataSource {
                     cell.productName.text = notif.product__name!
                     Nuke.loadImage(with: URL(string: notif.product__imageLink!)!, options: options, into: cell.notifImage)
                     cell.titleStackLbl.text = notif.store__chainName!
-                    cell.addressLbl.text = notif.store__address!
+                    cell.addressLbl.text = notif.store__city!
                     cell.dateLbl.text = notif.date?.replacingOccurrences(of: "-", with: "/")
                 } else {
                     cell.productName.text = notif.product__name!

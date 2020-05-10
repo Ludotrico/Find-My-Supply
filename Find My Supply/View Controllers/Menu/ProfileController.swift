@@ -80,7 +80,7 @@ class ProfileController: UIViewController {
     let fNameLbl: UILabel = {
         let lbl = UILabel()
         lbl.text = "First Name:"
-        lbl.font = UIFont(name: "HelveticaNeue", size: 25)
+        lbl.font = Fonts.shared.largeBold//UIFont(name: "HelveticaNeue", size: 25)
         lbl.textColor = .white //Dark mode
         lbl.numberOfLines = 1
         lbl.sizeToFit()
@@ -96,7 +96,7 @@ class ProfileController: UIViewController {
         attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray]) //Dark mode
         txt.borderStyle = .roundedRect
         txt.adjustsFontSizeToFitWidth = true
-        txt.font = UIFont(name: "HelveticaNeue", size: 20)
+        txt.font = Fonts.shared.largeLight//UIFont(name: "HelveticaNeue", size: 20)
         txt.isUserInteractionEnabled = false
         txt.autocorrectionType = .no
         txt.translatesAutoresizingMaskIntoConstraints = false
@@ -138,7 +138,7 @@ class ProfileController: UIViewController {
     let usernameLbl: UILabel = {
         let lbl = UILabel()
         lbl.text = "Username:"
-        lbl.font = UIFont(name: "HelveticaNeue", size: 25)
+        lbl.font = Fonts.shared.largeBold//UIFont(name: "HelveticaNeue", size: 25)
         lbl.textColor = .white //Dark mode
         lbl.numberOfLines = 1
         lbl.sizeToFit()
@@ -154,7 +154,7 @@ class ProfileController: UIViewController {
         attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray]) //Dark mode
         txt.borderStyle = .roundedRect
         txt.adjustsFontSizeToFitWidth = true
-        txt.font = UIFont(name: "HelveticaNeue", size: 20)
+        txt.font = Fonts.shared.largeLight//UIFont(name: "HelveticaNeue", size: 20)
         txt.isUserInteractionEnabled = false
         txt.autocapitalizationType = .none
         txt.autocorrectionType = .no
@@ -192,7 +192,7 @@ class ProfileController: UIViewController {
     let emailLbl: UILabel = {
         let lbl = UILabel()
         lbl.text = "Email:"
-        lbl.font = UIFont(name: "HelveticaNeue", size: 25)
+        lbl.font = Fonts.shared.largeBold//UIFont(name: "HelveticaNeue", size: 25)
         lbl.textColor = .white //Dark mode
         lbl.numberOfLines = 1
         lbl.sizeToFit()
@@ -208,7 +208,7 @@ class ProfileController: UIViewController {
         attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray]) //Dark mode
         txt.borderStyle = .roundedRect
         txt.adjustsFontSizeToFitWidth = true
-        txt.font = UIFont(name: "HelveticaNeue", size: 20)
+        txt.font = Fonts.shared.largeLight//UIFont(name: "HelveticaNeue", size: 20)
         txt.isUserInteractionEnabled = false
         txt.autocapitalizationType = .none
         txt.autocorrectionType = .no
@@ -236,7 +236,7 @@ class ProfileController: UIViewController {
         btn.setTitle("Change password", for: .normal)
         btn.setTitleColor(.white, for: .normal)
         btn.backgroundColor = .darkGray
-        btn.titleLabel?.font = UIFont(name: "HelveticaNeue", size: 25)
+        btn.titleLabel?.font = Fonts.shared.largeBold//UIFont(name: "HelveticaNeue", size: 25)
         btn.layer.borderColor = UIColor.white.cgColor //Dark mode
         btn.layer.borderWidth = 3
         btn.layer.cornerRadius = 10
@@ -252,7 +252,7 @@ class ProfileController: UIViewController {
         btn.setTitle("Save", for: .normal)
         btn.setTitleColor(.white, for: .normal)
         btn.backgroundColor = Color.shared.blue
-        btn.titleLabel?.font = UIFont(name: "HelveticaNeue", size: 25)
+        btn.titleLabel?.font = Fonts.shared.largeBold//UIFont(name: "HelveticaNeue", size: 25)
         btn.layer.borderColor = UIColor.white.cgColor //Dark mode
         btn.layer.borderWidth = 3
         btn.layer.cornerRadius = 10

@@ -92,7 +92,7 @@ class ChangePasswordController: UIViewController {
     let currentPswLbl: UILabel = {
         let lbl = UILabel()
         lbl.text = "Enter current password:"
-        lbl.font = UIFont(name: "HelveticaNeue", size: 25)
+        lbl.font = Fonts.shared.largeBold//UIFont(name: "HelveticaNeue", size: 25)
         lbl.textColor = .white //Dark mode
         lbl.numberOfLines = 1
         lbl.sizeToFit()
@@ -108,7 +108,7 @@ class ChangePasswordController: UIViewController {
         attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray]) //Dark mode
         txt.borderStyle = .roundedRect
         txt.adjustsFontSizeToFitWidth = true
-        txt.font = UIFont(name: "HelveticaNeue", size: 20)
+        txt.font = Fonts.shared.largeLight//UIFont(name: "HelveticaNeue", size: 20)
         txt.isUserInteractionEnabled = true
         txt.alpha = 1
         txt.tag = 1
@@ -120,7 +120,7 @@ class ChangePasswordController: UIViewController {
     let continueBtn: UIButton = {
         let btn = UIButton()
         btn.setTitle("Continue", for: .normal)
-        btn.titleLabel?.font = UIFont(name: "HelveticaNeue", size: 25)
+        btn.titleLabel?.font = Fonts.shared.largeBold//UIFont(name: "HelveticaNeue", size: 25)
         btn.layer.borderColor = UIColor.white.cgColor //Dark mode
         btn.layer.borderWidth = 3
         btn.layer.cornerRadius = 10
@@ -145,7 +145,7 @@ class ChangePasswordController: UIViewController {
     let newPswLbl1: UILabel = {
         let lbl = UILabel()
         lbl.text = "Enter new password:"
-        lbl.font = UIFont(name: "HelveticaNeue", size: 25)
+        lbl.font = Fonts.shared.largeBold//UIFont(name: "HelveticaNeue", size: 25)
         lbl.textColor = .white //Dark mode
         lbl.numberOfLines = 1
         lbl.sizeToFit()
@@ -161,7 +161,7 @@ class ChangePasswordController: UIViewController {
         attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray]) //Dark mode
         txt.borderStyle = .roundedRect
         txt.adjustsFontSizeToFitWidth = true
-        txt.font = UIFont(name: "HelveticaNeue", size: 20)
+        txt.font = Fonts.shared.largeLight//UIFont(name: "HelveticaNeue", size: 20)
         txt.isUserInteractionEnabled = true
         txt.alpha = 1
         txt.tag = 1
@@ -173,7 +173,7 @@ class ChangePasswordController: UIViewController {
     let newPswLbl2: UILabel = {
         let lbl = UILabel()
         lbl.text = "Repeat new password:"
-        lbl.font = UIFont(name: "HelveticaNeue", size: 25)
+        lbl.font = Fonts.shared.largeBold//UIFont(name: "HelveticaNeue", size: 25)
         lbl.textColor = .white //Dark mode
         lbl.numberOfLines = 1
         lbl.sizeToFit()
@@ -189,7 +189,7 @@ class ChangePasswordController: UIViewController {
         attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray]) //Dark mode
         txt.borderStyle = .roundedRect
         txt.adjustsFontSizeToFitWidth = true
-        txt.font = UIFont(name: "HelveticaNeue", size: 20)
+        txt.font = Fonts.shared.largeLight//UIFont(name: "HelveticaNeue", size: 20)
         txt.isUserInteractionEnabled = true
         txt.alpha = 1
         txt.tag = 1
@@ -202,7 +202,7 @@ class ChangePasswordController: UIViewController {
         let btn = UIButton()
         btn.setTitle("Save", for: .normal)
         btn.setTitleColor(Color.shared.blue, for: .normal)
-        btn.titleLabel?.font = UIFont(name: "HelveticaNeue", size: 25)
+        btn.titleLabel?.font = Fonts.shared.largeBold//UIFont(name: "HelveticaNeue", size: 25)
         btn.layer.borderColor = UIColor.white.cgColor //Dark mode
         btn.layer.borderWidth = 3
         btn.layer.cornerRadius = 10

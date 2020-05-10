@@ -53,8 +53,12 @@ class Fonts {
     let storeButton = UIFont(name: "BrandonGrotesque-Black", size: 20)
     
     let tableRowTitle = UIFont(name: "BrandonGrotesque-Black", size: 15)
+     let tableRowTitleLarge = UIFont(name: "BrandonGrotesque-Black", size: 25)
     let tableRowContent = UIFont(name: "BrandonGrotesque-Light", size: 15)
     let tableRowBtn = UIFont(name: "BrandonGrotesque-Black", size: 15)
+    
+    let largeBold = UIFont(name: "BrandonGrotesque-Black", size: 25)
+    let largeLight = UIFont(name: "BrandonGrotesque-Light", size: 20)
     
 }
 

@@ -145,7 +145,7 @@ struct notification: Decodable {
     var city: String?
     var store__id: Int?
     var store__chainName: String?
-    var store__address: String?
+    var store__city: String?
     var supplyName: String?
     var product__id: Int?
     var product__name: String?

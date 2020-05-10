@@ -141,7 +141,7 @@ class NotificationCell: UITableViewCell {
             //productName.adjustsFontSizeToFitWidth = true
             lbl.sizeToFit()
             lbl.textColor = .black
-            lbl.font = UIFont(name: "HelveticaNeue", size: 15)
+            lbl.font = Fonts.shared.tableRowTitle//UIFont(name: "HelveticaNeue", size: 15)
             lbl.textAlignment = .center
             return lbl
         }()
@@ -198,7 +198,7 @@ class NotificationCell: UITableViewCell {
         lbl.textColor = .black
         lbl.text = ""
         lbl.sizeToFit()
-        lbl.font = UIFont(name: "HelveticaNeue", size: 15)
+        lbl.font = Fonts.shared.tableRowContent//UIFont(name: "HelveticaNeue", size: 15)
         lbl.textAlignment = .center
         return lbl
     }()
@@ -211,7 +211,7 @@ class NotificationCell: UITableViewCell {
         lbl.text = ""//"26502 Towne Centre Dr, Foothill Ranch, CA 92610"
         lbl.sizeToFit()
         lbl.adjustsFontSizeToFitWidth = true
-        lbl.font = UIFont(name: "HelveticaNeue", size: 12)
+        lbl.font = Fonts.shared.tableRowContent//UIFont(name: "HelveticaNeue", size: 12)
         lbl.textAlignment = .center
         return lbl
     }()
@@ -222,7 +222,7 @@ class NotificationCell: UITableViewCell {
         lbl.numberOfLines = 0
         lbl.text = ""
         lbl.sizeToFit()
-        lbl.font = UIFont(name: "HelveticaNeue", size: 15)
+        lbl.font = Fonts.shared.tableRowContent//UIFont(name: "HelveticaNeue", size: 15)
         lbl.textAlignment = .center
         return lbl
     }()
@@ -261,7 +261,7 @@ class NotificationCell: UITableViewCell {
         deleteBtnFake.anchor(top: topAnchor, left: nil, bottom: nil, right: rightAnchor, paddingTop: 10, paddingLeft: 0, paddingBottom: 0, paddingRight: 10, width: 30, height: 30)
         
         addSubview(notifImage)
-        notifImage.anchor(top: topAnchor, left: leftAnchor, bottom: bottomAnchor, right: nil, paddingTop: 10, paddingLeft: 10, paddingBottom: 10, paddingRight: 0, width: 125, height: 125)
+        notifImage.anchor(top: topAnchor, left: leftAnchor, bottom: bottomAnchor, right: nil, paddingTop: 10, paddingLeft: 10, paddingBottom: 10, paddingRight: 0, width: 100, height: 125)
 
 
         addSubview(Vstack)

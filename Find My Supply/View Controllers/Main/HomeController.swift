@@ -618,7 +618,7 @@ class HomeController: UIViewController {
     // MARK: - Selectors
     func loadInterstitial() {
         DispatchQueue.global(qos: .background).async {
-            self.interstitial = GADInterstitial(adUnitID: Ads.shared.interstitialTest)
+            self.interstitial = GADInterstitial(adUnitID: Ads.shared.interstitialHomeID)
             self.interstitial?.delegate = self
             
             let request = GADRequest()
@@ -839,7 +839,6 @@ class HomeController: UIViewController {
     
     
     @objc func closeMenu() {
-        //print("+++IN CLOSE MENU, showing: \(menuIsShowing)")
 //        if menuIsShowing {
 //
 //            openMenu()

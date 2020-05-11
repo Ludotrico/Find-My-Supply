@@ -2551,6 +2551,13 @@ extension HomeController: UITableViewDelegate, UITableViewDataSource {
         
         isSearching = true
         
+        
+        if countryNotSupported {
+            showCountryNotSupported()
+            return
+        }
+        
+        
         supplySearchedFor = supplyList[indexPath.row].replacingOccurrences(of: " ", with: "_")
         DispatchQueue.main.async {
             self.callout.isHidden = true

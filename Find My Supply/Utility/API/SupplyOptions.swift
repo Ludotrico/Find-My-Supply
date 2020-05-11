@@ -27,7 +27,7 @@ struct supplyOptions {
             // decode data
             do {
                 let options = try JSONDecoder().decode([supplyOption].self, from: data!)
-                print("Finished Salt Fetch\n")
+                //print("Finished Salt Fetch\n")
                 completion(.success(options))
             } catch let error {
                 completion(.failure(error))

@@ -168,7 +168,7 @@ class MenuController: UIViewController {
     var delegate: HomeControllerDelegate?
     
     @objc func openProfileController() {
-        print("+++++OPEN PROFILE")
+        //print("+++++OPEN PROFILE")
         //navigationController?.pushViewController(ProfileController(), animated: true)
         delegate?.handleMenuToggle(forMenuOption: 0)
 
@@ -176,7 +176,7 @@ class MenuController: UIViewController {
     }
     
     @objc func openNotificationsController() {
-        print("+++++OPEN PROFILE")
+        //print("+++++OPEN PROFILE")
         //navigationController?.pushViewController(ProfileController(), animated: true)
         delegate?.handleMenuToggle(forMenuOption: 1)
 
@@ -184,7 +184,7 @@ class MenuController: UIViewController {
     }
     
     @objc func openSettingsController() {
-        print("+++++OPEN PROFILE")
+        //print("+++++OPEN PROFILE")
         //navigationController?.pushViewController(ProfileController(), animated: true)
         delegate?.handleMenuToggle(forMenuOption: 2)
 
@@ -192,7 +192,7 @@ class MenuController: UIViewController {
     }
     
     @objc func openGoldController() {
-        print("+++++OPEN PROFILE")
+        //print("+++++OPEN PROFILE")
         //navigationController?.pushViewController(ProfileController(), animated: true)
         delegate?.handleMenuToggle(forMenuOption: 3)
 
@@ -200,7 +200,7 @@ class MenuController: UIViewController {
     }
     
     @objc func openContactUsController() {
-        print("+++++OPEN PROFILE")
+        //print("+++++OPEN PROFILE")
         //navigationController?.pushViewController(ProfileController(), animated: true)
         delegate?.handleMenuToggle(forMenuOption: 4)
 

@@ -752,7 +752,7 @@ class GoldController: UIViewController {
     //MARK: Selectors
     
     @objc func handleUpgrade() {
-        print("=====UPgrading $$$$")
+        //print("=====UPgrading $$$$")
 
         
         
@@ -777,7 +777,7 @@ class GoldController: UIViewController {
                     break
                 }
                 
-                print("======in loop=====")
+                //print("======in loop=====")
                 sleep(3)
             }
             
@@ -815,7 +815,7 @@ class GoldController: UIViewController {
         
         if twelveTapped {
             //Show purchase popup
-             print("++++++ 12 tapped")
+             //print("++++++ 12 tapped")
             handleUpgrade()
         }
         twelveTapped = true
@@ -845,7 +845,7 @@ class GoldController: UIViewController {
         
         if sixTapped {
             //Show purchase popup
-             print("++++++ 6 tapped")
+             //print("++++++ 6 tapped")
             handleUpgrade()
         }
         sixTapped = true
@@ -877,7 +877,7 @@ class GoldController: UIViewController {
         
         if oneTapped {
             //Show purchase popup
-             print("++++++ 1 tapped")
+             //print("++++++ 1 tapped")
             handleUpgrade()
         }
         oneTapped = true
@@ -913,7 +913,7 @@ class GoldController: UIViewController {
     }
     
     @objc func scrollWasTapped() {
-        print("+++ TAPPED")
+        //print("+++ TAPPED")
         userHasSwiped = true
         updatePageControl()
     }
@@ -939,7 +939,7 @@ class GoldController: UIViewController {
             }, completion: { _ in
                 
  
-                print("+++ Completion!")
+                //print("+++ Completion!")
                 self.Hscroll.isUserInteractionEnabled = true
                 
                 self.createNewTile()
@@ -973,7 +973,7 @@ class GoldController: UIViewController {
         
         if isPopup {
             view.frame = CGRect(x: 0, y: 0, width: popupWidth, height: popupHeight)
-            print("+++++WIDTh: \(view.frame.width)")
+            //print("+++++WIDTh: \(view.frame.width)")
         }
         
    
@@ -1518,7 +1518,7 @@ class GoldController: UIViewController {
            return (info3GradientCopy, info3StackCopy, info3TitleCopy, info3TextCopy, info3ImgCopy)
             
         default:
-            print("+++something went wrong")
+            //print("+++something went wrong")
              return (UIImageView(), UIStackView(), UILabel(), UILabel(), UIImageView())
         }
         
@@ -1628,7 +1628,7 @@ class GoldController: UIViewController {
         lbl.backgroundColor = UIColor.rgb(red: 209, green: 21, blue: 0)
         lbl.textColor = .white
         lbl.text = text
-        lbl.font = UIFont.italicSystemFont(ofSize: 15.0)
+        lbl.font = Fonts.shared.slideInMessage
         //lbl.sizeToFit()
         lbl.textAlignment = .center
         lbl.numberOfLines = 0
@@ -1682,7 +1682,7 @@ extension GoldController:UIScrollViewDelegate {
         let currentOffset = self.Hscroll.contentOffset.x
         //Case user swiped Right
         if  (self.Hscroll.contentOffset.x - self.pastOffsetX) < 0 {
-            print("+++SWIPED RIGHT")
+            //print("+++SWIPED RIGHT")
             
             absoluteIndex -= 1
             if absoluteIndex == -1 {
@@ -1699,14 +1699,14 @@ extension GoldController:UIScrollViewDelegate {
             
             
             self.pastOffsetX -= self.view.frame.width
-            print("+Now at \(self.pastOffsetX)")
+            //print("+Now at \(self.pastOffsetX)")
         }
         else if  (self.Hscroll.contentOffset.x - self.pastOffsetX) > 0 {
-            print("+++SWIPED LEFT")
-            print("+Was at \(self.pastOffsetX)")
+            //print("+++SWIPED LEFT")
+            //print("+Was at \(self.pastOffsetX)")
             
             if !self.positiveSet.contains(currentOffset + self.view.frame.width*3) {
-                print("+++++Add tile to the RIGHT")
+                //print("+++++Add tile to the RIGHT")
                 self.positiveSet.insert(currentOffset + self.view.frame.width*3)
                 
                 createNewTile()
@@ -1720,7 +1720,7 @@ extension GoldController:UIScrollViewDelegate {
             }
             
             self.pastOffsetX += self.view.frame.width
-            print("+Now at \(self.pastOffsetX)")
+            //print("+Now at \(self.pastOffsetX)")
             
         }
         updatePageControl()

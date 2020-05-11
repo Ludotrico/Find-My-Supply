@@ -8,6 +8,7 @@
 
 import UIKit
 import MapKit
+import StoreKit
 import SwiftUI
 import CoreLocation
 import EzPopup
@@ -20,7 +21,7 @@ class HomeController: UIViewController {
         view.backgroundColor = .black
 
         
-        //print(BCryptSwift.generateSalt())
+        ////print(BCryptSwift.generateSalt())
         //showActivityIndicatory()
         
 
@@ -89,6 +90,34 @@ class HomeController: UIViewController {
             configureThemePopup()
             UserDefaults.standard.set(false, forKey: "firstLaunch")
         }
+        
+        if !firstOpened {
+            //Ask for review
+            
+      
+            if UserDefaults.standard.integer(forKey: "reviewCount") == 0 {
+                      //Never asked for review
+                if UserDefaults.standard.integer(forKey: "openCount")/10 == 1 {
+                    SKStoreReviewController.requestReview()
+                    UserDefaults.standard.set(UserDefaults.standard.integer(forKey: "reviewCount")+1, forKey: "reviewCount")
+                }
+            } else if UserDefaults.standard.integer(forKey: "reviewCount") == 1 {
+                      //asked once already
+                if UserDefaults.standard.integer(forKey: "openCount")/10 == 2 {
+                    SKStoreReviewController.requestReview()
+                    UserDefaults.standard.set(UserDefaults.standard.integer(forKey: "reviewCount")+1, forKey: "reviewCount")
+                }
+            } else if UserDefaults.standard.integer(forKey: "reviewCount") == 2{
+                //asked twice aleady
+                if UserDefaults.standard.integer(forKey: "openCount")/10 == 4 {
+                    SKStoreReviewController.requestReview()
+                    UserDefaults.standard.set(UserDefaults.standard.integer(forKey: "reviewCount")+1, forKey: "reviewCount")
+                }
+                
+            }
+        }
+        
+        firstOpened = false
    
         
         
@@ -496,7 +525,7 @@ class HomeController: UIViewController {
         btn.setTitle("Let's go", for: .normal)
         btn.setTitleColor(Color.shared.blue, for: .normal)
         btn.backgroundColor = .white
-        btn.titleLabel?.font = Fonts.shared.popupBtn//UIFont(name: "HelveticaNeue", size: 25)
+        btn.titleLabel?.font = Fonts.shared.XLBold//UIFont(name: "HelveticaNeue", size: 25)
         btn.layer.borderColor = UIColor.white.cgColor //Dark mode
         btn.layer.borderWidth = 3
         btn.layer.cornerRadius = 10
@@ -511,7 +540,7 @@ class HomeController: UIViewController {
         btn.setTitle("Got it", for: .normal)
         btn.setTitleColor(Color.shared.theme, for: .normal)
         btn.backgroundColor = Color.shared.gold
-        btn.titleLabel?.font = Fonts.shared.popupBtn//UIFont(name: "HelveticaNeue", size: 25)
+        btn.titleLabel?.font = Fonts.shared.XLBold//UIFont(name: "HelveticaNeue", size: 25)
         btn.layer.borderColor = Color.shared.gold.cgColor//UIColor.white.cgColor //Dark mode
         btn.layer.borderWidth = 3
         btn.layer.cornerRadius = 10
@@ -526,7 +555,7 @@ class HomeController: UIViewController {
         btn.setTitle("Add ZIP code", for: .normal)
         btn.setTitleColor(Color.shared.theme, for: .normal)
         btn.backgroundColor = Color.shared.gold
-        btn.titleLabel?.font = Fonts.shared.popupBtn//UIFont(name: "HelveticaNeue", size: 25)
+        btn.titleLabel?.font = Fonts.shared.XLBold//UIFont(name: "HelveticaNeue", size: 25)
         btn.layer.borderColor = Color.shared.gold.cgColor//UIColor.white.cgColor //Dark mode
         btn.layer.borderWidth = 3
         btn.layer.cornerRadius = 10
@@ -541,7 +570,7 @@ class HomeController: UIViewController {
         btn.setTitle("Cancel", for: .normal)
         btn.setTitleColor(Color.shared.theme, for: .normal)
         btn.backgroundColor = Color.shared.red
-        btn.titleLabel?.font = Fonts.shared.popupBtn//UIFont(name: "HelveticaNeue", size: 25)
+        btn.titleLabel?.font = Fonts.shared.XLBold//UIFont(name: "HelveticaNeue", size: 25)
         btn.layer.borderColor = Color.shared.red.cgColor //UIColor.white.cgColor //Dark mode
         btn.layer.borderWidth = 3
         btn.layer.cornerRadius = 10
@@ -579,6 +608,8 @@ class HomeController: UIViewController {
     var zipUpdated = false
     
     var interstitial: GADInterstitial?
+    
+    var firstOpened = true
     
 
  
@@ -661,7 +692,7 @@ class HomeController: UIViewController {
                     }
                     
                 case .failure(let error):
-                    print("DEBUG: Failed with error \(error)")
+                    //print("DEBUG: Failed with error \(error)")
                     DispatchQueue.main.async {
                         self.spinner.isHidden = true
                         self.showMessage(label: self.createLbl(text: "Oops! A network error occurred, please check your connection and try again."))
@@ -754,13 +785,13 @@ class HomeController: UIViewController {
           center.getNotificationSettings { settings in
               if settings.authorizationStatus == .notDetermined {
                   //Not determined
-                  print("=====+PROMPT USER")
+                  //print("=====+PROMPT USER")
 
                   let center = UNUserNotificationCenter.current()
                   center.requestAuthorization(options: [.alert, .sound, .badge]) { granted, error in
                       if let error = error {
                           // Handle the error here.
-                          print("DEBUG: Failed with error \(error)")
+                          //print("DEBUG: Failed with error \(error)")
                         self.showMessage(label: self.createLbl(text: "Oops! An unexpected error occurred, please try again."))
                       }
                       self.handleAddNotification()
@@ -808,7 +839,7 @@ class HomeController: UIViewController {
     
     
     @objc func closeMenu() {
-        print("+++IN CLOSE MENU, showing: \(menuIsShowing)")
+        //print("+++IN CLOSE MENU, showing: \(menuIsShowing)")
 //        if menuIsShowing {
 //
 //            openMenu()
@@ -819,7 +850,7 @@ class HomeController: UIViewController {
     
     
     @objc func openProfileController() {
-        print("+++++OPEN PROFILE")
+        //print("+++++OPEN PROFILE")
         navigationController?.pushViewController(ProfileController(), animated: true)
     }
     
@@ -886,7 +917,7 @@ class HomeController: UIViewController {
     }
     
     @objc func openMenu() {
-        print("===+ ADDING Menu")
+        //print("===+ ADDING Menu")
         
 
         
@@ -942,7 +973,7 @@ class HomeController: UIViewController {
 
     
     @objc func addNotification() {
-        print("===+ ADDING NOTIFICATION")
+        //print("===+ ADDING NOTIFICATION")
         
    
         
@@ -1001,7 +1032,7 @@ class HomeController: UIViewController {
     
     
     @objc func showItems() {
-         print("=========================SHOW ITEMS tapped")
+         //print("=========================SHOW ITEMS tapped")
         closeDropMenu()
   
         let storeController = StoreController()
@@ -1064,15 +1095,15 @@ class HomeController: UIViewController {
     
     
     @objc func redirect() {
-         print("=========================GET DIRECTIONS tapped")
+         //print("=========================GET DIRECTIONS tapped")
         handleRedirect()
     }
         
     @objc func handleMapTap(_ sender: UITapGestureRecognizer? = nil) {
         // handling code
-        print("========+handling MAP tap")
-        print("=======+calloutIsShowing\(calloutIsShowing)")
-        print("=======+calloutShowing\(calloutShowing)")
+        //print("========+handling MAP tap")
+        //print("=======+calloutIsShowing\(calloutIsShowing)")
+        //print("=======+calloutShowing\(calloutShowing)")
         
       
         if calloutIsShowing && !showingMenu{
@@ -1091,7 +1122,7 @@ class HomeController: UIViewController {
     
     @objc func handleTap(_ sender: UITapGestureRecognizer? = nil) {
         // handling code
-        print("===+handling CALLOUT tap")
+        //print("===+handling CALLOUT tap")
         
         
         
@@ -1126,22 +1157,22 @@ class HomeController: UIViewController {
             
 
             let index = (annotation.storeIndex)
-            print("===")
-            print("===")
-            print("===")
-            print("===SENDER: \(index!)")
+            //print("===")
+            //print("===")
+            //print("===")
+            //print("===SENDER: \(index!)")
 
 
-            print("===calloutIsShowing \(calloutIsShowing)")
-            print("===calloutShowing \(calloutShowing)")
+            //print("===calloutIsShowing \(calloutIsShowing)")
+            //print("===calloutShowing \(calloutShowing)")
             
             if calloutIsShowing {
                 if callout.frame.intersects(view.frame) {
                     return
                 }
 //                let pt = sender?.location(in: mapView)
-//                 print("===+tap point \(pt)")
-//                print("===+callout bounds: \(callout.frame)")
+//                 //print("===+tap point \(pt)")
+//                //print("===+callout bounds: \(callout.frame)")
 //                if callout.frame.contains(pt!) {
 //                     return
 //                 }
@@ -1254,7 +1285,7 @@ class HomeController: UIViewController {
     
     func authenticateUserAndConfigureView() {
         //Check if trying to change password
-        print("+++++\(UserDefaults.standard.bool(forKey: "tappedForgotPassword"))")
+        //print("+++++\(UserDefaults.standard.bool(forKey: "tappedForgotPassword"))")
         if UserDefaults.standard.bool(forKey: "tappedForgotPassword") {
             navigationController?.pushViewController(ForgotPasswordController(), animated: true)
             return
@@ -1263,7 +1294,7 @@ class HomeController: UIViewController {
         let isRegistered = UserDefaults.standard.bool(forKey: "isRegistered")
         if isRegistered {
             //Authenticate user
-            print("=========================registered=========================")
+            //print("=========================registered=========================")
 
             DispatchQueue.global(qos: .userInitiated).async {
 
@@ -1273,7 +1304,7 @@ class HomeController: UIViewController {
                             let firstChar = message.first
                             if firstChar == "#" {
                                 //Failed to register user
-                                print("MESSAGE: \(message)")
+                                //print("MESSAGE: \(message)")
                                 DispatchQueue.main.async {
                                 self.navigationController?.pushViewController(LoginController(), animated: true)
                                 }
@@ -1285,7 +1316,7 @@ class HomeController: UIViewController {
                                 UserDefaults.standard.set(false, forKey: "isGold")
                             }
                            
-                            print("===== ADS Enabled?: \(Ads.shared.adsEnabled)")
+                            //print("===== ADS Enabled?: \(Ads.shared.adsEnabled)")
                       
                             //Logged in user
                             Gold.shared.updatePrivileges()
@@ -1302,7 +1333,7 @@ class HomeController: UIViewController {
                             
                         
                         case .failure(let error):
-                            print("DEBUG: Failed with error \(error)")
+                            //print("DEBUG: Failed with error \(error)")
                             DispatchQueue.main.async {
                                 self.showMessage(label: self.createLbl(text: "Oops! A network error occurred, please check your connection and try again."))
                         }
@@ -1311,7 +1342,7 @@ class HomeController: UIViewController {
             }
         } else {
             //Show register page
-            print("unregistered")
+            //print("unregistered")
             DispatchQueue.main.async {
                 self.navigationController?.pushViewController(RegisterController(), animated: true)
             }
@@ -1423,7 +1454,7 @@ class HomeController: UIViewController {
     func configureColorScheme() {
         var overriden = false
         
-        print("++ Entering color scheme with \(UserDefaults.standard.integer(forKey: "colorScheme"))")
+        //print("++ Entering color scheme with \(UserDefaults.standard.integer(forKey: "colorScheme"))")
         
         let mapType = UserDefaults.standard.integer(forKey: "mapType")
             switch mapType {
@@ -1621,7 +1652,7 @@ class HomeController: UIViewController {
     func updateUserZip() {
     
         guard let exposedLocation = self.locationManager.location else {
-            print("*** Error in \(#function): exposedLocation is nil")
+            //print("*** Error in \(#function): exposedLocation is nil")
             return
         }
         
@@ -1641,7 +1672,7 @@ class HomeController: UIViewController {
             }
             
             if let city = placemark.locality {
-                print("+++\(city)")
+                //print("+++\(city)")
                 Notifications.shared.city = city.replacingOccurrences(of: " ", with: "_")
                 
             }
@@ -1655,14 +1686,14 @@ class HomeController: UIViewController {
                         UpdateUser.shared.updateUserZip { (result) in
                             switch result {
                             case .success(let m):
-                                print("+++\(zip)")
+                                //print("+++\(zip)")
                                 if m.first == "T" {
                                     self.zipNotSupported = true
                             
                                 }
                                 
                             case .failure(let error):
-                                print("DEBUG: Failed with error \(error)")
+                                //print("DEBUG: Failed with error \(error)")
                                 DispatchQueue.main.async {
                                     self.showMessage(label: self.createLbl(text: "Oops! A network error occurred, please check your connection and try again."))
                                 }
@@ -1672,7 +1703,7 @@ class HomeController: UIViewController {
                 }
                 
             }
-            print("+++\(Notifications.shared.city)")
+            //print("+++\(Notifications.shared.city)")
         }
     }
 
@@ -1692,13 +1723,13 @@ class HomeController: UIViewController {
         geocoder.reverseGeocodeLocation(location) { placemarks, error in
             
             guard error == nil else {
-                print("*** Error in \(#function): \(error!.localizedDescription)")
+                //print("*** Error in \(#function): \(error!.localizedDescription)")
                 completion(nil)
                 return
             }
             
             guard let placemark = placemarks?[0] else {
-                print("*** Error in \(#function): placemark is nil")
+                //print("*** Error in \(#function): placemark is nil")
                 completion(nil)
                 return
             }
@@ -1710,7 +1741,7 @@ class HomeController: UIViewController {
 
     
     func addSupplyRegionNotification() {
-        print("+++\(supplySearchedFor)")
+        //print("+++\(supplySearchedFor)")
         
         
         let date = Date()
@@ -1727,7 +1758,7 @@ class HomeController: UIViewController {
             Notifications.shared.addSupplyRegionNotification  { (result) in
                 switch result{
                 case .success(let message):
-                    print("=====+ \(message)")
+                    //print("=====+ \(message)")
                     if message.first == "#" {
                         //Notif already exists
                         DispatchQueue.main.async {
@@ -1735,7 +1766,7 @@ class HomeController: UIViewController {
                             lbl.backgroundColor = UIColor.rgb(red: 255, green: 153, blue: 0)
                             lbl.textColor = .white
                             lbl.text = "Notification has already been added."
-                            lbl.font = Fonts.shared.slideInMessage//UIFont.italicSystemFont(ofSize: 15.0)
+                            lbl.font = Fonts.shared.slideInMessage//Fonts.shared.slideInMessage
                             //lbl.sizeToFit()
                             lbl.textAlignment = .center
                             lbl.numberOfLines = 0
@@ -1754,7 +1785,7 @@ class HomeController: UIViewController {
                             lbl.backgroundColor = .systemGreen
                             lbl.textColor = .white
                             lbl.text = "Notification added."
-                            lbl.font = Fonts.shared.slideInMessage//UIFont.italicSystemFont(ofSize: 15.0)
+                            lbl.font = Fonts.shared.slideInMessage//Fonts.shared.slideInMessage
                             //lbl.sizeToFit()
                             lbl.textAlignment = .center
                             lbl.numberOfLines = 0
@@ -1766,7 +1797,7 @@ class HomeController: UIViewController {
                         }
                     }
                 case .failure(let error):
-                    print("DEBUG: Failed with error \(error)")
+                    //print("DEBUG: Failed with error \(error)")
                     DispatchQueue.main.async {
                         self.spinner.isHidden = true
                         self.showMessage(label: self.createLbl(text: "Oops! A network error occurred, please check your connection and try again."))
@@ -1787,7 +1818,7 @@ class HomeController: UIViewController {
         lbl.backgroundColor = UIColor.rgb(red: 209, green: 21, blue: 0)
         lbl.textColor = .white
         lbl.text = text
-        lbl.font = Fonts.shared.slideInMessage//UIFont.italicSystemFont(ofSize: 15.0)
+        lbl.font = Fonts.shared.slideInMessage//Fonts.shared.slideInMessage
         //lbl.sizeToFit()
         lbl.textAlignment = .center
         lbl.numberOfLines = 0
@@ -1856,7 +1887,7 @@ class HomeController: UIViewController {
                         
                     }
                 case .failure(let error):
-                    print("DEBUG: Failed with error \(error)")
+                    //print("DEBUG: Failed with error \(error)")
                     DispatchQueue.main.async {
                         self.showMessage(label: self.createLbl(text: "Oops! A network error occurred, please check your connection and try again."))
                     }
@@ -2017,7 +2048,7 @@ class HomeController: UIViewController {
         mapView.removeAnnotations(mapView.annotations)
         DispatchQueue.main.async {
             for i in 0..<self.stores.count {
-                //print(store)
+                ////print(store)
                 let storeAnnotation = CustomAnnotation(coordinate: CLLocationCoordinate2D(latitude: self.stores[i].store__latitude, longitude: self.stores[i].store__longitude))
                 storeAnnotation.storeIndex = i
                 storeAnnotation.chainName = self.stores[i].store__chainName
@@ -2095,7 +2126,7 @@ class HomeController: UIViewController {
 //                    switch result {
 //                        case .success(let options):
 //                            DispatchQueue.main.async {
-//                                print(options)
+//                                //print(options)
 //                                self.supplies = options
 //                                var indexPaths = [IndexPath]()
 //
@@ -2104,8 +2135,8 @@ class HomeController: UIViewController {
 //                                    indexPaths.append(indexPath)
 //                                }
 //
-//                                print(indexPaths)
-//                                print("\(self.supplies.count)")
+//                                //print(indexPaths)
+//                                //print("\(self.supplies.count)")
 //
 //
 //                                self.tableView.invalidateIntrinsicContentSize()
@@ -2119,7 +2150,7 @@ class HomeController: UIViewController {
 //
 //                        }
 //                        case .failure(let error):
-//                            print("DEBUG: Failed with error \(error)")
+//                            //print("DEBUG: Failed with error \(error)")
 //                    }
 //                }
 //            }
@@ -2234,13 +2265,13 @@ class HomeController: UIViewController {
     
     
     func centerMapOnUser() {
-        print("???Center map on user")
+        //print("???Center map on user")
 
         if let coordinates = self.locationManager.location?.coordinate {
             Location.shared.coordinates = coordinates
         }
         else { return }
-           print("???GOT LOCATION")
+           //print("???GOT LOCATION")
         initialNeedsCentering = false
         let region = MKCoordinateRegion(center: Location.shared.coordinates, latitudinalMeters: 2000, longitudinalMeters: 2000)
         self.mapView.setRegion(region, animated: true)
@@ -2248,14 +2279,14 @@ class HomeController: UIViewController {
     }
     
     func initialCenterMapOnUser() {
-        print("???Initial center map on user")
+        //print("???Initial center map on user")
         
 
         if let coordinates = self.locationManager.location?.coordinate {
             Location.shared.coordinates = coordinates
         }
         else { return }
-           print("???GOT initial LOCATION")
+           //print("???GOT initial LOCATION")
         
         initialNeedsCentering = false
         
@@ -2359,44 +2390,44 @@ class HomeController: UIViewController {
 
 extension HomeController: CLLocationManagerDelegate {
     func enableLocationServices() {
-        print("???Enable location services, status: \(CLLocationManager.authorizationStatus())")
+        //print("???Enable location services, status: \(CLLocationManager.authorizationStatus())")
         switch CLLocationManager.authorizationStatus() {
         case .notDetermined:
-            print("Location auth status is NOT DETERMINED")
+            //print("Location auth status is NOT DETERMINED")
             locationManager.requestWhenInUseAuthorization()
         case .restricted:
-            print("Location auth status is RESTRICTED")
+            //print("Location auth status is RESTRICTED")
             locationEnabled = true
         case .denied:
-            print("Location auth status is DENIED")
+            //print("Location auth status is DENIED")
             locationManager.requestWhenInUseAuthorization()
             locationEnabled = false
         case .authorizedAlways:
-            print("Location auth status is AUTHORIZED ALWAYS")
+            //print("Location auth status is AUTHORIZED ALWAYS")
             locationEnabled = true
             locationManager.startUpdatingLocation()
             locationManager.desiredAccuracy = kCLLocationAccuracyBest
         case .authorizedWhenInUse:
-            print("Location auth status is AUTHORIZED WHEN IN USE")
+            //print("Location auth status is AUTHORIZED WHEN IN USE")
             locationEnabled = true
             locationManager.startUpdatingLocation()
             locationManager.desiredAccuracy = kCLLocationAccuracyBest
         @unknown default:
-            print("Location auth status UNKOWN")
+            //print("Location auth status UNKOWN")
             fatalError()
             
         }
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        print("???Entered did update location")
+        //print("???Entered did update location")
         //centerMapOnUser()
     }
     
 
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-        print("???Entered did change Auth, status: \(status == .denied)")
+        //print("???Entered did change Auth, status: \(status == .denied)")
         //centerMapOnUser()
         if status == .notDetermined {
             initialNeedsCentering = true
@@ -2415,7 +2446,7 @@ extension HomeController: CLLocationManagerDelegate {
         else {
             locationEnabled = true
             if !isSearching && initialNeedsCentering{
-                print("??? first launch \(UserDefaults.standard.bool(forKey: "firstLaunch"))")
+                //print("??? first launch \(UserDefaults.standard.bool(forKey: "firstLaunch"))")
                 if UserDefaults.standard.bool(forKey: "firstLaunch") {
                     configureThemePopup()
                     UserDefaults.standard.set(false, forKey: "firstLaunch")
@@ -2486,7 +2517,7 @@ extension HomeController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print(supplies.count)
+        //print(supplies.count)
         return showingMenu ? supplyList.count : 0
     }
     
@@ -2506,7 +2537,7 @@ extension HomeController: UITableViewDelegate, UITableViewDataSource {
     
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-       // print(supplies[indexPath.row].supplyName)
+       // //print(supplies[indexPath.row].supplyName)
         
         
         mapView.removeAnnotations(mapView.annotations)
@@ -2549,7 +2580,7 @@ extension HomeController: UITableViewDelegate, UITableViewDataSource {
         
         
         Stores.shared.initialize(withSupply: supplyList[indexPath.row].replacingOccurrences(of: " ", with: "_"), withCoor: Location.shared.coordinates)
-        print("===================================START========================================")
+        //print("===================================START========================================")
 
         self.spinner.isHidden = false
         DispatchQueue.global(qos: .userInitiated).async {
@@ -2557,13 +2588,13 @@ extension HomeController: UITableViewDelegate, UITableViewDataSource {
                 switch result {
                     case .success(let stores):
                         if stores.count == 0{
-                            print("No stores found :(")
+                            //print("No stores found :(")
                                DispatchQueue.main.async {
                                     let lbl = UILabel()
                                     lbl.backgroundColor = UIColor.rgb(red: 209, green: 21, blue: 0)
                                     lbl.textColor = .white
                                     lbl.text = "No stores nearby currently have \(self.supplyList[indexPath.row]) in stock."
-                                    lbl.font = Fonts.shared.slideInMessage//UIFont.italicSystemFont(ofSize: 15.0)
+                                    lbl.font = Fonts.shared.slideInMessage//Fonts.shared.slideInMessage
                                     //lbl.sizeToFit()
                                     lbl.textAlignment = .center
                                     lbl.numberOfLines = 0
@@ -2592,7 +2623,7 @@ extension HomeController: UITableViewDelegate, UITableViewDataSource {
                             
                         } else {
                         DispatchQueue.main.async {
-                            //print(stores[0].store__chainName)
+                            ////print(stores[0].store__chainName)
                             self.notifBtn.removeFromSuperview()
                             self.stores = stores
                             self.displayStoresOnMap()
@@ -2602,7 +2633,7 @@ extension HomeController: UITableViewDelegate, UITableViewDataSource {
                     }
                         
                     case .failure(let error):
-                        print("DEBUG: Failed with error \(error)")
+                        //print("DEBUG: Failed with error \(error)")
                         DispatchQueue.main.async {
                             self.spinner.isHidden = true
                             self.showMessage(label: self.createLbl(text: "Oops! A network error occurred, please check your connection and try again."))
@@ -2612,7 +2643,7 @@ extension HomeController: UITableViewDelegate, UITableViewDataSource {
                 }
             }
         }
-        print("\(Location.shared.coordinates.latitude)")
+        //print("\(Location.shared.coordinates.latitude)")
         handleDropDown()
         
         
@@ -2631,7 +2662,7 @@ extension HomeController: UITableViewDelegate, UITableViewDataSource {
 extension HomeController: MKMapViewDelegate {
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-        print("???viewForAnnotation")
+        //print("???viewForAnnotation")
       
         let annotationView = AnnotationView(annotation: annotation, reuseIdentifier: "AnnotationView")
         
@@ -2656,7 +2687,7 @@ extension HomeController: MKMapViewDelegate {
          annotationView.addGestureRecognizer(tap)
 
 
-        print("++++ \(supplySearchedFor)")
+        //print("++++ \(supplySearchedFor)")
         switch supplySearchedFor! {
         case "Face_Masks":
             annotationView.image = #imageLiteral(resourceName: "maskAnn")
@@ -2694,7 +2725,7 @@ extension HomeController: MKMapViewDelegate {
     
     
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-        print("=====The annotation was selected: \(String(describing: view.annotation?.title))")
+        //print("=====The annotation was selected: \(String(describing: view.annotation?.title))")
 
        
 
@@ -2705,7 +2736,7 @@ extension HomeController: MKMapViewDelegate {
 
 extension HomeController: GADInterstitialDelegate {
     func interstitialDidDismissScreen(_ ad: GADInterstitial) {
-        print("======AD dismissed")
+        //print("======AD dismissed")
         showGoldPopup()
     }
 }

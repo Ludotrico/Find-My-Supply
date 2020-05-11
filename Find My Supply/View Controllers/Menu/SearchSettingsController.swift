@@ -174,7 +174,7 @@ class SearchSettingsController: UIViewController {
     //MARK: Selectors
     
     @objc func subtract() {
-        print("++++ SUB")
+        //print("++++ SUB")
         if Int(radius.text!)! <= 5 {
             return
         }
@@ -182,7 +182,7 @@ class SearchSettingsController: UIViewController {
     }
     
     @objc func add() {
-        print("++++ adddd")
+        //print("++++ adddd")
         if Int(radius.text!)! >= 100 {
             return
         }
@@ -190,7 +190,7 @@ class SearchSettingsController: UIViewController {
     }
     
     @objc func saveChanges() {
-        print("++++ saveee")
+        //print("++++ saveee")
         if Int(radius.text!)! == UserDefaults.standard.integer(forKey: "radius") {
             return
         }
@@ -207,7 +207,7 @@ class SearchSettingsController: UIViewController {
         lbl.backgroundColor = UIColor.rgb(red: 209, green: 21, blue: 0)
         lbl.textColor = .white
         lbl.text = text
-        lbl.font = UIFont.italicSystemFont(ofSize: 15.0)
+        lbl.font = Fonts.shared.slideInMessage
         //lbl.sizeToFit()
         lbl.textAlignment = .center
         lbl.numberOfLines = 0

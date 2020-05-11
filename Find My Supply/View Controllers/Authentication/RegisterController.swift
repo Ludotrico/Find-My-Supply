@@ -23,7 +23,7 @@ class RegisterController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        print("+++VIEW DID APPEAR")
+        //print("+++VIEW DID APPEAR")
         checkIfVerified()
     }
     
@@ -279,22 +279,22 @@ class RegisterController: UIViewController {
         self.loginButton.isEnabled = false
         spinner.isHidden = false
         DispatchQueue.global(qos: .userInitiated).async {
-            print("\n\n\n======================START==================\n")
+            //print("\n\n\n======================START==================\n")
             userAuth.initRegisterUser(withName: name, withEmail: email, withUsername: usrname, withPassword: psw, withZip: zip)
             userAuth.fetchNewSalt { (result) in
                 switch result {
                 case .success(let s):
-                    print("Completed Salt Fetch with salt: \(s)\n")
+                    //print("Completed Salt Fetch with salt: \(s)\n")
                         userAuth.salt = s
-                        print("Updated Register Obj salt\n")
+                        //print("Updated Register Obj salt\n")
                    
                     DispatchQueue.global(qos: .userInitiated).async {
                     userAuth.registerToServer { (result) in
                         switch result {
                         case .success(var m):
-                            print("Completed RTS Fetch\n")
+                            //print("Completed RTS Fetch\n")
                             DispatchQueue.main.async {
-                                print("Updating Label\n")
+                                //print("Updating Label\n")
                                 var registered = false
                                 let firstChar = m.removeFirst()
                                 if firstChar == "#" {
@@ -303,7 +303,7 @@ class RegisterController: UIViewController {
                                 }
                                 else{
                                     //Registered user!  m = T8023  (T if it is new zipcode, userID)
-                                    print("USER DEFUALTS:\n\(userAuth.fName)\n\(userAuth.email)\n\(userAuth.username)\n\(userAuth.salt)\n\(userAuth.password)\n\(firstChar)")
+                                    //print("USER DEFUALTS:\n\(userAuth.fName)\n\(userAuth.email)\n\(userAuth.username)\n\(userAuth.salt)\n\(userAuth.password)\n\(firstChar)")
                                     let hashedPsw = (userAuth.password + userAuth.salt).sha256()
                                     UserDefaults.standard.set(false, forKey: "isRegistered")
                                     UserDefaults.standard.set("\(userAuth.fName)", forKey: "fName")
@@ -323,6 +323,8 @@ class RegisterController: UIViewController {
                                         UserDefaults.standard.set(true, forKey: "waitingForScrape")
                                     }
                                     UserDefaults.standard.set(zip, forKey: "zipcode")
+                                    UserDefaults.standard.set(0, forKey: "openCount")
+                                    UserDefaults.standard.set(0, forKey: "reviewCount")
                                     UpdateUser.shared.zip = Int(zip)!
                    
                                     
@@ -345,7 +347,7 @@ class RegisterController: UIViewController {
                                 
                             }
                         case .failure(let error):
-                            print("DEBUG: Failed with error \(error)")
+                            //print("DEBUG: Failed with error \(error)")
                             DispatchQueue.main.async {
                                 self.spinner.isHidden = true
                                 self.loginButton.isEnabled = true
@@ -356,7 +358,7 @@ class RegisterController: UIViewController {
                     }
 
                 case .failure(let error):
-                    print("DEBUG: Failed with error \(error)")
+                    //print("DEBUG: Failed with error \(error)")
                     DispatchQueue.main.async {
                         self.spinner.isHidden = true
                         self.loginButton.isEnabled = true
@@ -376,7 +378,7 @@ class RegisterController: UIViewController {
     }
     
     @objc func sendVerificationEmail() {
-        print("=== RESENT")
+        //print("=== RESENT")
         spinner.isHidden = false
         DispatchQueue.global(qos: .userInitiated).async {
             UserAuth.shared.sendVerificationEmail { (result) in
@@ -390,7 +392,7 @@ class RegisterController: UIViewController {
                     
                     
                 case .failure(let error):
-                    print("DEBUG: Failed with error \(error)")
+                    //print("DEBUG: Failed with error \(error)")
                      DispatchQueue.main.async {
                          self.spinner.isHidden = true
                          self.showMessage(label: self.createLbl(text: "Oops! A network error occurred, please check your connection and try again."))
@@ -436,7 +438,7 @@ class RegisterController: UIViewController {
                             self.displayMessage = false
                             
                         case .failure(let error):
-                            print("DEBUG: Failed with error \(error)")
+                            //print("DEBUG: Failed with error \(error)")
                             DispatchQueue.main.async {
                                 self.showMessage(label: self.createLbl(text: "Oops! A network error occurred, please check your connection and try again."))
                             }
@@ -448,7 +450,7 @@ class RegisterController: UIViewController {
     }
     
     @objc func findLocation() {
-        print("++++FIND LOCATION")
+        //print("++++FIND LOCATION")
         
         locationManager = CLLocationManager()
         locationManager.delegate  = self
@@ -458,7 +460,7 @@ class RegisterController: UIViewController {
     
     func setZipcode() {
         guard let exposedLocation = self.locationManager.location else {
-            print("*** Error in \(#function): exposedLocation is nil")
+            //print("*** Error in \(#function): exposedLocation is nil")
             return
         }
         
@@ -474,18 +476,18 @@ class RegisterController: UIViewController {
                         self.present(alert, animated: true, completion: nil)
                     }
                 }
-                print(country)
+                //print(country)
             }
             
             if let zip = placemark.postalCode {
-                print(zip)
+                //print(zip)
                 DispatchQueue.main.async {
                     self.zipcodeTextField?.text = zip
                 }
                 
                 
             }
-            print("+++\(Notifications.shared.city)")
+            //print("+++\(Notifications.shared.city)")
         }
         
         
@@ -501,13 +503,13 @@ class RegisterController: UIViewController {
         geocoder.reverseGeocodeLocation(location) { placemarks, error in
             
             guard error == nil else {
-                print("*** Error in \(#function): \(error!.localizedDescription)")
+                //print("*** Error in \(#function): \(error!.localizedDescription)")
                 completion(nil)
                 return
             }
             
             guard let placemark = placemarks?[0] else {
-                print("*** Error in \(#function): placemark is nil")
+                //print("*** Error in \(#function): placemark is nil")
                 completion(nil)
                 return
             }
@@ -519,7 +521,7 @@ class RegisterController: UIViewController {
         
     
     @objc func handleShowLogin(_ sender: UITapGestureRecognizer) {
-        print("handling sign up")
+        //print("handling sign up")
         let LC = LoginController()
         LC.verified = verified
         navigationController?.pushViewController(LC, animated: true)
@@ -584,7 +586,7 @@ class RegisterController: UIViewController {
         lbl.backgroundColor = UIColor.rgb(red: 209, green: 21, blue: 0)
         lbl.textColor = .white
         lbl.text = text
-        lbl.font = UIFont.italicSystemFont(ofSize: 15.0)
+        lbl.font = Fonts.shared.slideInMessage//UIFont.italicSystemFont(ofSize: 15.0)
         //lbl.sizeToFit()
         lbl.textAlignment = .center
         lbl.numberOfLines = 0
@@ -629,9 +631,9 @@ class RegisterController: UIViewController {
         label.backgroundColor = .systemGreen
         label.setTitleColor(.white, for: .normal)
         label.setTitle("Verification email sent. Tap to resend.", for: .normal)
-        label.titleLabel?.font = UIFont.italicSystemFont(ofSize: 15.0)
+        label.titleLabel?.font = Fonts.shared.slideInMessage//UIFont.italicSystemFont(ofSize: 15.0)
         label.addTarget(self, action: #selector(sendVerificationEmail), for: .touchUpInside)
-
+        
 
         label.titleLabel?.textAlignment = .center
         label.titleLabel?.numberOfLines = 1
@@ -653,12 +655,12 @@ class RegisterController: UIViewController {
         label.alpha = 1
         
 
-        label.frame = CGRect(x: 0 ,y: 0, width: self.view.frame.width, height: 20)
+        label.frame = CGRect(x: 0 ,y: 0, width: self.view.frame.width, height: 25)
         label.center.x = view.center.x
 
         UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
 
-            label.frame = CGRect(x: 0, y: UIApplication.shared.statusBarFrame.height ?? 25, width: self.view.frame.width, height: 20)
+            label.frame = CGRect(x: 0, y: UIApplication.shared.statusBarFrame.height ?? 25, width: self.view.frame.width, height: 25)
             label.center.x = self.view.center.x
         }, completion: nil)
         
@@ -693,42 +695,42 @@ extension RegisterController : UITextFieldDelegate {
 
 extension RegisterController: CLLocationManagerDelegate {
     func enableLocationServices() {
-        print("???Enable location services, status: \(CLLocationManager.authorizationStatus())")
+        //print("???Enable location services, status: \(CLLocationManager.authorizationStatus())")
         switch CLLocationManager.authorizationStatus() {
         case .notDetermined:
-            print("Location auth status is NOT DETERMINED")
+            //print("Location auth status is NOT DETERMINED")
             locationManager.requestWhenInUseAuthorization()
         case .restricted:
-            print("Location auth status is RESTRICTED")
+            //print("Location auth status is RESTRICTED")
             locationEnabled = true
         case .denied:
-            print("Location auth status is DENIED")
+            //print("Location auth status is DENIED")
             locationManager.requestWhenInUseAuthorization()
             locationEnabled = false
         case .authorizedAlways:
-            print("Location auth status is AUTHORIZED ALWAYS")
+            //print("Location auth status is AUTHORIZED ALWAYS")
             locationEnabled = true
             setZipcode()
         case .authorizedWhenInUse:
-            print("Location auth status is AUTHORIZED WHEN IN USE")
+            //print("Location auth status is AUTHORIZED WHEN IN USE")
             locationEnabled = true
             setZipcode()
         @unknown default:
-            print("Location auth status UNKOWN")
+            //print("Location auth status UNKOWN")
             fatalError()
             
         }
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        print("???Entered did update location")
+        //print("???Entered did update location")
         //centerMapOnUser()
     }
     
 
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-        print("???Entered did change Auth, status: \(status == .denied)")
+        //print("???Entered did change Auth, status: \(status == .denied)")
         //centerMapOnUser()
         if status == .notDetermined {
             

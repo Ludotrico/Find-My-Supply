@@ -34,7 +34,7 @@ class UpdateUser {
     //POST
     //updateUserProfile/<int:userID>/<str:fName>/<str:usrname>/<str:email>/<str:token>
     func update(completion: @escaping(Result<String, Error>) -> ()) {
-        print("===https://find-my-supply-274702.uc.r.appspot.com/updateUserProfile/\(UserDefaults.standard.string(forKey: "userID")!)/\(fName)/\(username)/\(email)/\(UserDefaults.standard.string(forKey: "salt") ?? "nil")")
+        //print("===https://find-my-supply-274702.uc.r.appspot.com/updateUserProfile/\(UserDefaults.standard.string(forKey: "userID")!)/\(fName)/\(username)/\(email)/\(UserDefaults.standard.string(forKey: "salt") ?? "nil")")
      
         guard let url = URL(string: "https://find-my-supply-274702.uc.r.appspot.com/updateUserProfile/\(UserDefaults.standard.string(forKey: "userID")!)/\(fName)/\(username)/\(email)/\(UserDefaults.standard.string(forKey: "salt") ?? "nil")") else { return }
         
@@ -46,14 +46,14 @@ class UpdateUser {
             // handle error
             if let error = error {
                 completion(.failure(error))
-                print("Finished RTS with Error\n")
+                //print("Finished RTS with Error\n")
                 return
             }
             
             // decode data
             do {
                 let message = try JSONDecoder().decode(Message.self, from: data!)
-                print("Finished RTS\n")
+                //print("Finished RTS\n")
                 completion(.success(message.message))
             } catch let error {
                 completion(.failure(error))
@@ -65,7 +65,7 @@ class UpdateUser {
     //POST
     //changePassword/<str:login>/<str:salt>/<str:newPsw>/<str:type>
     func changePassword(completion: @escaping(Result<String, Error>) -> ()) {
-        print("===https://find-my-supply-274702.uc.r.appspot.com/changePassword/\(UserDefaults.standard.string(forKey: "username") ?? UserDefaults.standard.string(forKey: "login")!)/\(salt)/\((newPassword+salt).sha256())/\(type)")
+        //print("===https://find-my-supply-274702.uc.r.appspot.com/changePassword/\(UserDefaults.standard.string(forKey: "username") ?? UserDefaults.standard.string(forKey: "login")!)/\(salt)/\((newPassword+salt).sha256())/\(type)")
      
         guard let url = URL(string: "https://find-my-supply-274702.uc.r.appspot.com/changePassword/\(UserDefaults.standard.string(forKey: "username") ?? UserDefaults.standard.string(forKey: "login")!)/\(salt)/\((newPassword+salt).sha256())/\(type)") else { return }
         
@@ -77,14 +77,14 @@ class UpdateUser {
             // handle error
             if let error = error {
                 completion(.failure(error))
-                print("Finished RTS with Error\n")
+                //print("Finished RTS with Error\n")
                 return
             }
             
             // decode data
             do {
                 let message = try JSONDecoder().decode(Message.self, from: data!)
-                print("Finished RTS\n")
+                //print("Finished RTS\n")
                 completion(.success(message.message))
             } catch let error {
                 completion(.failure(error))
@@ -97,7 +97,7 @@ class UpdateUser {
     //POST
     //'updateUserZip/<int:userID>/<int:zip>/<str:token>'
     func updateUserZip(completion: @escaping(Result<String, Error>) -> ()) {
-        print("===https://find-my-supply-274702.uc.r.appspot.com/updateUserZip/\(UserDefaults.standard.string(forKey: "userID")!)/\(zip)/\(UserDefaults.standard.string(forKey: "salt")!)")
+        //print("===https://find-my-supply-274702.uc.r.appspot.com/updateUserZip/\(UserDefaults.standard.string(forKey: "userID")!)/\(zip)/\(UserDefaults.standard.string(forKey: "salt")!)")
      
         guard let url = URL(string: "https://find-my-supply-274702.uc.r.appspot.com/updateUserZip/\(UserDefaults.standard.string(forKey: "userID")!)/\(zip)/\(UserDefaults.standard.string(forKey: "salt")!)") else { return }
         
@@ -109,13 +109,13 @@ class UpdateUser {
             // handle error
             if let error = error {
                 completion(.failure(error))
-                print("Finished RTS with Error\n")
+                //print("Finished RTS with Error\n")
                 return
             }
             
             do {
                 let message = try JSONDecoder().decode(Message.self, from: data!)
-                print("Finished RTS\n")
+                //print("Finished RTS\n")
                 completion(.success(message.message))
             } catch let error {
                 completion(.failure(error))
@@ -126,7 +126,7 @@ class UpdateUser {
     
    
     func addNewZipcode(completion: @escaping(Result<String, Error>) -> ()) {
-        print("===https://find-my-supply-274702.uc.r.appspot.com/addNewZipcode/\(UpdateUser.shared.zip)/\(UserDefaults.standard.string(forKey: "salt")!)")
+        //print("===https://find-my-supply-274702.uc.r.appspot.com/addNewZipcode/\(UpdateUser.shared.zip)/\(UserDefaults.standard.string(forKey: "salt")!)")
      
         guard let url = URL(string: "https://find-my-supply-274702.uc.r.appspot.com/addNewZipcode/\(UpdateUser.shared.zip)/\(UserDefaults.standard.string(forKey: "salt")!)") else { return }
         
@@ -138,7 +138,7 @@ class UpdateUser {
             // handle error
             if let error = error {
                 completion(.failure(error))
-                print("Finished RTS with Error\n")
+                //print("Finished RTS with Error\n")
                 return
             }
             
@@ -155,11 +155,11 @@ class UpdateUser {
         let paramaters: [String: Any] = ["receipt": recipt]
         AF.request("https://find-my-supply-274702.uc.r.appspot.com/verifyRecipt/\(UserDefaults.standard.integer(forKey: "userID"))/\(UserDefaults.standard.string(forKey: "salt")!)", method: .post, parameters: paramaters, encoding: JSONEncoding.default)
         .responseJSON { response in
-            print("RESPONSE: \(response)")
+            //print("RESPONSE: \(response)")
                 do {
                     let message = try JSONDecoder().decode(Verified.self, from: response.data!)
-                    print("Finished RTS\n")
-                    print("======Verified: \(message.isVerified)")
+                    //print("Finished RTS\n")
+                    //print("======Verified: \(message.isVerified)")
                     completion(.success(message.isVerified))
                 } catch let error {
                     completion(.failure(error))
@@ -172,7 +172,7 @@ class UpdateUser {
         //POST
         //addRegistrationID/<int:userID>/<str:token>/<str:ID>'
         func addRegistrationID(completion: @escaping(Result<String, Error>) -> ()) {
-            print("===https://find-my-supply-274702.uc.r.appspot.com/addRegistrationID/\(UserDefaults.standard.integer(forKey: "userID"))/\(UserDefaults.standard.string(forKey: "salt")!)/\(registrationID)")
+            //print("===https://find-my-supply-274702.uc.r.appspot.com/addRegistrationID/\(UserDefaults.standard.integer(forKey: "userID"))/\(UserDefaults.standard.string(forKey: "salt")!)/\(registrationID)")
          
             guard let url = URL(string: "https://find-my-supply-274702.uc.r.appspot.com/addRegistrationID/\(UserDefaults.standard.integer(forKey: "userID"))/\(UserDefaults.standard.string(forKey: "salt")!)/\(registrationID)") else { return }
             
@@ -184,7 +184,7 @@ class UpdateUser {
                 // handle error
                 if let error = error {
                     completion(.failure(error))
-                    print("Finished RTS with Error\n")
+                    //print("Finished RTS with Error\n")
                     return
                 }
                 

@@ -228,11 +228,11 @@ class ChangePasswordController: UIViewController {
     
     //MARK: - Helper Functions
     @objc func savePassword() {
-        print("+++Save Psw")
+        //print("+++Save Psw")
         if let psw1 = newPswField1.text {
             if let psw2 = newPswField2.text {
                 
-                print("+++\(psw1) \(psw2)")
+                //print("+++\(psw1) \(psw2)")
                 if psw1 == psw2 {
                     if psw1.count < 5 {
                         newPswField1.resignFirstResponder()
@@ -280,7 +280,7 @@ class ChangePasswordController: UIViewController {
 
                             
                         case.failure(let error):
-                            print("DEBUG: Failed with error \(error)")
+                            //print("DEBUG: Failed with error \(error)")
                             DispatchQueue.main.async {
                                 self.spinner.isHidden = true
                                 self.showMessage(label: self.createLbl(text: "Oops! A network error occurred, please check your connection and try again."))
@@ -339,7 +339,7 @@ class ChangePasswordController: UIViewController {
     
     @objc func verifyPassword() {
         
-        print("+++Verify Psw")
+        //print("+++Verify Psw")
         currentPswField.resignFirstResponder()
         if let psw = currentPswField.text {
             let password = psw.trim()
@@ -379,7 +379,7 @@ class ChangePasswordController: UIViewController {
         lbl.backgroundColor = UIColor.rgb(red: 209, green: 21, blue: 0)
         lbl.textColor = .white
         lbl.text = text
-        lbl.font = UIFont.italicSystemFont(ofSize: 15.0)
+        lbl.font = Fonts.shared.slideInMessage
         //lbl.sizeToFit()
         lbl.textAlignment = .center
         lbl.numberOfLines = 0

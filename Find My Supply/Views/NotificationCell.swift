@@ -351,7 +351,7 @@ class NotificationCell: UITableViewCell {
     }
     
     @objc func test() {
-        print("+++DELETE")
+        //print("+++DELETE")
     }
     
     

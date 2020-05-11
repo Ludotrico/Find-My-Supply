@@ -44,7 +44,7 @@ class Gold: NSObject {
     }
     
     func updatePrivileges() {
-        print("===== Ads enabled: \(UserDefaults.standard.bool(forKey: "isGold"))")
+        //print("===== Ads enabled: \(UserDefaults.standard.bool(forKey: "isGold"))")
         if UserDefaults.standard.bool(forKey: "isGold") {
             Ads.shared.adsEnabled = false
         } else {
@@ -68,10 +68,10 @@ class Gold: NSObject {
 
 extension Gold: SKProductsRequestDelegate {
     func productsRequest(_ request: SKProductsRequest, didReceive response: SKProductsResponse) {
-        print("===IN reQ")
+        ////print("===IN reQ")
         self.subscriptions = response.products
 //        for product in response.products {
-//            print("===\(product.localizedTitle)")
+//            ////print("===\(product.localizedTitle)")
 //        }
     }
     
@@ -86,7 +86,7 @@ extension Gold: SKPaymentTransactionObserver {
                 break
             case .purchased:
     
-                print("=====Finished purchasing \(transaction.payment.productIdentifier)")
+                ////print("=====Finished purchasing \(transaction.payment.productIdentifier)")
                 
                 //Verify Recipt
                 if let appStoreReceiptURL = Bundle.main.appStoreReceiptURL,
@@ -94,7 +94,7 @@ extension Gold: SKPaymentTransactionObserver {
 
                     do {
                         let receiptData = try Data(contentsOf: appStoreReceiptURL, options: .alwaysMapped)
-                        print(receiptData)
+                        //print(receiptData)
 
                         let receiptString = receiptData.base64EncodedString(options: [])
 
@@ -105,10 +105,10 @@ extension Gold: SKPaymentTransactionObserver {
                                 switch result {
                                 case .success(let status):
                                     if status {
-                                        print("=====verified recipt")
+                                        //print("=====verified recipt")
                                         UserDefaults.standard.set(true, forKey: "isGold")
                                     } else {
-                                        print("=====Unverified recipt")
+                                        //print("=====Unverified recipt")
                                         UserDefaults.standard.set(false, forKey: "isGold")
                                     }
                                 case .failure(let error):
@@ -127,7 +127,7 @@ extension Gold: SKPaymentTransactionObserver {
                     }
                     catch { print("======Couldn't read receipt data with error: " + error.localizedDescription) }
                 } else {
-                    print("=====An error has occurred")
+                    //print("=====An error has occurred")
                 }
                 
                 
@@ -136,14 +136,14 @@ extension Gold: SKPaymentTransactionObserver {
              
                 
             case .restored:
-                print("====restored")
+                //print("====restored")
                 
                 queue.finishTransaction(transaction)
                 
                 
             default:
                 queue.finishTransaction(transaction)
-                print("=====Exited purchasing \(transaction.payment.productIdentifier)")
+                //print("=====Exited purchasing \(transaction.payment.productIdentifier)")
 
                 
             }

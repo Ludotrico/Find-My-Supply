@@ -39,7 +39,7 @@ class Fonts {
     let homeSupplies = UIFont(name: "BrandonGrotesque-Light", size: 18)!
     
     let popupBtn = UIFont(name: "BrandonGrotesque-Black", size: 20)!
-    let slideInMessage = UIFont(name: "BrandonGrotesque-Lightitalic", size: 18)
+    let slideInMessage = UIFont(name: "BrandonGrotesque-RegularItalic", size: 18)!
     let calloutBtn = UIFont(name: "BrandonGrotesque-Black", size: 120)!
     let callout = UIFont(name: "BrandonGrotesque-Light", size: 32)!
     let calloutBold = UIFont(name: "BrandonGrotesque-Black", size: 32)!
@@ -114,7 +114,7 @@ enum GoldSubscription: String {
 struct Random {
     static let shared = Random()
     
-    let goldPopup = 10
+    let goldPopup = 11
     let adPopup = 5
     let tableRowStart = 5
     let tableRowEnd = 9

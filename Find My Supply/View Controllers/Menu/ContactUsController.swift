@@ -308,7 +308,7 @@ class ContactUsController: UIViewController {
                             }
 
                         case .failure(let error):
-                            print("DEBUG: Failed with error \(error)")
+                            //print("DEBUG: Failed with error \(error)")
                             DispatchQueue.main.async {
                                 self.submit.isEnabled = true
                                 self.spinner.isHidden = true
@@ -485,7 +485,7 @@ class ContactUsController: UIViewController {
         lbl.backgroundColor = UIColor.rgb(red: 209, green: 21, blue: 0)
         lbl.textColor = .white
         lbl.text = text
-        lbl.font = UIFont.italicSystemFont(ofSize: 15.0)
+        lbl.font = Fonts.shared.slideInMessage
         //lbl.sizeToFit()
         lbl.textAlignment = .center
         lbl.numberOfLines = 0

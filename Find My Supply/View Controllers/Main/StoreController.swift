@@ -58,7 +58,7 @@ class StoreController: UIViewController, UIScrollViewDelegate, UIGestureRecogniz
     }
     
     override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
-        print("===ORIENTATION CHANGE")
+        //print("===ORIENTATION CHANGE")
         
 
         
@@ -554,7 +554,7 @@ class StoreController: UIViewController, UIScrollViewDelegate, UIGestureRecogniz
     
     @objc func openImageController(_ sender: UITapGestureRecognizer) {
         let view = sender.view as! UIImageView
-        print("+++ Open image #\(view.tag)")
+        //print("+++ Open image #\(view.tag)")
         let IC = ImageController()
         IC.img.image = view.image
         navigationController?.pushViewController(IC, animated: true)
@@ -586,7 +586,7 @@ class StoreController: UIViewController, UIScrollViewDelegate, UIGestureRecogniz
             Notifications.shared.addSKURegionNotification  { (result) in
                 switch result{
                 case .success(let message):
-                    print("=====+ \(message)")
+                    //print("=====+ \(message)")
                     if message.first == "#" {
                         //Notif already exists
                         DispatchQueue.main.async {
@@ -595,7 +595,7 @@ class StoreController: UIViewController, UIScrollViewDelegate, UIGestureRecogniz
                                 lbl.backgroundColor = UIColor.rgb(red: 255, green: 153, blue: 0)
                                 lbl.textColor = .white
                                 lbl.text = "Notification has already been added."
-                                lbl.font = Fonts.shared.slideInMessage//UIFont.italicSystemFont(ofSize: 15.0)
+                                lbl.font = Fonts.shared.slideInMessage//Fonts.shared.slideInMessage
                                 //lbl.sizeToFit()
                                 lbl.textAlignment = .center
                                 lbl.numberOfLines = 0
@@ -614,7 +614,7 @@ class StoreController: UIViewController, UIScrollViewDelegate, UIGestureRecogniz
                                lbl.backgroundColor = .systemGreen
                                lbl.textColor = .white
                                lbl.text = "Notification added."
-                            lbl.font = Fonts.shared.slideInMessage//UIFont.italicSystemFont(ofSize: 15.0)
+                            lbl.font = Fonts.shared.slideInMessage//Fonts.shared.slideInMessage
                                //lbl.sizeToFit()
                                lbl.textAlignment = .center
                                lbl.numberOfLines = 0
@@ -625,7 +625,7 @@ class StoreController: UIViewController, UIScrollViewDelegate, UIGestureRecogniz
                         }
                     }
                 case .failure(let error):
-                    print("DEBUG: Failed with error \(error)")
+                    //print("DEBUG: Failed with error \(error)")
                     DispatchQueue.main.async {
                           self.spinner2.isHidden = true
                         self.showMessage(label: self.createLbl(text: "Oops! A network error occurred, please check your connection and try again."))
@@ -658,7 +658,7 @@ class StoreController: UIViewController, UIScrollViewDelegate, UIGestureRecogniz
             Notifications.shared.addSKUStoreNotification  { (result) in
                 switch result{
                 case .success(let message):
-                    print("=====+ \(message)")
+                    //print("=====+ \(message)")
                     if message.first == "#" {
                         //Notif already exists
                         DispatchQueue.main.async {
@@ -666,7 +666,7 @@ class StoreController: UIViewController, UIScrollViewDelegate, UIGestureRecogniz
                             lbl.backgroundColor = UIColor.rgb(red: 255, green: 153, blue: 0)
                             lbl.textColor = .white
                             lbl.text = "Notification has already been added."
-                            lbl.font = Fonts.shared.slideInMessage//UIFont.italicSystemFont(ofSize: 15.0)
+                            lbl.font = Fonts.shared.slideInMessage//Fonts.shared.slideInMessage
                             //lbl.sizeToFit()
                             lbl.textAlignment = .center
                             lbl.numberOfLines = 0
@@ -685,7 +685,7 @@ class StoreController: UIViewController, UIScrollViewDelegate, UIGestureRecogniz
                             lbl.backgroundColor = .systemGreen
                             lbl.textColor = .white
                             lbl.text = "Notification added."
-                            lbl.font = Fonts.shared.slideInMessage//  UIFont.italicSystemFont(ofSize: 15.0)
+                            lbl.font = Fonts.shared.slideInMessage//  Fonts.shared.slideInMessage
                             //lbl.sizeToFit()
                             lbl.textAlignment = .center
                             lbl.numberOfLines = 0
@@ -697,7 +697,7 @@ class StoreController: UIViewController, UIScrollViewDelegate, UIGestureRecogniz
                         }
                     }
                 case .failure(let error):
-                    print("DEBUG: Failed with error \(error)")
+                    //print("DEBUG: Failed with error \(error)")
                     DispatchQueue.main.async {
                           self.spinner2.isHidden = true
                         self.showMessage(label: self.createLbl(text: "Oops! A network error occurred, please check your connection and try again."))
@@ -718,13 +718,13 @@ class StoreController: UIViewController, UIScrollViewDelegate, UIGestureRecogniz
         center.getNotificationSettings { settings in
             if settings.authorizationStatus == .notDetermined {
                 //Not determined
-                print("=====+PROMPT USER")
+                //print("=====+PROMPT USER")
 
                 let center = UNUserNotificationCenter.current()
                 center.requestAuthorization(options: [.alert, .sound, .badge]) { granted, error in
                     if let error = error {
                         // Handle the error here.
-                        print("DEBUG: Failed with error \(error)")
+                        //print("DEBUG: Failed with error \(error)")
                         DispatchQueue.main.async {
                             self.showMessage(label: self.createLbl(text: "Oops! An unexpected error occurred, please try again."))
                         }
@@ -779,7 +779,7 @@ class StoreController: UIViewController, UIScrollViewDelegate, UIGestureRecogniz
         
         let btn = sender as! UIButton
         //self.navigationController?.pushViewController(TESTViewController(), animated: true)
-        print("===+ Sender: \(sender.tag)")
+        //print("===+ Sender: \(sender.tag)")
         currSKU = products[sender.tag].SKU
         
         
@@ -791,7 +791,7 @@ class StoreController: UIViewController, UIScrollViewDelegate, UIGestureRecogniz
             Stores.shared.fetchNearbyStores { (result) in
                 switch result {
                 case .success(let stores):
-                    print("===+\(self.nearbyStores)")
+                    //print("===+\(self.nearbyStores)")
                     DispatchQueue.main.async {
                         var actionSheet = UIAlertController()
                         if stores.count > 0 {
@@ -865,7 +865,7 @@ class StoreController: UIViewController, UIScrollViewDelegate, UIGestureRecogniz
                     }
                     
                 case .failure(let error):
-                    print("DEBUG: Failed with error \(error)")
+                    //print("DEBUG: Failed with error \(error)")
                     DispatchQueue.main.async {
                         self.showMessage(label: self.createLbl(text: "Oops! A network error occurred, please check your connection and try again."))
                     }
@@ -879,7 +879,7 @@ class StoreController: UIViewController, UIScrollViewDelegate, UIGestureRecogniz
     }
      
        @objc func changeWeeklyHoursColor(_ sender: UITapGestureRecognizer) {
-           print("=====LONG HOLD")
+           //print("=====LONG HOLD")
            if sender.state == .began {
                 self.becomeFirstResponder()
                    self.weeklyHoursStack.alpha = 0.5
@@ -896,9 +896,9 @@ class StoreController: UIViewController, UIScrollViewDelegate, UIGestureRecogniz
        
        
        @objc func showWeeklyHours(_ sender: UITapGestureRecognizer) {
-           print("=====weekly hourssssss")
+           //print("=====weekly hourssssss")
            if sender.state == .began {
-               print("=====.began")
+               //print("=====.began")
                 self.becomeFirstResponder()
                UIView.animate(withDuration: 0.2, animations: {
                    self.weeklyHoursStack.alpha = 1
@@ -906,7 +906,7 @@ class StoreController: UIViewController, UIScrollViewDelegate, UIGestureRecogniz
                
            }
            else {
-               print("=====.other")
+               //print("=====.other")
                self.weeklyHoursStack.alpha = 0.5
           
                UIView.animate(withDuration: 0.5, animations: {
@@ -976,12 +976,12 @@ class StoreController: UIViewController, UIScrollViewDelegate, UIGestureRecogniz
     
     
     @objc func handleCloseNearbyStores() {
-        print("====+HANDLE CLOSE")
+        //print("====+HANDLE CLOSE")
         closeNearbyStores(UITapGestureRecognizer())
     }
     
     @objc func closeNearbyStores(_ sender: UITapGestureRecognizer) {
-        print("====+CLOSE")
+        //print("====+CLOSE")
         UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseIn, animations: {
             self.blackOverlay.alpha = 0
             self.tabView.alpha = 0
@@ -1008,7 +1008,7 @@ class StoreController: UIViewController, UIScrollViewDelegate, UIGestureRecogniz
         lbl.backgroundColor = UIColor.rgb(red: 209, green: 21, blue: 0)
         lbl.textColor = .white
         lbl.text = text
-        lbl.font = Fonts.shared.slideInMessage//UIFont.italicSystemFont(ofSize: 15.0)
+        lbl.font = Fonts.shared.slideInMessage//Fonts.shared.slideInMessage
         //lbl.sizeToFit()
         lbl.textAlignment = .center
         lbl.numberOfLines = 0
@@ -1088,8 +1088,8 @@ class StoreController: UIViewController, UIScrollViewDelegate, UIGestureRecogniz
             let minBound = (window.frame.height/3)/3
             if gestureRecognizer.state == UIGestureRecognizer.State.began || gestureRecognizer.state == UIGestureRecognizer.State.changed {
                 let translation = gestureRecognizer.translation(in: self.view)
-                print("======CenterY: \(nearbyStoresView.center.y)")
-                print("======TranslationY: \(translation.y)\n\n")
+                //print("======CenterY: \(nearbyStoresView.center.y)")
+                //print("======TranslationY: \(translation.y)\n\n")
                 
                     if diff >= 0 {
                         //Case that user is move CV up
@@ -1100,8 +1100,8 @@ class StoreController: UIViewController, UIScrollViewDelegate, UIGestureRecogniz
                         
                     
                       
-                        print("=====Diff: \(diff)")
-                        print("=====Alpha: \(1 - ((diff)/(window.frame.height - window.frame.height/3)))")
+                        //print("=====Diff: \(diff)")
+                        //print("=====Alpha: \(1 - ((diff)/(window.frame.height - window.frame.height/3)))")
                         blackOverlay.alpha = 0.6 - ((absDiff/minBound)*0.6)
                         
                         if self.scheme == 0{
@@ -1126,10 +1126,10 @@ class StoreController: UIViewController, UIScrollViewDelegate, UIGestureRecogniz
                 
             }
             else if (gestureRecognizer.state == UIGestureRecognizer.State.ended) || (gestureRecognizer.state == UIGestureRecognizer.State.cancelled) {
-                print("======Gesture ENDED")
-                print("======Height of Window: \(window.frame.height)")
-                print("======Height of View: \(window.frame.height/3)")
-                print("======Minimum Bounds: \((window.frame.height/3)/3)")
+                //print("======Gesture ENDED")
+                //print("======Height of Window: \(window.frame.height)")
+                //print("======Height of View: \(window.frame.height/3)")
+                //print("======Minimum Bounds: \((window.frame.height/3)/3)")
                 if (diff) >= (minBound)    {
                     UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
                 
@@ -1238,7 +1238,7 @@ class StoreController: UIViewController, UIScrollViewDelegate, UIGestureRecogniz
 
     
     @objc func showNearbyStores(sender: UIButton) {
-        print("=====SHOW NEARBY stores: \(sender.tag)")
+        //print("=====SHOW NEARBY stores: \(sender.tag)")
         //navigationController?.pushViewController(TESTViewController(), animated: true)
         
         
@@ -1254,7 +1254,7 @@ class StoreController: UIViewController, UIScrollViewDelegate, UIGestureRecogniz
 
                     
                     self.nearbyStores = stores
-                    print("===+\(self.nearbyStores)")
+                    //print("===+\(self.nearbyStores)")
                     DispatchQueue.main.async {
                         if stores.count == 0 {
                             
@@ -1262,7 +1262,7 @@ class StoreController: UIViewController, UIScrollViewDelegate, UIGestureRecogniz
                                 lbl.backgroundColor = UIColor.rgb(red: 209, green: 21, blue: 0)
                                 lbl.textColor = .white
                                 lbl.text = "No stores nearby currently have this product in stock."
-                                lbl.font = UIFont.italicSystemFont(ofSize: 15.0)
+                                lbl.font = Fonts.shared.slideInMessage
                                 //lbl.sizeToFit()
                                 lbl.textAlignment = .center
                                 lbl.numberOfLines = 0
@@ -1320,7 +1320,7 @@ class StoreController: UIViewController, UIScrollViewDelegate, UIGestureRecogniz
                     }
                     
                 case .failure(let error):
-                    print("DEBUG: Failed with error \(error)")
+                    //print("DEBUG: Failed with error \(error)")
                     DispatchQueue.main.async {
                           self.spinner2.isHidden = true
                         self.showMessage(label: self.createLbl(text: "Oops! A network error occurred, please check your connection and try again."))
@@ -1339,7 +1339,7 @@ class StoreController: UIViewController, UIScrollViewDelegate, UIGestureRecogniz
     }
     
        @objc func addressTapped(_ sender: UITapGestureRecognizer) {
-           print("=====ADRESS Tapped")
+           //print("=====ADRESS Tapped")
            handleRedirect()
        }
        
@@ -1402,13 +1402,13 @@ class StoreController: UIViewController, UIScrollViewDelegate, UIGestureRecogniz
         Vscroll.addSubview(nearbyStoresCollectionView)
         nearbyStoresCollectionView.anchor(top: Vscroll.topAnchor, left: nearbyStoresView.leftAnchor, bottom: nil, right: nearbyStoresView.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: nearbyStoresView.frame.width, height: CGFloat(110 * (nearbyStores.count)))
         
-        print("===+ Height: \(Vscroll.frame.height)")
+        //print("===+ Height: \(Vscroll.frame.height)")
         
         let width = view.frame.width
         Vscroll.contentSize = CGSize(width: width, height: CGFloat(110 * (nearbyStores.count)))
         
         
-        //print("===+Header heihgt: \(topStack.center.y)")
+        ////print("===+Header heihgt: \(topStack.center.y)")
         //nearbyStoresCollectionView.contentSize = CGSize(width: view.frame.width, height: 500*15)
         
         nearbyStoresCollectionView.delegate = self
@@ -1489,7 +1489,7 @@ class StoreController: UIViewController, UIScrollViewDelegate, UIGestureRecogniz
 
     @objc func configureViewComponents() {
        
-     print("===Configuring views!")
+     //print("===Configuring views!")
         //configureTest()
         configureImageView()
         configureStackViews()
@@ -1806,19 +1806,19 @@ class StoreController: UIViewController, UIScrollViewDelegate, UIGestureRecogniz
             }
             else {
                 openStatusLbl.text = openStatus + ":"
-                print("===\(hours)")
+                //print("===\(hours)")
                 var index = hours.index(hours.startIndex, offsetBy: 4)
                 let part1 = hours.prefix(upTo: index)  //0830
                 
-                print("===\(part1)")
+                //print("===\(part1)")
                 
                 index = part1.index(part1.startIndex, offsetBy: 2)  //08
                 var hour1 = Int(part1.prefix(upTo: index))!
-                print("===hour1 \(hour1)")
+                //print("===hour1 \(hour1)")
                 
                 index = part1.index(part1.endIndex, offsetBy: -2)  //30
                 let minutes1 = part1.suffix(from: index)
-                print("===min \(minutes1)")
+                //print("===min \(minutes1)")
                 
                 index = hours.index(hours.endIndex, offsetBy: -4)
                 let part2 = hours.suffix(from: index)
@@ -1851,7 +1851,7 @@ class StoreController: UIViewController, UIScrollViewDelegate, UIGestureRecogniz
                     }
                 }
                 hourStatusLbl.text = "\(hour1):\(minutes1)\(suff1) - \(hour2):\(minutes2)\(suff2)"
-                print("===\(hourStatusLbl.text)")
+                //print("===\(hourStatusLbl.text)")
             }
         }
    
@@ -2028,10 +2028,10 @@ class StoreController: UIViewController, UIScrollViewDelegate, UIGestureRecogniz
                         
                         self.configureViewComponents()
                         self.spinner.isHidden = true
-                        print("======\(products)")
+                        //print("======\(products)")
                     }
                 case .failure(let error):
-                    print("===DEBUG: Failed with error \(error)")
+                    //print("===DEBUG: Failed with error \(error)")
                     DispatchQueue.main.async {
                         self.spinner.isHidden = true
                         self.showMessage(label: self.createLbl(text: "Oops! A network error occurred, please check your connection and try again."))
@@ -2063,7 +2063,7 @@ class StoreController: UIViewController, UIScrollViewDelegate, UIGestureRecogniz
         
         
         if Ads.shared.adsEnabled {
-            print("+++Configuring add indexes")
+            //print("+++Configuring add indexes")
             
             var rowCount = products.count
             var adIndex = 0
@@ -2140,7 +2140,7 @@ extension StoreController: UITableViewDelegate, UITableViewDataSource {
             let product = products[indexPath.row]
             cell.productName.text = product.name
 
-            print("===height of NAME: \(cell.productName.intrinsicContentSize.height)")
+            //print("===height of NAME: \(cell.productName.intrinsicContentSize.height)")
 
             if product.minQuantity == 0 {
                 cell.stockStatusLbl.text = "Limited stock"
@@ -2167,7 +2167,7 @@ extension StoreController: UITableViewDelegate, UITableViewDataSource {
                 cell.priceLbl.text = ""
                 cell.priceLbl.removeFromSuperview()
             } else {
-                print("===\((product.price - Float(Int(product.price))))")
+                //print("===\((product.price - Float(Int(product.price))))")
                 if (product.price - Float(Int(product.price))) == 0.0 {
                     cell.priceLbl.text = "$\(product.price)0"
                 }
@@ -2176,10 +2176,10 @@ extension StoreController: UITableViewDelegate, UITableViewDataSource {
                 }
             }
             /*
-            print("=====frame \(cell.productName.frame.height)")
+            //print("=====frame \(cell.productName.frame.height)")
 
             let lines = Int(cell.productName.layer.frame.height)/Fonts.shared.productNameFontHeight
-            print("=====LINES \(lines)")
+            //print("=====LINES \(lines)")
             if lines == 2 {
                  cell.rowHeight = 120
             }
@@ -2197,7 +2197,7 @@ extension StoreController: UITableViewDelegate, UITableViewDataSource {
 
 
             if cell.quantityLbl.text?.count == 0 {
-                print("===GOT HEREË")
+                //print("===GOT HEREË")
                 cell.addSubview(cell.notificationBtn)
                 cell.notificationBtn.tag = indexPath.row
                 cell.notificationBtn.addTarget(self, action: #selector(addNotification(sender:)), for: .touchUpInside)
@@ -2231,7 +2231,7 @@ extension StoreController: UITableViewDelegate, UITableViewDataSource {
         
         
         func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-            print("====SELECTED ROW")
+            //print("====SELECTED ROW")
     }
      
     
@@ -2327,7 +2327,7 @@ extension StoreController: UICollectionViewDelegate, UICollectionViewDataSource,
             nearbyStoresInfo.append((openStatus, statusColor, Float(dist)))
         }
         
-        print("====+ distance: \(ceil(userPt.distance(to: storePt)*0.000621*100)/100)")
+        //print("====+ distance: \(ceil(userPt.distance(to: storePt)*0.000621*100)/100)")
         
         
         let options = ImageLoadingOptions(

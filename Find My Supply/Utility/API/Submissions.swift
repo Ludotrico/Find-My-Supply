@@ -23,7 +23,7 @@ class Submissions {
     //POST
     //addSubmission/<str:supply>/<str:token>
     func addSubmission(completion: @escaping(Result<String, Error>) -> ()) {
-        print("===https://find-my-supply-274702.uc.r.appspot.com/addSubmission/\(supply)/\(UserDefaults.standard.string(forKey: "salt") ?? "nil")")
+        //print("===https://find-my-supply-274702.uc.r.appspot.com/addSubmission/\(supply)/\(UserDefaults.standard.string(forKey: "salt") ?? "nil")")
      
         guard let url = URL(string: "https://find-my-supply-274702.uc.r.appspot.com/addSubmission/\(supply)/\(UserDefaults.standard.string(forKey: "salt") ?? "nil")") else { return }
         
@@ -35,7 +35,7 @@ class Submissions {
             // handle error
             if let error = error {
                 completion(.failure(error))
-                print("Finished RTS with Error\n")
+                //print("Finished RTS with Error\n")
                 return
             }
             

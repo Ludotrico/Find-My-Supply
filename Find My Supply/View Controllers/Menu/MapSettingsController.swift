@@ -251,7 +251,7 @@ class MapSettingsController: UIViewController {
 
     
     @objc func saveChanges() {
-        print("++++ saveee")
+        //print("++++ saveee")
 
     }
     
@@ -261,7 +261,7 @@ class MapSettingsController: UIViewController {
 
     
     @objc func handleMapAppToggle(_ control: UISegmentedControl) {
-        print("+++MAp style toggled")
+        //print("+++MAp style toggled")
         
         switch control.selectedSegmentIndex {
         case 0:
@@ -293,7 +293,7 @@ class MapSettingsController: UIViewController {
     }
     
     @objc func handleMapStyleToggle(_ control: UISegmentedControl) {
-        print("+++MAp style toggled")
+        //print("+++MAp style toggled")
         
         switch control.selectedSegmentIndex {
         case 0:
@@ -310,7 +310,7 @@ class MapSettingsController: UIViewController {
     }
     
     @objc func handleMapTypeToggle(_ control: UISegmentedControl) {
-        print("+++ mapType toggled")
+        //print("+++ mapType toggled")
         
         switch control.selectedSegmentIndex {
         case 0:
@@ -333,7 +333,7 @@ class MapSettingsController: UIViewController {
         lbl.backgroundColor = UIColor.rgb(red: 209, green: 21, blue: 0)
         lbl.textColor = .white
         lbl.text = text
-        lbl.font = UIFont.italicSystemFont(ofSize: 15.0)
+        lbl.font = Fonts.shared.slideInMessage
         //lbl.sizeToFit()
         lbl.textAlignment = .center
         lbl.numberOfLines = 0

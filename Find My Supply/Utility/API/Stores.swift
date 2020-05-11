@@ -28,15 +28,15 @@ struct Stores {
     //https://find-my-supply-274702.uc.r.appspot.com/getStoresWithSupply/<str:supply>/<int:radius><str:metric>/<latitude>/<longitude>/<str:token>
     func fetchStoresWithSupply(completion: @escaping(Result<[store], Error>) -> ()) {
         
-        print("https://find-my-supply-274702.uc.r.appspot.com/getStoresWithSupply/\(supply)/\(UserDefaults.standard.integer(forKey: "radius"))mi/\(coordinates.latitude)/\(coordinates.longitude)/\(UserDefaults.standard.string(forKey: "salt") ?? "nil")")
-        print("Entering FSWS")
+        //print("https://find-my-supply-274702.uc.r.appspot.com/getStoresWithSupply/\(supply)/\(UserDefaults.standard.integer(forKey: "radius"))mi/\(coordinates.latitude)/\(coordinates.longitude)/\(UserDefaults.standard.string(forKey: "salt") ?? "nil")")
+        //print("Entering FSWS")
         guard let url = URL(string: "https://find-my-supply-274702.uc.r.appspot.com/getStoresWithSupply/\(supply)/\(radius)mi/\(coordinates.latitude)/\(coordinates.longitude)/\(UserDefaults.standard.string(forKey: "salt") ?? "nil")") else { return }
         
         URLSession.shared.dataTask(with: url) { (data, response, error) in
             
             // handle error
             if let error = error {
-                print("Exiting FSWS with ERROR")
+                //print("Exiting FSWS with ERROR")
                 completion(.failure(error))
                 return
             }
@@ -44,8 +44,8 @@ struct Stores {
             // decode data
             do {
                 let stores = try JSONDecoder().decode([store].self, from: data!)
-                print("Finished FSWS\n")
-                //print(stores[0].store__latitude)
+                //print("Finished FSWS\n")
+                ////print(stores[0].store__latitude)
                 completion(.success(stores))
             } catch let error {
                 completion(.failure(error))
@@ -56,7 +56,7 @@ struct Stores {
     //https://find-my-supply-274702.uc.r.appspot.com/getTotalQuantityOf/Toilet_Paper/7/86d2a2f7970bf859fdac7b2c99712485e59deaa7b57eea64e8702504f87c9757
     func fetchTotalQuantity(completion: @escaping(Result<Int, Error>) -> ()) {
         
-        print("https://find-my-supply-274702.uc.r.appspot.com/getTotalQuantityOf/\(supply)/\(storeID)/\(UserDefaults.standard.string(forKey: "salt") ?? "nil")")
+        //print("https://find-my-supply-274702.uc.r.appspot.com/getTotalQuantityOf/\(supply)/\(storeID)/\(UserDefaults.standard.string(forKey: "salt") ?? "nil")")
 
         guard let url = URL(string: "https://find-my-supply-274702.uc.r.appspot.com/getTotalQuantityOf/\(supply)/\(storeID)/\(UserDefaults.standard.string(forKey: "salt") ?? "nil")") else { return }
         
@@ -64,7 +64,7 @@ struct Stores {
             
             // handle error
             if let error = error {
-                print("Exiting FSWS with ERROR")
+                //print("Exiting FSWS with ERROR")
                 completion(.failure(error))
                 return
             }
@@ -85,7 +85,7 @@ struct Stores {
     
     func fetchNearbyStores(completion: @escaping(Result<[nearbyStore], Error>) -> ()) {
         
-        print("https://find-my-supply-274702.uc.r.appspot.com/getNearbyStores/\(SKU)/\(UserDefaults.standard.integer(forKey: "radius"))mi/\(coordinates.latitude)/\(coordinates.longitude)/\(storeID)/\(UserDefaults.standard.string(forKey: "salt") ?? "nil")")
+        //print("https://find-my-supply-274702.uc.r.appspot.com/getNearbyStores/\(SKU)/\(UserDefaults.standard.integer(forKey: "radius"))mi/\(coordinates.latitude)/\(coordinates.longitude)/\(storeID)/\(UserDefaults.standard.string(forKey: "salt") ?? "nil")")
 
         guard let url = URL(string: "https://find-my-supply-274702.uc.r.appspot.com/getNearbyStores/\(SKU)/\(UserDefaults.standard.integer(forKey: "radius"))mi/\(coordinates.latitude)/\(coordinates.longitude)/\(storeID)/\(UserDefaults.standard.string(forKey: "salt") ?? "nil")") else { return }
         
@@ -93,7 +93,7 @@ struct Stores {
             
             // handle error
             if let error = error {
-                print("Exiting FNS with ERROR")
+                //print("Exiting FNS with ERROR")
                 completion(.failure(error))
                 return
             }

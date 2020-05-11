@@ -118,13 +118,13 @@ class NotificationsController: UIViewController {
     @objc func deleteNotification(sender: AnyObject) {
         let btn = sender as! UIButton
         
-        print("+++DELETE \(btn.tag)")
+        //print("+++DELETE \(btn.tag)")
         
         var index = btn.tag
         if (index - 100000) < 0 {
             
             //case that its an area notif
-            print("+++DELETE Area\(index)")
+            //print("+++DELETE Area\(index)")
             
             
 
@@ -141,7 +141,7 @@ class NotificationsController: UIViewController {
         }
         else {
             index -= 100000
-            print("+++DELETE Store\(index)")
+            //print("+++DELETE Store\(index)")
             
 //            storeNotifications.remove(at: index)
             let indexPath = IndexPath(item: index, section: 1)
@@ -158,7 +158,7 @@ class NotificationsController: UIViewController {
     //MARK: Helper Functions
     @objc func openImageController(_ sender: UITapGestureRecognizer) {
         let view = sender.view as! UIImageView
-        print("+++ Open image #\(view.tag)")
+        //print("+++ Open image #\(view.tag)")
         let IC = ImageController()
         IC.img.image = view.image
         navigationController?.pushViewController(IC, animated: true)
@@ -190,7 +190,7 @@ class NotificationsController: UIViewController {
                         self.spinner2.isHidden = true
                     }
                 case .failure(let error):
-                    print("DEBUG: Failed with error \(error)")
+                    //print("DEBUG: Failed with error \(error)")
                     DispatchQueue.main.async {
                         self.spinner2.isHidden = true
                         self.showMessage(label: self.createLbl(text: "Oops! A network error occurred, please check your connection and try again."))
@@ -226,7 +226,7 @@ class NotificationsController: UIViewController {
                         self.spinner2.isHidden = true
                     }
                 case .failure(let error):
-                    print("DEBUG: Failed with error \(error)")
+                    //print("DEBUG: Failed with error \(error)")
                     DispatchQueue.main.async {
                         self.spinner2.isHidden = true
                         self.showMessage(label: self.createLbl(text: "Oops! A network error occurred, please check your connection and try again."))
@@ -244,7 +244,7 @@ class NotificationsController: UIViewController {
     func deleteSupplyRegionNotification(notif: notification, indexPath: IndexPath) {
         Notifications.shared.supply = notif.supplyName!.replacingOccurrences(of: " ", with: "_")
         Notifications.shared.radius = notif.radius!
-        print("#######\(notif.radius!)")
+        //print("#######\(notif.radius!)")
         Notifications.shared.date = notif.date!
         Notifications.shared.city = notif.city!.replacingOccurrences(of: " ", with: "_")
         
@@ -263,7 +263,7 @@ class NotificationsController: UIViewController {
                         self.spinner2.isHidden = true
                     }
                 case .failure(let error):
-                    print("DEBUG: Failed with error \(error)")
+                    //print("DEBUG: Failed with error \(error)")
                     DispatchQueue.main.async {
                         self.spinner2.isHidden = true
                         self.showMessage(label: self.createLbl(text: "Oops! A network error occurred, please check your connection and try again."))
@@ -313,7 +313,7 @@ class NotificationsController: UIViewController {
         lbl.backgroundColor = UIColor.rgb(red: 209, green: 21, blue: 0)
         lbl.textColor = .white
         lbl.text = text
-        lbl.font = UIFont.italicSystemFont(ofSize: 15.0)
+        lbl.font = Fonts.shared.slideInMessage
         //lbl.sizeToFit()
         lbl.textAlignment = .center
         lbl.numberOfLines = 0
@@ -494,7 +494,7 @@ class NotificationsController: UIViewController {
             Notifications.shared.getAreaNotifications { (result) in
                 switch result {
                 case .success(let notifs):
-                    print("+++\(notifs)")
+                    //print("+++\(notifs)")
                     DispatchQueue.main.async {
                         self.areaNotifications = notifs
                     }
@@ -503,7 +503,7 @@ class NotificationsController: UIViewController {
                         Notifications.shared.getStoreNotifications { (result) in
                             switch result {
                             case .success(let notifs):
-                                print("+++\(notifs)")
+                                //print("+++\(notifs)")
                                 
                                 DispatchQueue.main.async {
                                     self.storeNotifications = notifs
@@ -517,7 +517,7 @@ class NotificationsController: UIViewController {
                                 }
                                 
                             case .failure(let error):
-                                print("DEBUG: Failed with error \(error)")
+                                //print("DEBUG: Failed with error \(error)")
                                 DispatchQueue.main.async {
                                     self.showMessage(label: self.createLbl(text: "Oops! A network error occurred, please check your connection and try again."))
                                 }
@@ -526,7 +526,7 @@ class NotificationsController: UIViewController {
                     }
                     
                 case .failure(let error):
-                    print("DEBUG: Failed with error \(error)")
+                    //print("DEBUG: Failed with error \(error)")
                     DispatchQueue.main.async {
                         self.showMessage(label: self.createLbl(text: "Oops! A network error occurred, please check your connection and try again."))
                     }
@@ -539,7 +539,7 @@ class NotificationsController: UIViewController {
     }
     
     @objc func test() {
-        print("+++DELETE")
+        //print("+++DELETE")
         
     }
     
@@ -616,7 +616,7 @@ extension NotificationsController: UITableViewDelegate, UITableViewDataSource {
 
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        print("++++++Item\(indexPath.row)")
+        //print("++++++Item\(indexPath.row)")
         
         if indexPath.section == 0 {
 
@@ -654,7 +654,7 @@ extension NotificationsController: UITableViewDelegate, UITableViewDataSource {
             else {
                 cell.productName.text = notif.supplyName!
                 let supply = notif.supplyName!
-                print("+++\(supply)")
+                //print("+++\(supply)")
                 switch supply{
                 case "Face Masks":
                     cell.notifImage.image = #imageLiteral(resourceName: "mask")

@@ -125,7 +125,7 @@ class ThemePopup: UIView {
     //MARK: Helper Functions
     
     @objc func handleThemeToggle(_ control: UISegmentedControl) {
-        print("+++Theme toggled  \(control.selectedSegmentIndex)")
+        //print("+++Theme toggled  \(control.selectedSegmentIndex)")
         
         switch control.selectedSegmentIndex {
         case 0:

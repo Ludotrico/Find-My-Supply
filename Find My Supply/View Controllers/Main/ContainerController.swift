@@ -20,7 +20,7 @@ class ContainerController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        print("+++ CONTAINER WILL APPEAR")
+        //print("+++ CONTAINER WILL APPEAR")
     }
     
     var homeController: HomeController!
@@ -73,13 +73,13 @@ class ContainerController: UIViewController {
             
 
             
-            print("+++CONFIGURe MENU")
+            //print("+++CONFIGURe MENU")
         }
         
     }
     
     @objc func closeMenu() {
-        print("+++++CLOSE MENU")
+        //print("+++++CLOSE MENU")
         
     }
     
@@ -159,7 +159,7 @@ class ContainerController: UIViewController {
     @objc func handleMenuSwipe(sender: UISwipeGestureRecognizer) {
         if sender.state == .ended {
             if sender.direction == .left {
-                print("+++SWIPED!")
+                //print("+++SWIPED!")
                 isExpanded = false
                 showMenuController(shouldExpand: false, option: nil)
                 
@@ -173,8 +173,8 @@ class ContainerController: UIViewController {
         let translation = gestureRecognizer.translation(in: self.view)
         let minBound = 125
         
-        print("+++view origin.x \(centerController.view.frame.origin.x)")
-        print("+++view origin.x \(translation.x)")
+        //print("+++view origin.x \(centerController.view.frame.origin.x)")
+        //print("+++view origin.x \(translation.x)")
         if gestureRecognizer.state == UIGestureRecognizer.State.began || gestureRecognizer.state == UIGestureRecognizer.State.changed {
          
             if centerController.view.frame.origin.x <= 250 {
@@ -197,7 +197,7 @@ class ContainerController: UIViewController {
         }
         else if (gestureRecognizer.state == UIGestureRecognizer.State.ended) || (gestureRecognizer.state == UIGestureRecognizer.State.cancelled) {
             
-            print("++++ ENDED w origin.x: \(centerController.view.frame.origin.x)")
+            //print("++++ ENDED w origin.x: \(centerController.view.frame.origin.x)")
             if centerController.view.frame.origin.x <= 125 {
   
                 isExpanded = false

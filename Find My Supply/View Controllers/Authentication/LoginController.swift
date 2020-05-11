@@ -72,7 +72,7 @@ class LoginController: UIViewController {
     
     var errorMessage: UILabel = {
         let label = UILabel()
-        label.font = UIFont.italicSystemFont(ofSize: 16.0)
+        label.font = Fonts.shared.slideInMessage//UIFont.italicSystemFont(ofSize: 16.0)
         label.textColor = .white
         label.numberOfLines = 10
         label.text=""
@@ -179,12 +179,12 @@ class LoginController: UIViewController {
             self.loginButton.isEnabled = false
             spinner.isHidden = false
             DispatchQueue.global(qos: .userInitiated).async {
-                print("\n\n\n======================START==================\n")
+                //print("\n\n\n======================START==================\n")
                 userAuth.initLoginUser(withLogin: login, withPassword: psw)
                 userAuth.fetchUserInfo { (result) in
                     switch result {
                         case .success(let user):
-                            print("Completed User Fetch with user: \(user)\n")
+                            //print("Completed User Fetch with user: \(user)\n")
                             DispatchQueue.main.async {
                                 let firstChar = user.message.first
                                 if firstChar == "#" {
@@ -192,8 +192,8 @@ class LoginController: UIViewController {
                                 }
                                 else {
                                 
-                                    print("=====Server salt:\(user.salt)\n\(user.password)")
-                                    print("=====Local psw: \((psw+user.salt).sha256())\n")
+                                    //print("=====Server salt:\(user.salt)\n\(user.password)")
+                                    //print("=====Local psw: \((psw+user.salt).sha256())\n")
                                     if user.password != (psw+user.salt).sha256() {
                                         if user.identifiedByEmail {
                                             self.showMessage(label: self.createLbl(text: "Incorrect password for given email."))
@@ -217,6 +217,8 @@ class LoginController: UIViewController {
                                             UserDefaults.standard.set(10, forKey: "submissionsRemaining")
                                             UserDefaults.standard.set(true, forKey: "firstLaunch")
                                             UserDefaults.standard.set(user.isGold, forKey: "isGold")
+                                            UserDefaults.standard.set(0, forKey: "openCount")
+                                            UserDefaults.standard.set(0, forKey: "reviewCount")
                                             
                                             Gold.shared.updatePrivileges()
         //                                        if UserDefaults.standard.string(forKey: "askedForNotification") == nil {
@@ -229,10 +231,10 @@ class LoginController: UIViewController {
                                 self.spinner.isHidden = true
                                 self.loginButton.isEnabled = true
                                
-                                print("Updated Register Obj salt\n")
+                                //print("Updated Register Obj salt\n")
                             }
                         case .failure(let error):
-                            print("DEBUG: Failed with error \(error)")
+                            //print("DEBUG: Failed with error \(error)")
                             DispatchQueue.main.async {
                                 self.spinner.isHidden = true
                                 self.loginButton.isEnabled = true
@@ -303,7 +305,7 @@ class LoginController: UIViewController {
                             }
 
                              self.showSentEmail(message: m)
-                            print("++ SET IT TO TRUE")
+                            //print("++ SET IT TO TRUE")
                             UserDefaults.standard.set(true, forKey: "tappedForgotPassword")
                             UserDefaults.standard.set(login, forKey: "login")
                             self.checkIfForgotPassword()
@@ -314,7 +316,7 @@ class LoginController: UIViewController {
 
             
                     case .failure(let error):
-                        print("DEBUG: Failed with error \(error)")
+                        //print("DEBUG: Failed with error \(error)")
                         DispatchQueue.main.async {
                             self.spinner.isHidden = true
                             self.forgotPasswordBtn.isEnabled = true
@@ -352,7 +354,7 @@ class LoginController: UIViewController {
                           }
                           
                       case .failure(let error):
-                          print("DEBUG: Failed with error \(error)")
+                          //print("DEBUG: Failed with error \(error)")
                           DispatchQueue.main.async {
                             self.showMessage(label: self.createLbl(text: "Oops! A network error occurred, please check your connection and try again."))
                           }
@@ -363,7 +365,7 @@ class LoginController: UIViewController {
       }
     
     @objc func sendVerificationEmail() {
-        print("=== RESENT")
+        //print("=== RESENT")
         spinner.isHidden = false
         DispatchQueue.global(qos: .userInitiated).async {
             UserAuth.shared.sendVerificationEmail { (result) in
@@ -377,7 +379,7 @@ class LoginController: UIViewController {
                     
                     
                 case .failure(let error):
-                    print("DEBUG: Failed with error \(error)")
+                    //print("DEBUG: Failed with error \(error)")
                     DispatchQueue.main.async {
                         self.spinner.isHidden = true
                          self.showMessage(label: self.createLbl(text: "Oops! A network error occurred, please check your connection and try again."))
@@ -391,7 +393,7 @@ class LoginController: UIViewController {
     
     
     @objc func handleShowRegister() {
-        print("handling sign up")
+        //print("handling sign up")
         navigationController?.pushViewController(RegisterController(), animated: true)
     }
 
@@ -470,7 +472,7 @@ class LoginController: UIViewController {
         lbl.backgroundColor = UIColor.rgb(red: 209, green: 21, blue: 0)
         lbl.textColor = .white
         lbl.text = text
-        lbl.font = UIFont.italicSystemFont(ofSize: 15.0)
+        lbl.font = Fonts.shared.slideInMessage//UIFont.italicSystemFont(ofSize: 15.0)
         //lbl.sizeToFit()
         lbl.textAlignment = .center
         lbl.numberOfLines = 0
@@ -496,7 +498,7 @@ class LoginController: UIViewController {
         label.backgroundColor = .systemGreen
         label.setTitleColor(.white, for: .normal)
         label.setTitle(m, for: .normal)
-        label.titleLabel?.font = UIFont.italicSystemFont(ofSize: 15.0)
+        label.titleLabel?.font = Fonts.shared.slideInMessage//UIFont.italicSystemFont(ofSize: 15.0)
         if isVerificationEmail {
              label.addTarget(self, action:  #selector(sendVerificationEmail), for: .touchUpInside)
         } else {
@@ -523,12 +525,12 @@ class LoginController: UIViewController {
         label.alpha = 1
         
 
-        label.frame = CGRect(x: 0 ,y: 0, width: self.view.frame.width, height: 20)
+        label.frame = CGRect(x: 0 ,y: 0, width: self.view.frame.width, height: 25)
         label.center.x = view.center.x
 
         UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
 
-            label.frame = CGRect(x: 0, y: UIApplication.shared.statusBarFrame.height ?? 25, width: self.view.frame.width, height: 20)
+            label.frame = CGRect(x: 0, y: UIApplication.shared.statusBarFrame.height ?? 25, width: self.view.frame.width, height: 25)
             label.center.x = self.view.center.x
         }, completion: nil)
         

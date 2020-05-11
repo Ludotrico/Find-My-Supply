@@ -22,7 +22,7 @@ class ForgotPasswordController: UIViewController {
         super.viewWillAppear(animated)
         
         
-        print("===\(UserDefaults.standard.bool(forKey: "forgotPassword"))")
+        //print("===\(UserDefaults.standard.bool(forKey: "forgotPassword"))")
         if !UserDefaults.standard.bool(forKey: "forgotPassword") {
             self.showSentEmail(message: "VVerification email sent. Tap to resend.")
             checkIfForgotPassword()
@@ -171,14 +171,14 @@ class ForgotPasswordController: UIViewController {
                                 userAuth.fetchUserInfo { (result) in
                                     switch result {
                                         case .success(let user):
-                                            print("Completed User Fetch with user: \(user)\n")
+                                            //print("Completed User Fetch with user: \(user)\n")
                                             DispatchQueue.main.async {
                                                 let firstChar = user.message.first
                                                 if firstChar == "#" {
                                                     self.showMessage(label: self.createLbl(text: "Username or email not found."))
                                                 }
                                                 else {
-                                                    print("Hashed password: \((psw1+user.salt).sha256())\n")
+                                                    //print("Hashed password: \((psw1+user.salt).sha256())\n")
 
                                                         if firstChar == "F" {
                                                             //User is unverified, (not a typo)
@@ -194,6 +194,8 @@ class ForgotPasswordController: UIViewController {
                                                             (UserDefaults.standard.integer(forKey: "radius") == 0) ? UserDefaults.standard.set(10, forKey: "radius") : nil
                                                             UserDefaults.standard.set(10, forKey: "submissionsRemaining")
                                                             UserDefaults.standard.set(true, forKey: "firstLaunch")
+                                                            UserDefaults.standard.set(0, forKey: "openCount")
+                                                            UserDefaults.standard.set(0, forKey: "reviewCount")
                                                             
                                                         }
                                                     
@@ -209,10 +211,10 @@ class ForgotPasswordController: UIViewController {
                                               self.resetPswButton.isEnabled = true
                                                 self.spinner.isHidden = true
                                                 
-                                              print("Updated Register Obj salt\n")
+                                              //print("Updated Register Obj salt\n")
                                             }
                                         case .failure(let error):
-                                            print("DEBUG: Failed with error \(error)")
+                                            //print("DEBUG: Failed with error \(error)")
                                             DispatchQueue.main.async {
                                              self.spinner.isHidden = true
                                                 self.resetPswButton.isEnabled = true
@@ -226,7 +228,7 @@ class ForgotPasswordController: UIViewController {
 
                                 
                             case.failure(let error):
-                                print("DEBUG: Failed with error \(error)")
+                                //print("DEBUG: Failed with error \(error)")
                                 DispatchQueue.main.async {
                                      self.spinner.isHidden = true
                                     self.resetPswButton.isEnabled = true
@@ -235,7 +237,7 @@ class ForgotPasswordController: UIViewController {
                             }
                         }
                 case .failure(let error):
-                    print("DEBUG: Failed with error \(error)")
+                    //print("DEBUG: Failed with error \(error)")
                     DispatchQueue.main.async {
                          self.spinner.isHidden = true
                         self.resetPswButton.isEnabled = true
@@ -290,7 +292,7 @@ class ForgotPasswordController: UIViewController {
 
             
                     case .failure(let error):
-                        print("DEBUG: Failed with error \(error)")
+                        //print("DEBUG: Failed with error \(error)")
                         DispatchQueue.main.async {
                              self.spinner.isHidden = true
                              self.showMessage(label: self.createLbl(text: "Oops! A network error occurred, please check your connection and try again."))
@@ -327,7 +329,7 @@ class ForgotPasswordController: UIViewController {
                           }
                           
                       case .failure(let error):
-                          print("DEBUG: Failed with error \(error)")
+                          //print("DEBUG: Failed with error \(error)")
                           DispatchQueue.main.async {
                             self.showMessage(label: self.createLbl(text: "Oops! A network error occurred, please check your connection and try again."))
                           }
@@ -349,7 +351,7 @@ class ForgotPasswordController: UIViewController {
     
     
     @objc func handleShowRegister() {
-        print("handling sign up")
+        //print("handling sign up")
         navigationController?.pushViewController(RegisterController(), animated: true)
     }
 
@@ -427,7 +429,7 @@ class ForgotPasswordController: UIViewController {
         lbl.backgroundColor = UIColor.rgb(red: 209, green: 21, blue: 0)
         lbl.textColor = .white
         lbl.text = text
-        lbl.font = UIFont.italicSystemFont(ofSize: 15.0)
+        lbl.font = Fonts.shared.slideInMessage
         //lbl.sizeToFit()
         lbl.textAlignment = .center
         lbl.numberOfLines = 0
@@ -447,7 +449,7 @@ class ForgotPasswordController: UIViewController {
         label.backgroundColor = .systemGreen
         label.setTitleColor(.white, for: .normal)
         label.setTitle(m, for: .normal)
-        label.titleLabel?.font = UIFont.italicSystemFont(ofSize: 15.0)
+        label.titleLabel?.font = Fonts.shared.slideInMessage
 
         label.addTarget(self, action:  #selector(sendResetPswEmail)     , for: .touchUpInside)
       
@@ -473,12 +475,12 @@ class ForgotPasswordController: UIViewController {
         label.alpha = 1
         
 
-        label.frame = CGRect(x: 0 ,y: 0, width: self.view.frame.width, height: 20)
+        label.frame = CGRect(x: 0 ,y: 0, width: self.view.frame.width, height: 25)
         label.center.x = view.center.x
 
         UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
 
-            label.frame = CGRect(x: 0, y: UIApplication.shared.statusBarFrame.height ?? 25, width: self.view.frame.width, height: 20)
+            label.frame = CGRect(x: 0, y: UIApplication.shared.statusBarFrame.height ?? 25, width: self.view.frame.width, height: 25)
             label.center.x = self.view.center.x
         }, completion: nil)
         

@@ -48,17 +48,17 @@ override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
     
  
     override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
-        //print("================self.BOUNDS: \(self.bounds)")
-        //print("==========point: \(point)")
+        ////print("================self.BOUNDS: \(self.bounds)")
+        ////print("==========point: \(point)")
         //let rect = CGRect(x: 0, y: 0, width: 262, height: 396)
         let rect = self.bounds
         /*
         if self.bounds.width == 262.0 {
-            print("================Inside callout box")
+            //print("================Inside callout box")
             rect = CGRect(x: 0, y: 0, width: 0, height: 0)
         }
         else {
-            print("================Inside pin")
+            //print("================Inside pin")
             rect = CGRect(x: 0, y: 0, width: 87.0, height: 87.0)
         }
  */
@@ -69,11 +69,11 @@ override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
         {
             
            // if let ann =  self.annotation as? CustomAnnotation {
-           //print("================IsSowing: \(Static.shared.calloutIsShowing)")
+           ////print("================IsSowing: \(Static.shared.calloutIsShowing)")
             if Static.shared.calloutIsShowing {
                     for view in self.subviews
                     {
-                        //print("================view.FRAME: \(view.frame)")
+                        ////print("================view.FRAME: \(view.frame)")
                         isInside = view.frame.contains(point)
                         if isInside
                         {
@@ -85,8 +85,8 @@ override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
         
  
         //}
-        //print("======\(isInside && self.bounds.width==87.0)")
-        //print("======\(isInside)")
+        ////print("======\(isInside && self.bounds.width==87.0)")
+        ////print("======\(isInside)")
         return isInside 
     }
 }

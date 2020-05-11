@@ -63,7 +63,7 @@ class Functions {
         let td = hour*60+minutes
         
         
-        print("\n\n===========Day: \(currDay) Hour: \(hour) Minutes: \(minutes) ")
+        //print("\n\n===========Day: \(currDay) Hour: \(hour) Minutes: \(minutes) ")
         
         let hoursCodex = store.store__openingHours
         if hoursCodex.count == 1 {
@@ -75,12 +75,12 @@ class Functions {
             return ("Closed today", UIColor.rgb(red: 255, green: 0, blue: 0))
 
         }
-        print("\n\n===========Day: \(currDay) Hour: \(hour) Minutes: \(minutes) ")
+        //print("\n\n===========Day: \(currDay) Hour: \(hour) Minutes: \(minutes) ")
         
         let openFrom = Float(hoursCodex[currDay].prefix(4))!/100.0
         let openUntil = Float(hoursCodex[currDay].suffix(4))!/100.0
         
-        print("\n\n===========Day: \(currDay) Hour: \(hour) Minutes: \(minutes) ")
+        //print("\n\n===========Day: \(currDay) Hour: \(hour) Minutes: \(minutes) ")
         
         //potentially open
         let openHour = Int(openFrom)
@@ -117,7 +117,7 @@ class Functions {
         let td = hour*60+minutes
         
         
-        print("\n\n===========Day: \(currDay) Hour: \(hour) Minutes: \(minutes) ")
+        //print("\n\n===========Day: \(currDay) Hour: \(hour) Minutes: \(minutes) ")
         
         let hoursCodex = store.store__openingHours
         if hoursCodex.count == 1 {
@@ -129,12 +129,12 @@ class Functions {
             return ("Closed today", UIColor.rgb(red: 255, green: 0, blue: 0))
 
         }
-        print("\n\n===========Day: \(currDay) Hour: \(hour) Minutes: \(minutes) ")
+        //print("\n\n===========Day: \(currDay) Hour: \(hour) Minutes: \(minutes) ")
         
         let openFrom = Float(hoursCodex[currDay].prefix(4))!/100.0
         let openUntil = Float(hoursCodex[currDay].suffix(4))!/100.0
         
-        print("\n\n===========Day: \(currDay) Hour: \(hour) Minutes: \(minutes) ")
+        ////print("\n\n===========Day: \(currDay) Hour: \(hour) Minutes: \(minutes) ")
         
         //potentially open
         let openHour = Int(openFrom)
@@ -166,13 +166,24 @@ class Functions {
     
     
     
-    
 
-    
-    
-    
-    
-    
-    
-    
 }
+
+
+//func print(_ items: Any..., separator: String = " ", terminator: String = "\n") {
+//
+//    #if DEBUG
+//
+//    var idx = items.startIndex
+//    let endIdx = items.endIndex
+//
+//    repeat {
+//        Swift.print(items[idx], separator: separator, terminator: idx == (endIdx - 1) ? terminator : separator)
+//        idx += 1
+//    }while idx < endIdx
+//
+//    #endif
+//}
+
+
+

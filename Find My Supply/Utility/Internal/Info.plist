@@ -35,7 +35,7 @@
 	<array>
 		<string>comgooglemaps</string>
 		<string>waze</string>
-        <string>fb</string>
+		<string>fb</string>
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
@@ -45,6 +45,7 @@
 	<array>
 		<string>brandon-grotesque-black-58a8a3e824392.otf</string>
 		<string>brandon-grotesque-light-58a8a4b38001d.otf</string>
+		<string>brandon-grotesque-regular-italic-58a8a456c4724.otf</string>
 	</array>
 	<key>UIApplicationSceneManifest</key>
 	<dict>

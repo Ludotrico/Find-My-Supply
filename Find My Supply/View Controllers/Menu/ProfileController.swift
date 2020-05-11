@@ -282,7 +282,7 @@ class ProfileController: UIViewController {
     //MARK: - Selectors
     
     @objc func saveChanges() {
-        print("+++SAVE")
+        //print("+++SAVE")
         
         
 
@@ -365,7 +365,7 @@ class ProfileController: UIViewController {
             }
         }
         
-        print("+++ENTerinG update with: \(fName) \(email) \(usrname)")
+        //print("+++ENTerinG update with: \(fName) \(email) \(usrname)")
 
             
         DispatchQueue.main.async {
@@ -402,7 +402,7 @@ class ProfileController: UIViewController {
 
                     self.updateUserDefaults(fName: fName, email: email, username: usrname)
                 case .failure(let error):
-                    print("DEBUG: Failed with error \(error)")
+                    //print("DEBUG: Failed with error \(error)")
                     DispatchQueue.main.async {
                         self.spinner.isHidden = true
                         self.showMessage(label: self.createLbl(text: "Oops! A network error occurred, please check your connection and try again."))
@@ -437,7 +437,7 @@ class ProfileController: UIViewController {
         lbl.backgroundColor = UIColor.rgb(red: 209, green: 21, blue: 0)
         lbl.textColor = .white
         lbl.text = text
-        lbl.font = UIFont.italicSystemFont(ofSize: 15.0)
+        lbl.font = Fonts.shared.slideInMessage
         //lbl.sizeToFit()
         lbl.textAlignment = .center
         lbl.numberOfLines = 0
@@ -447,7 +447,7 @@ class ProfileController: UIViewController {
     }
     
     @objc func editFname() {
-        print("+++EDIT FNAME")
+        //print("+++EDIT FNAME")
         fNameField.isUserInteractionEnabled = true
         usernameField.isUserInteractionEnabled = false
         emailField.isUserInteractionEnabled = false
@@ -477,7 +477,7 @@ class ProfileController: UIViewController {
     }
     
     @objc func editUsername() {
-        print("+++EDIT usrname")
+        //print("+++EDIT usrname")
         fNameField.isUserInteractionEnabled = false
         usernameField.isUserInteractionEnabled = true
         emailField.isUserInteractionEnabled = false
@@ -504,7 +504,7 @@ class ProfileController: UIViewController {
     }
     
     @objc func editEmail() {
-        print("+++EDIT email")
+        //print("+++EDIT email")
         fNameField.isUserInteractionEnabled = false
         usernameField.isUserInteractionEnabled = false
         emailField.isUserInteractionEnabled = true
@@ -599,7 +599,7 @@ class ProfileController: UIViewController {
         
         
         scrollView.contentSize = CGSize(width: view.frame.width, height: 850)
-        print("===\(view.frame.height)")
+        //print("===\(view.frame.height)")
         
         configureColorScheme()
         

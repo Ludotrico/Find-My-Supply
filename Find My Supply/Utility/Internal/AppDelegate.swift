@@ -31,6 +31,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         
         UIApplication.shared.applicationIconBadgeNumber = 0
+        UserDefaults.standard.set(UserDefaults.standard.integer(forKey: "openCount")+1, forKey: "openCount")
+        
+//
+//
+//
+//        for family in UIFont.familyNames.sorted() {
+//            let names = UIFont.fontNames(forFamilyName: family)
+//            //print("^^^^^Family: \(family) Font names: \(names)")
+//        }
         
         
         return true
@@ -53,7 +62,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-        print("@@@@@@@@@")
+        //print("@@@@@@@@@")
         let deviceTokenString = deviceToken.map { String(format: "%02x", $0) }.joined()
         
         DispatchQueue.global(qos: .userInitiated).async {
@@ -61,7 +70,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             UpdateUser.shared.addRegistrationID { (result) in
                 switch result {
                 case .success(_):
-                    print("@@@@@@success")
+                    //print("@@@@@@success")
                     UserDefaults.standard.set(true, forKey: "hasRegisteredID")
                 case .failure(let error):
                     print("DEBUG: Failed with error \(error)")
@@ -72,7 +81,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         
         
-        print("@@@@@@@: \(deviceTokenString)")
+        //print("@@@@@@@: \(deviceTokenString)")
         
     }
     

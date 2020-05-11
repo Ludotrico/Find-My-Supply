@@ -137,7 +137,7 @@ class ColorSchemeController: UIViewController {
     
     //MARK: Helper Functions
     @objc func handleSchemeToggle(_ control: UISegmentedControl) {
-        print("+++ mapType toggled")
+        //print("+++ mapType toggled")
         
         switch control.selectedSegmentIndex {
         case 0:
@@ -186,7 +186,7 @@ class ColorSchemeController: UIViewController {
     }
     
      func configureColorScheme() {
-        print("+++Configuring schme \(scheme)")
+        //print("+++Configuring schme \(scheme)")
         settingsController.configureColorScheme()
         menuController.configureColorScheme()
         
@@ -281,7 +281,7 @@ class ColorSchemeController: UIViewController {
 
 
     @objc func goBackHome() {
-        print("+++GO HOME")
+        //print("+++GO HOME")
         self.navigationController?.navigationBar.isHidden = true
         self.navigationController?.popToRootViewController(animated: true)
     }

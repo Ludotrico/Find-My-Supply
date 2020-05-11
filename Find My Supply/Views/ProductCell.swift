@@ -320,6 +320,6 @@ class ProductCell: UITableViewCell {
     
     
     @objc func showNearbyStores() {
-        print("====NEARBY STOREs")
+        //print("====NEARBY STOREs")
     }
 }

@@ -30,7 +30,7 @@ class AdCell: UITableViewCell {
     
     var bannerAd: GADBannerView = {
         let ad = GADBannerView()
-        ad.adUnitID = Ads.shared.bannerTest
+        ad.adUnitID = Ads.shared.tableViewBannerID
         ad.translatesAutoresizingMaskIntoConstraints = false
         
         return ad

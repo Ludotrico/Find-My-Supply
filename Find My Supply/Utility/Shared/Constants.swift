@@ -93,11 +93,12 @@ class Ads {
     
     let appID = "ca-app-pub-7180024158512245~7111316337"
     
-    let tableViewBannerID = "ca-app-pub-7180024158512245/2015736475"
-    let bannerTest = "ca-app-pub-3940256099942544/2934735716"
     
-    let interstitialTest = "ca-app-pub-3940256099942544/4411468910"
+    let tableViewBannerID = "ca-app-pub-7180024158512245/2015736475"
     let interstitialHomeID = "ca-app-pub-7180024158512245/6813234175"
+    
+    //let bannerTest = "ca-app-pub-3940256099942544/2934735716"
+    //let interstitialTest = "ca-app-pub-3940256099942544/4411468910"
     
 
     var adsEnabled = true

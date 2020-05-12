@@ -239,10 +239,64 @@ class ContactUsController: UIViewController {
         
     }()
     
+    let Hstack2: UIStackView = {
+        let stack = UIStackView()
+        stack.axis = .horizontal
+        stack.spacing = 5
+        stack.alignment = .center
+        stack.distribution = .equalSpacing
+        
+        //stack.addBackground(color: UIColor.gray, cornerRadius: 5)
+       stack.sizeToFit()
+        stack.translatesAutoresizingMaskIntoConstraints = false
+    
+        return stack
+    }()
+    
+    let termsBtn: UIButton = {
+        let button = UIButton(type: .system)
+        button.sizeToFit()
+        button.clipsToBounds = true
+        button.setTitle("Terms and conditions", for: .normal)
+        button.setTitleColor(Color.shared.blue, for: .normal)
+        button.titleLabel?.font = Fonts.shared.smallBold
+        button.addTarget(self, action: #selector(termsRedirect), for: .touchUpInside)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+        
+    }()
+    
+    let privacyBtn: UIButton = {
+        let button = UIButton(type: .system)
+        button.sizeToFit()
+        button.clipsToBounds = true
+        button.setTitle("Privacy policy", for: .normal)
+        button.setTitleColor(Color.shared.blue, for: .normal)
+        button.titleLabel?.font = Fonts.shared.smallBold
+        button.addTarget(self, action: #selector(privacyRedirect), for: .touchUpInside)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+        
+    }()
+    
     
     
     
     //MARK: Helper Functions
+    
+    @objc func termsRedirect() {
+        //let redirection = "https://www.waze.com/ul?ll=40.75889500,-73.98513100&navigate=yes"
+        let redirection = "https://find-my-supply-274702.uc.r.appspot.com/termsOfUse"
+        let url = URL(string: redirection)
+        UIApplication.shared.open(url!, options: [:], completionHandler: nil)
+    }
+    
+    @objc func privacyRedirect() {
+        //let redirection = "https://www.waze.com/ul?ll=40.75889500,-73.98513100&navigate=yes"
+        let redirection = "https://find-my-supply-274702.uc.r.appspot.com/privacyPolicy"
+        let url = URL(string: redirection)
+        UIApplication.shared.open(url!, options: [:], completionHandler: nil)
+    }
     
     @objc func twitterRedirect() {
         //let redirection = "https://www.waze.com/ul?ll=40.75889500,-73.98513100&navigate=yes"
@@ -384,6 +438,12 @@ class ContactUsController: UIViewController {
         Hstack.addArrangedSubview(emailLbl)
         //titleLbl2.anchor(top: nil, left: nil, bottom: nil, right: nil, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 400, height: 30)
         
+        scrollView.addSubview(Hstack2)
+        Hstack2.anchor(top: Vstack2.bottomAnchor, left: nil, bottom: nil, right: nil, paddingTop: 10, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 225, height: 40)
+        Hstack2.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        
+        Hstack2.addArrangedSubview(termsBtn)
+        Hstack2.addArrangedSubview(privacyBtn)
         
 
         
@@ -449,6 +509,8 @@ class ContactUsController: UIViewController {
             spinner.color = Color.shared.gold
             
             Hstack1.addBackground(color: Color.shared.gold.withAlphaComponent(1), cornerRadius: 30)
+            
+           
 
         }
         else {

@@ -286,14 +286,14 @@ class ContactUsController: UIViewController {
     
     @objc func termsRedirect() {
         //let redirection = "https://www.waze.com/ul?ll=40.75889500,-73.98513100&navigate=yes"
-        let redirection = "https://find-my-supply-274702.uc.r.appspot.com/termsOfUse"
+        let redirection = "https://findmysupply.app/terms"
         let url = URL(string: redirection)
         UIApplication.shared.open(url!, options: [:], completionHandler: nil)
     }
     
     @objc func privacyRedirect() {
         //let redirection = "https://www.waze.com/ul?ll=40.75889500,-73.98513100&navigate=yes"
-        let redirection = "https://find-my-supply-274702.uc.r.appspot.com/privacyPolicy"
+        let redirection = "https://findmysupply.app/privacy"
         let url = URL(string: redirection)
         UIApplication.shared.open(url!, options: [:], completionHandler: nil)
     }

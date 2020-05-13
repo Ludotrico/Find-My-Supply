@@ -124,3 +124,12 @@ struct Random {
     var showedAdPopup = false
     
 }
+
+class URLS {
+    static let shared = URLS()
+    
+    let terms = "https://findmysupply.app/terms"
+    let priacy = "https://findmysupply.app/privacy"
+    
+
+}

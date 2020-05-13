@@ -835,6 +835,101 @@ class GoldPopup: UIViewController {
         
     }()
     
+    let restoreStackV: UIStackView = {
+        let stack = UIStackView()
+        stack.axis = .vertical
+        //stack.distribution =
+        stack.alignment = .center
+        stack.clipsToBounds = true
+        //stack.sizeToFit()
+        //stack.addBackground(color: UIColor.black, cornerRadius: 0)
+        return stack
+    }()
+    
+    let restoreStackH2: UIStackView = {
+        let stack = UIStackView()
+        stack.axis = .horizontal
+        //stack.distribution = .fillProportionally
+        stack.alignment = .center
+        stack.clipsToBounds = true
+        //stack.sizeToFit()
+        
+        return stack
+    }()
+    
+    let restoreImg: UIImageView = {
+        let view = UIImageView()
+        view.image = #imageLiteral(resourceName: "restore").withRenderingMode(.alwaysTemplate)
+        view.tintColor = .gray
+        view.contentMode = .scaleAspectFit
+        view.clipsToBounds = true
+        return view
+    }()
+    
+    let restoreLbl: UILabel = {
+        let lbl = UILabel()
+        lbl.text = "Restore Purchases"
+        lbl.sizeToFit()
+        lbl.font = UIFont(name: "BrandonGrotesque-Light", size: 500)
+          lbl.lineBreakMode = .byClipping
+              //  lbl.minimumScaleFactor = 0.1
+        lbl.textColor = .gray
+        lbl.adjustsFontSizeToFitWidth = true
+          lbl.textAlignment  = .center
+        lbl.numberOfLines = 0
+        lbl.clipsToBounds = true
+        return lbl
+    }()
+    
+    
+    let restoreStackH1: UIStackView = {
+        let stack = UIStackView()
+        stack.axis = .horizontal
+        //stack.distribution = .fillProportionally
+        stack.alignment = .center
+        stack.clipsToBounds = true
+        //stack.sizeToFit()
+        
+        return stack
+    }()
+    
+    let termsLbl: UILabel = {
+        let lbl = UILabel()
+        lbl.text = "Terms"
+        lbl.sizeToFit()
+        lbl.font = UIFont(name: "BrandonGrotesque-Light", size: 500)
+          lbl.lineBreakMode = .byClipping
+              //  lbl.minimumScaleFactor = 0.1
+        lbl.textColor = .gray
+        lbl.adjustsFontSizeToFitWidth = true
+          lbl.textAlignment  = .center
+        lbl.numberOfLines = 0
+        lbl.clipsToBounds = true
+        lbl.isUserInteractionEnabled = true
+        return lbl
+    }()
+    
+    let privacylbl: UILabel = {
+        let lbl = UILabel()
+        lbl.text = "Privacy"
+        lbl.sizeToFit()
+        lbl.font = UIFont(name: "BrandonGrotesque-Light", size: 500)
+          lbl.lineBreakMode = .byClipping
+              //  lbl.minimumScaleFactor = 0.1
+        lbl.textColor = .gray
+        lbl.adjustsFontSizeToFitWidth = true
+          lbl.textAlignment  = .center
+        lbl.numberOfLines = 0
+        lbl.clipsToBounds = true
+        lbl.isUserInteractionEnabled = true
+        return lbl
+    }()
+    
+
+    
+    
+    
+    
     
     //MARK: VARIABLES
     let scheme = UserDefaults.standard.integer(forKey: "colorScheme")
@@ -1024,7 +1119,20 @@ class GoldPopup: UIViewController {
     
     
     
+    @objc func restorePurchases() {
+        Gold.shared.restorePurchases()
+    }
     
+    @objc func termsRedirect() {
+        let url = URL(string: URLS.shared.terms)
+        
+        UIApplication.shared.open(url!, options: [:], completionHandler: nil)
+    }
+    
+    @objc func privacyRedirect() {
+        let url = URL(string: URLS.shared.priacy)
+        UIApplication.shared.open(url!, options: [:], completionHandler: nil)
+    }
     
     
     
@@ -1390,6 +1498,39 @@ class GoldPopup: UIViewController {
         tap = UITapGestureRecognizer(target: self, action: #selector(handleUpgrade))
         btnStack.addGestureRecognizer(tap)
         
+        view.addSubview(restoreStackV)
+        restoreStackV.anchor(top: nil, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: view.frame.width, height: pricingHeight*(1/8)*2)
+
+        restoreStackV.addArrangedSubview(restoreStackH1)
+        
+        restoreStackH1.anchor(top: nil, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: view.frame.width, height: pricingHeight*(1/8))
+        
+        restoreStackH1.addArrangedSubview(termsLbl)
+        termsLbl.anchor(top: nil, left: nil, bottom: nil, right: nil, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: pricingHeight*(1/8))
+        tap = UITapGestureRecognizer(target: self, action: #selector(termsRedirect))
+        termsLbl.addGestureRecognizer(tap)
+        
+        
+         restoreStackH1.addArrangedSubview(restoreStackH2)
+        
+        restoreStackH1.addArrangedSubview(privacylbl)
+            privacylbl.anchor(top: nil, left: nil, bottom: nil, right: nil, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: pricingHeight*(1/8))
+        tap = UITapGestureRecognizer(target: self, action: #selector(privacyRedirect))
+        privacylbl.addGestureRecognizer(tap)
+
+        restoreStackH2.addArrangedSubview(restoreImg)
+        restoreImg.anchor(top: nil, left: nil, bottom: nil, right: nil, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: pricingHeight*(1/8), height: pricingHeight*(1/8)/1.5)
+
+        restoreStackH2.addArrangedSubview(restoreLbl)
+        restoreLbl.anchor(top: nil, left: nil, bottom: nil, right: nil, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: pricingHeight*(1/8))
+
+        restoreStackH2.anchor(top: nil, left: nil, bottom: nil, right: nil, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: view.frame.width*(4/10) , height: pricingHeight*(1/8))
+        restoreStackH2.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+
+        tap = UITapGestureRecognizer(target: self, action: #selector(restorePurchases))
+        restoreStackH2.addGestureRecognizer(tap)
+        
+        
         
         
         
@@ -1400,7 +1541,7 @@ class GoldPopup: UIViewController {
         
         
         
-        view.addScrollView(Dscroll, container: scrollViewContainer, elements: [invisibleRect, Hstack, upgradeBackground ])
+        view.addScrollView(Dscroll, container: scrollViewContainer, elements: [invisibleRect, Hstack, upgradeBackground,restoreStackV ])
         Dscroll.alwaysBounceVertical = true
         Dscroll.showsVerticalScrollIndicator = false
         

@@ -681,7 +681,7 @@ class GoldController: UIViewController {
         return stack
     }()
     
-    let restoreStackH: UIStackView = {
+    let restoreStackH2: UIStackView = {
         let stack = UIStackView()
         stack.axis = .horizontal
         //stack.distribution = .fillProportionally
@@ -717,6 +717,55 @@ class GoldController: UIViewController {
     }()
     
     
+    let restoreStackH1: UIStackView = {
+        let stack = UIStackView()
+        stack.axis = .horizontal
+        //stack.distribution = .fillProportionally
+        stack.alignment = .center
+        stack.clipsToBounds = true
+        //stack.sizeToFit()
+        
+        return stack
+    }()
+    
+    let termsLbl: UILabel = {
+        let lbl = UILabel()
+        lbl.text = "Terms"
+        lbl.sizeToFit()
+        lbl.font = UIFont(name: "BrandonGrotesque-Light", size: 500)
+          lbl.lineBreakMode = .byClipping
+              //  lbl.minimumScaleFactor = 0.1
+        lbl.textColor = .gray
+        lbl.adjustsFontSizeToFitWidth = true
+          lbl.textAlignment  = .center
+        lbl.numberOfLines = 0
+        lbl.clipsToBounds = true
+        lbl.isUserInteractionEnabled = true
+        return lbl
+    }()
+    
+    let privacylbl: UILabel = {
+        let lbl = UILabel()
+        lbl.text = "Privacy"
+        lbl.sizeToFit()
+        lbl.font = UIFont(name: "BrandonGrotesque-Light", size: 500)
+          lbl.lineBreakMode = .byClipping
+              //  lbl.minimumScaleFactor = 0.1
+        lbl.textColor = .gray
+        lbl.adjustsFontSizeToFitWidth = true
+          lbl.textAlignment  = .center
+        lbl.numberOfLines = 0
+        lbl.clipsToBounds = true
+        lbl.isUserInteractionEnabled = true
+        return lbl
+    }()
+    
+
+    
+    
+    
+    
+    
     
     
     
@@ -750,6 +799,9 @@ class GoldController: UIViewController {
     
     
     //MARK: Selectors
+
+    
+    
     
     @objc func handleUpgrade() {
         //print("=====UPgrading $$$$")
@@ -888,6 +940,16 @@ class GoldController: UIViewController {
         Gold.shared.restorePurchases()
     }
     
+    @objc func termsRedirect() {
+        let url = URL(string: URLS.shared.terms)
+        
+        UIApplication.shared.open(url!, options: [:], completionHandler: nil)
+    }
+    
+    @objc func privacyRedirect() {
+        let url = URL(string: URLS.shared.priacy)
+        UIApplication.shared.open(url!, options: [:], completionHandler: nil)
+    }
     
     
     
@@ -1260,21 +1322,60 @@ class GoldController: UIViewController {
         
         view.addSubview(restoreStackV)
         restoreStackV.anchor(top: nil, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: view.frame.width, height: pricingHeight*(1/8)*2)
+
+        restoreStackV.addArrangedSubview(restoreStackH1)
         
-        restoreStackV.addArrangedSubview(restoreStackH)
+        restoreStackH1.anchor(top: nil, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: view.frame.width, height: pricingHeight*(1/8))
+        
+        restoreStackH1.addArrangedSubview(termsLbl)
+        termsLbl.anchor(top: nil, left: nil, bottom: nil, right: nil, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: pricingHeight*(1/8))
+        tap = UITapGestureRecognizer(target: self, action: #selector(termsRedirect))
+        termsLbl.addGestureRecognizer(tap)
+        
+        
+        restoreStackH1.addArrangedSubview(restoreStackH2)
+        restoreStackH2.addArrangedSubview(restoreImg)
+        restoreImg.anchor(top: nil, left: nil, bottom: nil, right: nil, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: pricingHeight*(1/8), height: pricingHeight*(1/8)/1.5)
+
+        restoreStackH2.addArrangedSubview(restoreLbl)
+        restoreLbl.anchor(top: nil, left: nil, bottom: nil, right: nil, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: view.frame.width*(2/10), height: pricingHeight*(1/8))
+
+        restoreStackH2.anchor(top: nil, left: nil, bottom: nil, right: nil, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0 , height: pricingHeight*(1/8))
+        restoreStackH2.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+
+        tap = UITapGestureRecognizer(target: self, action: #selector(restorePurchases))
+        restoreStackH2.addGestureRecognizer(tap)
+        
+        
+        restoreStackH1.addArrangedSubview(privacylbl)
+            privacylbl.anchor(top: nil, left: nil, bottom: nil, right: nil, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: pricingHeight*(1/8))
+        tap = UITapGestureRecognizer(target: self, action: #selector(privacyRedirect))
+        privacylbl.addGestureRecognizer(tap)
+
 
         
-        restoreStackH.addArrangedSubview(restoreImg)
-        restoreImg.anchor(top: nil, left: nil, bottom: nil, right: nil, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: pricingHeight*(1/8), height: pricingHeight*(1/8)/1.5)
+
         
-        restoreStackH.addArrangedSubview(restoreLbl)
-        restoreLbl.anchor(top: nil, left: nil, bottom: nil, right: nil, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: pricingHeight*(1/8))
         
-        restoreStackH.anchor(top: nil, left: nil, bottom: nil, right: nil, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: restoreLbl.frame.width+pricingHeight*(1/8) , height: pricingHeight*(1/8))
-        restoreStackH.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         
-        tap = UITapGestureRecognizer(target: self, action: #selector(restorePurchases))
-        restoreStackH.addGestureRecognizer(tap)
+//        view.addSubview(restoreStackV)
+//        restoreStackV.anchor(top: nil, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: view.frame.width, height: pricingHeight*(1/8)*2)
+//
+//        restoreStackV.addArrangedSubview(restoreStackH)
+//
+//
+//        restoreStackH.addArrangedSubview(restoreImg)
+//        restoreImg.anchor(top: nil, left: nil, bottom: nil, right: nil, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: pricingHeight*(1/8), height: pricingHeight*(1/8)/1.5)
+//
+//        restoreStackH.addArrangedSubview(restoreLbl)
+//        restoreLbl.anchor(top: nil, left: nil, bottom: nil, right: nil, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: pricingHeight*(1/8))
+//
+//        restoreStackH.anchor(top: nil, left: nil, bottom: nil, right: nil, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: restoreLbl.frame.width+pricingHeight*(1/8) , height: pricingHeight*(1/8))
+//        restoreStackH.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+//
+//        tap = UITapGestureRecognizer(target: self, action: #selector(restorePurchases))
+//        restoreStackH.addGestureRecognizer(tap)
+        
         
         
         
@@ -1299,6 +1400,7 @@ class GoldController: UIViewController {
         view.bringSubviewToFront(oneVstack1)
         view.bringSubviewToFront(twelveLabel)
         view.bringSubviewToFront(sixLabel)
+        
 
     }
     

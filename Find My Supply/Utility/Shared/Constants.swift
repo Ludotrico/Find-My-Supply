@@ -139,5 +139,6 @@ class Supplies {
     static let shared = Supplies()
     
     var list = [String]()
+    var _list = [String]()
     
 }

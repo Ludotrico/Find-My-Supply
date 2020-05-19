@@ -1324,7 +1324,9 @@ class HomeController: UIViewController {
                                 case .success(let options):
                                     for option in options {
                                         Supplies.shared.list.append(option.name)
+                                        Supplies.shared._list.append(option.name.replacingOccurrences(of: " ", with: "_"))
                                     }
+                                
                                 case .failure(let error):
                                         DispatchQueue.main.async {
                                             self.showMessage(label: self.createLbl(text: "Oops! A network error occurred, please check your connection and try again."))
@@ -2708,25 +2710,33 @@ extension HomeController: MKMapViewDelegate {
 
 
         //print("++++ \(supplySearchedFor)")
-        switch supplySearchedFor! {
-        case "Face_Masks":
-            annotationView.image = #imageLiteral(resourceName: "maskAnn")
-        case "Gloves":
-            annotationView.image = #imageLiteral(resourceName: "glovesAnn-1")
-        case "Hand_Sanitizer":
-            annotationView.image = #imageLiteral(resourceName: "sanitAnn")
-        case "Soap":
-            annotationView.image = #imageLiteral(resourceName: "soapAn")
-        case "Toilet_Paper":
-            annotationView.image = #imageLiteral(resourceName: "redTPPin")
-        case "Disinfectant_Wipes":
-            annotationView.image = #imageLiteral(resourceName: "wipesAnn")
-        case "Disinfectant_Spray":
-            annotationView.image = #imageLiteral(resourceName: "sprayAnn")
-        default:
-            annotationView.image = #imageLiteral(resourceName: "black user loc")
             
+        
+            if supplySearchedFor! == Supplies.shared._list[0] {
+                annotationView.image = #imageLiteral(resourceName: "maskAnn")
             }
+            else if supplySearchedFor! == Supplies.shared._list[1] {
+                annotationView.image = #imageLiteral(resourceName: "gAnn")
+            }
+            else if supplySearchedFor! == Supplies.shared._list[2] {
+                annotationView.image = #imageLiteral(resourceName: "sanitAnn")
+            }
+            else if supplySearchedFor! == Supplies.shared._list[3] {
+                annotationView.image = #imageLiteral(resourceName: "barAn")
+            }
+            else if supplySearchedFor! == Supplies.shared._list[4] {
+                annotationView.image = #imageLiteral(resourceName: "redTPPin")
+            }
+            else if supplySearchedFor! == Supplies.shared._list[5] {
+                annotationView.image = #imageLiteral(resourceName: "wipeAnn")
+            }
+            else if supplySearchedFor! == Supplies.shared._list[6] {
+                annotationView.image = #imageLiteral(resourceName: "sprayAnn")
+            } else {
+                   annotationView.image = #imageLiteral(resourceName: "userLocGold")
+            }
+            
+            
 
  
         annotationView.canShowCallout = false

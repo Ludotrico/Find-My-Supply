@@ -655,25 +655,29 @@ extension NotificationsController: UITableViewDelegate, UITableViewDataSource {
                 cell.productName.text = notif.supplyName!
                 let supply = notif.supplyName!
                 //print("+++\(supply)")
-                switch supply{
-                case "Face Masks":
+                if supply == Supplies.shared._list[0] {
                     cell.notifImage.image = #imageLiteral(resourceName: "mask")
-                case "Gloves":
+                }
+                else if supply == Supplies.shared._list[1] {
                     cell.notifImage.image = #imageLiteral(resourceName: "glove")
-                case "Hand Sanitizer":
+                }
+                else if supply == Supplies.shared._list[2] {
                     cell.notifImage.image = #imageLiteral(resourceName: "sanit")
-                case "Soap":
-                    cell.notifImage.image = #imageLiteral(resourceName: "soap")
-                case "Toilet Paper":
+                }
+                else if supply == Supplies.shared._list[3] {
+                    cell.notifImage.image = #imageLiteral(resourceName: "bar")
+                }
+                else if supply == Supplies.shared._list[4] {
                     cell.notifImage.image = #imageLiteral(resourceName: "TP")
-                case "Disinfectant Wipes":  
+                }
+                else if supply == Supplies.shared._list[5] {
                     cell.notifImage.image = #imageLiteral(resourceName: "wipe")
-                case "Disinfectant Spray":
+                }
+                else if supply == Supplies.shared._list[6] {
                     cell.notifImage.image = #imageLiteral(resourceName: "spray")
-                default:
-                    cell.notifImage.image = #imageLiteral(resourceName: "image-not-found")
-                    
-                    }
+                } else {
+                       cell.notifImage.image = #imageLiteral(resourceName: "image-not-found")
+                }
                 cell.titleStackLbl.text = "\(notif.radius!) mile radius from \(notif.city!)"
                 cell.dateLbl.text = notif.date?.replacingOccurrences(of: "-", with: "/")
             }
@@ -725,25 +729,32 @@ extension NotificationsController: UITableViewDelegate, UITableViewDataSource {
             else {
                 cell.productName.text = notif.supplyName!
                 let supply = notif.supplyName!
-                switch supply{
-                case "Face Masks":
+                if supply == Supplies.shared._list[0] {
                     cell.notifImage.image = #imageLiteral(resourceName: "mask")
-                case "Gloves":
+                }
+                else if supply == Supplies.shared._list[1] {
                     cell.notifImage.image = #imageLiteral(resourceName: "glove")
-                case "Hand Sanitizer":
+                }
+                else if supply == Supplies.shared._list[2] {
                     cell.notifImage.image = #imageLiteral(resourceName: "sanit")
-                case "Soap":
-                    cell.notifImage.image = #imageLiteral(resourceName: "soap")
-                case "Toilet Paper":
+                }
+                else if supply == Supplies.shared._list[3] {
+                    cell.notifImage.image = #imageLiteral(resourceName: "bar")
+                }
+                else if supply == Supplies.shared._list[4] {
                     cell.notifImage.image = #imageLiteral(resourceName: "TP")
-                case "Disinfectant Wipes":
+                }
+                else if supply == Supplies.shared._list[5] {
                     cell.notifImage.image = #imageLiteral(resourceName: "wipe")
-                case "Disinfectant Spray":
+                }
+                else if supply == Supplies.shared._list[6] {
                     cell.notifImage.image = #imageLiteral(resourceName: "spray")
-                default:
-                    cell.notifImage.image = #imageLiteral(resourceName: "image-not-found")
-                    
-                    }
+                } else {
+                       cell.notifImage.image = #imageLiteral(resourceName: "image-not-found")
+                }
+                
+                
+                
                 
                 cell.titleStackLbl.text = "\(notif.radius!) mile radius from \(notif.city!)"
                 cell.dateLbl.text = notif.date?.replacingOccurrences(of: "-", with: "/")

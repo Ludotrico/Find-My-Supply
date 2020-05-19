@@ -35,7 +35,7 @@ struct UserInfo: Decodable {
 
 struct supplyOption: Decodable {
     
-    var supplyName: String
+    var name: String
 }
 
 

@@ -133,3 +133,11 @@ class URLS {
     
 
 }
+
+
+class Supplies {
+    static let shared = Supplies()
+    
+    var list = [String]()
+    
+}

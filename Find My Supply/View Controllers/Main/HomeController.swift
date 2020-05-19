@@ -65,6 +65,8 @@ class HomeController: UIViewController {
         
     }
     
+    
+    
 
     
     
@@ -164,7 +166,6 @@ class HomeController: UIViewController {
     var authorized = true
     var supplySearchedFor: String!
     var city = ""
-    let supplyList = ["Face Masks", "Gloves", "Hand Sanitizer", "Soap", "Toilet Paper", "Disinfectant Wipes", "Disinfectant Spray"]
 
 
     
@@ -1318,7 +1319,20 @@ class HomeController: UIViewController {
                             //print("===== ADS Enabled?: \(Ads.shared.adsEnabled)")
                       
                             //Logged in user
-                            Gold.shared.updatePrivileges()
+                            supplyOptions.shared.fetchOptions { (result)  in
+                                switch result {
+                                case .success(let options):
+                                    for option in options {
+                                        Supplies.shared.list.append(option.name)
+                                    }
+                                case .failure(let error):
+                                        DispatchQueue.main.async {
+                                            self.showMessage(label: self.createLbl(text: "Oops! A network error occurred, please check your connection and try again."))
+                                    }
+                                }
+                            }
+                            
+
                             
                             if !UserDefaults.standard.bool(forKey: "isGold") {
                                 DispatchQueue.main.async {
@@ -1857,7 +1871,7 @@ class HomeController: UIViewController {
         if showingMenu {
             var indexPaths = [IndexPath]()
             
-            for i in 0..<self.supplyList.count{
+            for i in 0..<Supplies.shared.list.count{
                 let indexPath = IndexPath(row: i, section: 0)
                 indexPaths.append(indexPath)
             }
@@ -2070,7 +2084,7 @@ class HomeController: UIViewController {
             DispatchQueue.main.async {
                 var indexPaths = [IndexPath]()
                 
-                for i in 0..<self.supplyList.count{
+                for i in 0..<Supplies.shared.list.count{
                     let indexPath = IndexPath(row: i, section: 0)
                     indexPaths.append(indexPath)
                 }
@@ -2090,7 +2104,7 @@ class HomeController: UIViewController {
             DispatchQueue.main.async {
                 var indexPaths = [IndexPath]()
                 
-                for i in 0..<self.supplyList.count{
+                for i in 0..<Supplies.shared.list.count{
                     let indexPath = IndexPath(row: i, section: 0)
                     indexPaths.append(indexPath)
                 }
@@ -2517,13 +2531,13 @@ extension HomeController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         //print(supplies.count)
-        return showingMenu ? supplyList.count : 0
+        return showingMenu ? Supplies.shared.list.count : 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "supplyCell", for: indexPath) as! supplyCell
         cell.selectionStyle = .none
-        cell.supply.text = supplyList[indexPath.row]//supplies[indexPath.row].supplyName
+        cell.supply.text = Supplies.shared.list[indexPath.row]//supplies[indexPath.row].supplyName
         cell.supply.textColor = Color.shared.theme
         //cell.supply.layer.frame = CGRect(x: 0,y: 0, width: 100,height: 100)
         cell.supply.layer.cornerRadius = 10
@@ -2558,7 +2572,7 @@ extension HomeController: UITableViewDelegate, UITableViewDataSource {
         }
         
         
-        supplySearchedFor = supplyList[indexPath.row].replacingOccurrences(of: " ", with: "_")
+        supplySearchedFor = Supplies.shared.list[indexPath.row].replacingOccurrences(of: " ", with: "_")
         DispatchQueue.main.async {
             self.callout.isHidden = true
             self.triView.isHidden = true
@@ -2585,7 +2599,7 @@ extension HomeController: UITableViewDelegate, UITableViewDataSource {
         else { return }
         
         
-        Stores.shared.initialize(withSupply: supplyList[indexPath.row].replacingOccurrences(of: " ", with: "_"), withCoor: Location.shared.coordinates)
+        Stores.shared.initialize(withSupply: Supplies.shared.list[indexPath.row].replacingOccurrences(of: " ", with: "_"), withCoor: Location.shared.coordinates)
         //print("===================================START========================================")
 
         self.spinner.isHidden = false
@@ -2599,7 +2613,7 @@ extension HomeController: UITableViewDelegate, UITableViewDataSource {
                                     let lbl = UILabel()
                                     lbl.backgroundColor = UIColor.rgb(red: 209, green: 21, blue: 0)
                                     lbl.textColor = .white
-                                    lbl.text = "No stores nearby currently have \(self.supplyList[indexPath.row]) in stock."
+                                    lbl.text = "No stores nearby currently have \(Supplies.shared.list[indexPath.row]) in stock."
                                     lbl.font = Fonts.shared.slideInMessage//Fonts.shared.slideInMessage
                                     //lbl.sizeToFit()
                                     lbl.textAlignment = .center

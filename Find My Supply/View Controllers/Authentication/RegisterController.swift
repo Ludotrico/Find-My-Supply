@@ -347,7 +347,7 @@ class RegisterController: UIViewController {
                                 
                             }
                         case .failure(let error):
-                            //print("DEBUG: Failed with error \(error)")
+                            print("DEBUG: Failed with error \(error)")
                             DispatchQueue.main.async {
                                 self.spinner.isHidden = true
                                 self.loginButton.isEnabled = true
@@ -358,7 +358,7 @@ class RegisterController: UIViewController {
                     }
 
                 case .failure(let error):
-                    //print("DEBUG: Failed with error \(error)")
+                    print("DEBUG: Failed with error \(error)")
                     DispatchQueue.main.async {
                         self.spinner.isHidden = true
                         self.loginButton.isEnabled = true
@@ -370,12 +370,11 @@ class RegisterController: UIViewController {
             
     
         }
-            
-            //if message.message.removeFirst() == "#" {
-
-            
-        
+                    
     }
+    
+    
+    
     
     @objc func sendVerificationEmail() {
         //print("=== RESENT")

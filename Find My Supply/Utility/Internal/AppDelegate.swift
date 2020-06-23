@@ -64,7 +64,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         //print("@@@@@@@@@")
         let deviceTokenString = deviceToken.map { String(format: "%02x", $0) }.joined()
-        
+        print(deviceTokenString)
         DispatchQueue.global(qos: .userInitiated).async {
             UpdateUser.shared.registrationID = deviceTokenString
             UpdateUser.shared.addRegistrationID { (result) in

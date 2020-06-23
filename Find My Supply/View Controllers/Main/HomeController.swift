@@ -122,7 +122,7 @@ class HomeController: UIViewController {
         firstOpened = false
    
         
-        
+        test()
 
         
             
@@ -967,6 +967,56 @@ class HomeController: UIViewController {
         
         
         
+        
+    }
+    
+    func test() {
+             let center = UNUserNotificationCenter.current()
+             center.getNotificationSettings { settings in
+                 if settings.authorizationStatus == .notDetermined {
+                     //Not determined
+                     //print("=====+PROMPT USER")
+
+                     let center = UNUserNotificationCenter.current()
+                     center.requestAuthorization(options: [.alert, .sound, .badge]) { granted, error in
+                         if let error = error {
+                             // Handle the error here.
+                             //print("DEBUG: Failed with error \(error)")
+                           self.showMessage(label: self.createLbl(text: "Oops! An unexpected error occurred, please try again."))
+                         }
+                         self.test()
+                         return
+                         
+                         }
+                 }
+                 
+                 else if settings.authorizationStatus == .denied {
+                     //Denied
+                     DispatchQueue.main.async {
+                         let alert = UIAlertController(title: "Notifications Disabled", message: "To enable, go to Settings -> Notifications -> Find My Supply -> Allow Notifications", preferredStyle: .alert)
+                         alert.addAction(UIAlertAction(title: "Got it", style: .default, handler: nil))
+                         self.present(alert, animated: true, completion: nil)
+                     }
+
+                     
+                 }
+                 else {
+                     //Accepted
+//                         self.addSupplyRegionNotification()
+
+                           Gold.shared.sendRegistrationId()
+                     
+                     
+                         
+        
+                 
+
+                      
+                     
+                 }
+                 
+             }
+             
         
     }
     
